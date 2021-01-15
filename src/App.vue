@@ -10,13 +10,13 @@
       </nav>
     </header>
     <main>
-      <HomePage msg="Lick my taint"/>
+      <HomePage msg="Lick my hairy taint"/>
     </main>
   </div>
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue';
+import HomePage from './web/components/HomePage.vue';
 
 export default {
   name: 'App',
