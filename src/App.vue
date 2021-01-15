@@ -4,13 +4,17 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <div> "Hello" </div>
+            <div> Architech </div>
           </li>
         </ul>
       </nav>
     </header>
     <main>
-      <HomePage msg="Lick my hairy taint"/>
+      <HomePage msg="Hope you have a great day =)"/>
+    </main>
+    <br/>
+    <main>
+      <HomePage msg="Go fuck yourself Leendert"/>
     </main>
   </div>
 </template>
@@ -40,6 +44,7 @@ main {
   background-color: white;
   width: 1024px;
   min-height: 300px;
+  border: 10px solid #000000;
 }
 
 .nav-item {
