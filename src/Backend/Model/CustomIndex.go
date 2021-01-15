@@ -47,3 +47,15 @@ type MarketCap struct {
 	upper int
 	lower int
 }
+
+type RevenueGrowth struct {
+	TimePeriod int
+	upper int
+	lower int
+}
+
+type EarningsGrowth struct {
+	TimePeriod int
+	upper int
+	lower int
+}
