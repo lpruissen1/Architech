@@ -50,4 +50,10 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"message": "not found"}`))
 }
 
-// func (r *Router) SetupRouter
+func SetupCustomIndexRouting(r *mux.Router) {
+	r.HandleFunc("/", get).Methods(http.MethodGet)
+	r.HandleFunc("/", post).Methods(http.MethodPost)
+	r.HandleFunc("/", delete).Methods(http.MethodDelete)
+	r.HandleFunc("/", notFound)
+	r.HandleFunc("/index/{indexID}", getParams).Methods(http.MethodGet)
+}
