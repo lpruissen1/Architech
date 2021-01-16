@@ -1,18 +1,9 @@
 package main
 
-import (
-	API "Backend/API"
-	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/gorilla/mux"
-)
+import "Backend/API"
 
 func main() {
-	r := mux.NewRouter()
-	api := r.PathPrefix("/api/v1").Subrouter()
-	API.SetupCustomIndexRouting(api)
-	fmt.Println("Listening on port 8081...")
-	log.Fatal(http.ListenAndServe(":8081", api))
+	api := API.NewApiClient()
+	api.Initialize()
+	api.Run()
 }

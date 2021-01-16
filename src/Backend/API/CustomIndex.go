@@ -1,6 +1,9 @@
 package API
 
 import (
+	"Backend/Model"
+	"Logging"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -8,13 +11,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func get(w http.ResponseWriter, r *http.Request) {
+func (c *ApiClient) get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"message": "get called"}`))
 }
 
-func getParams(w http.ResponseWriter, r *http.Request) {
+func (c *ApiClient) GetCustomIndex(w http.ResponseWriter, r *http.Request) {
 	pathParams := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
 
@@ -28,32 +31,40 @@ func getParams(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-
-	w.Write([]byte(fmt.Sprintf(`{"message": Recieved you indexID of: %d,}`, indexID)))
+	fmt.Println(indexID)
+	w.Write([]byte(`{"message": "got indexId"}`))
 }
 
-func post(w http.ResponseWriter, r *http.Request) {
+func (c *ApiClient) PostCustomIndex(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+
+	var index Model.CustomIndex
+	err := json.NewDecoder(r.Body).Decode(&index)
+	if err != nil {
+		Logging.Write("I messed up decoding the posted custom index", "API")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`{"message": "FAILURE"}`))
+		return
+	}
+
+	w.Write([]byte(fmt.Sprintf(`{"message": I posted a custom index,}`)))
+}
+
+func (c *ApiClient) post(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte(`{"message": "post called"}`))
 }
 
-func delete(w http.ResponseWriter, r *http.Request) {
+func (c *ApiClient) delete(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"message": "delete called"}`))
 }
 
-func notFound(w http.ResponseWriter, r *http.Request) {
+func (c *ApiClient) notFound(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 	w.Write([]byte(`{"message": "not found"}`))
-}
-
-func SetupCustomIndexRouting(r *mux.Router) {
-	r.HandleFunc("/", get).Methods(http.MethodGet)
-	r.HandleFunc("/", post).Methods(http.MethodPost)
-	r.HandleFunc("/", delete).Methods(http.MethodDelete)
-	r.HandleFunc("/", notFound)
-	r.HandleFunc("/index/{indexID}", getParams).Methods(http.MethodGet)
 }
