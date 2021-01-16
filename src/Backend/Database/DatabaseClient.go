@@ -25,24 +25,8 @@ func NewStockDataClient() DatabaseClient {
 	err = client.Connect(ctx)
 
 	if err != nil {
-		Logging.Write("Error Connecting to DB", "DB")
+		Logging.Write("Error Connecting to stock data DB", "DB")
 	}
 
 	return DatabaseClient{client.Database("StockData")}
-}
-
-func NewArchitechClient() DatabaseClient {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost"))
-	if err != nil {
-		fmt.Println("Error locating")
-	}
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	err = client.Connect(ctx)
-
-	if err != nil {
-		Logging.Write("Error Connecting to DB", "DB")
-	}
-
-	return DatabaseClient{client.Database("Architech")}
 }

@@ -11,13 +11,8 @@ type Logger struct {
 	file     string
 }
 
-func New(file string) Logger {
-	logger := Logger{"C:\\Log\\Agg", file}
-	return logger
-}
-
 func Write(entry string, location string) {
-	f, err := os.OpenFile("C:\\Log\\Agg"+location+".txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile("C:\\Log\\Architech"+location+".txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	defer f.Close()
 
 	if err != nil {

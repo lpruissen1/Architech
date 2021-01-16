@@ -1,6 +1,6 @@
-package model
+package Model
 
-type customIndex struct {
+type CustomIndex struct {
 	Markets             ComposedMarkets
 	DivYield            DividendYield
 	Volitility          Volitility
@@ -50,12 +50,12 @@ type MarketCap struct {
 
 type RevenueGrowth struct {
 	TimePeriod int
-	upper int
-	lower int
+	upper      int
+	lower      int
 }
 
 type EarningsGrowth struct {
 	TimePeriod int
-	upper int
-	lower int
+	upper      int
+	lower      int
 }
