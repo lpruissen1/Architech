@@ -14,18 +14,20 @@
     </main>
     <br/>
     <main>
-      <HomePage msg="Go fuck yourself Leendert"/>
+      <CustomPortfolio/>
     </main>
   </div>
 </template>
 
 <script>
 import HomePage from './web/components/HomePage.vue';
+import CustomPortfolio from './web/components/CustomPortfolio.vue';
 
 export default {
   name: 'App',
   components: {
     HomePage,
+    CustomPortfolio,
   },
 };
 </script>

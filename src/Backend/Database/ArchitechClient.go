@@ -3,10 +3,10 @@ package database
 import (
 	"Logging"
 	"context"
-	"fmt"
 	"time"
 
-	"Backend/Model"
+	apiModel "Backend/Model/API"
+	dbModel "Backend/Model/DB"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -17,7 +17,7 @@ import (
 func NewArchitechClient() DatabaseClient {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost"))
 	if err != nil {
-		fmt.Println("Error locating")
+		Logging.Write("Error locating", "DB")
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -30,7 +30,7 @@ func NewArchitechClient() DatabaseClient {
 	return DatabaseClient{client.Database("Architech")}
 }
 
-func (client DatabaseClient) GetCustomIndex(objectID string) Model.CustomIndex {
+func (client DatabaseClient) GetCustomIndex(objectID string) dbModel.CustomIndex {
 	indexCollection := client.database.Collection("CustomIndices")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -38,7 +38,11 @@ func (client DatabaseClient) GetCustomIndex(objectID string) Model.CustomIndex {
 
 	id, err := primitive.ObjectIDFromHex(objectID)
 
-	var index Model.CustomIndex
+	if err != nil {
+		Logging.Write("I fucked up creating objectID", "DB")
+	}
+
+	var index dbModel.CustomIndex
 	err = indexCollection.FindOne(ctx, bson.M{"_id": id}).Decode(&index)
 
 	if err != nil {
@@ -48,15 +52,18 @@ func (client DatabaseClient) GetCustomIndex(objectID string) Model.CustomIndex {
 	return index
 }
 
-func (client DatabaseClient) InsertCustomIndex(index Model.CustomIndex) {
+func (client DatabaseClient) InsertCustomIndex(index apiModel.CustomIndex) string {
 	indexCollection := client.database.Collection("CustomIndices")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	// we have to make sure the index is associated with a given user at some point
+	// todo we have to make sure the index is associated with a given user at some point
+	index.ID = primitive.NewObjectID()
 	_, err := indexCollection.InsertOne(ctx, index)
 
 	if err != nil {
 		Logging.Write("I fucked up inserting index info", "DB")
 	}
+
+	return index.ID.String()
 }

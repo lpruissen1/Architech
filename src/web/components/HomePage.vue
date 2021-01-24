@@ -15,7 +15,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.hell0 {
+.hello {
   margin: 40px 0 0;
   align-self: center;
 }

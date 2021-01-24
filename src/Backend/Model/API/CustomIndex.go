@@ -1,33 +1,37 @@
-package Model
+package apiModel
+
+import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type CustomIndex struct {
-	Markets             ComposedMarkets
+	ID                  primitive.ObjectID
+	Markets             []string
 	DivYield            DividendYield
 	Volitility          Volitility
 	TrailingPerformance TrailingPerformance
 	SectorAndIndustry   Sectors
 	MarketCaps          MarketCaps
+	Test                string
 }
 
 type ComposedMarkets struct {
-	markets []string
+	Markets []string
 }
 
 type DividendYield struct {
-	upper float32
-	lower float32
+	Upper float32
+	Lower float32
 }
 
 type Volitility struct {
-	method string
-	upper  float32
-	lower  float32
+	Method string
+	Upper  float32
+	Lower  float32
 }
 
 type TrailingPerformance struct {
 	TimePeriod int
-	upper      float32
-	lower      float32
+	Upper      float32
+	Lower      float32
 }
 
 type Sectors struct {
@@ -44,18 +48,18 @@ type MarketCaps struct {
 }
 
 type MarketCap struct {
-	upper int
-	lower int
+	Upper int
+	Lower int
 }
 
 type RevenueGrowth struct {
 	TimePeriod int
-	upper      int
-	lower      int
+	Upper      int
+	Lower      int
 }
 
 type EarningsGrowth struct {
 	TimePeriod int
-	upper      int
-	lower      int
+	Upper      int
+	Lower      int
 }
