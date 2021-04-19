@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Stock } from './Stock';
 
 export class TestScreener extends Component {
 	static displayName = TestScreener.name;
@@ -17,17 +18,12 @@ export class TestScreener extends Component {
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead>
 					<tr>
-						<th>Date</th>
-						<th>Temp. (C)</th>
-						<th>Temp. (F)</th>
-						<th>Summary</th>
+						<th>Ticker</th>
 					</tr>
 				</thead>
 				<tbody>
-					{stockdata.Tickers.map(stockdatum =>
-						<tr key={stockdatum}>
-							<td>{stockdatum}</td>
-						</tr>
+					{stockdata.map(stockdatum =>
+						<Stock ticker={stockdatum} />
 					)}
 				</tbody>
 			</table>
@@ -60,19 +56,19 @@ export class TestScreener extends Component {
 	}
 
 	postScreeningRequest(data = {}) {
-		fetch("https://localhost:6001/Screening/FuckYourself", {
+		const that = this;
+
+		fetch("https://localhost:5001/Screening/FuckYourself", {
 			method: 'POST',
-			mode: 'no-cors',
 			headers: {
-				'Accept': '*/*',
-				'Content-Type': 'application/json;charset=UTF-8'
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
 		})
 		.then(function (response) {
 			response.json()
 				.then(function (data) {
-						this.setState({ stockdata: data.Tickers, loading: false })
+						that.setState({ stockdata: data, loading: false })
 					})
 		});
 	}
