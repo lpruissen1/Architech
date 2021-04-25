@@ -1,0 +1,13 @@
+.flexbox {
+	display: flex;
+}
+
+.grey {
+	background: #adadad;
+	flex: 0 0 50px;
+}
+
+.green {
+	background: #32c962;
+	flex: 1;
+}

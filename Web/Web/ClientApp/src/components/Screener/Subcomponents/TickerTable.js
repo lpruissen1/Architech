@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Stock } from './Stock';
+import { Stock } from '../../Stock';
 
-export class TestScreener extends Component {
-	static displayName = TestScreener.name;
-	// contains 
+export class TickerTable extends Component {
+	static displayName = TickerTable.name;
+	// contains
 	//	* Ticker side table
 	//	* Screening controls
+
 	constructor(props) {
 		super(props);
 		this.state = { stockdata: [], loading: true };
@@ -35,12 +36,10 @@ export class TestScreener extends Component {
 	render() {
 		let contents = this.state.loading
 			? <p><em>Loading...</em></p>
-			: TestScreener.renderStockDataTable(this.state.stockdata);
+			: TickerTable.renderStockDataTable(this.state.stockdata);
 
 		return (
 			<div>
-				<h1 id="tabelLabel" >Stock Data</h1>
-				<p>This component demonstrates fetching data from the server.</p>
 				{contents}
 			</div>
 		);
@@ -50,9 +49,6 @@ export class TestScreener extends Component {
 		this.postScreeningRequest({
 			markets: [
 				"Sp500"
-			],
-			Sectors: [
-				"Healthcare"
 			]
 		});
 	}

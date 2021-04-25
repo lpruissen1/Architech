@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { TestScreener } from './components/TestScreener';
+import { Screener } from './components/Screener/Screener';
 
 import './custom.css'
 
@@ -18,6 +19,7 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
 		<Route path='/fetch-data' component={FetchData} />
 		<Route path='/test-screener' component={TestScreener} />
+		<Route path='/screener' component={Screener} />
       </Layout>
     );
   }
