@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SectorSelector from './SectorSelector';
 
 export class ScreeningControls extends Component {
 	static displayName = ScreeningControls.name;
@@ -6,7 +7,7 @@ export class ScreeningControls extends Component {
 	render() {
 		return (
 			<div>
-				<button> Hello </button>
+				<SectorSelector />
 			</div>
 		);
 	}
