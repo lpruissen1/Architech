@@ -1,19 +1,20 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import CustomToggleButton from './CustomToggleButton';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 export default function SectorSelector() {
-	/*
-	 * The second argument that will be passed to
-	 * `handleChange` from `ToggleButtonGroup`
-	 * is the SyntheticEvent object, but we are
-	 * not using it in this example so we will omit it.
-	 */
+	const [value, setValue] = useState(["Healthcare", "Mining", "Financial Services"])
+
+	const sectors = ["Healthcare", "Mining", "Financial Services"]
+
+
 	return (
-		<ToggleButtonGroup type="checkbox">
-			<ToggleButton value={1}>Option 1</ToggleButton>
-			<ToggleButton value={2}>Option 2</ToggleButton>
-			<ToggleButton value={3}>Option 3</ToggleButton>
+		<ToggleButtonGroup value={value} type="checkbox" value={value}> 
+			{value.map((sector) =>
+				<CustomToggleButton value={sector}>{sector}</CustomToggleButton >
+			)}
+
 		</ToggleButtonGroup>
 	);
 }
