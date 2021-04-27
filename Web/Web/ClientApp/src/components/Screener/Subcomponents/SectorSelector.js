@@ -1,20 +1,35 @@
 ﻿import React, { useState } from 'react';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import CustomToggleButton from './CustomToggleButton';
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import './SectorSelector.css';
+import './CustomToggleButton.js';
+import SectorButtons from './CustomToggleButton.js';
 
 export default function SectorSelector() {
 	const [value, setValue] = useState(["Healthcare", "Mining", "Financial Services"])
-
-	const sectors = ["Healthcare", "Mining", "Financial Services"]
-
+	const [selected, setSelected] = useState([true, true, true])
 
 	return (
-		<ToggleButtonGroup value={value} type="checkbox" value={value}> 
+		<> 
 			{value.map((sector) =>
-				<CustomToggleButton value={sector}>{sector}</CustomToggleButton >
+				<ToggleButton selected={selected} value={sector} toggleSelected={() => { setSelected(!selected); }}></ ToggleButton>
 			)}
-
-		</ToggleButtonGroup>
+			<SectorButtons />
+		</>
 	);
+}
+
+
+export class ToggleButton extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {};
+	}
+
+	render() {
+		const { selected, toggleSelected, value } = this.props;
+		return (
+			<>
+				<button onClick={toggleSelected} className={selected ? "buttonSelected" : "button"}>{value}</ button>
+			</>
+		);
+	}
 }

@@ -1,10 +1,17 @@
 ﻿import React from 'react';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import './CustomToggleButton.css'
+import './CustomToggleButton.css';
 
-export default function CustomToggleButton(props) {
+export default class SectorButtons extends React.Component {
 
-	return (
-		<ToggleButton type="checkbox" className="toggleButton">{props.value}</ToggleButton>
-	);
+	render() {
+		return(
+			<div class="container">
+				<ul class="ks-cboxtags">
+					<li><input type="checkbox" id="checkboxOne" value="Rainbow Dash" /><label for="checkboxOne">Healthcare</label></li>
+					<li><input type="checkbox" id="checkboxTwo" value="Rainbow Dash" /><label for="checkboxTwo">Mining</label></li>
+					<li><input type="checkbox" id="checkboxThree" value="Rainbow Dash" /><label for="checkboxThree">Financial Services</label></li>
+				</ul>
+			</div>)
+	}
+
 }
