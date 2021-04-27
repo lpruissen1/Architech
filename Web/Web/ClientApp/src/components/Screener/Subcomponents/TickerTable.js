@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Stock } from '../../Stock';
 
 export class TickerTable extends Component {
 	static displayName = TickerTable.name;
-	// contains
-	//	* Ticker side table
-	//	* Screening controls
 
 	constructor(props) {
 		super(props);
@@ -26,7 +22,7 @@ export class TickerTable extends Component {
 				</thead>
 				<tbody>
 					{stockdata.map(stockdatum =>
-						<Stock ticker={stockdatum} />
+						<tr>{stockdatum}</tr>
 					)}
 				</tbody>
 			</table>

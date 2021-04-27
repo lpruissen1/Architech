@@ -1,4 +1,7 @@
 ﻿import React, { Component } from "react";
+import CheckBox from './CheckBox.js';
+import './SectorSelector.css';
+
 export default class SectorSelector extends Component {
 	constructor(props) {
 		super(props)
@@ -28,9 +31,9 @@ export default class SectorSelector extends Component {
 
 	render() {
 		return (
-			<div>
-				<CheckBox type="checkbox" handleCheckChildElement={this.handleAllChecked} id="5" value="checkAll" value="checkedall" />
+			<div className = "sectorSelectorContainer">
 				<ul class="ks-cboxtags">
+					<CheckBox type="checkbox" handleCheckChildElement={this.handleAllChecked} id="5" value="Check/Uncheck All" />
 					{
 						this.state.sectors.map((sector) => {
 							return (<CheckBox handleCheckChildElement={this.handleCheckChildElement}  {...sector} />)
@@ -40,14 +43,6 @@ export default class SectorSelector extends Component {
 			</div>
 		);
 	}
-}
-
-export const CheckBox = props => {
-	return (
-		<li class="checkbox">
-			<input key={props.id} id={props.value + "Checkbox"} onClick={props.handleCheckChildElement} type="checkbox" checked={props.isChecked} value={props.value} /> <label for={props.value + "Checkbox"}>{props.value}</label>
-		</li>
-	)
 }
 
 //export class ToggleButton extends React.Component {
