@@ -3,7 +3,7 @@
 	background-color: #000000; /* Green */
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 8px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -15,7 +15,7 @@
 	background-color: #4CAF50;
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 8px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -24,12 +24,12 @@
 }
 
 .sectorSelectorContainer {
-	font-size: 13px;
+	font-size: 11px;
 }
 
 ul.ks-cboxtags {
 	list-style: none;
-	padding: 20px
+	padding: 16px
 }
 
 ul.ks-cboxtags li {
@@ -41,7 +41,7 @@ ul.ks-cboxtags li label {
 	background-color: #EDF6F8;
 	border: 2px solid #003B46;
 	color: #003B46;
-	width: 140px;
+	width: 150px;
 	text-align: center;
 	border-radius: 10px;
 	white-space: nowrap;

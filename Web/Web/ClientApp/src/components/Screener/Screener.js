@@ -10,9 +10,18 @@ export class Screener extends Component {
 	state = {
 		customIndex: {
 			sectors: [
-				{ value: "Healthcare", isChecked: true },
-				{ value: "Mining", isChecked: true },
-				{ value: "Financial Services", isChecked: true }
+				{ value: "Healthcare", isChecked: false },
+				{ value: "Technology", isChecked: false },
+				{ value: "Financial Services", isChecked: false },
+				{ value: "Industrials", isChecked: false },
+				{ value: "Consumer Cyclical", isChecked: false },
+				{ value: "Utilities", isChecked: false },
+				{ value: "Basic Materials", isChecked: false },
+				{ value: "Real Estate", isChecked: false },
+				{ value: "Communication Services", isChecked: false },
+				{ value: "Consumer Defensive", isChecked: false },
+				{ value: "Energy", isChecked: false },
+
 			],
 			market: "Sp500"
 		}
