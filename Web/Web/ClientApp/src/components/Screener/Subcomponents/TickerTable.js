@@ -45,8 +45,20 @@ export class TickerTable extends Component {
 		this.postScreeningRequest({
 			markets: [
 				"Sp500"
-			]
+			],
+			"sectors": this.getActiveSectors()
 		});
+	}
+
+
+	getActiveSectors() {
+		let activeSectors = []
+		let sectors = this.props.customIndex.sectors
+		sectors.forEach(sector => {
+			if (sector.isChecked === true)
+				activeSectors.push(sector.value)
+		})
+		return activeSectors
 	}
 
 	postScreeningRequest(data = {}) {

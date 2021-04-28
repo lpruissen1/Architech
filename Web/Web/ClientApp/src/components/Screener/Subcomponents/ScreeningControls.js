@@ -7,7 +7,7 @@ export class ScreeningControls extends Component {
 	render() {
 		return (
 			<div>
-				<SectorSelector />
+				<SectorSelector sectors = {this.props.customIndex.sectors}/>
 			</div>
 		);
 	}
