@@ -12,6 +12,10 @@ export class TickerTable extends Component {
 		this.populateTickers();
 	}
 
+	componentDidUpdate() {
+		this.populateTickers();
+	}
+
 	static renderStockDataTable(stockdata) {
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
