@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
-import { ScreeningControls } from './Subcomponents/ScreeningControls';
+import SectorSelector from './Subcomponents/SectorSelector';
 import './Screener.css';
 import Card from 'react-bootstrap/Card';
 
 export class Screener extends Component {
-	static displayName = Screener.name;
-
-	state = {
-		customIndex: {
+	constructor(props) {
+		super(props);
+		this.state = {
 			sectors: [
 				{ value: "Healthcare", isChecked: false },
 				{ value: "Technology", isChecked: false },
@@ -20,30 +19,67 @@ export class Screener extends Component {
 				{ value: "Real Estate", isChecked: false },
 				{ value: "Communication Services", isChecked: false },
 				{ value: "Consumer Defensive", isChecked: false },
-				{ value: "Energy", isChecked: false },
-
+				{ value: "Energy", isChecked: false }
 			],
-			market: "Sp500"
-		}
-	};
+			tickers: []
+		};
+	}
 
-	onUpdate(sectors) { this.setState({ sectors }) }
+	componentDidMount() {
+		this.screen()
+	}
 
 	render() {
 		return (
 			<div>
 				<h1 id="tabelLabel" >Screener</h1>
-				<div className = 'rowThing'>
-					<Card className = 'screenerCard'>
-						<ScreeningControls {...this.state} />
+				<div className='rowThing'>
+					<Card className='screenerCard'>
+						<SectorSelector sectors={this.state.sectors} />
 					</Card>
-					<Card className = 'tickerCard'>
-						<div className = 'tickerTableContainer'>
-							<TickerTable {...this.state}/>
+					<Card className='tickerCard'>
+						<div className='tickerTableContainer'>
+							<TickerTable tickers={this.state.tickers} />
 						</div>
 					</Card>
 				</div>
 			</div>
 		);
+	}
+	
+	screen() {
+		return this.postScreeningRequest({
+			markets: [
+				"Sp500"
+			],
+			"sectors": this.getActiveSectors(this.state.sectors)
+		});
+	}
+
+
+	getActiveSectors(sectors) {
+		let activeSectors = []
+		sectors.forEach(sector => {
+			if (sector.isChecked === true)
+				activeSectors.push(sector.value)
+		})
+		return activeSectors
+	}
+
+	postScreeningRequest(data = {}) {
+		const that = this
+		fetch("https://localhost:5001/Screening/FuckYourself", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+		.then(function (response) {
+			return response.json().then(function (data) {
+				console.log(data)
+				that.setState({ tickers: data })
+			})
+		});
 	}
 }
