@@ -29,13 +29,17 @@ export class Screener extends Component {
 		this.screen()
 	}
 
+	update = () => {
+		this.screen()
+	}
+
 	render() {
 		return (
 			<div>
 				<h1 id="tabelLabel" >Screener</h1>
 				<div className='rowThing'>
 					<Card className='screenerCard'>
-						<SectorSelector sectors={this.state.sectors} />
+						<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
 					</Card>
 					<Card className='tickerCard'>
 						<div className='tickerTableContainer'>

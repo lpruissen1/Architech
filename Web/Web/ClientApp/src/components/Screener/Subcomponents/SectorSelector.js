@@ -18,6 +18,7 @@ export default class SectorSelector extends Component {
 		let sectors = this.props.sectors
 		sectors.forEach(sector => sector.isChecked = event.target.checked)
 		this.setState({ sectors: sectors })
+		this.props.handleUpdate()
 	}
 
 	handleCheckChildElement = (event) => {
@@ -27,6 +28,7 @@ export default class SectorSelector extends Component {
 				sector.isChecked = event.target.checked
 		})
 		this.setState({ sectors: sectors })
+		this.props.handleUpdate()
 	}
 
 	render() {
