@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
 import SectorSelector from './Subcomponents/SectorSelector';
+import RangeSelector from './Subcomponents/RangeSelector';
 import './Screener.css';
 import Card from 'react-bootstrap/Card';
 
@@ -40,6 +41,7 @@ export class Screener extends Component {
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
+						<RangeSelector />
 					</Card>
 					<Card className='tickerCard'>
 						<div className='tickerTableContainer'>
