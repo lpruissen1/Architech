@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import { Stock } from '../../Stock';
 
 export class TickerTable extends Component {
 	static displayName = TickerTable.name;
-	// contains
-	//	* Ticker side table
-	//	* Screening controls
 
 	constructor(props) {
 		super(props);
-		this.state = { stockdata: [], loading: true };
 	}
 
-	componentDidMount() {
-		this.populateTickers();
-	}
+	static renderStockDataTable(tickers) {
+		if (!Array.isArray(tickers))
+			return "Loading";
 
-	static renderStockDataTable(stockdata) {
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead>
@@ -25,8 +19,8 @@ export class TickerTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{stockdata.map(stockdatum =>
-						<Stock ticker={stockdatum} />
+					{tickers.map(stockdatum =>
+						<tr key={stockdatum}><td>{stockdatum}</td></tr>
 					)}
 				</tbody>
 			</table>
@@ -34,9 +28,7 @@ export class TickerTable extends Component {
 	}
 
 	render() {
-		let contents = this.state.loading
-			? <p><em>Loading...</em></p>
-			: TickerTable.renderStockDataTable(this.state.stockdata);
+		let contents = TickerTable.renderStockDataTable(this.props.tickers);
 
 		return (
 			<div>
@@ -44,30 +36,4 @@ export class TickerTable extends Component {
 			</div>
 		);
 	}
-
-	populateTickers() {
-		this.postScreeningRequest({
-			markets: [
-				"Sp500"
-			]
-		});
-	}
-
-	postScreeningRequest(data = {}) {
-		const that = this;
-
-		fetch("https://localhost:5001/Screening/FuckYourself", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-		.then(function (response) {
-			response.json()
-				.then(function (data) {
-						that.setState({ stockdata: data, loading: false })
-					})
-		});
-	}
-}
+} 

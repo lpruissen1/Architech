@@ -1,8 +1,9 @@
+@import url('file:///C:\sketch\Architech\Web\Web\ClientApp\src\components\Screener\Subcomponents\SectorSelector.css');
 .button {
 	background-color: #000000; /* Green */
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 8px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -14,7 +15,7 @@
 	background-color: #4CAF50;
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 8px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -22,40 +23,65 @@
 	margin: 5px;
 }
 
-div label input {
-	margin-right: 100px;
+.sectorSelectorContainer {
+	font-size: 11px;
 }
 
-body {
-	font-family: sans-serif;
+ul.ks-cboxtags {
+	list-style: none;
+	padding: 16px
 }
 
-#ck-button {
-	margin: 4px;
-	background-color: #EFEFEF;
-	border-radius: 4px;
-	border: 1px solid #D0D0D0;
-	overflow: auto;
-	float: left;
+ul.ks-cboxtags li {
+	display: inline;
 }
 
-#ck-button label {
-	float: left;
-	width: 4.0em;
-}
-
-#ck-button label span {
+ul.ks-cboxtags li label {
+	display: inline-block;
+	background-color: #EDF6F8;
+	border: 2px solid #003B46;
+	color: #003B46;
+	width: 150px;
 	text-align: center;
-	padding: 3px 0px;
-	display: block;
+	border-radius: 10px;
+	white-space: nowrap;
+	margin: 3px 3px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	transition: all .2s;
 }
 
-#ck-button label input {
-	position: absolute;
-	top: -20px;
+ul.ks-cboxtags li label {
+	padding: 8px 12px;
+	cursor: pointer;
 }
 
-#ck-button input:checked + span {
-	background-color: #911;
+ul.ks-cboxtags li label::before {
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 12px;
+	padding: 2px 6px 2px 2px;
+	transition: transform .3s ease-in-out;
+}
+
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+	border: 2px solid #003B46;
+	background-color: #003B46;
 	color: #fff;
+	transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
 }
