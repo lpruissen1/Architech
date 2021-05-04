@@ -24,6 +24,7 @@ export class Screener extends Component {
 				{ value: "Energy", isChecked: false }
 			],
 			tickers: []
+			// Add "rangeRule" state which is an empty list of range rules
 		};
 	}
 
@@ -48,7 +49,6 @@ export class Screener extends Component {
 						</Collapsible>
 						<Collapsible className='Collapsible' trigger="Basic Metrics">
 							<div>
-								
 								<RangeSelector />
 							</div>
 						</Collapsible>
@@ -61,6 +61,13 @@ export class Screener extends Component {
 				</div>
 			</div>
 		);
+
+		// within second pane add a "Basic Rules" component
+			// start with empty panel with "+" 
+			// button triggers replacement with a list of rule types
+			// select rule type
+
+		// Add panel to 
 	}
 	
 	screen() {
