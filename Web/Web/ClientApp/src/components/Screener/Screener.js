@@ -4,6 +4,7 @@ import SectorSelector from './Subcomponents/SectorSelector';
 import RangeSelector from './Subcomponents/RangeSelector';
 import './Screener.css';
 import Card from 'react-bootstrap/Card';
+import Collapsible from 'react-collapsible';
 
 export class Screener extends Component {
 	constructor(props) {
@@ -40,8 +41,17 @@ export class Screener extends Component {
 				<h1 id="tabelLabel" >Screener</h1>
 				<div className='rowThing'>
 					<Card className='screenerCard'>
-						<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
-						<RangeSelector />
+						<Collapsible className='Collapsible' trigger="Sectors">
+							<div>
+								<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
+							</div>
+						</Collapsible>
+						<Collapsible className='Collapsible' trigger="Basic Metrics">
+							<div>
+								
+								<RangeSelector />
+							</div>
+						</Collapsible>
 					</Card>
 					<Card className='tickerCard'>
 						<div className='tickerTableContainer'>
