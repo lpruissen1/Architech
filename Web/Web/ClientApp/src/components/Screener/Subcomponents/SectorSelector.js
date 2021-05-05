@@ -6,11 +6,7 @@ export default class SectorSelector extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			sectors: [
-				//{ value: "Healthcare", isChecked: false },
-				//{ value: "Mining", isChecked: false },
-				//{ value: "Financial Services", isChecked: false }
-			]
+			
 		}
 	}
 

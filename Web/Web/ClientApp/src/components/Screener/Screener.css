@@ -20,6 +20,7 @@
 	margin-bottom: 10px;
 	margin-right: 15px;
 	margin-left: 0px;
+	border-radius: 8px 8px 8px 8px;
 }
 
 .rowThing {
@@ -27,27 +28,27 @@
 }
 
 .Collapsible {
-	background-color: #ff0000;
+	background-color: white;
+	border: 1px solid #003B46;
 }
 
 
 .Collapsible__contentInner {
 	padding: 10px;
-	border: 1px solid #CBB700;
 	border-top: 0;
+	background: none;
 }
 
 .Collapsible__trigger {
 	display: block;
 	font-weight: 400;
 	text-decoration: none;
-	color: $grey;
-	position: relative;
-	border: 1px solid white;
+	color: #003B46;
+	border: 1px solid #EDF6F8;
 	padding: 10px;
-	background: $cyan;
-	color: white;
+	opacity: 1;
 }
+
 
 .CustomTriggerCSS {
 	background-color: lightcoral;
@@ -64,3 +65,4 @@
 	background-color: #CBB700;
 	color: black;
 }
+

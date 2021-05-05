@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
 import SectorSelector from './Subcomponents/SectorSelector';
 import RangeSelector from './Subcomponents/RangeSelector';
+import BasicRules from './Subcomponents/BasicRules';
 import './Screener.css';
 import Card from 'react-bootstrap/Card';
 import Collapsible from 'react-collapsible';
@@ -23,8 +24,9 @@ export class Screener extends Component {
 				{ value: "Consumer Defensive", isChecked: false },
 				{ value: "Energy", isChecked: false }
 			],
-			tickers: []
-			// Add "rangeRule" state which is an empty list of range rules
+			tickers: [],
+			rangedRule: [],
+			appendedCompsCount : 0
 		};
 	}
 
@@ -36,22 +38,21 @@ export class Screener extends Component {
 		this.screen()
 	}
 
+	// All of the stuff in the screenercard should go in the screening controls component. 
 	render() {
 		return (
 			<div>
 				<h1 id="tabelLabel" >Screener</h1>
 				<div className='rowThing'>
 					<Card className='screenerCard'>
-						<Collapsible className='Collapsible' trigger="Sectors">
-							<div>
+						<div>
+							<Collapsible className='Collapsible' trigger="Sectors"> 
 								<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
-							</div>
-						</Collapsible>
-						<Collapsible className='Collapsible' trigger="Basic Metrics">
-							<div>
-								<RangeSelector />
-							</div>
-						</Collapsible>
+							</Collapsible>
+							<Collapsible className='Collapsible' trigger="Basic Metrics">
+								<BasicRules/>
+							</Collapsible>
+						</div>
 					</Card>
 					<Card className='tickerCard'>
 						<div className='tickerTableContainer'>
