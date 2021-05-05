@@ -26,7 +26,6 @@ export class Screener extends Component {
 			],
 			tickers: [],
 			rangedRule: [],
-			appendedCompsCount : 0
 		};
 	}
 

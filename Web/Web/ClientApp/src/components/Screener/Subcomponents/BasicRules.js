@@ -4,14 +4,31 @@ import './BasicRules.css';
 export default class BasicRules extends Component {
 
 	state = {
-		count: 0
+		count: 0,
+		metricList: false
+	};
+
+	handleAddNewMetricClick = () => {
+		this.setState(prev => ({ metricList: !prev.metricList }));
+	};
+
+	addMetricList = () => {
+		if (this.state.metricList === true) {
+			return (
+				<ul>
+					<li><button onClick={this.handleClick}>Market Capitalizaton</button></li>
+					<li><button onClick={this.handleClick}>Dividend Yield</button></li>
+				</ul>
+			)
+		}
 	};
 
 	handleClick = () => {
-		// Use updater function when new state is derived from old
 		this.setState(prev => ({ count: prev.count + 1 }));
+		this.setState(prev => ({ metricList: !prev.metricList }));
 	};
 
+	// check this.props.rules (or ranged rules)
 	getAppendedComponents = () => {
 		let appendedComponents = [];
 		for (let i = 0; i < this.state.count; i++) {
@@ -24,14 +41,13 @@ export default class BasicRules extends Component {
 
 	render() {
 		return (
-			<button className="block" onClick={this.handleClick}>
 				<div className="BasicRules">
 					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-					<button className="newMetricButton">
-						<i className="fa fa-plus-circle"></i>Add New Metric </button>
+				<button className="newMetricButton" onClick={this.handleAddNewMetricClick}>
+					<i className="fa fa-plus-circle"></i>Add New Metric </button>
+					{this.addMetricList()}
 					{this.getAppendedComponents()}
 				</div>
-			</button>
 		);
 	}
 }
