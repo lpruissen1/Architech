@@ -1,7 +1,8 @@
-﻿import React, { Component } from "react";
+﻿import React from "react";
 import './BasicRules.css';
+import RuleSelector from "./RuleSelector";
 
-export default class BasicRules extends Component {
+export default class BasicRules extends React.Component {
 
 	state = {
 		count: 0,
@@ -41,13 +42,7 @@ export default class BasicRules extends Component {
 
 	render() {
 		return (
-				<div className="BasicRules">
-					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-				<button className="newMetricButton" onClick={this.handleAddNewMetricClick}>
-					<i className="fa fa-plus-circle"></i>Add New Metric </button>
-					{this.addMetricList()}
-					{this.getAppendedComponents()}
-				</div>
+			RuleSelector
 		);
 	}
 }
