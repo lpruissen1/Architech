@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SectorSelector from './SectorSelector';
+import BasicRules from './BasicRules';
+import Collapsible from 'react-collapsible';
+import "../Screener.css"
 
-export class ScreeningControls extends Component {
-	static displayName = ScreeningControls.name;
-
-	render() {
-		return (
-			<div>
-				<SectorSelector sectors = {this.props.customIndex.sectors}/>
-			</div>
-		);
-	}
+export default function ScreeningControls(props){
+	return (
+		<div>
+			<Collapsible className='Collapsible' trigger="Sectors">
+				<SectorSelector sectors={props.sectors} handleUpdate={props.handleUpdate} />
+			</Collapsible>
+			<Collapsible className='Collapsible' trigger="Basic Metrics">
+				<BasicRules />
+			</Collapsible>
+		</div>
+	);
 }

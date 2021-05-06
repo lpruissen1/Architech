@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
-import SectorSelector from './Subcomponents/SectorSelector';
-import RangeSelector from './Subcomponents/RangeSelector';
-import BasicRules from './Subcomponents/BasicRules';
-import './Screener.css';
+import ScreeningControls from './Subcomponents/ScreeningControls';
 import Card from 'react-bootstrap/Card';
-import Collapsible from 'react-collapsible';
+import './Screener.css';
 
 export class Screener extends Component {
 	constructor(props) {
@@ -37,7 +34,6 @@ export class Screener extends Component {
 		this.screen()
 	}
 
-	// All of the stuff in the screenercard should go in the screening controls component. 
 	render() {
 		return (
 			<div>
@@ -45,12 +41,7 @@ export class Screener extends Component {
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<div>
-							<Collapsible className='Collapsible' trigger="Sectors"> 
-								<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
-							</Collapsible>
-							<Collapsible className='Collapsible' trigger="Basic Metrics">
-								<BasicRules/>
-							</Collapsible>
+							<ScreeningControls sectors={this.state.sectors} handleUpdate={this.update} />
 						</div>
 					</Card>
 					<Card className='tickerCard'>
@@ -61,13 +52,6 @@ export class Screener extends Component {
 				</div>
 			</div>
 		);
-
-		// within second pane add a "Basic Rules" component
-			// start with empty panel with "+" 
-			// button triggers replacement with a list of rule types
-			// select rule type
-
-		// Add panel to 
 	}
 	
 	screen() {
