@@ -8,16 +8,16 @@ export default function RuleSelector(props) {
 	const renderOptions = () => {
 		return (
 			<>
-				{props.options && props.options.map((option) => {
-					<button className="newMetricButton"> option.displayName</button>
-				})}
+				{props.options && props.options.map((option) => 
+					<button className="newMetricButton"> {option.displayName} </button>
+				)}
 			</>
 		)
 	}
 
-	const shit = displayList ? renderOptions() : <button className="newMetricButton" onClick={clickie}>Add New Metric </button>;
+	const display = displayList ? renderOptions() : <button className="newMetricButton" onClick={clickie}>Add New Metric </button>;
 
     return (
-		<>{shit}</>
+		<>{display}</>
     );
 }
