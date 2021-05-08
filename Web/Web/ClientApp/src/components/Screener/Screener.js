@@ -41,7 +41,7 @@ export class Screener extends Component {
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<div>
-							<ScreeningControls sectors={this.state.sectors} handleUpdate={this.update} />
+							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRule} handleUpdate={this.update} />
 						</div>
 					</Card>
 					<Card className='tickerCard'>

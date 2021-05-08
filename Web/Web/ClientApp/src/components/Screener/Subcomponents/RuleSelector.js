@@ -8,8 +8,8 @@ export default function RuleSelector(props) {
 	const renderOptions = () => {
 		return (
 			<>
-				{props.options && props.options.map((option) => 
-					<button className="newMetricButton"> {option.displayName} </button>
+				{props.options && props.options.map((option) =>
+					<button className="newMetricButton" onClick={() => option.count++}> {option.displayName} </button>
 				)}
 			</>
 		)
