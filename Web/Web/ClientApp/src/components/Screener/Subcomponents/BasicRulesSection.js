@@ -1,6 +1,7 @@
 ﻿import React from "react";
 import './BasicRules.css';
 import RuleSelector from "./RuleSelector";
+import RangeSelector from "./RangeSelector";
 
 export default class BasicRulesSection extends React.Component {
 
@@ -35,12 +36,23 @@ export default class BasicRulesSection extends React.Component {
 	};
 
 	// check this.props.rules (or ranged rules)
-	getAppendedComponents = (props) => {
-		let appendedComponents = [];
+	getAppendedComponents() {
 
-		for (let i = 0; i < props.count; i++) {
+		let appendedComponents = []
+
+		for (let i = 0; i < this.props.rangedRules.length; i++) {
 			appendedComponents.push(
-				<button>click</button>
+				<>
+					<RangeSelector />
+				</>
+			)
+		}
+
+		for (let i = 0; i < this.props.timedRangeRules.length; i++) {
+			appendedComponents.push(
+				<>
+					<RangeSelector />
+				</>
 			)
 		}
 
@@ -50,7 +62,8 @@ export default class BasicRulesSection extends React.Component {
 	render() {
 		return (
 			<>
-				<RuleSelector handleAddNewMetricClick={this.handleAddNewRuleNew} options={this.state.options} rangedRules={this.props.rangedRules} />
+				{this.getAppendedComponents()}
+				<RuleSelector handleAddNewMetricClick={this.handleAddNewRuleNew} options={this.state.options} />
 			</>
 		);
 	}
