@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
-import SectorSelector from './Subcomponents/SectorSelector';
-import './Screener.css';
+import ScreeningControls from './Subcomponents/ScreeningControls';
 import Card from 'react-bootstrap/Card';
+import './Screener.css';
 
 export class Screener extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			// We should move this isChecked stuff down to the sector selector controls and simply append or remove sectors as clicked
 			sectors: [
 				{ value: "Healthcare", isChecked: false },
 				{ value: "Technology", isChecked: false },
@@ -21,8 +22,24 @@ export class Screener extends Component {
 				{ value: "Consumer Defensive", isChecked: false },
 				{ value: "Energy", isChecked: false }
 			],
-			tickers: []
+			tickers: [],
+			rangedRules: [],
+			timedRangeRules: [],
 		};
+		this.handleRangedRuleUpdate = this.handleRangedRuleUpdate.bind(this);
+		this.handleTimedRangeRuleUpdate = this.handleTimedRangeRuleUpdate.bind(this);
+	}
+
+	handleRangedRuleUpdate(rule) {
+		this.setState({
+			rangedRules: [...this.state.rangedRules, rule]
+		})
+	}
+
+	handleTimedRangeRuleUpdate(rule) {
+		this.setState({
+			timedRangeRules: [...this.state.timedRangeRules, rule]
+		})
 	}
 
 	componentDidMount() {
@@ -39,7 +56,9 @@ export class Screener extends Component {
 				<h1 id="tabelLabel" >Screener</h1>
 				<div className='rowThing'>
 					<Card className='screenerCard'>
-						<SectorSelector sectors={this.state.sectors} handleUpdate={this.update} />
+						<div>
+							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={this.handleRangedRuleUpdate} handleTimedRangeRuleUpdate={this.handleTimedRangeRuleUpdate} />
+						</div>
 					</Card>
 					<Card className='tickerCard'>
 						<div className='tickerTableContainer'>
@@ -56,7 +75,8 @@ export class Screener extends Component {
 			markets: [
 				"Sp500"
 			],
-			"sectors": this.getActiveSectors(this.state.sectors)
+			"sectors": this.getActiveSectors(this.state.sectors),
+			"rangedRule": this.state.rangedRules
 		});
 	}
 

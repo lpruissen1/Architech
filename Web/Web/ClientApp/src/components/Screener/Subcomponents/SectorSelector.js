@@ -3,21 +3,10 @@ import CheckBox from './CheckBox.js';
 import './SectorSelector.css';
 
 export default class SectorSelector extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			sectors: [
-				//{ value: "Healthcare", isChecked: false },
-				//{ value: "Mining", isChecked: false },
-				//{ value: "Financial Services", isChecked: false }
-			]
-		}
-	}
-
 	handleAllChecked = (event) => {
 		let sectors = this.props.sectors
 		sectors.forEach(sector => sector.isChecked = event.target.checked)
-		this.setState({ sectors: sectors })
+		this.setState({})
 		this.props.handleUpdate()
 	}
 
@@ -27,7 +16,7 @@ export default class SectorSelector extends Component {
 			if (sector.value === event.target.value)
 				sector.isChecked = event.target.checked
 		})
-		this.setState({ sectors: sectors })
+		this.setState({})
 		this.props.handleUpdate()
 	}
 
@@ -37,7 +26,7 @@ export default class SectorSelector extends Component {
 				<ul className="ks-cboxtags">
 					<CheckBox type="checkbox" handleCheckChildElement={this.handleAllChecked} id="5" value="Check/Uncheck All" />
 					{
-						this.props.sectors.map((sector) => {
+						this.props.sectors && this.props.sectors.map((sector) => {
 							return (<CheckBox key={sector.value} handleCheckChildElement={this.handleCheckChildElement}  {...sector} />)
 						})
 					}

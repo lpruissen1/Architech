@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
 export class TickerTable extends Component {
-	static displayName = TickerTable.name;
-
-	constructor(props) {
-		super(props);
-	}
 
 	static renderStockDataTable(tickers) {
 		if (!Array.isArray(tickers))
