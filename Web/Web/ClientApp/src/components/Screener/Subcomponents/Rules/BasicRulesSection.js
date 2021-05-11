@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import './BasicRules.css';
 import RuleSelector from "./RuleSelector";
-import RangeSelector from "./RangeSelector";
+import RangeRule from "./RangedRule";
 
 export default class BasicRulesSection extends React.Component {
 
@@ -41,7 +41,7 @@ export default class BasicRulesSection extends React.Component {
 		this.props.rangedRules && this.props.rangedRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<RangeSelector displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
+					<RangeRule displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
 					<br />
 				</>
 			)
@@ -50,7 +50,7 @@ export default class BasicRulesSection extends React.Component {
 		this.props.timedRangeRules && this.props.timedRangeRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<RangeSelector displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
+					<RangeRule displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
 					<br />
 				</>
 			)
