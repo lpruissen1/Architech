@@ -16,7 +16,7 @@ export default class ScreeningControls extends React.Component {
 					<SectorSelector sectors={this.props.sectors} handleUpdate={this.props.handleUpdate} />
 				</Collapsible>
 				<Collapsible className='Collapsible' trigger="Basic Metrics">
-					<BasicRulesSection rangedRules={this.props.rangedRules} timedRangeRules={this.props.timedRangeRules} handleUpdate={this.props.handleUpdate} handleRangedRuleUpdate={this.props.handleRangedRuleUpdate} />
+					<BasicRulesSection rangedRules={this.props.rangedRules} timedRangeRules={this.props.timedRangeRules} handleUpdate={this.props.handleUpdate} handleRangedRuleUpdate={this.props.handleRangedRuleUpdate} handleTimedRangeRuleUpdate={this.props.handleTimedRangeRuleUpdate} />
 				</Collapsible>
 			</div>
 		);

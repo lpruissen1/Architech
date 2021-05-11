@@ -27,6 +27,7 @@ export class Screener extends Component {
 			timedRangeRules: [],
 		};
 		this.handleRangedRuleUpdate = this.handleRangedRuleUpdate.bind(this);
+		this.handleTimedRangeRuleUpdate = this.handleTimedRangeRuleUpdate.bind(this);
 	}
 
 	handleRangedRuleUpdate(rule) {
@@ -34,6 +35,13 @@ export class Screener extends Component {
 			rangedRules: [...this.state.rangedRules, rule]
 		})
 	}
+
+	handleTimedRangeRuleUpdate(rule) {
+		this.setState({
+			timedRangeRules: [...this.state.timedRangeRules, rule]
+		})
+	}
+
 	componentDidMount() {
 		this.screen()
 	}
@@ -49,7 +57,7 @@ export class Screener extends Component {
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<div>
-							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={ this.handleRangedRuleUpdate} />
+							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={this.handleRangedRuleUpdate} handleTimedRangeRuleUpdate={this.handleTimedRangeRuleUpdate} />
 						</div>
 					</Card>
 					<Card className='tickerCard'>
