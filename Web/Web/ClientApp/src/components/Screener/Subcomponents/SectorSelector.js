@@ -3,17 +3,10 @@ import CheckBox from './CheckBox.js';
 import './SectorSelector.css';
 
 export default class SectorSelector extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			
-		}
-	}
-
 	handleAllChecked = (event) => {
 		let sectors = this.props.sectors
 		sectors.forEach(sector => sector.isChecked = event.target.checked)
-		this.setState({ sectors: sectors })
+		this.setState({})
 		this.props.handleUpdate()
 	}
 
@@ -23,7 +16,7 @@ export default class SectorSelector extends Component {
 			if (sector.value === event.target.value)
 				sector.isChecked = event.target.checked
 		})
-		this.setState({ sectors: sectors })
+		this.setState({})
 		this.props.handleUpdate()
 	}
 

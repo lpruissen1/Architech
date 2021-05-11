@@ -3,16 +3,15 @@ import './BasicRules.css';
 import RuleSelector from "./RuleSelector";
 
 export default class BasicRulesSection extends React.Component {
-	state = {
-		metricList: false,
 
+	state = {
 		// this shit should come from a config file of some sort kinda like the styling
 		options: [
-			{ displayName: "Market Capitalizaton", value: "MarketCap", count: 0 },
-			{ displayName: "Dividend Yield", value: "DividendYield", count: 0 }
+			{ displayName: "Market Capitalizaton", value: "MarketCap", type: "ranged" },
+			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged" },
+			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange" }
 		]
 	};
-
 
 	// Here we need to access the value of options, then create an element equal to the count and append that to the list of components (In getAppendedComponents). 
 	// If you click "Add new metric" it brings up the list, clicking an element of the list will up the count for part of the state by 1
@@ -28,20 +27,27 @@ export default class BasicRulesSection extends React.Component {
 		this.props.handleUpdate()
 	};
 
-	addMetricList = () => {
-		if (this.state.metricList === true) {
-			return (
-				<ul>
-					<li><button onClick={this.handleClick}>Market Capitalizaton</button></li>
-					<li><button onClick={this.handleClick}>Dividend Yield</button></li>
-				</ul>
-			)
+	// this should be abstracted out into some other type of functionality because this would be used for advanced rule selection as well
+	handleAddNewRuleNew = (event) => {
+		debugger;
+		if ("ranged" === event.target.attributes.type.value) {
+			this.props.handleRangedRuleUpdate({
+				ruleType: event.target.attributes.value.value,
+				upper: 1,
+				lower: 20000
+			})
 		}
-	};
 
-	handleClick = () => {
-		this.setState(prev => ({ count: prev.count + 1 }));
-		this.setState(prev => ({ metricList: !prev.metricList }));
+		if ("timedRange" === event.target.attributes.type.value) {
+			let rules = this.props.rangedRules
+			this.props.rangedRules = [...this.props.timedRangeRules, {
+				ruleType: event.target.attributes.type.value,
+				upper: 1,
+				lower: 20000
+			}]
+		}
+
+		this.props.handleUpdate()
 	};
 
 	// check this.props.rules (or ranged rules)
@@ -60,10 +66,7 @@ export default class BasicRulesSection extends React.Component {
 	render() {
 		return (
 			<>
-				<RuleSelector handleAddNewMetricClick={this.handleAddNewRule} options={this.state.options} rangedRules={this.props.rangedRules} />
-				{this.state.options.map((option) => {
-					this.getAppendedComponents(option)
-				})}
+				<RuleSelector handleAddNewMetricClick={this.handleAddNewRuleNew} options={this.state.options} rangedRules={this.props.rangedRules} />
 			</>
 		);
 	}

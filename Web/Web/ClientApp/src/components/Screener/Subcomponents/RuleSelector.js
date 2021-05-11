@@ -9,7 +9,7 @@ export default function RuleSelector(props) {
 		return (
 			<>
 				{props.options && props.options.map((option) =>
-					<button className="newMetricButton" onClick={() => option.count++}> {option.displayName} </button>
+					<button key={ option.value} className="newMetricButton" type={option.type} value={option.value} onClick={props.handleAddNewMetricClick}> {option.displayName} </button>
 				)}
 			</>
 		)

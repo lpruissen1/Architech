@@ -8,6 +8,7 @@ export class Screener extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			// We should move this isChecked stuff down to the sector selector controls and simply append or remove sectors as clicked
 			sectors: [
 				{ value: "Healthcare", isChecked: false },
 				{ value: "Technology", isChecked: false },
@@ -22,10 +23,17 @@ export class Screener extends Component {
 				{ value: "Energy", isChecked: false }
 			],
 			tickers: [],
-			rangedRule: [],
+			rangedRules: [],
+			timedRangeRules: [],
 		};
+		this.handleRangedRuleUpdate = this.handleRangedRuleUpdate.bind(this);
 	}
 
+	handleRangedRuleUpdate(rule) {
+		this.setState({
+			rangedRules: [...this.state.rangedRules, rule]
+		})
+	}
 	componentDidMount() {
 		this.screen()
 	}
@@ -41,7 +49,7 @@ export class Screener extends Component {
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<div>
-							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRule} handleUpdate={this.update} />
+							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={ this.handleRangedRuleUpdate} />
 						</div>
 					</Card>
 					<Card className='tickerCard'>
