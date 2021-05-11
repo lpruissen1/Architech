@@ -75,7 +75,8 @@ export class Screener extends Component {
 			markets: [
 				"Sp500"
 			],
-			"sectors": this.getActiveSectors(this.state.sectors)
+			"sectors": this.getActiveSectors(this.state.sectors),
+			"rangedRule": this.state.rangedRules
 		});
 	}
 

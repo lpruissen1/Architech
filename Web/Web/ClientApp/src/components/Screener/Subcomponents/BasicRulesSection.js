@@ -19,8 +19,8 @@ export default class BasicRulesSection extends React.Component {
 		if ("ranged" === event.target.attributes.type.value) {
 			this.props.handleRangedRuleUpdate({
 				ruleType: event.target.attributes.value.value,
-				upper: 1,
-				lower: 20000
+				lower: 20000000000,
+				upper: 100000000000
 			})
 		}
 
@@ -31,32 +31,32 @@ export default class BasicRulesSection extends React.Component {
 				lower: 20000
 			})
 		}
-
 		this.props.handleUpdate()
 	};
 
 	// check this.props.rules (or ranged rules)
 	getAppendedComponents() {
-
 		let appendedComponents = []
 
-		for (let i = 0; i < this.props.rangedRules.length; i++) {
+		this.props.rangedRules && this.props.rangedRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<RangeSelector />
+					<RangeSelector displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
+					<br />
 				</>
 			)
-		}
+		)
 
-		for (let i = 0; i < this.props.timedRangeRules.length; i++) {
+		this.props.timedRangeRules && this.props.timedRangeRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<RangeSelector />
+					<RangeSelector displayName={ this.state.options.find(option => option.value === rule.ruleType).displayName}/>
+					<br />
 				</>
 			)
-		}
+		)
 
-		return appendedComponents;
+		return appendedComponents
 	}
 
 	render() {
