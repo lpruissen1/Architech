@@ -1,7 +1,5 @@
 ﻿import React, { useState } from "react";
-//import Slider, { Range } from 'rc-slider';
 import Slider from '@material-ui/core/Slider';
-import 'rc-slider/assets/index.css';
 
 export default function RangedRule(props) {
 	const [value, setValue] = React.useState([props.rule.lower, props.rule.upper]);
@@ -30,7 +28,7 @@ export default function RangedRule(props) {
 				value={value}
 				onChange={updateRuleRanges}
 				valueLabelDisplay="auto"
-				aria-labelledby="range-slider"
+				aria-labelledby="non-linear-slider"
 			/>
 		</>
 	);
