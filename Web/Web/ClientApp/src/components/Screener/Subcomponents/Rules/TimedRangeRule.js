@@ -3,14 +3,24 @@ import { Range } from 'rc-slider';
 
 
 export default function TimedRangeRule(props) {
+	const updateRuleRanges = (event) => {
+		let rule = props.rule
+		rule.lower = event[0]
+		rule.upper = event[1]
+		props.handleUpdate()
+	}
 
-    // pass in initial input min/max and min/max for entire slider
-    // we need an id for each rule so we can keep a list for display and removal purposes
-    // add timespan dropdown (should be own component)
-    return (
-        <>
-            <div>{props.displayName}</div>
-            <Range min={0} max={20} defaultValue={[3, 10]} />
-        </>
-    );
+	const updateTimePeriod = (event) => {
+		let rule = props.rule
+		rule.timePeriod = event
+		props.handleUpdate()
+	}
+
+	return (
+		// dropdown with time periods
+		<>
+			<div>{props.option.displayName}</div>
+			<Range min={props.option.selectorMin} max={props.option.selectorMax} defaultValue={[props.rule.lower, props.rule.upper]} onChange={updateRuleRanges} />
+		</>
+	);
 }
