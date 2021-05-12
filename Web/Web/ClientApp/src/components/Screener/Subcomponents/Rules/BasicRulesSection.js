@@ -11,7 +11,12 @@ export default class BasicRulesSection extends React.Component {
 		// this shit should come from a config file of some sort kinda like the styling
 		options: [
 			{ displayName: "Market Capitalizaton", value: "MarketCap", type: "ranged", selectorMin : 0, selectorMax : 2000000000000 },
-			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged", selectorMin: 0, selectorMax: 12},
+			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged", selectorMin: 0, selectorMax: 12 },
+			{ displayName: "Price to Earnings Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 2000 },
+			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
+			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 2000 },
 			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", selectorMin: 0, selectorMax: 10 }
 		]
 	};
