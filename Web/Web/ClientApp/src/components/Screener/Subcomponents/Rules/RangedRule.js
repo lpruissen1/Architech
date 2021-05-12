@@ -23,13 +23,14 @@ export default function RangedRule(props) {
 			<div>High: {high}</div>
 			<div>Low: {low}</div>
 			<Slider
-				min={props.option.selectorMin}
-				max={props.option.selectorMax}
-				value={value}
-				onChange={updateRuleRanges}
-				valueLabelDisplay="auto"
-				aria-labelledby="non-linear-slider"
-			/>
+					className = "RangedRuleSlider"
+					min={props.option.selectorMin}
+					max={props.option.selectorMax}
+					value={value}
+					onChange={updateRuleRanges}
+					valueLabelDisplay="auto"
+					aria-labelledby="non-linear-slider"
+				/> 
 		</>
 	);
 }

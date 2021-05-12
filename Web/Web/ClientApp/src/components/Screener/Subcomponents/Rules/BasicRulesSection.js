@@ -10,7 +10,7 @@ export default class BasicRulesSection extends React.Component {
 	state = {
 		// this shit should come from a config file of some sort kinda like the styling
 		options: [
-			{ displayName: "Market Capitalizaton", value: "MarketCap", type: "ranged", selectorMin : 0, selectorMax : 2000000000000 },
+			{ displayName: "Market Capitalizaton", value: "MarketCap", type: "ranged", selectorMin : 1, selectorMax : 2000000000000 },
 			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged", selectorMin: 0, selectorMax: 12 },
 			{ displayName: "Price to Earnings Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 2000 },
 			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
