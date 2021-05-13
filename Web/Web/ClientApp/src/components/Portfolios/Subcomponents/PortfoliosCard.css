@@ -1,10 +1,11 @@
-﻿using System;
-namespace Web.ClientApp.src.components.Portfolios.Subcomponents
-{
- public class PortfoliosCard
- {
-     public PortfoliosCard()
-     {
-     }
- }
+﻿.cardContainer {
+	overflow-y: auto; /* Trigger vertical scroll    */
+	overflow-x: hidden; /* Hide the horizontal scroll */
+}
+
+.portfoliosCard {
+	position: relative;
+	right: 0px;
+	height: 300px;
+	width: 300px;
 }

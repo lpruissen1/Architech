@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import './PortfoliosCard.css';
 
 export class PortfoliosCard extends Component {
 
