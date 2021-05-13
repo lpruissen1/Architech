@@ -103,7 +103,7 @@ export class Screener extends Component {
 
 	saveIndex() {
 		return this.postCustomIndexRequest({
-			id: v4(),
+			userId: v4(),
 			markets: [
 				"Sp500"
 			],
@@ -140,7 +140,7 @@ export class Screener extends Component {
 	}
 
 	postCustomIndexRequest(data = {}) {
-		fetch("https://localhost:5001/CustomIndex", {
+		fetch("https://localhost:7001/CustomIndex", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
