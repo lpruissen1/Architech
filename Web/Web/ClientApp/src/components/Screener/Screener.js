@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { TickerTable } from './Subcomponents/TickerTable';
 import ScreeningControls from './Subcomponents/ScreeningControls';
+import SaveButton from './Subcomponents/SaveButton';
 import Card from 'react-bootstrap/Card';
 import './Screener.css';
+import { v4 } from 'uuid';
 
 export class Screener extends Component {
 	constructor(props) {
@@ -63,6 +65,10 @@ export class Screener extends Component {
 		this.screen()
 	}
 
+	save = () => {
+		this.saveIndex()
+	}
+
 	render() {
 		return (
 			<div>
@@ -71,6 +77,8 @@ export class Screener extends Component {
 					<Card className='screenerCard'>
 						<div>
 							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={this.handleRangedRuleUpdate} handleTimedRangeRuleUpdate={this.handleTimedRangeRuleUpdate} />
+							<br/>
+							<SaveButton handleSave={this.save}/>
 						</div>
 					</Card>
 					<Card className='tickerCard'>
@@ -85,6 +93,17 @@ export class Screener extends Component {
 	
 	screen() {
 		return this.postScreeningRequest({
+			markets: [
+				"Sp500"
+			],
+			"sectors": this.getActiveSectors(this.state.sectors),
+			"rangedRule": this.state.rangedRules
+		});
+	}
+
+	saveIndex() {
+		return this.postCustomIndexRequest({
+			id: v4(),
 			markets: [
 				"Sp500"
 			],
@@ -118,5 +137,18 @@ export class Screener extends Component {
 				that.setState({ tickers: data })
 			})
 		});
+	}
+
+	postCustomIndexRequest(data = {}) {
+		fetch("https://localhost:5001/CustomIndex", {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then(function (response) {
+				return response.status
+			});
 	}
 }
