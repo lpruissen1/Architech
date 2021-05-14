@@ -5,8 +5,8 @@ export default function SaveButton(props) {
 	const [checked, setChecked] = useState(true)
 
 	const handleSaveClick = (event) => {
-		props.handleSave()
 		setChecked(!checked)
+		props.handleSave()
 	}
 
 	return (

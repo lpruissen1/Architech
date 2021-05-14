@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import './BasicRules.css';
+import './Rules.css';
 import RuleSelector from "./RuleSelector";
 import RangedRule from "./RangedRule";
 import TimedRangeRule from "./TimedRangeRule";
