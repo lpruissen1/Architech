@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme) => ({
 
 function numFormatter(num) {
 	if (num > 1000000 && num < 1000000000) {
-		return (num / 1000000).toFixed(1) + 'M'; 
+		return (num / 1000000).toFixed(0) + 'M'; 
 	} else if (num >= 1000000000 && num < 1000000000000) {
-		return (num / 1000000000).toFixed(1) + 'B';
+		return (num / 1000000000).toFixed(0) + 'B';
 	} else if (num >= 1000000000000) {
-			return (num / 1000000000000).toFixed(1) + 'T'; 
+			return (num / 1000000000000).toFixed(2) + 'T'; 
 	} else if (num < 100000) {
 		return '< 0.1M';
 	}
