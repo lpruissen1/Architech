@@ -2,6 +2,7 @@
 import Slider from '@material-ui/core/Slider';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import TimePeriodSelector from "./TimePeriodSelector";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -94,6 +95,7 @@ export default function TimeRangedRule(props) {
 					onChange={(event, newValue) => setValue(newValue)}
 					onChangeCommitted={updateRuleRanges} />
 			</div>
+			<TimePeriodSelector />
 		</>
 	);
 }
