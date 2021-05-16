@@ -61,6 +61,7 @@ export default function TimeRangedRule(props) {
 	const [value, setValue] = React.useState([props.rule.lower, props.rule.upper]);
 	const [high, setHigh] = useState(props.rule.upper);
 	const [low, setLow] = useState(props.rule.lower);
+	const [timePeriod, setTimePeriod] = useState(props.rule.timePeriod);
 	const classes = useStyles();
 
 	const updateRuleRanges = (event, newValue) => {
@@ -73,9 +74,9 @@ export default function TimeRangedRule(props) {
 		props.handleUpdate()
 	}
 
-	const updateTimePeriod = (event) => {
+	const updateTimePeriod = (newTimePeriod) => {
 		let rule = props.rule
-		rule.timePeriod = event
+		setTimePeriod(newTimePeriod)
 		props.handleUpdate()
 	}
 
@@ -95,7 +96,7 @@ export default function TimeRangedRule(props) {
 					onChange={(event, newValue) => setValue(newValue)}
 					onChangeCommitted={updateRuleRanges} />
 			</div>
-			<TimePeriodSelector />
+			<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
 		</>
 	);
 }

@@ -14,10 +14,10 @@ export default class BasicRulesSection extends React.Component {
 			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged", selectorMin: 0, selectorMax: 12 },
 			{ displayName: "Price to Earnings Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 2000 },
 			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
-			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 1000 },
-			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 1000 },
-			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", selectorMin: -100, selectorMax: 2000 },
-			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", selectorMin: 0, selectorMax: 10 }
+			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 2000 },
+			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", timePeriod: "Year", selectorMin: 0, selectorMax: 10 }
 		]
 	};
 
@@ -40,7 +40,7 @@ export default class BasicRulesSection extends React.Component {
 				ruleType: ruleType,
 				upper: this.getSelectorMax(ruleType),
 				lower: this.getSelectorMin(ruleType),
-				timePeriod: "Year"
+				timePeriod: this.getTimePeriod(ruleType)
 			})
 		}
 	};
@@ -51,6 +51,10 @@ export default class BasicRulesSection extends React.Component {
 
 	getSelectorMax(ruleType) {
 		return this.state.options.find(option => option.value === ruleType ).selectorMax
+	}
+
+	getTimePeriod(ruleType) {
+		return this.state.options.find(option => option.value === ruleType).timePeriod
 	}
 
 	// check this.props.rules (or ranged rules)
