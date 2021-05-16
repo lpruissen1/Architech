@@ -1,5 +1,5 @@
 ﻿import React, { useState } from "react";
-import './BasicRules.css';
+import './Rules.css';
 
 export default function RuleSelector(props) {
 	const [displayList, setDisplayList] = useState(false);
