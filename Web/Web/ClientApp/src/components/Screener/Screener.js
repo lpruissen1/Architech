@@ -31,9 +31,22 @@ export class Screener extends Component {
 	}
 
 	handleRangedRuleUpdate(rule) {
-		this.setState({
-			rangedRules: [...this.state.rangedRules, rule]
-		})
+		const rules = this.state.rangedRules;
+
+		if (!rules.find(function (existingRule, index) {
+			if (existingRule.id === rule.id)
+				return true;
+		})) {
+			// if new rule 
+			this.setState({
+				rangedRules: [...this.state.rangedRules, rule]
+			})
+		}
+
+		// if not new rule update existing
+
+		// then screen
+		this.screen()
 	}
 
 	handleTimedRangeRuleUpdate(rule) {

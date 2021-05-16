@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SectorSelector from './SectorSelector';
-import BasicRulesSection from "./BasicRulesSection";
+import BasicRulesSection from "./Rules/BasicRulesSection";
 import Collapsible from 'react-collapsible';
 import "../Screener.css"
 
