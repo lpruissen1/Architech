@@ -61,7 +61,6 @@ export default function TimeRangedRule(props) {
 	const [value, setValue] = React.useState([props.rule.lower, props.rule.upper]);
 	const [high, setHigh] = useState(props.rule.upper);
 	const [low, setLow] = useState(props.rule.lower);
-	const [timePeriod, setTimePeriod] = useState(props.rule.timePeriod);
 	const classes = useStyles();
 
 	const updateRuleRanges = (event, newValue) => {
@@ -74,9 +73,9 @@ export default function TimeRangedRule(props) {
 		props.handleUpdate()
 	}
 
-	const updateTimePeriod = (newTimePeriod) => {
+	const updateTimePeriod = (time) => {
 		let rule = props.rule
-		setTimePeriod(newTimePeriod)
+		rule.timePeriod = time;
 		props.handleUpdate()
 	}
 
@@ -93,7 +92,7 @@ export default function TimeRangedRule(props) {
 					max={props.option.selectorMax}
 					value={value}
 					valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-					onChange={(event, newValue) => setValue(newValue)}
+					onChange={updateRuleRanges}
 					onChangeCommitted={updateRuleRanges} />
 			</div>
 			<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
