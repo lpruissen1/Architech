@@ -97,7 +97,8 @@ export class Screener extends Component {
 				"Sp500"
 			],
 			"sectors": this.getActiveSectors(this.state.sectors),
-			"rangedRule": this.state.rangedRules
+			"rangedRule": this.state.rangedRules,
+			"timedRangeRule": this.state.timedRangeRules
 		});
 	}
 
