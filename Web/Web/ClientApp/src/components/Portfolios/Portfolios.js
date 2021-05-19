@@ -1,20 +1,42 @@
-﻿import React, { Component } from 'react';
-import { PortfoliosCard } from './Subcomponents/PortfoliosCard';
+﻿import React, { useCallback, useState } from 'react';
+import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import Card from 'react-bootstrap/Card';
+import styled, { css } from "styled-components";
+import { useHistory } from 'react-router-dom';
 //import './Portfolios.css';
 
-export class Portfolios extends Component {
+export function Portfolios() {
 
-	render() {
-		return (
-			<div>
-				<h1>My Blueprints</h1>
-				<Card className='portfoliosCard'>
-					<div className='cardContainer'>
-						<PortfoliosCard portfolios={this.portfolios} />
-					</div>
-				</Card>
-			</div>
-			);
-	}
+	const history = useHistory();
+	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
+	const [createNew, setCreateNew] = useState(false)
+	const clickie = () => setCreateNew(!createNew)
+
+	const ModalContainer = styled.div`
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.5);
+		`;		
+
+	return (
+		<div>
+			<h1>My Blueprints</h1>
+			<Card className='portfoliosCard'>
+					<NewPortfolioCard onClick={clickie} />
+			</Card>
+			{createNew && (
+				<>
+					<ModalContainer>
+						<div className="centered">
+							<Card className="createNew">Create New</Card>
+							<Card onClick={handleOnClick} className="createNew">Create from Template</Card>
+						</div>
+					</ModalContainer>
+				</>
+			)}
+		</div>
+	);
 }

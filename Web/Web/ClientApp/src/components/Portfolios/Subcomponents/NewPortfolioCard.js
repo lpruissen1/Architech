@@ -1,13 +1,13 @@
-﻿import React, { Component } from 'react';
-import './PortfoliosCard.css';
+﻿import React from 'react';
+import './NewPortfolioCard.css';
 import { FaPlus } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 
-export class PortfoliosCard extends Component {
+export function NewPortfolioCard(props) {
 
 
-	render() {
-		return (
+	return (
+		<div onClick={props.onClick} className='cardContainer'>
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead></thead>
 				<tbody>
@@ -22,6 +22,6 @@ export class PortfoliosCard extends Component {
 					</IconContext.Provider>
 				</tbody>
 			</table>
-		);
-	}
+		</div>
+	);
 } 
