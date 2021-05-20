@@ -12,6 +12,7 @@ export function Portfolios() {
 	const [createNew, setCreateNew] = useState(false)
 	const clickie = () => setCreateNew(!createNew)
 
+	// MOVE THIS TO .CSS AND REMOVE STYLED-COMPOENTS
 	const ModalContainer = styled.div`
 		position: absolute;
 		top: 0;
