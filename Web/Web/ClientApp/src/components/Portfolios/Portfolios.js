@@ -32,8 +32,8 @@ export function Portfolios() {
 				<>
 					<ModalContainer>
 						<div className="centered">
-							<Card className="createNew">Create New</Card>
-							<Card onClick={handleOnClick} className="createNew">Create from Template</Card>
+							<Card onClick={handleOnClick} className="createNew">Create New</Card>
+							<Card className="createNew">Create from Template</Card>
 						</div>
 					</ModalContainer>
 				</>
