@@ -1,0 +1,15 @@
+﻿.newMetricButton {
+	box-sizing: border-box;
+	border-radius: 0px 0px 0px 0px;
+}
+.button {
+	background-color: #000000; /* Green */
+	border: none;
+	color: white;
+	padding: 8px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 5px;
+}
