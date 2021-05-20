@@ -1,0 +1,10 @@
+﻿using System;
+namespace Web.ClientApp.src.components.Portfolios
+{
+ public class Portfolios
+ {
+     public Portfolios()
+     {
+     }
+ }
+}
