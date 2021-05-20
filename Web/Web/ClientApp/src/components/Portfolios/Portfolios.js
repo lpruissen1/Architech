@@ -19,7 +19,7 @@ export function Portfolios() {
 		left: 0;
 		width: 100vw;
 		height: 100vh;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.7);
 		`;		
 
 	return (
@@ -30,7 +30,7 @@ export function Portfolios() {
 			</Card>
 			{createNew && (
 				<>
-					<ModalContainer>
+					<ModalContainer className="centeredModal">
 						<div className="centered">
 							<Card onClick={handleOnClick} className="createNew">Create New</Card>
 							<Card className="createNew">Create from Template</Card>
