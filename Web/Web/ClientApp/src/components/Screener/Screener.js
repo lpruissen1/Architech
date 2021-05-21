@@ -3,6 +3,7 @@ import { TickerTable } from './Subcomponents/TickerTable';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import SaveButton from './Subcomponents/SaveButton';
 import Card from 'react-bootstrap/Card';
+import Loading from './Subcomponents/Loading';
 import './Screener.css';
 import { v4 } from 'uuid';
 
@@ -27,6 +28,7 @@ export class Screener extends Component {
 			tickers: [],
 			rangedRules: [],
 			timedRangeRules: [],
+			loading: true
 		};
 		this.handleRangedRuleUpdate = this.handleRangedRuleUpdate.bind(this);
 		this.handleTimedRangeRuleUpdate = this.handleTimedRangeRuleUpdate.bind(this);
@@ -82,8 +84,9 @@ export class Screener extends Component {
 						</div>
 					</Card>
 					<Card className='tickerCard'>
+						{this.state.loading && <Loading />}
 						<div className='tickerTableContainer'>
-							<TickerTable tickers={this.state.tickers} />
+							<TickerTable tickers={this.state.tickers} loading={this.state.loading} />
 						</div>
 					</Card>
 				</div>
@@ -124,8 +127,11 @@ export class Screener extends Component {
 		return activeSectors
 	}
 
+	
+
 	postScreeningRequest(data = {}) {
 		const that = this
+		that.setState({ loading: true })
 		fetch("https://localhost:5001/Screening/FuckYourself", {
 			method: 'POST',
 			headers: {
@@ -136,7 +142,7 @@ export class Screener extends Component {
 		.then(function (response) {
 			return response.json().then(function (data) {
 				console.log(data)
-				that.setState({ tickers: data })
+				that.setState({ tickers: data, loading: false })
 			})
 		});
 	}
