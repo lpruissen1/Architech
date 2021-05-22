@@ -17,13 +17,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function TimePeriodSelector() {
+export default function TimePeriodSelector(props) {
 	const classes = useStyles();
-	const [timePeriod, setTimePeriod] = React.useState('Year');
+	const [time, setTime] = React.useState("Year");
 	const [open, setOpen] = React.useState(false);
 
+	const handleTimePeriodUpdate = (event) => {
+		handleChange(event)
+		props.updateTimePeriod(event.target.value)
+	}
+
 	const handleChange = (event) => {
-		setTimePeriod(event.target.value);
+		setTime(event.target.value);
 	};
 
 	const handleClose = () => {
@@ -44,12 +49,12 @@ export default function TimePeriodSelector() {
 					open={open}
 					onClose={handleClose}
 					onOpen={handleOpen}
-					value={timePeriod}
-					onChange={handleChange}
+					value={time}
+					onChange={handleTimePeriodUpdate}
 				>
-					<MenuItem value="">
-						<em>None</em>
-					</MenuItem>
+					<MenuItem value={'Quarter'}>1 Quarter</MenuItem>
+					<MenuItem value={'HalfYear'}>2 Quarters</MenuItem>
+					<MenuItem value={'Year'}>1 Year</MenuItem>
 					<MenuItem value={'ThreeYears'}>3 Years</MenuItem>
 					<MenuItem value={'FiveYears'}>5 Years</MenuItem>
 				</Select>

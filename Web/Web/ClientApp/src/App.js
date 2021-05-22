@@ -7,8 +7,6 @@ import { Education } from './components/Education/Education';
 import { Home } from './components/Home/Home';
 import { Profile } from './components/Profile/Profile';
 import { Research } from './components/Research/Research';
-
-
 import './custom.css'
 
 export default class App extends Component {
@@ -23,6 +21,7 @@ export default class App extends Component {
 			<Route exact path='/research' component={Research} />
 			<Route exact path='/education' component={Education} />
 			<Route exact path='/profile' component={Profile} />
+            <Route exact path='/portfolios' component={Portfolios} />
       </Layout>
     );
   }

@@ -1,0 +1,13 @@
+﻿.loading {
+	background-color: whitesmoke;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 9;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	opacity: 0.6;
+}
+
+

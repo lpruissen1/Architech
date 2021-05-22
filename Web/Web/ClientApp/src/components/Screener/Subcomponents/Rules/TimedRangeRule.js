@@ -73,9 +73,9 @@ export default function TimeRangedRule(props) {
 		props.handleUpdate()
 	}
 
-	const updateTimePeriod = (event) => {
+	const updateTimePeriod = (time) => {
 		let rule = props.rule
-		rule.timePeriod = event
+		rule.timePeriod = time;
 		props.handleUpdate()
 	}
 
@@ -92,10 +92,10 @@ export default function TimeRangedRule(props) {
 					max={props.option.selectorMax}
 					value={value}
 					valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-					onChange={(event, newValue) => setValue(newValue)}
+					onChange={updateRuleRanges}
 					onChangeCommitted={updateRuleRanges} />
 			</div>
-			<TimePeriodSelector />
+			<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
 		</>
 	);
 }
