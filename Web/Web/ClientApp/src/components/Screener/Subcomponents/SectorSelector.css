@@ -38,10 +38,12 @@ ul.ks-cboxtags li {
 
 ul.ks-cboxtags li label {
 	display: inline-block;
-	background-color: #EDF6F8;
-	border: 2px solid #003B46;
-	color: #003B46;
-	width: 150px;
+	background-color: #fff;
+	border: 1px solid #176F6A;
+	color: #176F6A;
+	width: 180px;
+	font-size: 14px;
+	font-weight: 600;
 	text-align: center;
 	border-radius: 10px;
 	white-space: nowrap;
@@ -67,19 +69,17 @@ ul.ks-cboxtags li label::before {
 	text-rendering: auto;
 	-webkit-font-smoothing: antialiased;
 	font-family: "Font Awesome 5 Free";
-	font-weight: 900;
-	font-size: 12px;
 	padding: 2px 6px 2px 2px;
 	transition: transform .3s ease-in-out;
 }
 
 
-ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-	border: 2px solid #003B46;
-	background-color: #003B46;
-	color: #fff;
-	transition: all .2s;
-}
+	ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+		border: 1px solid #176F6A;
+		background-color: #176F6A;
+		color: #fff;
+		transition: all .2s;
+	}
 
 ul.ks-cboxtags li input[type="checkbox"] {
 	position: absolute;
