@@ -3,17 +3,54 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			light: '#82E1B6',
+			main: '#2E9B7F',
+			dark: '#176F6A',
+		},
+		error: {
+			light: '#FFEBDB',
+			main: '#FFB293',
+			dark: '#FF644C',
+			contrastText: '#7A0E22',
+		},
+		warning: {
+			light: '#FFF2C5',
+			main: '#FFEAA8',
+			dark: '#FFE192',
+			contrastText: '#7A4F15'
+		},
+		info: {
+			light: '#C9FBF6',
+			main: '#5DE3EA',
+			dark: '#0096BC',
+			contrastText: '#002D5A'
+		},
+		success: {
+			light: '#DFFDE4',
+			main: '#9FF3BC',
+			dark: '#5cd89f',
+			contrastText: '#116762'
+		},
+	}
+})
+
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>,
-  rootElement);
+	<BrowserRouter basename={baseUrl}>
+		<MuiThemeProvider theme={theme}>
+			<App />
+		</MuiThemeProvider>
+	</BrowserRouter>,
+		rootElement);
 
 registerServiceWorker();
 
