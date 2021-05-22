@@ -32,6 +32,7 @@
 .Collapsible {
 	background-color: white;
 	border: 1px solid #003B46;
+	border-radius: 8px;
 }
 
 
@@ -46,9 +47,9 @@
 	font-weight: 400;
 	text-decoration: none;
 	color: #003B46;
-	border: 1px solid #EDF6F8;
 	padding: 10px;
 	opacity: 1;
+	border-radius: 8px;
 }
 
 .Collapsible__trigger:after {
