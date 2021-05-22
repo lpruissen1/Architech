@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import Loading from './Loading';
 
 export class TickerTable extends Component {
-
-	static renderStockDataTable(tickers) {
+	constructor(props) {
+		super(props)
+	}
+	static renderStockDataTable(tickers, loading) {
 		if (!Array.isArray(tickers))
 			return "Loading";
 
@@ -14,6 +17,7 @@ export class TickerTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
+					{loading && <Loading />}
 					{tickers.map(stockdatum =>
 						<tr key={stockdatum}><td>{stockdatum}</td></tr>
 					)}
@@ -23,7 +27,7 @@ export class TickerTable extends Component {
 	}
 
 	render() {
-		let contents = TickerTable.renderStockDataTable(this.props.tickers);
+		let contents = TickerTable.renderStockDataTable(this.props.tickers, this.props.loading);
 
 		return (
 			<div>
