@@ -1,0 +1,53 @@
+﻿.cardContainer {
+	overflow-y: auto; /* Trigger vertical scroll    */
+	overflow-x: hidden; /* Hide the horizontal scroll */
+}
+
+.portfoliosCard {
+	position: relative;
+	right: 0px;
+	height: 280px;
+	width: 220px;
+	background-color: #F8F8F8;
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+	border-radius: 8px;
+
+}
+
+.plusIconContainer {
+	margin-top: 100px;
+	margin-bottom: 25px;
+	margin-left: 85px;
+}
+
+.blueprintText {
+	text-align: center;
+}
+
+.createNew {
+	background: #fff;
+	position: relative;
+	margin: 60px;
+	border: 1px solid #000;
+	margin-top: 15%;
+	padding-top: 22%;
+	height: 420px;
+	width: 330px;
+	text-align: center;
+	font-size: 20px;
+	background-color: #F8F8F8;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-Direction: row;
+}
+
+.centeredModal {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-Direction: row;
+}

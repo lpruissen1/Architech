@@ -84,7 +84,6 @@ export class Screener extends Component {
 						</div>
 					</Card>
 					<Card className='tickerCard'>
-						{this.state.loading && <Loading />}
 						<div className='tickerTableContainer'>
 							<TickerTable tickers={this.state.tickers} loading={this.state.loading} />
 						</div>
