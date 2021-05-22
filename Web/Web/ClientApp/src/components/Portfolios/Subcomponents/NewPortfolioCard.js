@@ -11,7 +11,7 @@ export function NewPortfolioCard(props) {
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead></thead>
 				<tbody>
-					<IconContext.Provider value={{ style: { fontSize: '50px', color: "#003B46" } }}>
+					<IconContext.Provider value={{ style: { fontSize: '50px', color: "#2E9B7F" } }}>
 						<div className='plusIconContainer'>
 							<FaPlus />
 						</div>

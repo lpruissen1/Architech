@@ -1,7 +1,6 @@
 ﻿import React, { useCallback, useState } from 'react';
 import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import Card from 'react-bootstrap/Card';
-import styled, { css } from "styled-components";
 import { useHistory } from 'react-router-dom';
 import './Portfolios.css';
 
