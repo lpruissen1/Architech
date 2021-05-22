@@ -2,10 +2,10 @@
 import Slider from '@material-ui/core/Slider';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		color: theme.palette.primary,
 		width: 300
 	},
 }));
@@ -26,7 +26,6 @@ function numFormatter(num) {
 
 const RuleSlider = withStyles({
 	root: {
-		color: '#61A4AD',
 		height: 8,
 	},
 	thumb: {
