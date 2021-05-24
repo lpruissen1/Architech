@@ -1,0 +1,29 @@
+﻿.flex-container {
+	display: flex;
+	flex-Direction: column;
+}
+
+.registration-card {
+	border: 1px solid;
+	border-color: black;
+	border-radius: 8px;
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.nameRow {
+	display: flex;
+	flex-direction: row
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 30px;
+}
