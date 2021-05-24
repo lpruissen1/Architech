@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Registration.css';
 import { makeStyles } from '@material-ui/core/styles';
+import Cookie from 'js-cookie';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -41,7 +42,7 @@ export function Registration() {
 	const [password, setPassword] = useState('');
 
 	const postUserRegistrationRequest = (data) => {
-		fetch("https://localhost:44327/User", {
+		fetch("https://localhost:9001/User", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -49,7 +50,11 @@ export function Registration() {
 			body: JSON.stringify(data)
 		})
 			.then(function (response) {
-				return response.status
+				console.log(response)
+				response.text().then(function (data) {
+					debugger
+					Cookie.set("jwtToken", data)
+				})
 			});
 	}
 
