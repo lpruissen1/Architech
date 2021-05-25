@@ -2,6 +2,7 @@
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Registration.css';
+import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import Cookie from 'js-cookie';
 
@@ -42,20 +43,8 @@ export function Registration() {
 	const [password, setPassword] = useState('');
 
 	const postUserRegistrationRequest = (data) => {
-		fetch("https://localhost:9001/User", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(function (response) {
-				response.text().then(function (data) {
-					Cookie.set("jwtToken", data)
-				})
-			});
+		AuthClient.register(data)
 	}
-
 
 	const registerUser = () => {
 		return postUserRegistrationRequest({
