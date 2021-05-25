@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
-		fontWeight: 550,
-		border: '1px solid'
+		fontWeight: 550, 
 	},
 	buttonSaved: {
 		margin: theme.spacing(1),
@@ -34,7 +33,7 @@ export default function SaveButton(props) {
 		<>
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
 			{checked
-				? <Button onClick={handleSaveClick} variant='outlined' color='primary' size="small" className={classes.button}>Save Index</Button>
+				? <Button onClick={handleSaveClick} variant='contained' color='primary' size="small" className={classes.button}>Save Index</Button>
 				: <Button color='primary' variant='contained' size="small" className={classes.buttonSaved} endIcon={<CheckCircleOutlinedIcon />}>Saved</Button>}
 		</>)
 }
