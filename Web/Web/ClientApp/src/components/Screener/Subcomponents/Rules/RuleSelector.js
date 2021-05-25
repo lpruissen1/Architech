@@ -12,15 +12,15 @@ export default function RuleSelector(props) {
 
 	const renderOptions = () => {
 		return (
-			<>
+			<div className="flex">
 				{props.options && props.options.map((option) =>
-					<button key={option.value} className="newMetricButton" type={option.type} value={option.value} onClick={superClickie}> {option.displayName} </button>
+					<button key={option.value} className="button" type={option.type} value={option.value} onClick={superClickie}> {option.displayName} </button>
 				)}
-			</>
+			</div>
 		)
 	}
 
-	const display = displayList ? renderOptions() : <button className="newMetricButton" onClick={clickie}>Add New Metric </button>;
+	const display = displayList ? renderOptions() : <button className="newMetricButton" onClick={clickie}> + Add New Metric </button>;
 
     return (
 		<>{display}</>

@@ -24,7 +24,7 @@ export default class SectorSelector extends Component {
 		return (
 			<div className = "sectorSelectorContainer">
 				<ul className="ks-cboxtags">
-					<CheckBox type="checkbox" handleCheckChildElement={this.handleAllChecked} id="5" value="Check/Uncheck All" />
+					<CheckBox type="checkbox" handleCheckChildElement={this.handleAllChecked} id="5" value="Toggle All Sectors" />
 					{
 						this.props.sectors && this.props.sectors.map((sector) => {
 							return (<CheckBox key={sector.value} handleCheckChildElement={this.handleCheckChildElement}  {...sector} />)
