@@ -38,9 +38,7 @@ export function Registration() {
 			body: JSON.stringify(data)
 		})
 			.then(function (response) {
-				console.log(response)
 				response.text().then(function (data) {
-					debugger
 					Cookie.set("jwtToken", data)
 				})
 			});
