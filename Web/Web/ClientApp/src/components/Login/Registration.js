@@ -6,8 +6,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import Cookie from 'js-cookie';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		
+	button: {
+		margin: '0 auto',
+		marginTop: '14px',
+		display: "flex",
+		width: '42ch',
+		fontWeight: '700',
+		color: 'white',
+		boxShadow: 'none',
+		textTransform: 'none',
+		fontSize: 16,
+		backgroundColor: theme.palette.info.main,
+		"&:hover": {
+			backgroundColor: '#0075A1'
+		}
 	},
 	smallForm: {
 		margin: theme.spacing(1.5),
@@ -60,55 +72,61 @@ export function Registration() {
 	}
 
 	return (
-		<div className="registration-card">
-			<h1>Register</h1>
-			<form className={classes.root}>
-				<div className="flex-container">
-					<div className="nameRow">
-						<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="First Name"
-							InputLabelProps={{
+		<div className="global-flex-container">
+			<div className="registration-card">
+				<form className={classes.root}>
+					<div className="flex-container">
+						<div className="nameRow">
+							<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="First Name"
+								InputLabelProps={{
+									shrink: true,
+								}}
+								onChange={(event) => {
+									setFirstName(event.target.value)
+								}}
+								autoComplete='off'
+							/>
+							<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="Last Name"
+								InputLabelProps={{
 								shrink: true,
-							}}
-							onChange={(event) => {
-								setFirstName(event.target.value)
-							}}
-						/>
-						<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="Last Name"
+								}}
+								onChange={(event) => {
+									setLastName(event.target.value)
+								}}
+								autoComplete='off'
+							/>
+						</div>
+						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Username"
 							InputLabelProps={{
 							shrink: true,
 							}}
 							onChange={(event) => {
-								setLastName(event.target.value)
+								setUsername(event.target.value)
 							}}
+							autoComplete='off'
+						/>
+						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Password"
+							InputLabelProps={{
+							shrink: true,
+							}}
+							onChange={(event) => {
+								setPassword(event.target.value)
+							}}
+							autoComplete='off'
+						/>
+						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Email"
+							InputLabelProps={{
+							shrink: true,
+							}}
+							onChange={(event) => {
+								setEmail(event.target.value)
+							}}
+							autoComplete='off'
 						/>
 					</div>
-					<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Username"
-						InputLabelProps={{
-						shrink: true,
-						}}
-						onChange={(event) => {
-							setUsername(event.target.value)
-						}}
-					/>
-					<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Password"
-						InputLabelProps={{
-						shrink: true,
-						}}
-						onChange={(event) => {
-							setPassword(event.target.value)
-						}}
-					/>
-					<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Email"
-						InputLabelProps={{
-						shrink: true,
-						}}
-						onChange={(event) => {
-							setEmail(event.target.value)
-						}}
-					/>
-				</div>
-			</form>
-			<Button onClick={register}> Register </Button>
+				</form>
+				<Button onClick={register} className={classes.button} variant="contained"> Register </Button>
+			</div>
 		</div>
 	);
 }

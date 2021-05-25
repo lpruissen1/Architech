@@ -80,22 +80,24 @@ export default function TimeRangedRule(props) {
 	}
 
 	return (
-		<>
-			<div>{props.option.displayName}</div>
-			<div>High: {high}</div>
-			<div>Low: {low}</div>
-			<div className={classes.root}>
-				<RuleSlider
-					valueLabelDisplay="auto"
-					aria-label="pretto slider"
-					min={props.option.selectorMin}
-					max={props.option.selectorMax}
-					value={value}
-					valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-					onChange={updateRuleRanges}
-					onChangeCommitted={updateRuleRanges} />
+		<div className="ranged-rule-container">
+			<div className="display-name">{props.option.displayName}</div>
+			<div className="ranged-slider-container">
+				<div className={classes.root}>
+					<RuleSlider
+						valueLabelDisplay="auto"
+						aria-label="pretto slider"
+						min={props.option.selectorMin}
+						max={props.option.selectorMax}
+						value={value}
+						valueLabelFormat={value => <div>{numFormatter(value)}</div>}
+						onChange={updateRuleRanges}
+						onChangeCommitted={updateRuleRanges} />
+				</div>
 			</div>
-			<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
-		</>
+			<div className="timePeriod-selector-container">
+				<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
+			</div>
+		</div>
 	);
 }

@@ -1,6 +1,6 @@
 @import url('file:///C:\sketch\Architech\Web\Web\ClientApp\src\components\Screener\Subcomponents\SectorSelector.css');
 .button {
-	background-color: #000000; /* Green */
+	background-color: #000000;
 	border: none;
 	color: white;
 	padding: 8px 20px;
@@ -29,7 +29,7 @@
 
 ul.ks-cboxtags {
 	list-style: none;
-	padding: 16px
+	padding: 24px;
 }
 
 ul.ks-cboxtags li {
@@ -39,8 +39,9 @@ ul.ks-cboxtags li {
 	ul.ks-cboxtags li label {
 		display: inline-block;
 		background-color: #fff;
-		border: 1px solid #2E9B7F;
-		color: #2E9B7F;
+		border: 1px solid;
+		border-color: dimgrey;
+		color: dimgrey;
 		width: 180px;
 		font-size: 14px;
 		font-weight: 600;
@@ -60,6 +61,11 @@ ul.ks-cboxtags li {
 ul.ks-cboxtags li label {
 	padding: 8px 12px;
 	cursor: pointer;
+}
+
+ul.ks-boxtags li label:hover {
+	background-color: rgba(0, 0, 0, 0.1); /* Green */
+	color: black;
 }
 
 ul.ks-cboxtags li label::before {
