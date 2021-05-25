@@ -29,7 +29,7 @@
 
 ul.ks-cboxtags {
 	list-style: none;
-	padding: 16px
+	padding: 24px;
 }
 
 ul.ks-cboxtags li {
@@ -61,6 +61,11 @@ ul.ks-cboxtags li {
 ul.ks-cboxtags li label {
 	padding: 8px 12px;
 	cursor: pointer;
+}
+
+ul.ks-boxtags li label:hover {
+	background-color: rgba(0, 0, 0, 0.1); /* Green */
+	color: black;
 }
 
 ul.ks-cboxtags li label::before {

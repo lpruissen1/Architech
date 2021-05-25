@@ -5,12 +5,14 @@
 	display: inline-block;
 	background-color: lightgrey;
 	background-color: rgba(0, 0, 0, 0.07);
+	font-weight: 600;
+	color: rgb(70,70,70)
 }
 
-.newMetricButton:hover {
-	background-color: rgba(0, 0, 0, 0.1); /* Green */
-	color: black;
-}
+	.newMetricButton:hover {
+		background-color: rgba(0, 0, 0, 0.1); /* Green */
+		color: rgb(70,70,70);
+	}
 
 .button {
 	display: inline-block;

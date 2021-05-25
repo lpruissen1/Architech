@@ -9,13 +9,13 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
-		fontWeight: 550, 
+		fontWeight: 600, 
 	},
 	buttonSaved: {
 		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
-		fontWeight: 550,
+		fontWeight: 600,
 		backgroundColor: theme.palette.primary
 	}
 }));
