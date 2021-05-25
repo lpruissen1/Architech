@@ -53,6 +53,7 @@
 .rule-container {
 	display: flex;
 	flex-direction: row;
+	flex-basis: 0;
 	padding: 24px;
 	padding-top: 36px;
 	padding-bottom: 4px;
@@ -60,10 +61,27 @@
 
 .display-name{
 	margin-left: 10px;
+	font-size: 14px;
 	width: 33%;
 }
 
 .slider-container{
 	width: 66%;
 	height: 100%;
+}
+
+
+.ranged-rule-container {
+	display: flex;
+	flex-direction: row;
+	flex-basis: 0;
+	padding: 24px;
+	padding-top: 36px;
+	padding-bottom: 4px;
+}
+
+.timePeriod-selector-container {
+	display: flex;
+	align-content: center;
+	padding-left: 10%;
 }

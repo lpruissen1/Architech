@@ -89,6 +89,8 @@ export default function RangedRule(props) {
 							onChangeCommitted={updateRuleRanges}/>
 					</div>
 				</div>
+				<div>
+				</div>
 			</div>
 		</>
 	);
