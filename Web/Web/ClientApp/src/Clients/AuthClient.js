@@ -34,6 +34,10 @@ class AuthService {
 			})
 		});
 	}
+
+	getCurrentUser() {
+		return Cookie.get("jwtToken")
+	}
 }
 
 export default new AuthService();

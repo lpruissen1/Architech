@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
-import Cookie from 'js-cookie';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
