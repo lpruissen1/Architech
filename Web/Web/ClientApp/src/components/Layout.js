@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
+import AuthClient from '../Clients/AuthClient';
 
 export class Layout extends Component {
-  static displayName = Layout.name;
+	constructor(props) {
+		super(props)
+		this.state = {
+			loggedIn: false
+		}
+	}
 
-  render () {
-    return (
-      <div>
-        <NavMenu />
-        <Container>
-          {this.props.children}
-        </Container>
-      </div>
-    );
-  }
+	updateLoggedIn() {
+		const token = AuthClient.getCurrentUser()
+		if (token) {
+			this.setState({ loggedIn: true })
+		}
+	}
+	static displayName = Layout.name;
+
+	render () {
+		return (
+			<div>
+				<NavMenu loggedIn={ this.state.loggedIn }/>
+				<Container>
+					{React.cloneElement(this.props.children, { updateLoggedIn: this.updateLoggedIn })}
+				</Container>
+			</div>
+		);
+	}
 }

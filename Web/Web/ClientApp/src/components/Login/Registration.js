@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
 	button: {
 		margin: '0 auto',
 		marginTop: '14px',
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function Registration() {
+export function Registration(props) {
 
 	const classes = useStyles();
 	const [firstName, setFirstName] = useState('');
@@ -40,9 +41,15 @@ export function Registration() {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const history = useHistory();
 
 	const postUserRegistrationRequest = (data) => {
-		AuthClient.register(data)
+		const success = AuthClient.register(data)
+		debugger
+		if (success) {
+			history.push('/')
+			props.updateLoggedIn()
+		}
 	}
 
 	const registerUser = () => {

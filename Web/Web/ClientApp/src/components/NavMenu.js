@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import AuthClient from '../Clients/AuthClient';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -13,7 +12,6 @@ export class NavMenu extends Component {
 		this.toggleNavbar = this.toggleNavbar.bind(this);
 		this.state = {
 			collapsed: true,
-			loggedIn : ""
 		};
 	}
 
@@ -23,18 +21,7 @@ export class NavMenu extends Component {
 		});
 	}
 
-	componentDidMount() {
-		const token = AuthClient.getCurrentUser();
-
-		if (token) {
-			this.setState({
-				loggedIn: token
-			});
-		}
-	}
-
 	render() {
-		debugger
 		return (
 			<header>
 				<Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -43,7 +30,7 @@ export class NavMenu extends Component {
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 						<Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
 							<ul className="navbar-nav flex-grow">
-								{this.state.loggedIn ? (
+								{this.props.loggedIn ? (
 									<>
 										<NavItem>
 											<NavLink tag={Link} className="text-dark" to="/">Home</NavLink>

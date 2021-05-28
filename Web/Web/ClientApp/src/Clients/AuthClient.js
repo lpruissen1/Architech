@@ -4,6 +4,7 @@ const API_URL = "https://localhost:9001/User/";
 
 class AuthService {
 	login(username, password) {
+		// return something if failure/success
 		fetch(API_URL + "login", {
 			method: 'POST',
 			headers: {
@@ -11,8 +12,10 @@ class AuthService {
 			},
 			body: JSON.stringify({"username" : username, "passwordhash": password})
 		}).then(function (response) {
-			response.text().then(function (data) {
-				Cookie.set("jwtToken", data)
+			if (!response.ok) return false;
+			response.json().then(function (data) {
+				Cookie.set("jwtToken", data.token)
+				return true
 			})
 		});
 	}
@@ -22,6 +25,7 @@ class AuthService {
 	}
 
 	register(registrationData) {
+		// return something if failure/success
 		fetch(API_URL + "create", {
 			method: 'POST',
 			headers: {
@@ -29,10 +33,14 @@ class AuthService {
 			},
 			body: JSON.stringify(registrationData)
 		}).then(function (response) {
-			response.text().then(function (data) {
-				Cookie.set("jwtToken", data)
+			if (!response.ok) return false;
+			response.json().then(function (data) {
+				Cookie.set("jwtToken", data.token)
+				return true
 			})
 		});
+
+		return true
 	}
 
 	getCurrentUser() {
