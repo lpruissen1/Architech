@@ -40,12 +40,11 @@ export function Login(props) {
     const [password, setPassword] = useState('');
 	const history = useHistory();
 
-    const loginUser = () => {
-		const success = AuthClient.login(username, password);
-		debugger
+    const loginUser = async () => {
+		const success = await AuthClient.login(username, password);
 		if (success) {
-			history.push('/')
 			props.updateLoggedIn()
+			history.push('/')
 		}
     };
 

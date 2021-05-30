@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { TickerTable } from './Subcomponents/TickerTable';
-import ScreeningControls from './Subcomponents/ScreeningControls';
-import SaveButton from './Subcomponents/SaveButton';
 import Card from 'react-bootstrap/Card';
-import Loading from './Subcomponents/Loading';
-import './Screener.css';
 import { v4 } from 'uuid';
+import './Screener.css';
+import SaveButton from './Subcomponents/SaveButton';
+import ScreeningControls from './Subcomponents/ScreeningControls';
+import { TickerTable } from './Subcomponents/TickerTable';
 
 export class Screener extends Component {
 	constructor(props) {

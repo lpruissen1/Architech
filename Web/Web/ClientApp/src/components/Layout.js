@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router';
 import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
 import AuthClient from '../Clients/AuthClient';
+import { Education } from './Education/Education';
+import { Home } from './Home/Home';
+import { Login } from './Login/Login';
+import { Registration } from './Login/Registration';
+import { Portfolios } from './Portfolios/Portfolios';
+import { Profile } from './Profile/Profile';
+import { Research } from './Research/Research';
+import { Screener } from './Screener/Screener';
+import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
 	constructor(props) {
@@ -11,20 +20,31 @@ export class Layout extends Component {
 		}
 	}
 
-	updateLoggedIn() {
+	updateLoggedIn = () => {
 		const token = AuthClient.getCurrentUser()
+		debugger
 		if (token) {
 			this.setState({ loggedIn: true })
 		}
 	}
-	static displayName = Layout.name;
+
+	componentDidMount() {
+		this.updateLoggedIn()
+	}
 
 	render () {
 		return (
 			<div>
 				<NavMenu loggedIn={ this.state.loggedIn }/>
 				<Container>
-					{React.cloneElement(this.props.children, { updateLoggedIn: this.updateLoggedIn })}
+					<Route exact path='/' component={Home} />
+					<Route exact path='/screener' component={Screener} />
+					<Route exact path='/portfolios' component={Portfolios} />
+					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} />}/>
+					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} />}/>
+					<Route exact path='/research' component={Research} />
+					<Route exact path='/education' component={Education} />
+					<Route exact path='/profile' component={Profile} />
 				</Container>
 			</div>
 		);

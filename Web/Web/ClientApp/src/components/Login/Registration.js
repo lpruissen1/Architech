@@ -43,12 +43,11 @@ export function Registration(props) {
 	const [password, setPassword] = useState('');
 	const history = useHistory();
 
-	const postUserRegistrationRequest = (data) => {
-		const success = AuthClient.register(data)
-		debugger
+	const postUserRegistrationRequest = async (data) => {
+		const success = await AuthClient.register(data)
 		if (success) {
-			history.push('/')
 			props.updateLoggedIn()
+			history.push('/')
 		}
 	}
 
@@ -58,7 +57,7 @@ export function Registration(props) {
 			"lastName": lastName,
 			"userName": username,
 			"email": email,
-			"password": password
+			"passwordHash": password
 		});
 	}
 
