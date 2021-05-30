@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import './NavMenu.css';
+import AuthClient from '../Clients/AuthClient';
 
 export class NavMenu extends Component {
 	static displayName = NavMenu.name;
@@ -10,6 +11,7 @@ export class NavMenu extends Component {
 		super(props);
 
 		this.toggleNavbar = this.toggleNavbar.bind(this);
+		this.logout = this.logout.bind(this);
 		this.state = {
 			collapsed: true,
 		};
@@ -19,6 +21,11 @@ export class NavMenu extends Component {
 		this.setState({
 			collapsed: !this.state.collapsed
 		});
+	}
+
+	logout() {
+		AuthClient.logout()
+		this.props.updateLoggedIn()
 	}
 
 	render() {
@@ -49,6 +56,9 @@ export class NavMenu extends Component {
 										</NavItem>
 										<NavItem>
 											<NavLink tag={Link} className="text-dark" to="/profile">Profile</NavLink>
+										</NavItem>
+										<NavItem>
+											<NavLink tag={Link} onClick={this.logout} className="text-dark">Logout</NavLink>
 										</NavItem>
 									</>
 								) : (

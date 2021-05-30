@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import { Container } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
 import { Education } from './Education/Education';
@@ -22,9 +22,11 @@ export class Layout extends Component {
 
 	updateLoggedIn = () => {
 		const token = AuthClient.getCurrentUser()
-		debugger
 		if (token) {
 			this.setState({ loggedIn: true })
+		}
+		else {
+			this.setState({loggedIn : false})
 		}
 	}
 
@@ -35,18 +37,30 @@ export class Layout extends Component {
 	render () {
 		return (
 			<div>
-				<NavMenu loggedIn={ this.state.loggedIn }/>
+				<NavMenu loggedIn={this.state.loggedIn} updateLoggedIn={this.updateLoggedIn} />
 				<Container>
 					<Route exact path='/' component={Home} />
-					<Route exact path='/screener' component={Screener} />
-					<Route exact path='/portfolios' component={Portfolios} />
-					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} />}/>
-					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} />}/>
-					<Route exact path='/research' component={Research} />
-					<Route exact path='/education' component={Education} />
-					<Route exact path='/profile' component={Profile} />
+					<AuthenticatedRoute exact path='/screener' component={Screener} loggedIn={ this.state.loggedIn} />
+					<AuthenticatedRoute exact path='/portfolios' component={Portfolios} loggedIn={this.state.loggedIn} />
+					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} />} />
+					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} />} />
+					<AuthenticatedRoute exact path='/research' component={Research} loggedIn={this.state.loggedIn} />
+					<AuthenticatedRoute exact path='/education' component={Education} loggedIn={this.state.loggedIn} />
+					<AuthenticatedRoute exact path='/profile' component={Profile} loggedIn={this.state.loggedIn} />
 				</Container>
 			</div>
 		);
 	}
+}
+
+export default function AuthenticatedRoute({ component: C, loggedIn, ...rest }) {
+	return (
+		<Route
+			{...rest}
+			render={props =>
+				loggedIn
+					? <C {...props} />
+					: <Redirect to={{ pathname: 'login' }} />}
+		/>
+	);
 }
