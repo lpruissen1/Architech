@@ -45,7 +45,7 @@ export class Layout extends Component {
 				<NavMenu loggedIn={this.state.loggedIn} updateLoggedIn={this.updateLoggedIn} />
 				<Container>
 					<Route exact path='/' component={Home} />
-					<AuthenticatedRoute exact path='/screener' component={Screener} loggedIn={this.state.loggedIn} userID={this.state.userID}/>
+					<AuthenticatedRoute exact path='/screener' component={() => <Screener userID={this.state.userID} />} loggedIn={this.state.loggedIn} />
 					<AuthenticatedRoute exact path='/portfolios' component={Portfolios} loggedIn={this.state.loggedIn} userID={this.state.userID} />
 					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} setUserID={this.setUserID} />} />
 					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} setUserID={this.setUserID} />} />
