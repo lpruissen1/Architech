@@ -18,9 +18,9 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
-		backgroundColor: theme.palette.info.main,
+		backgroundColor: theme.palette.primary.main,
 		"&:hover": {
-			backgroundColor: '#0075A1'
+			backgroundColor: theme.palette.primary.dark
 		}
 	},
 	smallForm: {
@@ -71,11 +71,11 @@ export function Login(props) {
                             autoComplete='off' />
                     </div>
                 </form>
-                <Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
+				<Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
+				<Link className="registration-link" to="/register">
+					<p> Don't have an account? Sign up now!</p>
+				</Link>
 			</div>
-			<Link to="/register">
-				<Button className={classes.button} variant="contained"> Register User </Button>
-			</Link>
         </div>
     );
 }

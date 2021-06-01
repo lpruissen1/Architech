@@ -17,9 +17,9 @@ export const useStyles = makeStyles((theme) => ({
 		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
-		backgroundColor: theme.palette.info.main,
+		backgroundColor: theme.palette.primary.main,
 		"&:hover": {
-			backgroundColor: '#0075A1'
+			backgroundColor: theme.palette.primary.dark
 		}
 	},
 	smallForm: {
