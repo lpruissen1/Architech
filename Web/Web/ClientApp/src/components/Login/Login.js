@@ -46,7 +46,7 @@ export function Login(props) {
 			props.updateLoggedIn()
 			history.push('/')
 		}
-    };
+	};
 
     return (
         <div className="global-flex-container">

@@ -41,6 +41,11 @@ export function Registration(props) {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [firstNameError, setFirstNameError] = useState(false)
+	const [lastNameError, setLastNameError] = useState(false)
+	const [emailError, setEmailError] = useState(false)
+	const [usernameError, setUsernameError] = useState(false)
+	const [passwordError, setPasswordError] = useState(false)
 	const history = useHistory();
 
 	const postUserRegistrationRequest = async (data) => {
@@ -65,6 +70,23 @@ export function Registration(props) {
 		registerUser()
 	}
 
+	const validateEmail = () => {
+		const regex = /\S+@\S+\.\S+/
+		const valid = regex.test(email)
+		valid ? setEmailError(false) : setEmailError(true)
+	}
+
+	const validateUsername = () => {
+		username.length >= 8 ? setUsernameError(false) : setUsernameError(true)
+	}
+
+	const validatePassword = () => {
+		const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+		const valid = passw.test(password)
+		valid ? setPasswordError(false) : setPasswordError(true)
+	}
+
+
 	return (
 		<div className="global-flex-container">
 			<div className="registration-card">
@@ -78,26 +100,35 @@ export function Registration(props) {
 								onChange={(event) => {
 									setFirstName(event.target.value)
 								}}
+								onBlur={() =>
+									firstName === '' ? setFirstNameError(true) : setFirstNameError(false)}
 								autoComplete='off'
+								error={firstNameError}
 							/>
 							<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="Last Name"
 								InputLabelProps={{
-								shrink: true,
+									shrink: true,
 								}}
 								onChange={(event) => {
 									setLastName(event.target.value)
 								}}
+								onBlur={() =>
+									lastName === '' ? setLastNameError(true) : setLastNameError(false)}
 								autoComplete='off'
+								error={lastNameError}
 							/>
 						</div>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Username"
 							InputLabelProps={{
-							shrink: true,
+								shrink: true,
 							}}
 							onChange={(event) => {
 								setUsername(event.target.value)
 							}}
+							onBlur={validateUsername}
 							autoComplete='off'
+							error={usernameError}
+							helperText="Must have at least 8 characters"
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Password"
 							InputLabelProps={{
@@ -106,16 +137,22 @@ export function Registration(props) {
 							onChange={(event) => {
 								setPassword(event.target.value)
 							}}
+							onBlur={validatePassword}
 							autoComplete='off'
+							type='password'
+							error={passwordError}
+							helperText="Must contain uppercase, lowercase, number, and symbol"
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Email"
 							InputLabelProps={{
-							shrink: true,
+								shrink: true,
 							}}
 							onChange={(event) => {
 								setEmail(event.target.value)
 							}}
+							onBlur={validateEmail}
 							autoComplete='off'
+							error={emailError}
 						/>
 					</div>
 				</form>
