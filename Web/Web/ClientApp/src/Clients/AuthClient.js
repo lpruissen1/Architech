@@ -16,7 +16,7 @@ class AuthService {
 		if (response.ok) {
 			const json = await response.json();
 			Cookie.set("jwtToken", json.token)
-			return json
+			return [true, json.userID]
 		}
 
 		return false

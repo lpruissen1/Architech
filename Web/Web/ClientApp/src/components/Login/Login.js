@@ -41,10 +41,12 @@ export function Login(props) {
 	const history = useHistory();
 
     const loginUser = async () => {
-		const success = await AuthClient.login(username, password);
+		const response = await AuthClient.login(username, password);
+		const success = response[0]
 		if (success) {
 			props.updateLoggedIn()
 			history.push('/')
+			props.setUserID(response[1])
 		}
 	};
 
