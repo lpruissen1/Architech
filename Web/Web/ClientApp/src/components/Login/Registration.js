@@ -46,6 +46,7 @@ export function Registration(props) {
 	const [emailError, setEmailError] = useState(false)
 	const [usernameError, setUsernameError] = useState(false)
 	const [passwordError, setPasswordError] = useState(false)
+	const [formValid, setFormValid] = useState(false)
 	const history = useHistory();
 
 	const postUserRegistrationRequest = async (data) => {
@@ -67,23 +68,35 @@ export function Registration(props) {
 	}
 
 	const register = () => {
-		registerUser()
+			registerUser()
 	}
 
 	const validateEmail = () => {
 		const regex = /\S+@\S+\.\S+/
 		const valid = regex.test(email)
 		valid ? setEmailError(false) : setEmailError(true)
+		renderRegistrationButton()
 	}
 
 	const validateUsername = () => {
 		username.length >= 8 ? setUsernameError(false) : setUsernameError(true)
+		renderRegistrationButton()
 	}
 
 	const validatePassword = () => {
 		const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
 		const valid = passw.test(password)
 		valid ? setPasswordError(false) : setPasswordError(true)
+		renderRegistrationButton()
+	}
+
+	const renderRegistrationButton = () => {
+		const errorList = [firstNameError, lastNameError, usernameError, passwordError, emailError]
+		const formInputs = [firstName, lastName, username, password, email]
+
+		if (errorList.indexOf(true) === -1 && formInputs.indexOf('') === -1) {
+			setFormValid(true)
+		}
 	}
 
 
@@ -156,7 +169,9 @@ export function Registration(props) {
 						/>
 					</div>
 				</form>
-				<Button onClick={register} className={classes.button} variant="contained"> Register </Button>
+				{formValid
+					? <Button onClick={register} className={classes.button} variant="contained"> Register </Button>
+					: <Button className={classes.button} variant="contained" disabled> Register </Button>}
 			</div>
 		</div>
 	);
