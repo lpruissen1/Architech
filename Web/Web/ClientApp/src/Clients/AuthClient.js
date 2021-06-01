@@ -16,7 +16,7 @@ class AuthService {
 		if (response.ok) {
 			const json = await response.json();
 			Cookie.set("jwtToken", json.token)
-			return true
+			return json
 		}
 
 		return false
@@ -38,7 +38,7 @@ class AuthService {
 		if (response.ok) {
 			const json = await response.json();
 			Cookie.set("jwtToken", json.token)
-			return true
+			return [true, json.userID]
 		}
 
 		return false

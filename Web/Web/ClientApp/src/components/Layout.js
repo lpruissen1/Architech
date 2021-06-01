@@ -16,7 +16,8 @@ export class Layout extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			loggedIn: false
+			loggedIn: false,
+			userID: ''
 		}
 	}
 
@@ -30,6 +31,10 @@ export class Layout extends Component {
 		}
 	}
 
+	setUserID = (user) => {
+		this.setState({userID : user})
+	}
+
 	componentDidMount() {
 		this.updateLoggedIn()
 	}
@@ -40,13 +45,13 @@ export class Layout extends Component {
 				<NavMenu loggedIn={this.state.loggedIn} updateLoggedIn={this.updateLoggedIn} />
 				<Container>
 					<Route exact path='/' component={Home} />
-					<AuthenticatedRoute exact path='/screener' component={Screener} loggedIn={ this.state.loggedIn} />
-					<AuthenticatedRoute exact path='/portfolios' component={Portfolios} loggedIn={this.state.loggedIn} />
-					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} />} />
-					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} />} />
+					<AuthenticatedRoute exact path='/screener' component={Screener} loggedIn={this.state.loggedIn} userID={this.state.userID}/>
+					<AuthenticatedRoute exact path='/portfolios' component={Portfolios} loggedIn={this.state.loggedIn} userID={this.state.userID} />
+					<Route exact path='/login' component={() => <Login updateLoggedIn={this.updateLoggedIn} setUserID={this.setUserID} />} />
+					<Route exact path='/register' component={() => <Registration updateLoggedIn={this.updateLoggedIn} setUserID={this.setUserID} />} />
 					<AuthenticatedRoute exact path='/research' component={Research} loggedIn={this.state.loggedIn} />
 					<AuthenticatedRoute exact path='/education' component={Education} loggedIn={this.state.loggedIn} />
-					<AuthenticatedRoute exact path='/profile' component={Profile} loggedIn={this.state.loggedIn} />
+					<AuthenticatedRoute exact path='/profile' component={Profile} loggedIn={this.state.loggedIn} userID={this.state.userID}/>
 				</Container>
 			</div>
 		);

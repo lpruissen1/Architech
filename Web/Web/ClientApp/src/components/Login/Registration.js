@@ -50,10 +50,13 @@ export function Registration(props) {
 	const history = useHistory();
 
 	const postUserRegistrationRequest = async (data) => {
-		const success = await AuthClient.register(data)
+		const response = await AuthClient.register(data)
+		const success = response[0]
+		const ID = response[1]
 		if (success) {
 			props.updateLoggedIn()
 			history.push('/')
+			props.setUserID(ID)
 		}
 	}
 
