@@ -9,11 +9,11 @@ export function Portfolios(props) {
 	const history = useHistory();
 	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
 	const [createNew, setCreateNew] = useState(false)
+	const [markets, setMarkets] = useState([])
 	const clickie = () => setCreateNew(!createNew)	
 	const API_URL = 'https://localhost:7001/CustomIndex?userID=' + props.userID
 
 	const getCustomIndexRequest = () => {
-		debugger
 		fetch(API_URL, {
 			method: 'GET',
 			headers: {
@@ -21,7 +21,11 @@ export function Portfolios(props) {
 			}
 		})
 			.then(function (response) {
-				return response.status
+				return response.json().then(function (data) {
+					console.log(data)
+					debugger
+					setMarkets(data[0].markets)
+				})
 			});
 	}
 
