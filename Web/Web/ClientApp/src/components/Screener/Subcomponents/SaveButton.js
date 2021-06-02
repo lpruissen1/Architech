@@ -1,7 +1,7 @@
 ﻿import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import './SaveButton.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +36,6 @@ export default function SaveButton(props) {
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
 			{checked
 				? <Button onClick={handleSaveClick} variant='contained' color='primary' size="small" className={classes.button}>Save Index</Button>
-				: <Button color='primary' variant='contained' size="small" className={classes.buttonSaved} endIcon={<CheckCircleOutlinedIcon />}>Saved</Button>}
+				: <Button color='primary' variant='contained' size="small" className={classes.buttonSaved} endIcon={<CheckOutlinedIcon />}>Saved</Button>}
 		</>)
 }

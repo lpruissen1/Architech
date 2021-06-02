@@ -23,11 +23,11 @@ export const useStyles = makeStyles((theme) => ({
 		}
 	},
 	smallForm: {
-		margin: theme.spacing(1.5),
+		margin: theme.spacing(1.25),
 		width: '20ch'
 	},
 	largeForm: {
-		margin: theme.spacing(1.5),
+		margin: theme.spacing(1.25),
 		width: '43ch'
 	}
 }));
@@ -41,11 +41,13 @@ export function Registration(props) {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [passwordMatch, setPasswordMatch] = useState('');
 	const [firstNameError, setFirstNameError] = useState(false)
 	const [lastNameError, setLastNameError] = useState(false)
 	const [emailError, setEmailError] = useState(false)
 	const [usernameError, setUsernameError] = useState(false)
 	const [passwordError, setPasswordError] = useState(false)
+	const [passwordMatchError, setPasswordMatchError] = useState(false)
 	const [formValid, setFormValid] = useState(false)
 	const history = useHistory();
 
@@ -93,6 +95,14 @@ export function Registration(props) {
 		renderRegistrationButton()
 	}
 
+	const checkPasswordMatch = () => {
+		const curr = password
+		const match = passwordMatch
+
+		curr === match ? setPasswordMatchError(false) : setPasswordMatchError(true)
+		renderRegistrationButton()
+	}
+
 	const renderRegistrationButton = () => {
 		const errorList = [firstNameError, lastNameError, usernameError, passwordError, emailError]
 		const formInputs = [firstName, lastName, username, password, email]
@@ -109,7 +119,7 @@ export function Registration(props) {
 				<form className={classes.root}>
 					<div className="flex-container">
 						<div className="nameRow">
-							<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="First Name"
+							<TextField required id="outlined-required" className={classes.smallForm} label="First Name" variant="outlined" placeholder="First Name"
 								InputLabelProps={{
 									shrink: true,
 								}}
@@ -121,7 +131,7 @@ export function Registration(props) {
 								autoComplete='off'
 								error={firstNameError}
 							/>
-							<TextField required id="outlined-required" className={classes.smallForm} label="Required" variant="outlined" placeholder="Last Name"
+							<TextField required id="outlined-required" className={classes.smallForm} label="Last Name" variant="outlined" placeholder="Last Name"
 								InputLabelProps={{
 									shrink: true,
 								}}
@@ -134,7 +144,7 @@ export function Registration(props) {
 								error={lastNameError}
 							/>
 						</div>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Username"
+						<TextField required id="outlined-required" className={classes.largeForm} label="Username" variant="outlined" placeholder="Username"
 							InputLabelProps={{
 								shrink: true,
 							}}
@@ -144,9 +154,9 @@ export function Registration(props) {
 							onBlur={validateUsername}
 							autoComplete='off'
 							error={usernameError}
-							helperText="Must have at least 8 characters"
+							helperText="*Must have at least 8 characters"
 						/>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Password"
+						<TextField required id="outlined-required" className={classes.largeForm} label="Password" variant="outlined" placeholder="Password"
 							InputLabelProps={{
 							shrink: true,
 							}}
@@ -157,9 +167,24 @@ export function Registration(props) {
 							autoComplete='off'
 							type='password'
 							error={passwordError}
-							helperText="Must contain uppercase, lowercase, number, and symbol"
+							helperText="*Must contain uppercase, lowercase, number, and symbol"
 						/>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Required" variant="outlined" placeholder="Email"
+						<TextField required id="outlined-required" className={classes.largeForm} label="Re-enter Password" variant="outlined" placeholder="Re-enter Password"
+							InputLabelProps={{
+								shrink: true,
+							}}
+							onChange={(event) => {
+								setPasswordMatch(event.target.value)
+							}}
+							onBlur={checkPasswordMatch}
+							autoComplete='off'
+							type='password'
+							error={passwordMatchError}
+							helperText={passwordMatchError
+								? "*Passwords do not match"
+								: ''}
+						/>
+						<TextField required id="outlined-required" className={classes.largeForm} label="Email" variant="outlined" placeholder="Email"
 							InputLabelProps={{
 								shrink: true,
 							}}
@@ -169,6 +194,9 @@ export function Registration(props) {
 							onBlur={validateEmail}
 							autoComplete='off'
 							error={emailError}
+							helperText={emailError
+								? "*Invalid Email"
+								: ''}
 						/>
 					</div>
 				</form>

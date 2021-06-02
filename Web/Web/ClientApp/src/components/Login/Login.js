@@ -69,7 +69,8 @@ export function Login(props) {
                             }}
                             onChange={(event) => {
                                 setPassword(event.target.value);
-                            }}
+							}}
+							type='password'
                             autoComplete='off' />
                     </div>
                 </form>
