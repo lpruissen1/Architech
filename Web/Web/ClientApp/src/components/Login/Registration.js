@@ -76,19 +76,22 @@ export function Registration(props) {
 			registerUser()
 	}
 
-	const validateEmail = () => {
+	const validateEmail = (event) => {
+		setEmail(event.target.value)
 		const regex = /\S+@\S+\.\S+/
 		const valid = regex.test(email)
 		valid ? setEmailError(false) : setEmailError(true)
 		renderRegistrationButton()
 	}
 
-	const validateUsername = () => {
+	const validateUsername = (event) => {
+		setUsername(event.target.value)
 		username.length >= 8 ? setUsernameError(false) : setUsernameError(true)
 		renderRegistrationButton()
 	}
 
-	const validatePassword = () => {
+	const validatePassword = (event) => {
+		setPassword(event.target.value)
 		const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
 		const valid = passw.test(password)
 		valid ? setPasswordError(false) : setPasswordError(true)
@@ -148,10 +151,7 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={(event) => {
-								setUsername(event.target.value)
-							}}
-							onBlur={validateUsername}
+							onChange={validateUsername}
 							autoComplete='off'
 							error={usernameError}
 							helperText="*Must have at least 8 characters"
@@ -160,10 +160,7 @@ export function Registration(props) {
 							InputLabelProps={{
 							shrink: true,
 							}}
-							onChange={(event) => {
-								setPassword(event.target.value)
-							}}
-							onBlur={validatePassword}
+							onChange={validatePassword}
 							autoComplete='off'
 							type='password'
 							error={passwordError}
@@ -188,15 +185,9 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={(event) => {
-								setEmail(event.target.value)
-							}}
-							onBlur={validateEmail}
+							onChange={validateEmail}
 							autoComplete='off'
 							error={emailError}
-							helperText={emailError
-								? "*Invalid Email"
-								: ''}
 						/>
 					</div>
 				</form>

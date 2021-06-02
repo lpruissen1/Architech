@@ -37,7 +37,8 @@ export function Login(props) {
 
     const classes = useStyles();
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+	const [password, setPassword] = useState('');
+	const [credentialError, setCredentialError] = useState(false)
 	const history = useHistory();
 
     const loginUser = async () => {
@@ -47,7 +48,10 @@ export function Login(props) {
 			props.updateLoggedIn()
 			history.push('/')
 			props.setUserID(response[1])
+			setCredentialError(false)
 		}
+
+		setCredentialError(true)
 	};
 
     return (
@@ -55,15 +59,16 @@ export function Login(props) {
             <div className="registration-card">
                 <form className={classes.root}>
                     <div className="flex-container">
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Username"
+                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Username" label="Username"
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(event) => {
                                 setUsername(event.target.value);
-                            }}
+							}}
+							error={credentialError}
                             autoComplete='off' />
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password"
+                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -71,12 +76,14 @@ export function Login(props) {
                                 setPassword(event.target.value);
 							}}
 							type='password'
+							error={credentialError}
+							helperText={credentialError? "Invalid Credentials" : ""}
                             autoComplete='off' />
                     </div>
                 </form>
 				<Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
 				<Link className="registration-link" to="/register">
-					<p> Don't have an account? Sign up now!</p>
+					<p> Don't have an account? <span className = "signup">Sign up now!</span></p>
 				</Link>
 			</div>
         </div>
