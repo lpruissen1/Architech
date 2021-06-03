@@ -9,9 +9,11 @@ export function Portfolios(props) {
 	const history = useHistory();
 	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
 	const [createNew, setCreateNew] = useState(false)
-	const [markets, setMarkets] = useState([])
+	const [portfolios, setPortfolios] = useState([])
 	const clickie = () => setCreateNew(!createNew)	
 	const API_URL = 'https://localhost:7001/CustomIndex?userID=' + props.userID
+
+	// Pass ID to screener, map there to see if sector matches any on list 
 
 	const getCustomIndexRequest = () => {
 		fetch(API_URL, {
@@ -23,8 +25,17 @@ export function Portfolios(props) {
 			.then(function (response) {
 				return response.json().then(function (data) {
 					console.log(data)
-					debugger
-					setMarkets(data[0].markets)
+
+					const activePortfolios = data.map((portfolio) => {
+						return {
+							markets: portfolio.markets,
+							sectors: portfolio.sectors,
+							rangedRules: portfolio.rangedRule,
+							timedRangeRules: portfolio.timedRangeRule
+						}
+					})
+
+					setPortfolios(activePortfolios)
 				})
 			});
 	}
