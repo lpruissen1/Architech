@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import { v4 } from 'uuid';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
@@ -9,6 +8,7 @@ import { TickerTable } from './Subcomponents/TickerTable';
 export class Screener extends Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			// We should move this isChecked stuff down to the sector selector controls and simply append or remove sectors as clicked
 			sectors: [

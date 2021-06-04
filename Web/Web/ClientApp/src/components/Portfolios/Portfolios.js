@@ -1,5 +1,6 @@
 ﻿import React, { useCallback, useState } from 'react';
 import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
+import { PortfolioCard } from './Subcomponents/PortfolioCard';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
 import './Portfolios.css';
@@ -44,6 +45,11 @@ export function Portfolios(props) {
 		<div>
 			<button onClick={getCustomIndexRequest}> make request </button>
 			<h1>My Blueprints</h1>
+			{
+				portfolios && portfolios.map((portfolioooo) => {
+					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolioooo.indexId} portfolio={portfolioooo} /> </Card>)
+				})
+			}
 			<Card className='portfoliosCard'>
 					<NewPortfolioCard onClick={clickie} />
 			</Card>

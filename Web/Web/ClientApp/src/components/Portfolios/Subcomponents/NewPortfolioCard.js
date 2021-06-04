@@ -18,7 +18,6 @@ export function NewPortfolioCard(props) {
 						<div>
 							<p className='blueprintText'>Create New Blueprint</p>
 						</div>
-
 					</IconContext.Provider>
 				</tbody>
 			</table>
