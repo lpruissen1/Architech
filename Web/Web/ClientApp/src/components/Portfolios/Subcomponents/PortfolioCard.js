@@ -3,18 +3,13 @@ import './NewPortfolioCard.css';
 import { FaPlus } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 import Button from '@material-ui/core/Button';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Route } from 'react-router-dom';
 
 export function PortfolioCard(props) {
 	const history = useHistory();
 	const handleOnClick = () => {
 		history.push({
-			pathname: '/screener',
-			state: {
-				rangedRule: props.portfolio.rangedRule,
-				timedRangeRule: props.portfolio.timedRangeRule,
-				taint: 'taint'
-			}
+			pathname: '/screener/blah',
 		});
 	}
 
@@ -32,13 +27,10 @@ export function PortfolioCard(props) {
 								return (<>{sector}</>)
 							})
 						}
-						<Button>
-							<Link to={{
-								pathname: "/screener",
-								taint: { taint: 'Taint'}
-							}}> Taint</Link>
+						<Button onClick={handleOnClick}>
+							Click
 						</Button>
-
+						<Route exact path={`/screener/${props.portfolio.indexId}`} />
 					</IconContext.Provider>
 				</tbody>
 			</table>

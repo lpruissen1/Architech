@@ -8,7 +8,6 @@ import { TickerTable } from './Subcomponents/TickerTable';
 export class Screener extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			// We should move this isChecked stuff down to the sector selector controls and simply append or remove sectors as clicked
 			sectors: [
@@ -73,7 +72,7 @@ export class Screener extends Component {
 	render() {
 		return (
 			<div>
-				<h1 id="tabelLabel" >Screener</h1>
+				<h1 id="tabelLabel" >Screener: {this.props.routeParam}</h1>
 				<div className='rowThing'>
 					<Card className='screenerCard'>
 						<div>
