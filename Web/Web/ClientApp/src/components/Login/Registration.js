@@ -5,7 +5,9 @@ import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
+import { validateEmail, validatePassword, validateUsername, validateName, validatePasswordMatch}  from './RegistrationValidationHelpers'
 
+// we should move all these to their own files
 export const useStyles = makeStyles((theme) => ({
 	button: {
 		margin: '0 auto',
@@ -80,7 +82,7 @@ export function Registration(props) {
 	}
 
 	const validateForm = () => {
-		const errorList = [validateEmail(email), validatePassword(password), validateUsername(username), validateFirstName(firstName), validateLastName(lastName), validatePasswordMatch(password, passwordMatch)]
+		const errorList = [validateEmail(email), validatePassword(password), validateUsername(username), validateName(firstName), validateName(lastName), validatePasswordMatch(password, passwordMatch)]
 
 		if (errorList.indexOf(false) === -1) {
 			setFormValid(true)
@@ -97,16 +99,6 @@ export function Registration(props) {
 		}
 	}
 
-	const validateEmail = (email) => {
-		const emailRegex = /\S+@\S+\.\S+/
-
-		if (emailRegex.test(email)) {
-			return true
-		}
-
-		return false
-	}
-
 	const handleUsernameInput = (event) => {
 		if (validateUsername(event.target.value)) {
 			setUsernameError(false)
@@ -115,14 +107,6 @@ export function Registration(props) {
 		else {
 			setUsernameError(true)
 		}
-	}
-
-	const validateUsername = (username) => {
-		if (username.length >= 8) {
-			return true
-		}
-
-		return false
 	}
 
 	const handlePasswordInput = (event) => {
@@ -135,16 +119,6 @@ export function Registration(props) {
 		}
 	}
 
-	const validatePassword = (password) => {
-		const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
-
-		if (passwordRegex.test(password)) {
-			return true
-		}
-
-		return false
-	}
-
 	const handlePasswordMatchInput = (event) => {
 		if (validatePasswordMatch(password, event.target.value)) {
 			setPasswordMatchError(false)
@@ -155,17 +129,8 @@ export function Registration(props) {
 		}
 	}
 
-	const validatePasswordMatch = (password, matchedPassword) => {
-		if (password === matchedPassword) {
-			return true
-		}
-		else {
-			return false
-		}
-	}
-
 	const handleFirstNameInput = (event) => {
-		if (validateFirstName(event.target.value)) {
+		if (validateName(event.target.value)) {
 			setFirstNameError(false)
 			setFirstName(event.target.value)
 		}
@@ -174,30 +139,14 @@ export function Registration(props) {
 		}
 	}
 
-	const validateFirstName = (firstName) => {
-		if (firstName === '') {
-			return false
-		}
-
-		return true	
-	}
-
 	const handleLastNameInput = (event) => {
-		if (validateLastName(event.target.value)) {
+		if (validateName(event.target.value)) {
 			setLastNameError(false)
 			setLastName(event.target.value)
 		}
 		else {
 			setLastNameError(true)
 		}
-	}
-
-	const validateLastName = (lastName) => {
-		if (lastName === '') {
-			return false
-		}
-
-		return true;
 	}
 
 	return (
