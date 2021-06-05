@@ -68,53 +68,137 @@ export function Registration(props) {
 			"lastName": lastName,
 			"userName": username,
 			"email": email,
-			"passwordHash": password
+			"password": password
 		});
 	}
 
 	const register = () => {
+		validateForm()
+		if (formValid) {
 			registerUser()
+		}
 	}
 
-	const validateEmail = (event) => {
-		setEmail(event.target.value)
-		const regex = /\S+@\S+\.\S+/
-		const valid = regex.test(email)
-		valid ? setEmailError(false) : setEmailError(true)
-		renderRegistrationButton()
-	}
+	const validateForm = () => {
+		const errorList = [validateEmail(email), validatePassword(password), validateUsername(username), validateFirstName(firstName), validateLastName(lastName), validatePasswordMatch(password, passwordMatch)]
 
-	const validateUsername = (event) => {
-		setUsername(event.target.value)
-		username.length >= 8 ? setUsernameError(false) : setUsernameError(true)
-		renderRegistrationButton()
-	}
-
-	const validatePassword = (event) => {
-		setPassword(event.target.value)
-		const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
-		const valid = passw.test(password)
-		valid ? setPasswordError(false) : setPasswordError(true)
-		renderRegistrationButton()
-	}
-
-	const checkPasswordMatch = () => {
-		const curr = password
-		const match = passwordMatch
-
-		curr === match ? setPasswordMatchError(false) : setPasswordMatchError(true)
-		renderRegistrationButton()
-	}
-
-	const renderRegistrationButton = () => {
-		const errorList = [firstNameError, lastNameError, usernameError, passwordError, emailError]
-		const formInputs = [firstName, lastName, username, password, email]
-
-		if (errorList.indexOf(true) === -1 && formInputs.indexOf('') === -1) {
+		if (errorList.indexOf(false) === -1) {
 			setFormValid(true)
 		}
 	}
 
+	const handleEmailInput = (event) => {
+		if (validateEmail(event.target.value)) {
+			setEmailError(false)
+			setEmail(event.target.value)
+		}
+		else {
+			setEmailError(true)
+		}
+	}
+
+	const validateEmail = (email) => {
+		const emailRegex = /\S+@\S+\.\S+/
+
+		if (emailRegex.test(email)) {
+			return true
+		}
+
+		return false
+	}
+
+	const handleUsernameInput = (event) => {
+		if (validateUsername(event.target.value)) {
+			setUsernameError(false)
+			setUsername(event.target.value)
+		}
+		else {
+			setUsernameError(true)
+		}
+	}
+
+	const validateUsername = (username) => {
+		if (username.length >= 8) {
+			return true
+		}
+
+		return false
+	}
+
+	const handlePasswordInput = (event) => {
+		if (validatePassword(event.target.value)) {
+			setPasswordError(false)
+			setPassword(event.target.value)
+		}
+		else {
+			setPasswordError(true)
+		}
+	}
+
+	const validatePassword = (password) => {
+		const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+
+		if (passwordRegex.test(password)) {
+			return true
+		}
+
+		return false
+	}
+
+	const handlePasswordMatchInput = (event) => {
+		if (validatePasswordMatch(password, event.target.value)) {
+			setPasswordMatchError(false)
+			setPasswordMatch(event.target.value)
+		}
+		else {
+			setPasswordMatchError(true)
+		}
+	}
+
+	const validatePasswordMatch = (password, matchedPassword) => {
+		if (password === matchedPassword) {
+			return true
+		}
+		else {
+			return false
+		}
+	}
+
+	const handleFirstNameInput = (event) => {
+		if (validateFirstName(event.target.value)) {
+			setFirstNameError(false)
+			setFirstName(event.target.value)
+		}
+		else {
+			setFirstNameError(true)
+		}
+	}
+
+	const validateFirstName = (firstName) => {
+		if (firstName === '') {
+			return false
+		}
+
+		return true	
+	}
+
+	const handleLastNameInput = (event) => {
+		if (validateLastName(event.target.value)) {
+			setLastNameError(false)
+			setLastName(event.target.value)
+		}
+		else {
+			setLastNameError(true)
+		}
+	}
+
+	const validateLastName = (lastName) => {
+		if (lastName === '') {
+			return false
+		}
+
+		return true;
+	}
 
 	return (
 		<div className="global-flex-container">
@@ -126,11 +210,7 @@ export function Registration(props) {
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChange={(event) => {
-									setFirstName(event.target.value)
-								}}
-								onBlur={() =>
-									firstName === '' ? setFirstNameError(true) : setFirstNameError(false)}
+								onChangeCapture={handleFirstNameInput}
 								autoComplete='off'
 								error={firstNameError}
 							/>
@@ -138,11 +218,7 @@ export function Registration(props) {
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChange={(event) => {
-									setLastName(event.target.value)
-								}}
-								onBlur={() =>
-									lastName === '' ? setLastNameError(true) : setLastNameError(false)}
+								onChangeCapture={handleLastNameInput}
 								autoComplete='off'
 								error={lastNameError}
 							/>
@@ -151,7 +227,7 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={validateUsername}
+							onChange={handleUsernameInput}
 							autoComplete='off'
 							error={usernameError}
 							helperText="*Must have at least 8 characters"
@@ -160,7 +236,7 @@ export function Registration(props) {
 							InputLabelProps={{
 							shrink: true,
 							}}
-							onChange={validatePassword}
+							onChange={handlePasswordInput}
 							autoComplete='off'
 							type='password'
 							error={passwordError}
@@ -170,10 +246,7 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={(event) => {
-								setPasswordMatch(event.target.value)
-							}}
-							onBlur={checkPasswordMatch}
+							onChange={handlePasswordMatchInput}
 							autoComplete='off'
 							type='password'
 							error={passwordMatchError}
@@ -185,15 +258,13 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={validateEmail}
+							onChangeCapture={handleEmailInput}
 							autoComplete='off'
 							error={emailError}
 						/>
 					</div>
 				</form>
-				{formValid
-					? <Button onClick={register} className={classes.button} variant="contained"> Register </Button>
-					: <Button className={classes.button} variant="contained" disabled> Register </Button>}
+					<Button onClick={register} className={classes.button} variant="contained"> Register </Button>
 			</div>
 		</div>
 	);
