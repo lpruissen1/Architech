@@ -27,6 +27,26 @@ export function Screener(props) {
 
 	let { indexID } = useParams();
 
+	const GET_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID=' + props.userID + '&indexId=' + indexID;
+
+	const getCustomIndexRequest = () => {
+		fetch(GET_URL, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(function (response) {
+				return response.json().then(function (data) {
+					console.log(data)
+
+
+					setRangedRules(data.rangedRule)
+					setTimedRangeRules(data.timedRangeRule)
+				})
+			});
+	}
+
 	const handleRangedRuleUpdate = (rule) => {
 		const rules = rangedRules;
 
@@ -86,7 +106,12 @@ export function Screener(props) {
 		});
 	}
 
-	useEffect(() => {screen()}, []);
+	const handleMount = () => {
+		screen()
+		getCustomIndexRequest()
+	}
+
+	useEffect(() => {handleMount()}, []);
 
 	const update = () => {
 		screen()
