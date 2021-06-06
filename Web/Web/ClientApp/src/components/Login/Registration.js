@@ -179,17 +179,17 @@ export function Registration(props) {
 							onChange={handleUsernameInput}
 							autoComplete='off'
 							error={usernameError}
-							helperText="*Must have at least 8 characters"
+							helperText={usernameError && "*Must have at least 8 characters"}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Password" variant="outlined" placeholder="Password"
 							InputLabelProps={{
-							shrink: true,
+								shrink: true,
 							}}
 							onChange={handlePasswordInput}
 							autoComplete='off'
 							type='password'
 							error={passwordError}
-							helperText="*Must contain uppercase, lowercase, number, and symbol"
+							helperText={passwordError && "*Must contain uppercase, lowercase, number, and symbol"}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Re-enter Password" variant="outlined" placeholder="Re-enter Password"
 							InputLabelProps={{
