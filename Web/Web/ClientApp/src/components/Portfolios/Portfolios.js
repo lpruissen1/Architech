@@ -29,6 +29,7 @@ export function Portfolios(props) {
 
 					const activePortfolios = data.map((portfolio) => {
 						return {
+							indexId: portfolio.indexId,
 							markets: portfolio.markets,
 							sectors: portfolio.sectors,
 							rangedRules: portfolio.rangedRule,

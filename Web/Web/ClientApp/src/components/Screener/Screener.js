@@ -1,134 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import { TickerTable } from './Subcomponents/TickerTable';
+import {useParams} from "react-router-dom";
 
-export class Screener extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			// We should move this isChecked stuff down to the sector selector controls and simply append or remove sectors as clicked
-			sectors: [
-				{ value: "Healthcare", isChecked: false },
-				{ value: "Technology", isChecked: false },
-				{ value: "Financial Services", isChecked: false },
-				{ value: "Industrials", isChecked: false },
-				{ value: "Consumer Cyclical", isChecked: false },
-				{ value: "Utilities", isChecked: false },
-				{ value: "Basic Materials", isChecked: false },
-				{ value: "Real Estate", isChecked: false },
-				{ value: "Communication Services", isChecked: false },
-				{ value: "Consumer Defensive", isChecked: false },
-				{ value: "Energy", isChecked: false }
-			],
-			tickers: [],
-			rangedRules: [],
-			timedRangeRules: [],
-			loading: true
-		};
-		this.handleRangedRuleUpdate = this.handleRangedRuleUpdate.bind(this);
-		this.handleTimedRangeRuleUpdate = this.handleTimedRangeRuleUpdate.bind(this);
-	}
+export function Screener(props) {
+	const [sectors, setSectors] = useState([
+		{ value: "Healthcare", isChecked: false },
+		{ value: "Technology", isChecked: false },
+		{ value: "Financial Services", isChecked: false },
+		{ value: "Industrials", isChecked: false },
+		{ value: "Consumer Cyclical", isChecked: false },
+		{ value: "Utilities", isChecked: false },
+		{ value: "Basic Materials", isChecked: false },
+		{ value: "Real Estate", isChecked: false },
+		{ value: "Communication Services", isChecked: false },
+		{ value: "Consumer Defensive", isChecked: false },
+		{ value: "Energy", isChecked: false }
+	])
+	const [tickers, setTickers] = useState([])
+	const [rangedRules, setRangedRules] = useState([])
+	const [timedRangeRules, setTimedRangeRules] = useState([])
+	const [loading, setLoading] = useState(true)
 
-	handleRangedRuleUpdate(rule) {
-		const rules = this.state.rangedRules;
+	let { indexID } = useParams();
+
+	const handleRangedRuleUpdate = (rule) => {
+		const rules = rangedRules;
 
 		if (!rules.find(function (existingRule, index) {
 			if (existingRule.id === rule.id)
 				return true;
 		})) {
 			// if new rule 
-			this.setState({
-				rangedRules: [...this.state.rangedRules, rule]
-			})
+			setRangedRules([...rangedRules, rule])
 		}
 
 		// if not new rule update existing
 
 		// then screen
-		this.screen()
+		screen()
 	}
 
-	handleTimedRangeRuleUpdate(rule) {
-		this.setState({
-			timedRangeRules: [...this.state.timedRangeRules, rule]
-		})
+	const handleTimedRangeRuleUpdate = (rule) => {
+		setTimedRangeRules([...timedRangeRules, rule])
 	}
 
-	componentDidMount() {
-		this.screen()
-	}
-
-	update = () => {
-		this.screen()
-	}
-
-	save = () => {
-		this.saveIndex()
-	}
-
-	render() {
-		return (
-			<div>
-				<h1 id="tabelLabel" >Screener: {this.props.routeParam}</h1>
-				<div className='rowThing'>
-					<Card className='screenerCard'>
-						<div>
-							<ScreeningControls sectors={this.state.sectors} rangedRules={this.state.rangedRules} timedRangeRules={this.state.timedRangeRules} handleUpdate={this.update} handleRangedRuleUpdate={this.handleRangedRuleUpdate} handleTimedRangeRuleUpdate={this.handleTimedRangeRuleUpdate} />
-							<br/>
-							<SaveButton handleSave={this.save}/>
-						</div>
-					</Card>
-					<Card className='tickerCard'>
-						<div className='tickerTableContainer'>
-							<TickerTable tickers={this.state.tickers} loading={this.state.loading} />
-						</div>
-					</Card>
-				</div>
-			</div>
-		);
-	}
-	
-	screen() {
-		return this.postScreeningRequest({
-			markets: [
-				"Sp500"
-			],
-			"sectors": this.getActiveSectors(this.state.sectors),
-			"rangedRule": this.state.rangedRules,
-			"timedRangeRule": this.state.timedRangeRules
-		});
-	}
-
-	saveIndex() {
-		return this.postCustomIndexRequest({
-			userId: this.props.userID,
-			markets: [
-				"Sp500"
-			],
-			"sectors": this.getActiveSectors(this.state.sectors),
-			"rangedRule": this.state.rangedRules,
-			"timedRangeRule": this.state.timedRangeRules
-		});
-	}
-
-
-	getActiveSectors(sectors) {
+	const getActiveSectors = (sectorList) => {
 		let activeSectors = []
-		sectors.forEach(sector => {
+		sectorList.forEach(sector => {
 			if (sector.isChecked === true)
 				activeSectors.push(sector.value)
 		})
 		return activeSectors
 	}
 
-	
-
-	postScreeningRequest(data = {}) {
-		const that = this
-		that.setState({ loading: true })
+	const postScreeningRequest = (data = {}) => {
+		setLoading(true)
 		fetch("https://localhost:5001/Screening/FuckYourself", {
 			method: 'POST',
 			headers: {
@@ -136,15 +66,33 @@ export class Screener extends Component {
 			},
 			body: JSON.stringify(data)
 		})
-		.then(function (response) {
-			return response.json().then(function (data) {
-				console.log(data)
-				that.setState({ tickers: data, loading: false })
-			})
+			.then(function (response) {
+				return response.json().then(function (data) {
+					console.log(data)
+					setTickers(data)
+					setLoading(false)
+				})
+			});
+	}
+
+	const screen = () => {
+		return postScreeningRequest({
+			markets: [
+				"Sp500"
+			],
+			"sectors": getActiveSectors(sectors),
+			"rangedRule": rangedRules,
+			"timedRangeRule": timedRangeRules
 		});
 	}
 
-	postCustomIndexRequest(data = {}) {
+	useEffect(() => {screen()}, []);
+
+	const update = () => {
+		screen()
+	}
+
+	const postCustomIndexRequest = (data = {}) => {
 		fetch("https://localhost:7001/CustomIndex", {
 			method: 'POST',
 			headers: {
@@ -156,4 +104,40 @@ export class Screener extends Component {
 				return response.status
 			});
 	}
+
+	const saveIndex = () => {
+		return postCustomIndexRequest({
+			userId: props.userID,
+			markets: [
+				"Sp500"
+			],
+			"sectors": getActiveSectors(sectors),
+			"rangedRule": rangedRules,
+			"timedRangeRule": timedRangeRules
+		});
+	}
+
+	const save = () => {
+		saveIndex()
+	}
+
+	return (
+		<div>
+			<h1 id="tabelLabel" >Screener: {indexID}</h1>
+			<div className='rowThing'>
+				<Card className='screenerCard'>
+					<div>
+						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={update} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} />
+						<br/>
+						<SaveButton handleSave={save}/>
+					</div>
+				</Card>
+				<Card className='tickerCard'>
+					<div className='tickerTableContainer'>
+						<TickerTable tickers={tickers} loading={loading} />
+					</div>
+				</Card>
+			</div>
+		</div>
+	)
 }

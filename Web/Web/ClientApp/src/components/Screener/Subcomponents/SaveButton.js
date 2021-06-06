@@ -26,7 +26,7 @@ export default function SaveButton(props) {
 	const [checked, setChecked] = useState(true)
 	const classes = useStyles();
 
-	const handleSaveClick = (event) => {
+	const handleSaveClick = () => {
 		setChecked(!checked)
 		props.handleSave()
 	}

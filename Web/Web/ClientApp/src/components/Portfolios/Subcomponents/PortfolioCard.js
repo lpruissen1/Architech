@@ -9,7 +9,7 @@ export function PortfolioCard(props) {
 	const history = useHistory();
 	const handleOnClick = () => {
 		history.push({
-			pathname: '/screener/blah',
+			pathname: `/screener/${props.portfolio.indexId}`,
 		});
 	}
 
@@ -30,7 +30,6 @@ export function PortfolioCard(props) {
 						<Button onClick={handleOnClick}>
 							Click
 						</Button>
-						<Route exact path={`/screener/${props.portfolio.indexId}`} />
 					</IconContext.Provider>
 				</tbody>
 			</table>
