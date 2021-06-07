@@ -24,6 +24,7 @@ export function Screener(props) {
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [loading, setLoading] = useState(true)
+	const [collapseOpen, setCollapseOpen] = useState(false)
 
 	let { indexID } = useParams();
 
@@ -107,8 +108,13 @@ export function Screener(props) {
 	}
 
 	const handleMount = () => {
+
+		if (indexID) {
+			getCustomIndexRequest()
+			setCollapseOpen(true)
+		}
+
 		screen()
-		getCustomIndexRequest()
 	}
 
 	useEffect(() => {handleMount()}, []);
@@ -148,11 +154,11 @@ export function Screener(props) {
 
 	return (
 		<div>
-			<h1 id="tabelLabel" >Screener: {indexID}</h1>
+			<h1 id="tabelLabel" >Screener</h1>
 			<div className='rowThing'>
 				<Card className='screenerCard'>
 					<div>
-						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={update} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} />
+						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={update} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} collapseOpen={collapseOpen}/>
 						<br/>
 						<SaveButton handleSave={save}/>
 					</div>
