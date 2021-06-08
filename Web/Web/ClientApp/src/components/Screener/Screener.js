@@ -36,12 +36,23 @@ export function Screener(props) {
 			headers: {
 				'Content-Type': 'application/json'
 			}
-		})
+			})
 			.then(function (response) {
 				return response.json().then(function (data) {
 					console.log(data)
 
+					let tempSectors = []
 
+					sectors.forEach(sector => {
+						if (data.sectors.includes(sector.value)) {
+							tempSectors.push({value: sector.value, isChecked: true})
+						}
+						else {
+							tempSectors.push({value: sector.value, isChecked: false})
+						}
+					})
+					debugger
+					setSectors(tempSectors)
 					setRangedRules(data.rangedRule)
 					setTimedRangeRules(data.timedRangeRule)
 				})
@@ -108,18 +119,18 @@ export function Screener(props) {
 	}
 
 	const handleMount = () => {
-
+		debugger
 		if (indexID) {
 			getCustomIndexRequest()
 			setCollapseOpen(true)
 		}
-
-		screen()
 	}
 
 	useEffect(() => {handleMount()}, []);
+	useEffect(() => { update() }, [rangedRules, sectors, timedRangeRules]);
 
 	const update = () => {
+		debugger
 		screen()
 	}
 
