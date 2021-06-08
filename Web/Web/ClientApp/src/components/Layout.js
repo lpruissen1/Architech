@@ -65,7 +65,7 @@ export default function AuthenticatedRoute({ component: C, loggedIn, ...rest }) 
 			render={props =>
 				loggedIn
 					? <C {...props} />
-					: <Redirect to={{ pathname: 'login' }} />}
+					: <Redirect to={{ pathname: '/login' }} />}
 		/>
 	);
 }
