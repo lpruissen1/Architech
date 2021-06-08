@@ -1,4 +1,5 @@
 ﻿import Cookie from "js-cookie";
+import jwt from 'jwt-decode';
 
 const API_URL = "https://localhost:9001/User/";
 
@@ -37,6 +38,9 @@ class AuthService {
 
 		if (response.ok) {
 			const json = await response.json();
+
+			const decoded = jwt(json.token);
+			debugger;
 			Cookie.set("jwtToken", json.token)
 			return [true, json.userID]
 		}

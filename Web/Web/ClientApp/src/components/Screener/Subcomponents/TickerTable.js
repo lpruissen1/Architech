@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
+import EmptyTickerTable from './EmptyTickerTable';
 
 export class TickerTable extends Component {
 	constructor(props) {
@@ -8,6 +9,10 @@ export class TickerTable extends Component {
 	static renderStockDataTable(tickers, loading) {
 		if (!Array.isArray(tickers))
 			return "Loading";
+
+		if (tickers.length === 0) 
+			return (<EmptyTickerTable />)
+						
 
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
