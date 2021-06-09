@@ -106,7 +106,7 @@ export class Screener extends Component {
 	saveIndex() {
 		debugger;
 		return this.postCustomIndexRequest({
-			userId: this.props.userID,
+			userId: this.props.userId,
 			markets: [
 				"Sp500"
 			],

@@ -4,7 +4,7 @@ import BasicRulesSection from "./Rules/BasicRulesSection";
 import Collapsible from 'react-collapsible';
 import "../Screener.css"
 
-export default class ScreeningControls extends React.Component {
+export default class ScreeningControls extends Component {
 	constructor(props) {
 		super(props);
 	}

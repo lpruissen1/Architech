@@ -1,6 +1,7 @@
 ﻿import Cookie from "js-cookie";
+import jwt from 'jwt-decode';
 
-const API_URL = "https://localhost:9001/User/";
+const API_URL = "https://localhost:9001/User/"; // this will eventually need to be config
 
 class AuthService {
 	async login(username, password) {
@@ -14,9 +15,11 @@ class AuthService {
 		});
 
 		if (response.ok) {
-			const json = await response.json();
-			Cookie.set("jwtToken", json.token)
-			return [true, json.userID]
+			const json = await response.json()
+			const id = this.getUserIdFromJwt(json.token)
+
+			Cookie.set("jwtToken", json.token, { expires: 1 / 24  })
+			return [true, id]
 		}
 
 		return false
@@ -36,9 +39,10 @@ class AuthService {
 		});
 
 		if (response.ok) {
-			const json = await response.json();
-			Cookie.set("jwtToken", json.token)
-			return [true, json.userID]
+			const json = await response.json()
+			Cookie.set("jwtToken", json.token, { expires: 1 / 24 })
+
+			return [true, json.userId]
 		}
 
 		return false
@@ -46,6 +50,10 @@ class AuthService {
 
 	getCurrentUser() {
 		return Cookie.get("jwtToken")
+	}
+
+	getUserIdFromJwt(token) {
+		return jwt(token).nameid;
 	}
 }
 

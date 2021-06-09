@@ -60,7 +60,7 @@ export function Registration(props) {
 		if (success) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserID(ID)
+			props.setUserId(ID)
 		}
 	}
 

@@ -5,8 +5,6 @@ import './NavMenu.css';
 import AuthClient from '../Clients/AuthClient';
 
 export class NavMenu extends Component {
-	static displayName = NavMenu.name;
-
 	constructor(props) {
 		super(props);
 
@@ -39,25 +37,25 @@ export class NavMenu extends Component {
 							<ul className="navbar-nav flex-grow">
 								{this.props.loggedIn ? (
 									<>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/screener">Screener</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/portfolios">Portfolios</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/research">Research</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/education">Education</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/profile">Profile</NavLink>
 										</NavItem>
-										<NavItem>
+										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} onClick={this.logout} className="text-dark">Logout</NavLink>
 										</NavItem>
 									</>
