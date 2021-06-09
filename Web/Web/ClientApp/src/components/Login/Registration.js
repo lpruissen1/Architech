@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { useState, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Registration.css';
@@ -74,18 +74,15 @@ export function Registration(props) {
 		});
 	}
 
-	const register = () => {
-		validateForm()
-		if (formValid) {
-			registerUser()
-		}
-	}
-
 	const validateForm = () => {
 		const errorList = [validateEmail(email), validatePassword(password), validateUsername(username), validateName(firstName), validateName(lastName), validatePasswordMatch(password, passwordMatch)]
 
+		debugger
 		if (errorList.indexOf(false) === -1) {
 			setFormValid(true)
+		}
+		else {
+			setFormValid(false)
 		}
 	}
 
@@ -149,6 +146,8 @@ export function Registration(props) {
 		}
 	}
 
+	useEffect(() => { validateForm()})
+
 	return (
 		<div className="global-flex-container">
 			<div className="registration-card">
@@ -159,7 +158,7 @@ export function Registration(props) {
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChangeCapture={handleFirstNameInput}
+								onChange={handleFirstNameInput}
 								autoComplete='off'
 								error={firstNameError}
 							/>
@@ -167,7 +166,7 @@ export function Registration(props) {
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChangeCapture={handleLastNameInput}
+								onChange={handleLastNameInput}
 								autoComplete='off'
 								error={lastNameError}
 							/>
@@ -207,13 +206,17 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChangeCapture={handleEmailInput}
+							onChange={handleEmailInput}
 							autoComplete='off'
 							error={emailError}
 						/>
 					</div>
 				</form>
-					<Button onClick={register} className={classes.button} variant="contained"> Register </Button>
+				{formValid ?
+					<Button onClick={registerUser} className={classes.button} variant="contained"> Register </Button>
+					:
+					<Button className={classes.button} variant="contained" disabled> Register </Button>
+					}
 			</div>
 		</div>
 	);
