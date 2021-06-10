@@ -51,7 +51,6 @@ export function Screener(props) {
 							tempSectors.push({value: sector.value, isChecked: false})
 						}
 					})
-					debugger
 					setSectors(tempSectors)
 					setRangedRules(data.rangedRule)
 					setTimedRangeRules(data.timedRangeRule)
@@ -100,7 +99,6 @@ export function Screener(props) {
 		})
 			.then(function (response) {
 				return response.json().then(function (data) {
-					console.log(data)
 					setTickers(data)
 					setLoading(false)
 				})
@@ -119,7 +117,6 @@ export function Screener(props) {
 	}
 
 	const handleMount = () => {
-		debugger
 		if (indexID) {
 			getCustomIndexRequest()
 			setCollapseOpen(true)
@@ -127,12 +124,7 @@ export function Screener(props) {
 	}
 
 	useEffect(() => {handleMount()}, []);
-	useEffect(() => { update() }, [rangedRules, sectors, timedRangeRules]);
-
-	const update = () => {
-		debugger
-		screen()
-	}
+	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
 
 	const postCustomIndexRequest = (data = {}) => {
 		fetch("https://localhost:7001/CustomIndex", {
@@ -159,19 +151,15 @@ export function Screener(props) {
 		});
 	}
 
-	const save = () => {
-		saveIndex()
-	}
-
 	return (
 		<div>
 			<h1 id="tabelLabel" >Screener</h1>
 			<div className='rowThing'>
 				<Card className='screenerCard'>
 					<div>
-						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={update} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} collapseOpen={collapseOpen}/>
+						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={screen} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} collapseOpen={collapseOpen}/>
 						<br/>
-						<SaveButton handleSave={save}/>
+						<SaveButton handleSave={saveIndex}/>
 					</div>
 				</Card>
 				<Card className='tickerCard'>

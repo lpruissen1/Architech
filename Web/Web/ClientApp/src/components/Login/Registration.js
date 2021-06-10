@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { useState, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Registration.css';
@@ -60,7 +60,7 @@ export function Registration(props) {
 		if (success) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserID(ID)
+			props.setUserId(ID)
 		}
 	}
 
@@ -74,80 +74,78 @@ export function Registration(props) {
 		});
 	}
 
-	const register = () => {
-		validateForm()
-		if (formValid) {
-			registerUser()
-		}
-	}
-
 	const validateForm = () => {
-		const errorList = [validateEmail(email), validatePassword(password), validateUsername(username), validateName(firstName), validateName(lastName), validatePasswordMatch(password, passwordMatch)]
+		const errorList = [firstNameError, lastNameError, usernameError, passwordError, passwordMatchError, emailError]
 
-		if (errorList.indexOf(false) === -1) {
+		if (errorList.indexOf(true) === -1) {
 			setFormValid(true)
 		}
+		else {
+			setFormValid(false)
+		}
 	}
 
-	const handleEmailInput = (event) => {
-		if (validateEmail(event.target.value)) {
+	const handleEmailInput = () => {
+		if (validateEmail(email)) {
 			setEmailError(false)
-			setEmail(event.target.value)
 		}
 		else {
 			setEmailError(true)
 		}
 	}
 
-	const handleUsernameInput = (event) => {
-		if (validateUsername(event.target.value)) {
+	const handleUsernameInput = () => {
+		if (validateUsername(username)) {
 			setUsernameError(false)
-			setUsername(event.target.value)
 		}
 		else {
 			setUsernameError(true)
 		}
 	}
 
-	const handlePasswordInput = (event) => {
-		if (validatePassword(event.target.value)) {
+	const handlePasswordInput = () => {
+		if (validatePassword(password)) {
 			setPasswordError(false)
-			setPassword(event.target.value)
 		}
 		else {
 			setPasswordError(true)
 		}
 	}
 
-	const handlePasswordMatchInput = (event) => {
-		if (validatePasswordMatch(password, event.target.value)) {
+	const handlePasswordMatchInput = () => {
+		if (validatePasswordMatch(password, passwordMatch)) {
 			setPasswordMatchError(false)
-			setPasswordMatch(event.target.value)
 		}
 		else {
 			setPasswordMatchError(true)
 		}
 	}
 
-	const handleFirstNameInput = (event) => {
-		if (validateName(event.target.value)) {
+	const handleFirstNameInput = () => {
+		if (validateName(firstName)) {
 			setFirstNameError(false)
-			setFirstName(event.target.value)
 		}
 		else {
 			setFirstNameError(true)
 		}
 	}
 
-	const handleLastNameInput = (event) => {
-		if (validateName(event.target.value)) {
+	const handleLastNameInput = () => {
+		if (validateName(lastName)) {
 			setLastNameError(false)
-			setLastName(event.target.value)
 		}
 		else {
 			setLastNameError(true)
 		}
 	}
+
+	useEffect(() => { handleFirstNameInput() }, [firstName])
+	useEffect(() => { handleLastNameInput() }, [lastName])
+	useEffect(() => { handleUsernameInput() }, [username])
+	useEffect(() => { handlePasswordInput() }, [password])
+	useEffect(() => { handlePasswordMatchInput() }, [passwordMatch])
+	useEffect(() => { handleEmailInput() }, [email])
+	useEffect(() => { validateForm()}, [firstNameError, lastNameError, usernameError, passwordError, passwordMatchError, emailError])
 
 	return (
 		<div className="global-flex-container">
@@ -159,46 +157,46 @@ export function Registration(props) {
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChangeCapture={handleFirstNameInput}
+								onChange={(e) => setFirstName(e.target.value)}
 								autoComplete='off'
-								error={firstNameError}
+								error={firstName ? firstNameError : false}
 							/>
 							<TextField required id="outlined-required" className={classes.smallForm} label="Last Name" variant="outlined" placeholder="Last Name"
 								InputLabelProps={{
 									shrink: true,
 								}}
-								onChangeCapture={handleLastNameInput}
+								onChange={(e) => setLastName(e.target.value)}
 								autoComplete='off'
-								error={lastNameError}
+								error={lastName ? lastNameError : false}
 							/>
 						</div>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Username" variant="outlined" placeholder="Username"
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={handleUsernameInput}
+							onChange={(e) => setUsername(e.target.value)}
 							autoComplete='off'
-							error={usernameError}
+							error={username ? usernameError : false}
 							helperText={usernameError && "*Must have at least 8 characters"}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Password" variant="outlined" placeholder="Password"
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={handlePasswordInput}
+							onChange={(e) => setPassword(e.target.value)}
 							autoComplete='off'
 							type='password'
-							error={passwordError}
+							error={password ? passwordError : false}
 							helperText={passwordError && "*Must contain uppercase, lowercase, number, and symbol"}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Re-enter Password" variant="outlined" placeholder="Re-enter Password"
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChange={handlePasswordMatchInput}
+							onChange={(e) => setPasswordMatch(e.target.value)}
 							autoComplete='off'
 							type='password'
-							error={passwordMatchError}
+							error={passwordMatch ? passwordMatchError : false}
 							helperText={passwordMatchError
 								? "*Passwords do not match"
 								: ''}
@@ -207,13 +205,17 @@ export function Registration(props) {
 							InputLabelProps={{
 								shrink: true,
 							}}
-							onChangeCapture={handleEmailInput}
+							onChange={(e) => setEmail(e.target.value)}
 							autoComplete='off'
-							error={emailError}
+							error={email ? emailError : false}
 						/>
 					</div>
 				</form>
-					<Button onClick={register} className={classes.button} variant="contained"> Register </Button>
+				{formValid ?
+					<Button onClick={registerUser} className={classes.button} variant="contained"> Register </Button>
+					:
+					<Button className={classes.button} variant="contained" disabled> Register </Button>
+					}
 			</div>
 		</div>
 	);

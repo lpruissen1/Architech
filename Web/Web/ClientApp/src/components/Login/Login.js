@@ -33,9 +33,10 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
+// where did you come from and what was the state of where you came from
 export function Login(props) {
 
-    const classes = useStyles();
+	const classes = useStyles();
     const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [credentialError, setCredentialError] = useState(false)
@@ -47,7 +48,7 @@ export function Login(props) {
 		if (success) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserID(response[1])
+			props.setUserId(response[1])
 			setCredentialError(false)
 		}
 
