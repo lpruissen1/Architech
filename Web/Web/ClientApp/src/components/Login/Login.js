@@ -44,11 +44,10 @@ export function Login(props) {
 
     const loginUser = async () => {
 		const response = await AuthClient.login(username, password);
-		const success = response[0]
-		if (success) {
+		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserId(response[1])
+			props.setUserId(response)
 			setCredentialError(false)
 		}
 

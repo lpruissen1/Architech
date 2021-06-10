@@ -55,12 +55,10 @@ export function Registration(props) {
 
 	const postUserRegistrationRequest = async (data) => {
 		const response = await AuthClient.register(data)
-		const success = response[0]
-		const ID = response[1]
-		if (success) {
+		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserId(ID)
+			props.setUserId(response)
 		}
 	}
 

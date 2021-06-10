@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useState } from 'react';
+﻿import React, { useCallback, useState, useEffect } from 'react';
 import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import { PortfolioCard } from './Subcomponents/PortfolioCard';
 import Card from 'react-bootstrap/Card';
@@ -23,29 +23,30 @@ export function Portfolios(props) {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(function (response) {
-				return response.json().then(function (data) {
-					console.log(data)
+		.then(function (response) {
+			return response.json().then(function (data) {
+				console.log(data)
 
-					const activePortfolios = data.map((portfolio) => {
-						return {
-							indexId: portfolio.indexId,
-							markets: portfolio.markets,
-							sectors: portfolio.sectors,
-							rangedRules: portfolio.rangedRule,
-							timedRangeRules: portfolio.timedRangeRule
-						}
-					})
-
-					setPortfolios(activePortfolios)
+				const activePortfolios = data.map((portfolio) => {
+					return {
+						indexId: portfolio.indexId,
+						markets: portfolio.markets,
+						sectors: portfolio.sectors,
+						rangedRules: portfolio.rangedRule,
+						timedRangeRules: portfolio.timedRangeRule
+					}
 				})
-			});
+
+				setPortfolios(activePortfolios)
+			})
+		});
 	}
+
+	useEffect(() => {getCustomIndexRequest()}, [])
 
 	return (
 		<div>
-			<button onClick={getCustomIndexRequest}> make request </button>
-			<h1>My Blueprints</h1>
+			<h1>Your Blueprints</h1>
 			{
 				portfolios && portfolios.map((portfolioooo) => {
 					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolioooo.indexId} portfolio={portfolioooo} /> </Card>)
