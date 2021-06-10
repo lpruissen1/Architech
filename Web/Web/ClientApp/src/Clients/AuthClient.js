@@ -11,7 +11,7 @@ class AuthService {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ "username": username, "passwordhash": password })
+			body: JSON.stringify({ "username": username, "password": password })
 		});
 
 		if (response.ok) {
