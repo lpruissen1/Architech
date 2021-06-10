@@ -19,10 +19,8 @@ class AuthService {
 			const id = this.getUserIdFromJwt(json.token)
 
 			Cookie.set("jwtToken", json.token, { expires: 1 / 24  })
-			return [true, id]
+			return id
 		}
-
-		return false
 	}
 
 	logout() {
@@ -39,13 +37,11 @@ class AuthService {
 		});
 
 		if (response.ok) {
-			const json = await response.json()
+			const json = await response.json();
 			Cookie.set("jwtToken", json.token, { expires: 1 / 24 })
 
-			return [true, json.userId]
+			return this.getUserIdFromJwt(json.token)
 		}
-
-		return false
 	}
 
 	getCurrentUser() {

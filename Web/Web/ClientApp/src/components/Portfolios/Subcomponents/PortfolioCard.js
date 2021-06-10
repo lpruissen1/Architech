@@ -2,9 +2,16 @@
 import './NewPortfolioCard.css';
 import { FaPlus } from 'react-icons/fa';
 import { IconContext } from "react-icons";
+import Button from '@material-ui/core/Button';
+import { useHistory, Route } from 'react-router-dom';
 
-export function NewPortfolioCard(props) {
-
+export function PortfolioCard(props) {
+	const history = useHistory();
+	const handleOnClick = () => {
+		history.push({
+			pathname: `/screener/${props.portfolio.indexId}`,
+		});
+	}
 
 	return (
 		<div onClick={props.onClick} className='cardContainer'>
@@ -15,12 +22,17 @@ export function NewPortfolioCard(props) {
 						<div className='plusIconContainer'>
 							<FaPlus />
 						</div>
-						<div>
-							<p className='blueprintText'>Create New Blueprint</p>
-						</div>
+						{
+							props.portfolio.sectors && props.portfolio.sectors.map((sector) => {
+								return (<>{sector}</>)
+							})
+						}
+						<Button onClick={handleOnClick}>
+							Click
+						</Button>
 					</IconContext.Provider>
 				</tbody>
 			</table>
 		</div>
 	);
-} 
+}
