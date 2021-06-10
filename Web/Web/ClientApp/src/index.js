@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.css';
-//import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,9 +17,9 @@ const theme = createMuiTheme({
 			dark: '#176F6A',
 		},
 		error: {
-			light: '#FFEBDB',
-			main: '#FFB293',
-			dark: '#FF644C',
+			light: '#FFF2C5',
+			main: '#FF644C',
+			dark: '#B72629',
 			contrastText: '#7A0E22',
 		},
 		warning: {
@@ -30,9 +29,9 @@ const theme = createMuiTheme({
 			contrastText: '#7A4F15'
 		},
 		info: {
-			light: '#C9FBF6',
-			main: '#5DE3EA',
-			dark: '#0096BC',
+			dark: '#005787',
+			light: '#5DE3EA',
+			main: '#0096BC',
 			contrastText: '#002D5A'
 		},
 		success: {

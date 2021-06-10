@@ -6,7 +6,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		color: theme.palette.primary,
-		width: 300
+		width: '50%'
 	},
 }));
 
@@ -74,19 +74,23 @@ export default function RangedRule(props) {
 
 	return (
 		<>
-			<div>{props.option.displayName}</div>
-			<div>High: {high}</div>
-			<div>Low: {low}</div>
-			<div className={classes.root}>
-				<RuleSlider
-					valueLabelDisplay="auto"
-					aria-label="pretto slider"
-					min={props.option.selectorMin}
-					max={props.option.selectorMax}
-					value={value}
-					valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-					onChange={(event, newValue) => setValue(newValue)}
-					onChangeCommitted={updateRuleRanges}/>
+			<div className="rule-container">
+				<div className="display-name">{props.option.displayName}</div>
+				<div className="slider-container">
+					<div className={classes.root}>
+						<RuleSlider
+							valueLabelDisplay="auto"
+							aria-label="pretto slider"
+							min={props.option.selectorMin}
+							max={props.option.selectorMax}
+							value={value}
+							valueLabelFormat={value => <div>{numFormatter(value)}</div>}
+							onChange={(event, newValue) => setValue(newValue)}
+							onChangeCommitted={updateRuleRanges}/>
+					</div>
+				</div>
+				<div>
+				</div>
 			</div>
 		</>
 	);

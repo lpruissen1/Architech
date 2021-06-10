@@ -1,15 +1,87 @@
 ﻿.newMetricButton {
-	box-sizing: border-box;
-	border-radius: 0px 0px 0px 0px;
-}
-.button {
-	background-color: #000000; /* Green */
-	border: none;
-	color: white;
-	padding: 8px 20px;
-	text-align: center;
-	text-decoration: none;
+	border-radius: 2px 2px 8px 8px;
+	width: 100%;
+	border: 0px;
 	display: inline-block;
-	font-size: 16px;
-	margin: 5px;
+	background-color: lightgrey;
+	background-color: rgba(0, 0, 0, 0.07);
+	font-weight: 600;
+	color: rgb(70,70,70)
+}
+
+	.newMetricButton:hover {
+		background-color: rgba(0, 0, 0, 0.1); /* Green */
+		color: rgb(70,70,70);
+	}
+
+.button {
+	display: inline-block;
+	background-color: #fff;
+	border: 1px solid;
+	border-color: rgb(95,95,95);
+	color: rgb(95,95,95);
+	width: 200px;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 10px;
+	white-space: nowrap;
+	margin: 3px 3px;
+	margin-bottom: 8px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	transition: all .2s;
+	padding: 4px;
+}
+
+	.button:hover {
+		border-color: rgb(155,155,155);
+		color: rgb(155,155,155);
+	}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.rule-container {
+	display: flex;
+	flex-direction: row;
+	flex-basis: 0;
+	padding: 24px;
+	padding-top: 36px;
+	padding-bottom: 4px;
+}
+
+.display-name{
+	margin-left: 10px;
+	font-size: 14px;
+	width: 33%;
+}
+
+.slider-container{
+	width: 66%;
+	height: 100%;
+}
+
+
+.ranged-rule-container {
+	display: flex;
+	flex-direction: row;
+	flex-basis: 0;
+	padding: 24px;
+	padding-top: 36px;
+	padding-bottom: 4px;
+}
+
+.timePeriod-selector-container {
+	display: flex;
+	align-content: center;
+	padding-left: 10%;
 }
