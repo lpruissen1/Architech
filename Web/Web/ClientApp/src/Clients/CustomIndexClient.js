@@ -26,6 +26,20 @@ class CustomIndexClient {
 			return activePortfolios
 		}
 	}
+
+
+	async getCustomIndexByIdRequest(userID, indexID) {
+		const response = await fetch(API_URL + userID + '&indexId=' + indexID, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		if(response.ok)
+			const data = await response.json()
+			return data
+	}
 }
 
 

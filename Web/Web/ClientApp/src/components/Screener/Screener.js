@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
+import CustomIndexClient from '../../Clients/CustomIndexClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
@@ -28,34 +29,22 @@ export function Screener(props) {
 
 	let { indexID } = useParams();
 
-	const GET_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID=' + props.userID + '&indexId=' + indexID;
-
 	const getCustomIndexRequest = () => {
-		fetch(GET_URL, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
+		const index = CustomIndexClient.getCustomIndexByIdRequest(props.userID, indexID)
+		let tempSectors = []
+
+		sectors.forEach(sector => {
+			if (index.sectors.includes(sector.value)) {
+				tempSectors.push({value: sector.value, isChecked: true})
 			}
-			})
-			.then(function (response) {
-				return response.json().then(function (data) {
-					console.log(data)
+			else {
+				tempSectors.push({value: sector.value, isChecked: false})
+			}
+		})
 
-					let tempSectors = []
-
-					sectors.forEach(sector => {
-						if (data.sectors.includes(sector.value)) {
-							tempSectors.push({value: sector.value, isChecked: true})
-						}
-						else {
-							tempSectors.push({value: sector.value, isChecked: false})
-						}
-					})
-					setSectors(tempSectors)
-					setRangedRules(data.rangedRule)
-					setTimedRangeRules(data.timedRangeRule)
-				})
-			});
+		setSectors(tempSectors)
+		setRangedRules(index.rangedRule)
+		setTimedRangeRules(index.timedRangeRule)
 	}
 
 	const handleRangedRuleUpdate = (rule) => {
