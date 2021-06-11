@@ -15,7 +15,7 @@ export function Portfolios(props) {
 	const clickie = () => setCreateNew(!createNew)	
 
 	const loadPortfolios = async () => {
-		const activePortfolios =  await CustomIndexClient.getCustomIndexRequest(props.userID)
+		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
 		debugger
 		setPortfolios(activePortfolios)
 	}

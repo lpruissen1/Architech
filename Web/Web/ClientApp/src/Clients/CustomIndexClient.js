@@ -1,11 +1,12 @@
-﻿const GET_API_URL = 'https://localhost:7001/CustomIndex?userID='
+﻿const GET_ALL_URL = 'https://localhost:7001/CustomIndex?userID='
+const GET_BY_ID_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID='
 const POST_API_URL = 'https://localhost:7001/CustomIndex'
 
 
 class CustomIndexClient {
 
-	async getCustomIndexRequest(userID) {
-		const response = await fetch(GET_API_URL + userID, {
+	async getCustomIndexByUserId(userID) {
+		const response = await fetch(GET_ALL_URL + userID, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -30,17 +31,18 @@ class CustomIndexClient {
 	}
 
 
-	async getCustomIndexByIdRequest(userID, indexID) {
-		const response = await fetch(GET_API_URL + userID + '&indexId=' + indexID, {
+	async getCustomIndexByIndexId(userID, indexID) {
+		const response = await fetch(GET_BY_ID_URL + userID + '&indexId=' + indexID, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		})
 
-		if(response.ok)
+		if (response.ok) {
 			const data = await response.json()
 			return data
+		}
 	}
 
 	postCustomIndexRequest(data = {}) {

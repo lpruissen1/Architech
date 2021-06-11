@@ -30,12 +30,12 @@ export function Screener(props) {
 
 	let { indexID } = useParams();
 
-	const loadIndex = () => {
-		const index = CustomIndexClient.getCustomIndexByIdRequest(props.userID, indexID)
+	const loadIndex = async () => {
+		const index = await CustomIndexClient.getCustomIndexByIndexId(props.userID, indexID)
 		let tempSectors = []
-
+		
 		sectors.forEach(sector => {
-			if (index.sectors.includes(sector.value)) {
+			if (index.sectors && index.sectors.includes(sector.value)) {
 				tempSectors.push({value: sector.value, isChecked: true})
 			}
 			else {
@@ -78,7 +78,7 @@ export function Screener(props) {
 		return activeSectors
 	}
 
-	const screen = () => {
+	const screen = async () => {
 		setLoading(true)
 
 		const tickers = await ScreenerClient.postScreeningRequest({
