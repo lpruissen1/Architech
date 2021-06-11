@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
+import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
@@ -29,7 +30,7 @@ export function Screener(props) {
 
 	let { indexID } = useParams();
 
-	const getCustomIndexRequest = () => {
+	const loadIndex = () => {
 		const index = CustomIndexClient.getCustomIndexByIdRequest(props.userID, indexID)
 		let tempSectors = []
 
@@ -77,37 +78,25 @@ export function Screener(props) {
 		return activeSectors
 	}
 
-	const postScreeningRequest = (data = {}) => {
-		setLoading(true)
-		fetch("https://localhost:5001/Screening/FuckYourself", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(function (response) {
-				return response.json().then(function (data) {
-					setTickers(data)
-					setLoading(false)
-				})
-			});
-	}
-
 	const screen = () => {
-		return postScreeningRequest({
+		setLoading(true)
+
+		const tickers = await ScreenerClient.postScreeningRequest({
 			markets: [
 				"Sp500"
 			],
 			"sectors": getActiveSectors(sectors),
 			"rangedRule": rangedRules,
 			"timedRangeRule": timedRangeRules
-		});
+		})
+
+		setTickers(tickers)
+		setLoading(false)
 	}
 
 	const handleMount = () => {
 		if (indexID) {
-			getCustomIndexRequest()
+			loadIndex()
 			setCollapseOpen(true)
 		}
 	}
@@ -115,21 +104,9 @@ export function Screener(props) {
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
 
-	const postCustomIndexRequest = (data = {}) => {
-		fetch("https://localhost:7001/CustomIndex", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(function (response) {
-				return response.status
-			});
-	}
 
 	const saveIndex = () => {
-		return postCustomIndexRequest({
+		return CustomIndexClient.postCustomIndexRequest({
 			userId: props.userID,
 			markets: [
 				"Sp500"
