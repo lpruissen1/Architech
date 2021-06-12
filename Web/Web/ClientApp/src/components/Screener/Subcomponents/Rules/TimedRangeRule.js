@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import Slider from '@material-ui/core/Slider';
+import Button from '@material-ui/core/Button';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TimePeriodSelector from "./TimePeriodSelector";
@@ -79,6 +80,11 @@ export default function TimeRangedRule(props) {
 		props.handleUpdate()
 	}
 
+	const deleteRule = () => {
+		const ruleType = props.option.value
+		props.deleteTimedRangeRule(ruleType)
+	}
+
 	return (
 		<div className="ranged-rule-container">
 			<div className="display-name">{props.option.displayName}</div>
@@ -98,6 +104,7 @@ export default function TimeRangedRule(props) {
 			<div className="timePeriod-selector-container">
 				<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
 			</div>
+			<Button onClick={deleteRule}> Delete </Button>
 		</div>
 	);
 }

@@ -74,6 +74,11 @@ export function Screener(props) {
 		setRangedRules(resultingRules)
 	}
 
+	const deleteTimedRangeRule = (selectedRule) => {
+		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule);
+		setTimedRangeRules(resultingRules)
+	}
+
 
 	const getActiveSectors = (sectorList) => {
 		let activeSectors = []
@@ -137,7 +142,8 @@ export function Screener(props) {
 							handleRangedRuleUpdate={handleRangedRuleUpdate}
 							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
 							collapseOpen={collapseOpen}
-							deleteRangedRule={deleteRangedRule}/>
+							deleteRangedRule={deleteRangedRule}
+							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
 						<SaveButton handleSave={saveIndex}/>
 					</div>

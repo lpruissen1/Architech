@@ -77,7 +77,11 @@ export default class BasicRulesSection extends React.Component {
 		this.props.timedRangeRules && this.props.timedRangeRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<TimedRangeRule option={this.state.options.find(option => option.value === rule.ruleType)} rule={rule} handleUpdate={this.props.handleUpdate}/>
+					<TimedRangeRule
+						option={this.state.options.find(option => option.value === rule.ruleType)}
+						rule={rule}
+						handleUpdate={this.props.handleUpdate}
+						deleteTimedRangeRule={this.props.deleteTimedRangeRule}/>
 					<br />
 				</>
 			)

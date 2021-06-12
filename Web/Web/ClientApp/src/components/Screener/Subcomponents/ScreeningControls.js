@@ -22,7 +22,8 @@ export default class ScreeningControls extends Component {
 						handleUpdate={this.props.handleUpdate}
 						handleRangedRuleUpdate={this.props.handleRangedRuleUpdate}
 						handleTimedRangeRuleUpdate={this.props.handleTimedRangeRuleUpdate}
-						deleteRangedRule={this.props.deleteRangedRule}/>
+						deleteRangedRule={this.props.deleteRangedRule}
+						deleteTimedRangeRule={this.props.deleteTimedRangeRule}/>
 				</Collapsible>
 			</div>
 		);
