@@ -69,6 +69,12 @@ export function Screener(props) {
 		setTimedRangeRules([...timedRangeRules, rule])
 	}
 
+	const deleteRangedRule = (selectedRule) => {
+		const resultingRules = rangedRules.filter(rule => rule.ruleType !== selectedRule);
+		setRangedRules(resultingRules)
+	}
+
+
 	const getActiveSectors = (sectorList) => {
 		let activeSectors = []
 		sectorList.forEach(sector => {
@@ -123,7 +129,15 @@ export function Screener(props) {
 			<div className='rowThing'>
 				<Card className='screenerCard'>
 					<div>
-						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={screen} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} collapseOpen={collapseOpen}/>
+						<ScreeningControls
+							sectors={sectors}
+							rangedRules={rangedRules}
+							timedRangeRules={timedRangeRules}
+							handleUpdate={screen}
+							handleRangedRuleUpdate={handleRangedRuleUpdate}
+							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
+							collapseOpen={collapseOpen}
+							deleteRangedRule={deleteRangedRule}/>
 						<br/>
 						<SaveButton handleSave={saveIndex}/>
 					</div>
