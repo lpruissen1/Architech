@@ -1,6 +1,7 @@
 ﻿const GET_ALL_URL = 'https://localhost:7001/CustomIndex?userID='
 const GET_BY_ID_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID='
 const POST_API_URL = 'https://localhost:7001/CustomIndex'
+const PUT_API_URL = 'https://localhost:7001/CustomIndex/UpdateIndex?userId='
 
 
 class CustomIndexClient {
@@ -48,6 +49,19 @@ class CustomIndexClient {
 	postCustomIndexRequest(data = {}) {
 		fetch(POST_API_URL, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then(function (response) {
+				return response.status
+			});
+	}
+
+	updateCustomIndexRequest(userId, data = {}) {
+		fetch(PUT_API_URL + userId, {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},

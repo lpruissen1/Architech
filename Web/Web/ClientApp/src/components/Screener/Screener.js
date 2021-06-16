@@ -4,6 +4,7 @@ import CustomIndexClient from '../../Clients/CustomIndexClient';
 import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
+import UpdateButton from './Subcomponents/UpdateButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
@@ -27,6 +28,7 @@ export function Screener(props) {
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
+	const [updateButton, setUpdateButton] = useState(false)
 
 	let { indexID } = useParams();
 
@@ -109,6 +111,7 @@ export function Screener(props) {
 		if (indexID) {
 			loadIndex()
 			setCollapseOpen(true)
+			setUpdateButton(true)
 		}
 	}
 
@@ -119,6 +122,19 @@ export function Screener(props) {
 	const saveIndex = () => {
 		return CustomIndexClient.postCustomIndexRequest({
 			userId: props.userID,
+			markets: [
+				"Sp500"
+			],
+			"sectors": getActiveSectors(sectors),
+			"rangedRule": rangedRules,
+			"timedRangeRule": timedRangeRules
+		});
+	}
+
+	const updateIndex = () => {
+		return CustomIndexClient.updateCustomIndexRequest(props.userID, {
+			userId: props.userID,
+			indexId: indexID,
 			markets: [
 				"Sp500"
 			],
@@ -145,7 +161,9 @@ export function Screener(props) {
 							deleteRangedRule={deleteRangedRule}
 							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
-						<SaveButton handleSave={saveIndex}/>
+						{updateButton
+							? <UpdateButton handleUpdate={updateIndex}/>
+							: <SaveButton handleSave={saveIndex} />}
 					</div>
 				</Card>
 				<Card className='tickerCard'>
