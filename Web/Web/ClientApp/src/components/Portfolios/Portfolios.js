@@ -16,7 +16,6 @@ export function Portfolios(props) {
 
 	const loadPortfolios = async () => {
 		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
-		debugger
 		setPortfolios(activePortfolios)
 	}
 
