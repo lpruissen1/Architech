@@ -12,12 +12,17 @@ export function Portfolios(props) {
 	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
 	const [createNew, setCreateNew] = useState(false)
 	const [portfolios, setPortfolios] = useState([])
-	const clickie = () => setCreateNew(!createNew)	
+	const clickie = () => setCreateNew(!createNew)
 
 	const loadPortfolios = async () => {
 		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
 		debugger
 		setPortfolios(activePortfolios)
+	}
+
+	const deletePortfolio = async (userId, indexId) => {
+		await CustomIndexClient.deleteCustomIndexRequest(userId, indexId)
+		loadPortfolios()
 	}
 
 	useEffect(() => { loadPortfolios() }, [])
@@ -27,7 +32,12 @@ export function Portfolios(props) {
 			<h1>Your Blueprints</h1>
 			{
 				portfolios && portfolios.map((portfolioooo) => {
-					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolioooo.indexId} portfolio={portfolioooo} /> </Card>)
+					return (<Card className='portfoliosCard'>
+						<PortfolioCard key={portfolioooo.indexId}
+							portfolio={portfolioooo}
+							deletePortfolio={deletePortfolio}
+							userId={props.userID}/>
+					</Card>)
 				})
 			}
 			<Card className='portfoliosCard'>
