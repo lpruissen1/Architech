@@ -1,11 +1,21 @@
 ﻿import React, { useState } from 'react';
 import './NewPortfolioCard.css';
-import { FaPlus } from 'react-icons/fa';
-import { IconContext } from "react-icons";
+import './PortfolioCard.css';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+
+export const useStyles = makeStyles((theme) => ({
+	deleteButton: {
+		color: 'white',
+	},
+	editButton: {
+		color: 'white',
+		marginLeft: 'auto'
+	}
+}));
 
 export function PortfolioCard(props) {
 	const [modal, setModal] = useState(false)
@@ -15,6 +25,8 @@ export function PortfolioCard(props) {
 			pathname: `/screener/${props.portfolio.indexId}`,
 		});
 	}
+
+	const classes = useStyles();
 
 	const handleDelete = () => {
 		const userId = props.userId
@@ -32,27 +44,33 @@ export function PortfolioCard(props) {
 
 	return (
 		<>
-			<div onClick={props.onClick} className='cardContainer'>
-				<table className='table table-striped' aria-labelledby="tabelLabel">
-					<thead></thead>
-					<tbody>
-						<IconContext.Provider value={{ style: { fontSize: '50px', color: "#2E9B7F" } }}>
-							<div className='plusIconContainer'>
-								<FaPlus />
+			<div className="portfolioCard">
+				<table>
+					<tr>
+						<th colSpan="2">
+							<div className="header">
+								<h2>Blueprint Name</h2>
+								<Button className={classes.editButton} onClick={handleOnClick}>
+									Edit
+								</Button>
+								<IconButton className={classes.deleteButton} onClick={renderModal} color="white" aria-label="delete">
+									<DeleteIcon />
+								</IconButton>
 							</div>
-							{
-								props.portfolio.sectors && props.portfolio.sectors.map((sector) => {
-									return (<>{sector}</>)
-								})
-							}
-							<Button onClick={handleOnClick}>
-								Click
-							</Button>
-							<IconButton onClick={renderModal} color="dimgrey" aria-label="delete">
-								<DeleteIcon />
-							</IconButton>
-						</IconContext.Provider>
-					</tbody>
+						</th>
+					</tr>
+					<tr>
+						<td>Sectors:</td>
+						<td>{props.portfolio.sectors}</td>
+					</tr>
+					<tr>
+						<td>Industries:</td>
+						<td>{props.portfolio.industries}</td>
+					</tr>
+					<tr>
+						<td>Basic Metrics:</td>
+						<td></td>
+					</tr>
 				</table>
 			</div>
 			{modal && (
