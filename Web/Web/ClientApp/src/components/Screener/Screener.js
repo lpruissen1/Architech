@@ -4,7 +4,7 @@ import CustomIndexClient from '../../Clients/CustomIndexClient';
 import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
-import ScreeningControls from './Subcomponents/ScreeningControls';
+import ScreeningControls from "./Subcomponents/ScreeningControls";
 import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
 

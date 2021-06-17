@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SectorSelector from './SectorSelector';
 import BasicRulesSection from "./Rules/BasicRulesSection";
 import Collapsible from 'react-collapsible';
 import "../Screener.css"
+import ManualSelection from './ManualSelection';
 
-export default class ScreeningControls extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<div>
-				<Collapsible className='Collapsible' trigger="Sectors" open={this.props.collapseOpen}>
-					<SectorSelector sectors={this.props.sectors} handleUpdate={this.props.handleUpdate} />
-				</Collapsible>
-				<Collapsible className='Collapsible' trigger="Basic Metrics" open={this.props.collapseOpen}>
-					<BasicRulesSection
-						rangedRules={this.props.rangedRules}
-						timedRangeRules={this.props.timedRangeRules}
-						handleUpdate={this.props.handleUpdate}
-						handleRangedRuleUpdate={this.props.handleRangedRuleUpdate}
-						handleTimedRangeRuleUpdate={this.props.handleTimedRangeRuleUpdate}
-						deleteRangedRule={this.props.deleteRangedRule}/>
-				</Collapsible>
-			</div>
-		);
-	}
+export default function ScreeningControls(props) {
+	return (
+		<div>
+			<Collapsible className='Collapsible' trigger="Sectors" open={props.collapseOpen}>
+				<SectorSelector
+					sectors={props.sectors}
+					handleUpdate={props.handleUpdate}
+				/>
+			</Collapsible>
+			<Collapsible className='Collapsible' trigger="Basic Metrics" open={props.collapseOpen}>
+				<BasicRulesSection
+					rangedRules={props.rangedRules}
+					timedRangeRules={props.timedRangeRules}
+					handleUpdate={props.handleUpdate}
+					handleRangedRuleUpdate={props.handleRangedRuleUpdate}
+					handleTimedRangeRuleUpdate={props.handleTimedRangeRuleUpdate}
+					deleteRangedRule={props.deleteRangedRule}
+				/>
+			</Collapsible>
+			<Collapsible className='Collapsible' trigger="Manual Selection" open={props.collapseOpen}>
+				<ManualSelection/>
+			</Collapsible>
+		</div>
+	);
+	
 }
+
