@@ -29,6 +29,7 @@ export function Portfolios(props) {
 	return (
 		<div>
 			<h1>Your Blueprints</h1>
+			<NewPortfolioCard onClick={clickie} />
 			{
 				portfolios && portfolios.map((portfolioooo) => {
 					return (<Card className='portfoliosCard'>
@@ -39,9 +40,6 @@ export function Portfolios(props) {
 					</Card>)
 				})
 			}
-			<Card className='portfoliosCard'>
-					<NewPortfolioCard onClick={clickie} />
-			</Card>
 			{createNew && (
 				<>
 					<div className="centeredModal" onClick={clickie}>
