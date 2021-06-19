@@ -26,8 +26,8 @@ export function Portfolios(props) {
 		<div>
 			<h1>Your Blueprints</h1>
 			{
-				portfolios && portfolios.map((portfolioooo) => {
-					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolioooo.indexId} portfolio={portfolioooo} /> </Card>)
+				portfolios && portfolios.map((portfolio) => {
+					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolio.indexId} portfolio={portfolio} /> </Card>)
 				})
 			}
 			<Card className='portfoliosCard'>

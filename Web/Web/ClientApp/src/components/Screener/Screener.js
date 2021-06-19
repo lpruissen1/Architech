@@ -8,6 +8,7 @@ import UpdateButton from './Subcomponents/UpdateButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
 	const [sectors, setSectors] = useState([
@@ -30,7 +31,9 @@ export function Screener(props) {
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [updateButton, setUpdateButton] = useState(false)
 
-	let { indexID } = useParams();
+	let { passedIndexID } = useParams();
+
+	const [indexID, setIndexID] = useState(passedIndexID)
 
 	const loadIndex = async () => {
 		const index = await CustomIndexClient.getCustomIndexByIndexId(props.userID, indexID)
@@ -60,10 +63,6 @@ export function Screener(props) {
 			// if new rule 
 			setRangedRules([...rangedRules, rule])
 		}
-
-		// if not new rule update existing
-
-		// then screen
 		screen()
 	}
 
@@ -119,15 +118,20 @@ export function Screener(props) {
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
 
 	const saveIndex = () => {
-		return CustomIndexClient.CreateCustomIndex({
+		const newIndexID = uuidv4()
+		
+		CustomIndexClient.CreateCustomIndex({
 			userId: props.userID,
+			indexId: newIndexID, 
 			markets: [
 				"Sp500"
 			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
 		});
+
+		setIndexID(newIndexID)
 	}
 
 	const updateIndex = () => {
@@ -137,9 +141,9 @@ export function Screener(props) {
 			markets: [
 				"Sp500"
 			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
 		});
 	}
 
@@ -160,7 +164,7 @@ export function Screener(props) {
 							deleteRangedRule={deleteRangedRule}
 							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
-						{updateButton
+						{indexID
 							? <UpdateButton handleUpdate={updateIndex}/>
 							: <SaveButton handleSave={saveIndex} />}
 					</div>

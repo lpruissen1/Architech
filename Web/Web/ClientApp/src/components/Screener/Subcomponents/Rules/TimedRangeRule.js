@@ -65,7 +65,6 @@ export default function TimeRangedRule(props) {
 	const classes = useStyles();
 
 	const updateView = (event, newValue) => {
-		debugger
 		setValue(newValue);
 		let rule = props.rule
 		rule.lower = value[0]
