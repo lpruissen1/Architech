@@ -64,13 +64,18 @@ export default function TimeRangedRule(props) {
 	const [low, setLow] = useState(props.rule.lower);
 	const classes = useStyles();
 
-	const updateRuleRanges = (event, newValue) => {
+	const updateView = (event, newValue) => {
+		debugger
 		setValue(newValue);
 		let rule = props.rule
 		rule.lower = value[0]
 		rule.upper = value[1]
 		setHigh(value[1])
 		setLow(value[0])
+	}
+
+	const updateRuleRanges = (event, newValue) => {
+		updateView()
 		props.handleUpdate()
 	}
 
@@ -97,7 +102,7 @@ export default function TimeRangedRule(props) {
 						max={props.option.selectorMax}
 						value={value}
 						valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-						onChange={updateRuleRanges}
+						onChange={updateView}
 						onChangeCommitted={updateRuleRanges} />
 				</div>
 			</div>

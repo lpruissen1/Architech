@@ -46,7 +46,7 @@ class CustomIndexClient {
 		}
 	}
 
-	postCustomIndexRequest(data = {}) {
+	CreateCustomIndex(data = {}) {
 		fetch(POST_API_URL, {
 			method: 'POST',
 			headers: {
@@ -59,7 +59,7 @@ class CustomIndexClient {
 			});
 	}
 
-	updateCustomIndexRequest(userId, data = {}) {
+	UpdateCustomIndex(userId, data = {}) {
 		fetch(PUT_API_URL + userId, {
 			method: 'PUT',
 			headers: {
