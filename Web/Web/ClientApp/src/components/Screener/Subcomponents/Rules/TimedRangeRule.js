@@ -75,7 +75,7 @@ export default function TimeRangedRule(props) {
 	}
 
 	const updateRuleRanges = (event, newValue) => {
-		updateView()
+		updateView(event, newValue)
 		props.handleUpdate()
 	}
 
