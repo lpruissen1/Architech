@@ -22,19 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UpdateButton(props) {
-	const [checked, setChecked] = useState(true)
 	const classes = useStyles();
-
-	const handleUpdateClick = () => {
-		setChecked(!checked)
-		props.handleUpdate()
-	}
 
 	return (
 		<>
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
-			{checked
-				? <Button onClick={handleUpdateClick} variant='contained' color='primary' size="small" className={classes.button}>Update Index</Button>
-				: <Button color='primary' variant='contained' size="small" className={classes.buttonSaved} endIcon={<CheckOutlinedIcon />}>Changes Saved Successfully</Button>}
+			<Button onClick={props.handleUpdate} variant='contained' color='primary' size="small" className={classes.button}>Update Index</Button>
+			{!props.changeMade && <p> Changes saved successfully </p>}
 		</>)
 }

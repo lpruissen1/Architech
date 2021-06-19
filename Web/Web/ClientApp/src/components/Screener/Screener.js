@@ -29,11 +29,9 @@ export function Screener(props) {
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
-	const [updateButton, setUpdateButton] = useState(false)
+	const [changeMade, setChangeMade] = useState(false)
 
-	let { passedIndexID } = useParams();
-
-	const [indexID, setIndexID] = useState(passedIndexID)
+	const [indexID, setIndexID] = useState(useParams())
 
 	const loadIndex = async () => {
 		const index = await CustomIndexClient.getCustomIndexByIndexId(props.userID, indexID)
@@ -110,12 +108,16 @@ export function Screener(props) {
 		if (indexID) {
 			loadIndex()
 			setCollapseOpen(true)
-			setUpdateButton(true)
 		}
+	}
+
+	const blah = () => {
+		setChangeMade(true)
 	}
 
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
+	useEffect(() => { blah() }, );
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -135,7 +137,7 @@ export function Screener(props) {
 	}
 
 	const updateIndex = () => {
-		return CustomIndexClient.UpdateCustomIndex(props.userID, {
+		CustomIndexClient.UpdateCustomIndex(props.userID, {
 			userId: props.userID,
 			indexId: indexID,
 			markets: [
@@ -145,6 +147,8 @@ export function Screener(props) {
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules
 		});
+
+		setChangeMade(false)
 	}
 
 	return (
@@ -165,7 +169,7 @@ export function Screener(props) {
 							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
 						{indexID
-							? <UpdateButton handleUpdate={updateIndex}/>
+							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
 							: <SaveButton handleSave={saveIndex} />}
 					</div>
 				</Card>
