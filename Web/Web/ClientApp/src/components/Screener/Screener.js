@@ -4,9 +4,11 @@ import CustomIndexClient from '../../Clients/CustomIndexClient';
 import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
+import UpdateButton from './Subcomponents/UpdateButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
 	const [sectors, setSectors] = useState([
@@ -27,15 +29,18 @@ export function Screener(props) {
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
+	const [changeMade, setChangeMade] = useState(false)
 
 	let { indexID } = useParams();
 
+	const [index, setIndex] = useState(indexID)
+
 	const loadIndex = async () => {
-		const index = await CustomIndexClient.getCustomIndexByIndexId(props.userID, indexID)
+		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(props.userID, index)
 		let tempSectors = []
 		
 		sectors.forEach(sector => {
-			if (index.sectors && index.sectors.includes(sector.value)) {
+			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
 				tempSectors.push({value: sector.value, isChecked: true})
 			}
 			else {
@@ -44,8 +49,8 @@ export function Screener(props) {
 		})
 
 		setSectors(tempSectors)
-		setRangedRules(index.rangedRule)
-		setTimedRangeRules(index.timedRangeRule)
+		setRangedRules(loadedIndex.rangedRule)
+		setTimedRangeRules(loadedIndex.timedRangeRule)
 	}
 
 	const handleRangedRuleUpdate = (rule) => {
@@ -58,10 +63,6 @@ export function Screener(props) {
 			// if new rule 
 			setRangedRules([...rangedRules, rule])
 		}
-
-		// if not new rule update existing
-
-		// then screen
 		screen()
 	}
 
@@ -91,6 +92,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		setLoading(true)
+		setChangeMade(true)
 
 		const tickers = await ScreenerClient.postScreeningRequest({
 			markets: [
@@ -106,7 +108,7 @@ export function Screener(props) {
 	}
 
 	const handleMount = () => {
-		if (indexID) {
+		if (index) {
 			loadIndex()
 			setCollapseOpen(true)
 		}
@@ -114,18 +116,38 @@ export function Screener(props) {
 
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
-
+	//useEffect(() => { setChangeMade(true) }, [rangedRules, sectors, timedRangeRules] );
 
 	const saveIndex = () => {
-		return CustomIndexClient.postCustomIndexRequest({
+		const newIndexID = uuidv4()
+		
+		CustomIndexClient.CreateCustomIndex({
 			userId: props.userID,
+			indexId: newIndexID, 
 			markets: [
 				"Sp500"
 			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
 		});
+
+		setIndex(newIndexID)
+	}
+
+	const updateIndex = () => {
+		CustomIndexClient.UpdateCustomIndex(props.userID, {
+			userId: props.userID,
+			indexId: index,
+			markets: [
+				"Sp500"
+			],
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
+		});
+
+		setChangeMade(false)
 	}
 
 	return (
@@ -145,7 +167,9 @@ export function Screener(props) {
 							deleteRangedRule={deleteRangedRule}
 							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
-						<SaveButton handleSave={saveIndex}/>
+						{indexID
+							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
+							: <SaveButton handleSave={saveIndex} />}
 					</div>
 				</Card>
 				<Card className='tickerCard'>

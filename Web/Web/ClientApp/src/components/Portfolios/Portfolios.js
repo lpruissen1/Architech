@@ -31,10 +31,10 @@ export function Portfolios(props) {
 			<h1>Your Blueprints</h1>
 			<NewPortfolioCard onClick={clickie} />
 			{
-				portfolios && portfolios.map((portfolioooo) => {
+				portfolios && portfolios.map((portfolio) => {
 					return (
-						<PortfolioCard key={portfolioooo.indexId}
-							portfolio={portfolioooo}
+						<PortfolioCard key={portfolio.indexId}
+							portfolio={portfolio}
 							deletePortfolio={deletePortfolio}
 							userId={props.userID}/>)
 				})
