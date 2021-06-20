@@ -1,8 +1,8 @@
 ﻿const GET_ALL_URL = 'https://localhost:7001/CustomIndex?userID='
 const GET_BY_ID_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID='
 const POST_API_URL = 'https://localhost:7001/CustomIndex'
+const DELETE_API_URL = 'https://localhost:7001/CustomIndex/DeleteIndex?userId='
 const PUT_API_URL = 'https://localhost:7001/CustomIndex/UpdateIndex?userId='
-
 
 class CustomIndexClient {
 
@@ -59,7 +59,19 @@ class CustomIndexClient {
 			});
 	}
 
-	UpdateCustomIndex(userId, data = {}) {
+async deleteCustomIndexRequest(userId, indexId) {
+		await fetch(DELETE_API_URL + userId + '&indexId=' + indexId, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		})
+			.then(function (response) {
+				return response.status
+			});
+	}
+  
+UpdateCustomIndex(userId, data = {}) {
 		fetch(PUT_API_URL + userId, {
 			method: 'PUT',
 			headers: {
@@ -71,7 +83,5 @@ class CustomIndexClient {
 				return response.status
 			});
 	}
-}
-
 
 export default new CustomIndexClient();

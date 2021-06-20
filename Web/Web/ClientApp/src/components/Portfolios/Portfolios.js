@@ -12,12 +12,16 @@ export function Portfolios(props) {
 	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
 	const [createNew, setCreateNew] = useState(false)
 	const [portfolios, setPortfolios] = useState([])
-	const clickie = () => setCreateNew(!createNew)	
+	const clickie = () => setCreateNew(!createNew)
 
 	const loadPortfolios = async () => {
 		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
-		debugger
 		setPortfolios(activePortfolios)
+	}
+
+	const deletePortfolio = async (userId, indexId) => {
+		await CustomIndexClient.deleteCustomIndexRequest(userId, indexId)
+		loadPortfolios()
 	}
 
 	useEffect(() => { loadPortfolios() }, [])
@@ -25,14 +29,16 @@ export function Portfolios(props) {
 	return (
 		<div>
 			<h1>Your Blueprints</h1>
+			<NewPortfolioCard onClick={clickie} />
 			{
 				portfolios && portfolios.map((portfolio) => {
-					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolio.indexId} portfolio={portfolio} /> </Card>)
+					return (
+						<PortfolioCard key={portfolio.indexId}
+							portfolio={portfolio}
+							deletePortfolio={deletePortfolio}
+							userId={props.userID}/>)
 				})
 			}
-			<Card className='portfoliosCard'>
-					<NewPortfolioCard onClick={clickie} />
-			</Card>
 			{createNew && (
 				<>
 					<div className="centeredModal" onClick={clickie}>

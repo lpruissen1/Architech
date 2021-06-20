@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react";
 import Slider from '@material-ui/core/Slider';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -101,7 +102,9 @@ export default function RangedRule(props) {
 				</div>
 				<div>
 				</div>
-				<Button onClick={deleteRule}> Delete </Button>
+				<IconButton onClick={deleteRule} color="dimgrey" aria-label="delete">
+					<DeleteIcon />
+				</IconButton>
 			</div>
 		</>
 	);
