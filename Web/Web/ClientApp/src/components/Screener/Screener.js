@@ -80,6 +80,13 @@ export function Screener(props) {
 		setTimedRangeRules(resultingRules)
 	}
 
+	const checkIfRangedRuleExists = (rule) => {
+		if (rangedRules.filter(rangedRule => rangedRule.ruleType === rule).length > 0) {
+			return true
+		}
+
+		return false
+	}
 
 	const getActiveSectors = (sectorList) => {
 		let activeSectors = []
@@ -165,7 +172,8 @@ export function Screener(props) {
 							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
 							collapseOpen={collapseOpen}
 							deleteRangedRule={deleteRangedRule}
-							deleteTimedRangeRule={deleteTimedRangeRule}/>
+							deleteTimedRangeRule={deleteTimedRangeRule}
+							checkIfRangedRuleExists={checkIfRangedRuleExists}/>
 						<br/>
 						{indexID
 							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
