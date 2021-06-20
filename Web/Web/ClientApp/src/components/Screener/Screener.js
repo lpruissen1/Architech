@@ -31,14 +31,16 @@ export function Screener(props) {
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
 
-	const [indexID, setIndexID] = useState(useParams())
+	let { indexID } = useParams();
+
+	const [index, setIndex] = useState(indexID)
 
 	const loadIndex = async () => {
-		const index = await CustomIndexClient.getCustomIndexByIndexId(props.userID, indexID)
+		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(props.userID, index)
 		let tempSectors = []
 		
 		sectors.forEach(sector => {
-			if (index.sectors && index.sectors.includes(sector.value)) {
+			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
 				tempSectors.push({value: sector.value, isChecked: true})
 			}
 			else {
@@ -47,8 +49,8 @@ export function Screener(props) {
 		})
 
 		setSectors(tempSectors)
-		setRangedRules(index.rangedRule)
-		setTimedRangeRules(index.timedRangeRule)
+		setRangedRules(loadedIndex.rangedRule)
+		setTimedRangeRules(loadedIndex.timedRangeRule)
 	}
 
 	const handleRangedRuleUpdate = (rule) => {
@@ -90,6 +92,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		setLoading(true)
+		setChangeMade(true)
 
 		const tickers = await ScreenerClient.postScreeningRequest({
 			markets: [
@@ -105,19 +108,15 @@ export function Screener(props) {
 	}
 
 	const handleMount = () => {
-		if (indexID) {
+		if (index) {
 			loadIndex()
 			setCollapseOpen(true)
 		}
 	}
 
-	const blah = () => {
-		setChangeMade(true)
-	}
-
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
-	useEffect(() => { blah() }, );
+	//useEffect(() => { setChangeMade(true) }, [rangedRules, sectors, timedRangeRules] );
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -133,13 +132,13 @@ export function Screener(props) {
 			timedRangeRule: timedRangeRules
 		});
 
-		setIndexID(newIndexID)
+		setIndex(newIndexID)
 	}
 
 	const updateIndex = () => {
 		CustomIndexClient.UpdateCustomIndex(props.userID, {
 			userId: props.userID,
-			indexId: indexID,
+			indexId: index,
 			markets: [
 				"Sp500"
 			],
