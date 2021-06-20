@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import Slider from '@material-ui/core/Slider';
+import Button from '@material-ui/core/Button';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -62,14 +63,23 @@ export default function RangedRule(props) {
 	const [low, setLow] = useState(props.rule.lower);
 	const classes = useStyles();
 
-	const updateRuleRanges = (event, newValue) => {
+	const updateView = (event, newValue) => {
 		setValue(newValue);
 		let rule = props.rule
 		rule.lower = value[0]
 		rule.upper = value[1]
 		setHigh(value[1])
 		setLow(value[0])
+	}
+
+	const updateRuleRanges = (event, newValue) => {
+		updateView(event, newValue)
 		props.handleUpdate()
+	}
+
+	const deleteRule = () => {
+		const ruleType = props.option.value
+		props.deleteRangedRule(ruleType)
 	}
 
 	return (
@@ -85,12 +95,13 @@ export default function RangedRule(props) {
 							max={props.option.selectorMax}
 							value={value}
 							valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-							onChange={(event, newValue) => setValue(newValue)}
+							onChange={updateView}
 							onChangeCommitted={updateRuleRanges}/>
 					</div>
 				</div>
 				<div>
 				</div>
+				<Button onClick={deleteRule}> Delete </Button>
 			</div>
 		</>
 	);

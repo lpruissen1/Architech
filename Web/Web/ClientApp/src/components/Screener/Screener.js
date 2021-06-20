@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
+import CustomIndexClient from '../../Clients/CustomIndexClient';
+import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
+import UpdateButton from './Subcomponents/UpdateButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
 	const [sectors, setSectors] = useState([
@@ -25,37 +29,28 @@ export function Screener(props) {
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
+	const [changeMade, setChangeMade] = useState(false)
 
 	let { indexID } = useParams();
 
-	const GET_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID=' + props.userID + '&indexId=' + indexID;
+	const [index, setIndex] = useState(indexID)
 
-	const getCustomIndexRequest = () => {
-		fetch(GET_URL, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
+	const loadIndex = async () => {
+		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(props.userID, index)
+		let tempSectors = []
+		
+		sectors.forEach(sector => {
+			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
+				tempSectors.push({value: sector.value, isChecked: true})
 			}
-			})
-			.then(function (response) {
-				return response.json().then(function (data) {
-					console.log(data)
+			else {
+				tempSectors.push({value: sector.value, isChecked: false})
+			}
+		})
 
-					let tempSectors = []
-
-					sectors.forEach(sector => {
-						if (data.sectors.includes(sector.value)) {
-							tempSectors.push({value: sector.value, isChecked: true})
-						}
-						else {
-							tempSectors.push({value: sector.value, isChecked: false})
-						}
-					})
-					setSectors(tempSectors)
-					setRangedRules(data.rangedRule)
-					setTimedRangeRules(data.timedRangeRule)
-				})
-			});
+		setSectors(tempSectors)
+		setRangedRules(loadedIndex.rangedRule)
+		setTimedRangeRules(loadedIndex.timedRangeRule)
 	}
 
 	const handleRangedRuleUpdate = (rule) => {
@@ -68,16 +63,23 @@ export function Screener(props) {
 			// if new rule 
 			setRangedRules([...rangedRules, rule])
 		}
-
-		// if not new rule update existing
-
-		// then screen
 		screen()
 	}
 
 	const handleTimedRangeRuleUpdate = (rule) => {
 		setTimedRangeRules([...timedRangeRules, rule])
 	}
+
+	const deleteRangedRule = (selectedRule) => {
+		const resultingRules = rangedRules.filter(rule => rule.ruleType !== selectedRule);
+		setRangedRules(resultingRules)
+	}
+
+	const deleteTimedRangeRule = (selectedRule) => {
+		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule);
+		setTimedRangeRules(resultingRules)
+	}
+
 
 	const getActiveSectors = (sectorList) => {
 		let activeSectors = []
@@ -88,67 +90,64 @@ export function Screener(props) {
 		return activeSectors
 	}
 
-	const postScreeningRequest = (data = {}) => {
+	const screen = async () => {
 		setLoading(true)
-		fetch("https://localhost:5001/Screening/FuckYourself", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(function (response) {
-				return response.json().then(function (data) {
-					setTickers(data)
-					setLoading(false)
-				})
-			});
-	}
+		setChangeMade(true)
 
-	const screen = () => {
-		return postScreeningRequest({
+		const tickers = await ScreenerClient.postScreeningRequest({
 			markets: [
 				"Sp500"
 			],
 			"sectors": getActiveSectors(sectors),
 			"rangedRule": rangedRules,
 			"timedRangeRule": timedRangeRules
-		});
+		})
+
+		setTickers(tickers)
+		setLoading(false)
 	}
 
 	const handleMount = () => {
-		if (indexID) {
-			getCustomIndexRequest()
+		if (index) {
+			loadIndex()
 			setCollapseOpen(true)
 		}
 	}
 
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
-
-	const postCustomIndexRequest = (data = {}) => {
-		fetch("https://localhost:7001/CustomIndex", {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-			.then(function (response) {
-				return response.status
-			});
-	}
+	//useEffect(() => { setChangeMade(true) }, [rangedRules, sectors, timedRangeRules] );
 
 	const saveIndex = () => {
-		return postCustomIndexRequest({
+		const newIndexID = uuidv4()
+		
+		CustomIndexClient.CreateCustomIndex({
 			userId: props.userID,
+			indexId: newIndexID, 
 			markets: [
 				"Sp500"
 			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
 		});
+
+		setIndex(newIndexID)
+	}
+
+	const updateIndex = () => {
+		CustomIndexClient.UpdateCustomIndex(props.userID, {
+			userId: props.userID,
+			indexId: index,
+			markets: [
+				"Sp500"
+			],
+			sectors: getActiveSectors(sectors),
+			rangedRule: rangedRules,
+			timedRangeRule: timedRangeRules
+		});
+
+		setChangeMade(false)
 	}
 
 	return (
@@ -157,9 +156,20 @@ export function Screener(props) {
 			<div className='rowThing'>
 				<Card className='screenerCard'>
 					<div>
-						<ScreeningControls sectors={sectors} rangedRules={rangedRules} timedRangeRules={timedRangeRules} handleUpdate={screen} handleRangedRuleUpdate={handleRangedRuleUpdate} handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate} collapseOpen={collapseOpen}/>
+						<ScreeningControls
+							sectors={sectors}
+							rangedRules={rangedRules}
+							timedRangeRules={timedRangeRules}
+							handleUpdate={screen}
+							handleRangedRuleUpdate={handleRangedRuleUpdate}
+							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
+							collapseOpen={collapseOpen}
+							deleteRangedRule={deleteRangedRule}
+							deleteTimedRangeRule={deleteTimedRangeRule}/>
 						<br/>
-						<SaveButton handleSave={saveIndex}/>
+						{indexID
+							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
+							: <SaveButton handleSave={saveIndex} />}
 					</div>
 				</Card>
 				<Card className='tickerCard'>

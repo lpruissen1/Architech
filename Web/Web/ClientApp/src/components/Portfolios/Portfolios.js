@@ -1,4 +1,5 @@
 ﻿import React, { useCallback, useState, useEffect } from 'react';
+import CustomIndexClient from '../../Clients/CustomIndexClient';
 import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import { PortfolioCard } from './Subcomponents/PortfolioCard';
 import Card from 'react-bootstrap/Card';
@@ -12,44 +13,21 @@ export function Portfolios(props) {
 	const [createNew, setCreateNew] = useState(false)
 	const [portfolios, setPortfolios] = useState([])
 	const clickie = () => setCreateNew(!createNew)	
-	const API_URL = 'https://localhost:7001/CustomIndex?userID=' + props.userID
 
-	// Pass ID to screener, map there to see if sector matches any on list 
-
-	const getCustomIndexRequest = () => {
-		fetch(API_URL, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-		.then(function (response) {
-			return response.json().then(function (data) {
-				console.log(data)
-
-				const activePortfolios = data.map((portfolio) => {
-					return {
-						indexId: portfolio.indexId,
-						markets: portfolio.markets,
-						sectors: portfolio.sectors,
-						rangedRules: portfolio.rangedRule,
-						timedRangeRules: portfolio.timedRangeRule
-					}
-				})
-
-				setPortfolios(activePortfolios)
-			})
-		});
+	const loadPortfolios = async () => {
+		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
+		debugger
+		setPortfolios(activePortfolios)
 	}
 
-	useEffect(() => {getCustomIndexRequest()}, [])
+	useEffect(() => { loadPortfolios() }, [])
 
 	return (
 		<div>
 			<h1>Your Blueprints</h1>
 			{
-				portfolios && portfolios.map((portfolioooo) => {
-					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolioooo.indexId} portfolio={portfolioooo} /> </Card>)
+				portfolios && portfolios.map((portfolio) => {
+					return (<Card className='portfoliosCard'> <PortfolioCard key={portfolio.indexId} portfolio={portfolio} /> </Card>)
 				})
 			}
 			<Card className='portfoliosCard'>
