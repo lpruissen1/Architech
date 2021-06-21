@@ -76,7 +76,8 @@ export function Screener(props) {
 	}
 
 	const deleteTimedRangeRule = (selectedRule) => {
-		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule);
+		debugger
+		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule.value && rule.timePeriod !== selectedRule.timePeriod);
 		setTimedRangeRules(resultingRules)
 	}
 

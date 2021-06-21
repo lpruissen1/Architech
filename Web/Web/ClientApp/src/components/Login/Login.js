@@ -82,7 +82,7 @@ export function Login(props) {
                     </div>
                 </form>
 				<Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
-					<p className="registration-link"> Don't have an account?
+					<p className="registration-link"> Don't have an account? 
 						<Link to="/register">
 							<span className="signup"> Sign up now!</span>
 						</Link>

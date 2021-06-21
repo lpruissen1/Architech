@@ -86,7 +86,7 @@ export default function TimeRangedRule(props) {
 	}
 
 	const deleteRule = () => {
-		const ruleType = props.option.value
+		const ruleType = props.rule
 		props.deleteTimedRangeRule(ruleType)
 	}
 
