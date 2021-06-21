@@ -43,7 +43,7 @@ export default function TimePeriodSelector(props) {
 	const createMenuItems = () => {
 
 		let appendedComponents = []
-		debugger
+
 		for (let i = 0; i < timeSpans.length; i++) {
 			appendedComponents.push(
 				<MenuItem
