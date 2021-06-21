@@ -84,8 +84,28 @@ export function Screener(props) {
 		if (rangedRules.filter(rangedRule => rangedRule.ruleType === rule).length > 0) {
 			return true
 		}
-
 		return false
+	}
+
+	const checkIfTimedRangeRuleExists = (rule) => {
+		const possibleTimeSpans = ['Quarter', 'HalfYear', 'Year', 'ThreeYears', 'FiveYears']
+
+		const selectedTimeSpans = getTimePeriodsForTimedRangeRule(rule)
+		const renderedTimeSpans = possibleTimeSpans.filter(timeSpan => !selectedTimeSpans.includes(timeSpan))
+
+		return renderedTimeSpans
+	}
+
+	const getTimePeriodsForTimedRangeRule = (rule) => {
+		const relevantTimedRangeRules = timedRangeRules.filter(timedRangeRule => timedRangeRule.ruleType === rule)
+		if (relevantTimedRangeRules.length > 1) {
+			debugger
+			const relevantTimePeriods = relevantTimedRangeRules.map(timeRule => timeRule.timePeriod)
+
+			return relevantTimePeriods
+		}
+
+		return []
 	}
 
 	const getActiveSectors = (sectorList) => {
@@ -123,7 +143,6 @@ export function Screener(props) {
 
 	useEffect(() => {handleMount()}, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
-	//useEffect(() => { setChangeMade(true) }, [rangedRules, sectors, timedRangeRules] );
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -173,7 +192,8 @@ export function Screener(props) {
 							collapseOpen={collapseOpen}
 							deleteRangedRule={deleteRangedRule}
 							deleteTimedRangeRule={deleteTimedRangeRule}
-							checkIfRangedRuleExists={checkIfRangedRuleExists}/>
+							checkIfRangedRuleExists={checkIfRangedRuleExists}
+							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}/>
 						<br/>
 						{indexID
 							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>

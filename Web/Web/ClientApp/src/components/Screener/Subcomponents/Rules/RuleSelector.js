@@ -12,7 +12,6 @@ export default function RuleSelector(props) {
 
 	const disableButton = (rule) => {
 		if (rule.type === 'ranged') {
-			debugger
 			const value = props.checkIfRangedRuleExists(rule.value)
 			return value
 		}

@@ -81,7 +81,8 @@ export default class BasicRulesSection extends React.Component {
 						option={this.state.options.find(option => option.value === rule.ruleType)}
 						rule={rule}
 						handleUpdate={this.props.handleUpdate}
-						deleteTimedRangeRule={this.props.deleteTimedRangeRule}/>
+						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
+						renderedTimeSpans={this.props.checkIfTimedRangeRuleExists(rule.ruleType)}/>
 					<br />
 				</>
 			)

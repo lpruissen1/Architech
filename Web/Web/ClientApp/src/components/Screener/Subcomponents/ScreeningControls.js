@@ -24,7 +24,8 @@ export default class ScreeningControls extends Component {
 						handleTimedRangeRuleUpdate={this.props.handleTimedRangeRuleUpdate}
 						deleteRangedRule={this.props.deleteRangedRule}
 						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
-						checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}/>
+						checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}
+						checkIfTimedRangeRuleExists={this.props.checkIfTimedRangeRuleExists}/>
 				</Collapsible>
 			</div>
 		);
