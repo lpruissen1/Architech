@@ -8,13 +8,13 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 100,
+		minWidth: 140,
 	},
 }));
 
 export default function TimePeriodSelector(props) {
 	const classes = useStyles();
-	const [time, setTime] = React.useState("Year");
+	const [time, setTime] = React.useState("");
 	const [open, setOpen] = React.useState(false);
 	const [timeSpans, setTimeSpans] = React.useState([
 		{ value: 'Quarter', displayName: 'One Quarter' },
@@ -57,7 +57,8 @@ export default function TimePeriodSelector(props) {
 
 	return (
 		<div>
-			<FormControl className={classes.formControl}>
+			<FormControl
+				className={classes.formControl}>
 				<InputLabel id="demo-controlled-open-select-label">Time Period</InputLabel>
 				<Select
 					labelId="demo-controlled-open-select-label"
@@ -67,6 +68,7 @@ export default function TimePeriodSelector(props) {
 					onOpen={handleOpen}
 					value={time}
 					onChange={handleTimePeriodUpdate}
+					placeholder=''
 				>
 					{createMenuItems()}
 				</Select>
