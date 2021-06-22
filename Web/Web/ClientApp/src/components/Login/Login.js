@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
 		width: '42ch',
 		fontWeight: '700',
 		color: 'white',
-		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: theme.palette.primary.main,
@@ -81,7 +80,11 @@ export function Login(props) {
                             autoComplete='off' />
                     </div>
                 </form>
-				<Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
+				<Button
+					onClick={loginUser}
+					className={classes.button}
+					variant="contained"
+					disableElevation> Login </Button>
 					<p className="registration-link"> Don't have an account? 
 						<Link to="/register">
 							<span className="signup"> Sign up now!</span>

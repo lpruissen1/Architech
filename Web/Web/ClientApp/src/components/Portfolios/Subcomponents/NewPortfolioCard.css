@@ -54,9 +54,8 @@
 
 .deleteModal {
 	position: absolute;
-	margin: 60px;
-	margin-top: 30%;
-	margin-left: 40%;
+	color: dimgrey;
+	right: 250px;
 	padding: 20px;
 	width: 400px;
 	text-align: center;

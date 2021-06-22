@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
 		width: '42ch',
 		fontWeight: '700',
 		color: 'white',
-		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: theme.palette.primary.main,
@@ -209,10 +208,17 @@ export function Registration(props) {
 						/>
 					</div>
 				</form>
-				{formValid ?
-					<Button onClick={registerUser} className={classes.button} variant="contained"> Register </Button>
-					:
-					<Button className={classes.button} variant="contained" disabled> Register </Button>
+				{formValid
+					? <Button
+						onClick={registerUser}
+						className={classes.button}
+						variant="contained"
+						disableElevation> Register </Button>
+					: <Button
+						className={classes.button}
+						variant="contained"
+						disabled
+						disableElevation> Register </Button>
 					}
 			</div>
 		</div>

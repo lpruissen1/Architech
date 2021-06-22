@@ -14,6 +14,15 @@ export const useStyles = makeStyles((theme) => ({
 	editButton: {
 		color: 'white',
 		marginLeft: 'auto'
+	},
+	modalButtonContinue: {
+		textTransform: 'none',
+		margin: theme.spacing(1),
+	},
+	modalButtonBack: {
+		textTransform: 'none',
+		margin: theme.spacing(1),
+		color: 'dimgrey'
 	}
 }));
 
@@ -29,6 +38,7 @@ export function PortfolioCard(props) {
 	const classes = useStyles();
 
 	const handleDelete = () => {
+		debugger
 		const userId = props.userId
 		const indexId = props.portfolio.indexId
 		props.deletePortfolio(userId, indexId)
@@ -39,6 +49,7 @@ export function PortfolioCard(props) {
 	}
 
 	const closeModal = () => {
+		debugger
 		setModal(false)
 	}
 
@@ -53,6 +64,21 @@ export function PortfolioCard(props) {
 								<Button className={classes.editButton} onClick={handleOnClick}>
 									Edit
 								</Button>
+								{modal && (
+									<div className="deleteModal">
+										<h2> Are you sure you would like to delete this portfolio? </h2>
+										<p> Deleting an active portfolio will result in all holdings being sold. </p>
+										<Button
+											onClick={handleDelete}
+											color="primary"
+											variant='contained'
+											className={classes.modalButtonContinue}
+											disableElevation> Yes, delete portfolio </Button>
+										<Button
+											onClick={closeModal}
+											variant="outlined"
+											className={classes.modalButtonBack}> No, take me back </Button>
+									</div>)}
 								<IconButton className={classes.deleteButton} onClick={renderModal} color="white" aria-label="delete">
 									<DeleteIcon />
 								</IconButton>
@@ -73,15 +99,6 @@ export function PortfolioCard(props) {
 					</tr>
 				</table>
 			</div>
-			{modal && (
-				<div color="white" className="deleteModal">
-					<h2> Are you sure you would like to delete this portfolio? </h2>
-					<p> Deleting an active portfolio will result in all holdings being sold. </p>
-					<Button onClick={handleDelete}
-						color="primary"
-						variant='contained'> Yes, delete portfolio </Button>
-					<Button onClick={closeModal}> No, take me back </Button>
-				</div>)}
 		</>
 
 	);
