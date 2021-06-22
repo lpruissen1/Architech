@@ -79,8 +79,8 @@ export default function RangedRule(props) {
 	}
 
 	const deleteRule = () => {
-		const ruleType = props.option.value
-		props.deleteRangedRule(ruleType)
+		const rule = props.rule
+		props.deleteRangedRule(rule)
 	}
 
 	return (

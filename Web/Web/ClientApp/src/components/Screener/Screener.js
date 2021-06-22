@@ -71,13 +71,12 @@ export function Screener(props) {
 	}
 
 	const deleteRangedRule = (selectedRule) => {
-		const resultingRules = rangedRules.filter(rule => rule.ruleType !== selectedRule);
+		const resultingRules = rangedRules.filter(rule => rule.id !== selectedRule.id);
 		setRangedRules(resultingRules)
 	}
 
-	//Use rule ID instead of time period and ruletype
 	const deleteTimedRangeRule = (selectedRule) => {
-		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule.value && rule.timePeriod !== selectedRule.timePeriod);
+		const resultingRules = timedRangeRules.filter(rule => rule.id !== selectedRule.id);
 		setTimedRangeRules(resultingRules)
 	}
 
