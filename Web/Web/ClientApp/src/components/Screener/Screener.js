@@ -75,6 +75,7 @@ export function Screener(props) {
 		setRangedRules(resultingRules)
 	}
 
+	//Use rule ID instead of time period and ruletype
 	const deleteTimedRangeRule = (selectedRule) => {
 		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule.value && rule.timePeriod !== selectedRule.timePeriod);
 		setTimedRangeRules(resultingRules)
@@ -117,21 +118,35 @@ export function Screener(props) {
 	}
 
 	const screen = async () => {
-		setLoading(true)
-		setChangeMade(true)
+		if (validate()) {
+			setLoading(true)
+			setChangeMade(true)
 
-		const tickers = await ScreenerClient.postScreeningRequest({
-			markets: [
-				"Sp500"
-			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			const tickers = await ScreenerClient.postScreeningRequest({
+				markets: [
+					"Sp500"
+				],
+				"sectors": getActiveSectors(sectors),
+				"rangedRule": rangedRules,
+				"timedRangeRule": timedRangeRules
+			})
+
+			setTickers(tickers)
+			setLoading(false)
+		}
+	}
+
+	// Create function to validate custom index then call in screener, if valid do the screening request
+	const validate = () => {
+
+		timedRangeRules.forEach(rule => {
+			if (rule.timePeriod === "") {
+				return false
+			}
 		})
 
-		setTickers(tickers)
-		setLoading(false)
-	}
+		return true
+	} 
 
 	const handleMount = () => {
 		if (index) {
