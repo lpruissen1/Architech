@@ -1,6 +1,8 @@
 ﻿import React, { Component } from "react";
 import CheckBox from './CheckBox.js';
 import './SectorSelector.css';
+import Button from '@material-ui/core/Button';
+
 
 export default class SectorSelector extends Component {
 	handleAllChecked = (event) => {
@@ -31,6 +33,7 @@ export default class SectorSelector extends Component {
 						})
 					}
 				</ul>
+				<Button>Filter By Industry</Button>
 			</div>
 		);
 	}
