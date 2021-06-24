@@ -154,7 +154,7 @@ export function Screener(props) {
 		}
 	}
 
-	useEffect(() => {handleMount()}, []);
+	useEffect(() => { handleMount() }, []);
 	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
 
 	const saveIndex = () => {
@@ -209,13 +209,18 @@ export function Screener(props) {
 							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}/>
 						<br/>
 						{indexID
-							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
-							: <SaveButton handleSave={saveIndex} />}
+							? <UpdateButton
+								changeMade={changeMade}
+								handleUpdate={updateIndex} />
+							: <SaveButton
+								handleSave={saveIndex} />}
 					</div>
 				</Card>
 				<Card className='tickerCard'>
 					<div className='tickerTableContainer'>
-						<TickerTable tickers={tickers} loading={loading} />
+						<TickerTable
+							tickers={tickers}
+							loading={loading} />
 					</div>
 				</Card>
 			</div>

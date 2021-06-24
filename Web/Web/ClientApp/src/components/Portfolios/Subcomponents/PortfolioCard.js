@@ -38,7 +38,6 @@ export function PortfolioCard(props) {
 	const classes = useStyles();
 
 	const handleDelete = () => {
-		debugger
 		const userId = props.userId
 		const indexId = props.portfolio.indexId
 		props.deletePortfolio(userId, indexId)
@@ -49,7 +48,6 @@ export function PortfolioCard(props) {
 	}
 
 	const closeModal = () => {
-		debugger
 		setModal(false)
 	}
 

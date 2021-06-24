@@ -68,8 +68,7 @@ export default function TimePeriodSelector(props) {
 					onOpen={handleOpen}
 					value={time}
 					onChange={handleTimePeriodUpdate}
-					placeholder=''
-				>
+					placeholder=''>
 					{createMenuItems()}
 				</Select>
 			</FormControl>

@@ -32,20 +32,15 @@ export default function SaveButton(props) {
 	return (
 		<>
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
-			{checked
-				? <Button
-					onClick={handleSaveClick}
-					variant='contained'
-					color='primary'
-					size="small"
-					className={classes.button}
-					disableElevation>Save Index</Button>
-				: <Button
-					color='primary'
-					variant='contained'
-					size="small"
-					className={classes.buttonSaved}
-					endIcon={<CheckOutlinedIcon />}
-					disableElevation>Saved</Button>}
+			<Button
+				onClick={handleSaveClick}
+				variant='contained'
+				color='primary'
+				size="small"
+				className={checked ? classes.button : classes.buttonSaved}
+				disableElevation
+			>
+				{checked ? 'Save Index' : 'Saved'}
+			</Button>
 		</>)
 }

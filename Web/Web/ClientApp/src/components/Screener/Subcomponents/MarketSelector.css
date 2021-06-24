@@ -1,0 +1,7 @@
+﻿.flex-market-container {
+	display: flex;
+	flex-direction: row;
+	padding-left: 10%;
+	padding-right: 10%;
+	font-size: 12px;
+}
