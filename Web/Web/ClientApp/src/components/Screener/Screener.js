@@ -17,17 +17,110 @@ export function Screener(props) {
 		{ value: '', displayName: 'Useless', isChecked: true },
 		{ value: '', displayName: 'Useless', isChecked: true }])
 	const [sectors, setSectors] = useState([
-		{ value: "Healthcare", isChecked: false },
-		{ value: "Technology", isChecked: false },
-		{ value: "Financial Services", isChecked: false },
-		{ value: "Industrials", isChecked: false },
-		{ value: "Consumer Cyclical", isChecked: false },
-		{ value: "Utilities", isChecked: false },
-		{ value: "Basic Materials", isChecked: false },
-		{ value: "Real Estate", isChecked: false },
-		{ value: "Communication Services", isChecked: false },
-		{ value: "Consumer Defensive", isChecked: false },
-		{ value: "Energy", isChecked: false }
+		{
+			value: "Healthcare", isChecked: false, industries: [
+				{ value: 'Biotechnology', isChecked: false },
+				{ value: 'Drug Manufacterers', isChecked: false },
+				{ value: 'Health Care Plans', isChecked: false },
+				{ value: 'Health Care Providers', isChecked: false },
+				{ value: 'Medical Devices', isChecked: false },
+				{ value: 'Medical Diagnostics & Research', isChecked: false },
+				{ value: 'Medical Distribution', isChecked: false },
+				{ value: 'Medical Instruments & Equipment', isChecked: false }
+			]
+		},
+		{
+			value: "Technology", isChecked: false, industries: [
+				{ value: 'Application Software', isChecked: false },
+				{ value: 'Communication Equipment', isChecked: false },
+				{ value: 'Computer Hardware', isChecked: false },
+				{ value: 'Online Media', isChecked: false },
+				{ value: 'Semiconductors', isChecked: false },
+			]
+		},
+		{
+			value: "Financial Services", isChecked: false, industries: [
+				{ value: 'Asset Management', isChecked: false },
+				{ value: 'Banks', isChecked: false },
+				{ value: 'Brokerages & Exchanges', isChecked: false },
+				{ value: 'Credit Services', isChecked: false },
+				{ value: 'Insurance', isChecked: false },
+				{ value: 'Insurance - Life', isChecked: false },
+				{ value: 'Insurance - Property & Casualty', isChecked: false },
+				{ value: 'Insurance - Specialty', isChecked: false }
+			]
+		},
+		{
+			value: "Industrials", isChecked: false, industries: [
+				{ value: 'Aerospace & Defense', isChecked: false },
+				{ value: 'Airlines', isChecked: false },
+				{ value: 'Business Services', isChecked: false },
+				{ value: 'Consulting & Outsourcing', isChecked: false },
+				{ value: 'Employment Services', isChecked: false },
+				{ value: 'Engineering & Construction', isChecked: false },
+				{ value: 'Farm & Construction', isChecked: false },
+				{ value: 'Industrial Products', isChecked: false },
+				{ value: 'Transportation & Logistics', isChecked: false },
+				{ value: 'Waste Management', isChecked: false }
+			]
+		},
+		{
+			value: "Consumer Cyclical", isChecked: false, industries: [
+				{ value: 'Advertising & Marketing Services', isChecked: false },
+				{ value: 'Autos', isChecked: false },
+				{ value: 'Entertainment', isChecked: false },
+				{ value: 'Homebuilding & Construction', isChecked: false },
+				{ value: 'Manufacturing - Apparel & Furniture', isChecked: false },
+				{ value: 'Packaging & Containers', isChecked: false },
+				{ value: 'Personal Services', isChecked: false },
+				{ value: 'Retail - Apparel & Specialty', isChecked: false },
+				{ value: 'Travel & Leisure', isChecked: false },
+			]
+		},
+		{
+			value: "Utilities", isChecked: false, industries: [
+				{ value: 'Utilities - Independent Power Producers', isChecked: false },
+				{ value: 'Utilities - Regulated', isChecked: false },
+			]
+		},
+		{
+			value: "Basic Materials", isChecked: false, industries: [
+				{ value: 'Agriculture', isChecked: false },
+				{ value: 'Chemicals', isChecked: false },
+				{ value: 'Forest Products', isChecked: false },
+				{ value: 'Metals & Mining', isChecked: false },
+				{ value: 'Steel', isChecked: false },
+			]
+		},
+		{
+			value: "Real Estate", isChecked: false, industries: [
+				{ value: 'REITs', isChecked: false }
+			]
+		},
+		{
+			value: "Communication Services", isChecked: false, industries: [
+				{ value: 'Communication Services', isChecked: false }
+			]
+		},
+		{
+			value: "Consumer Defensive", isChecked: false, industries: [
+				{ value: 'Beverages - Alcoholic', isChecked: false },
+				{ value: 'Beverages - Non-Alcoholic', isChecked: false },
+				{ value: 'Consumer Packaged Goods', isChecked: false },
+				{ value: 'Tobacco Products', isChecked: false },
+				{ value: 'Retail - Defensive', isChecked: false },
+			]
+		},
+		{
+			value: "Energy", isChecked: false, industries: [
+				{ value: 'Oil & Gas - Drilling', isChecked: false },
+				{ value: 'Oil & Gas - Drilling', isChecked: false },
+				{ value: 'Oil & Gas - Integrated', isChecked: false },
+				{ value: 'Oil & Gas - Midstream', isChecked: false },
+				{ value: 'Oil & Gas - Refining & Marketing', isChecked: false },
+				{ value: 'Oil & Gas - Services', isChecked: false },
+			]
+		}
 	])
 	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
