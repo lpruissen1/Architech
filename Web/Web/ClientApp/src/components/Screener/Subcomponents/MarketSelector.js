@@ -5,13 +5,13 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(2),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
 	},
 	buttonChecked: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(2),
 		textTransform: 'none',
 		fontSize: 14,
 		variant: 'contained',
@@ -21,43 +21,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MarketSelector(props) {
 	const classes = useStyles();
-	const [buttons, setButtons] = useState([
-		{ value: 'Market 1', isChecked: false },
-		{ value: 'Market 2', isChecked: false },
-		{ value: 'Market 3', isChecked: false },
-		{ value: 'Market 4', isChecked: false}])
 
 	const handleCheck = (event) => {
-		let tempButton = []
-		debugger
-		buttons.forEach(button => {
-			if (event.currentTarget.value === button.value) {
-				tempButton.push({ value: button.value, isChecked: !button.isChecked })
-			}
-
-			else {
-				tempButton.push({ value: button.value, isChecked: button.isChecked })
-			}
+		props.markets.forEach(market => {
+			if (market.value === event.currentTarget.value)
+				market.isChecked = !market.isChecked
 		})
 
-		setButtons(tempButton)
+		props.handleUpdate()
 	}
 
 	return (
 		<div className='flex-market-container'>
-			{buttons && buttons.map(button => {
+			{props.markets && props.markets.map(market => {
 				return (
 					<div className="marketButtons">
 						<Button
 							onClick={handleCheck}
-							value={button.value}
-							className={button.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
-							variant={button.isChecked ? 'contained' : 'outlined'}
-							color={button.isChecked ? 'primary' : 'dimgray'}
+							value={market.value}
+							className={market.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
+							variant={market.isChecked ? 'contained' : 'outlined'}
+							color={market.isChecked ? 'primary' : 'dimgray'}
 							disableElevation
 							disableRipple
 						>
-							{button.value}
+							{market.displayName}
 						</Button>
 						<p> Market description </p>
 					</div>

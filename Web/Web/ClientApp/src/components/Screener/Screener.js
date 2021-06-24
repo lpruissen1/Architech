@@ -11,6 +11,11 @@ import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
+	const [markets, setMarkets] = useState([
+		{ value: 'Sp500', displayName: 'S&P 500', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true }])
 	const [sectors, setSectors] = useState([
 		{ value: "Healthcare", isChecked: false },
 		{ value: "Technology", isChecked: false },
@@ -116,18 +121,26 @@ export function Screener(props) {
 		return activeSectors
 	}
 
+	const getActiveMarkets = (marketList) => {
+		let activeMarkets = []
+
+		marketList.forEach(market => {
+			if (market.isChecked === true)
+				activeMarkets.push(market.value)
+		})
+		return activeMarkets
+	}
+
 	const screen = async () => {
 		if (validate()) {
 			setLoading(true)
 			setChangeMade(true)
 
 			const tickers = await ScreenerClient.postScreeningRequest({
-				markets: [
-					"Sp500"
-				],
-				"sectors": getActiveSectors(sectors),
-				"rangedRule": rangedRules,
-				"timedRangeRule": timedRangeRules
+				markets: getActiveMarkets(markets),
+				sectors: getActiveSectors(sectors),
+				rangedRule: rangedRules,
+				timedRangeRule: timedRangeRules
 			})
 
 			setTickers(tickers)
@@ -155,7 +168,7 @@ export function Screener(props) {
 	}
 
 	useEffect(() => { handleMount() }, []);
-	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
+	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules]);
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -206,7 +219,9 @@ export function Screener(props) {
 							deleteRangedRule={deleteRangedRule}
 							deleteTimedRangeRule={deleteTimedRangeRule}
 							checkIfRangedRuleExists={checkIfRangedRuleExists}
-							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}/>
+							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+							markets={markets}
+						/>
 						<br/>
 						{indexID
 							? <UpdateButton

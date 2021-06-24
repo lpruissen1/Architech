@@ -17,7 +17,10 @@ export default class ScreeningControls extends Component {
 					className='Collapsible'
 					trigger='Markets'
 					open={this.props.collapseOpen}>
-					<MarketSelector />
+					<MarketSelector
+						markets={this.props.markets}
+						handleUpdate={this.props.handleUpdate}
+					/>
 				</Collapsible>
 				<Collapsible
 					className='Collapsible'
