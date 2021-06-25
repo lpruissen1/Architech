@@ -114,7 +114,7 @@ export function Screener(props) {
 		{
 			value: "Energy", isChecked: false, industries: [
 				{ value: 'Oil & Gas - Drilling', isChecked: false },
-				{ value: 'Oil & Gas - Drilling', isChecked: false },
+				{ value: 'Oil & Gas - E&P', isChecked: false },
 				{ value: 'Oil & Gas - Integrated', isChecked: false },
 				{ value: 'Oil & Gas - Midstream', isChecked: false },
 				{ value: 'Oil & Gas - Refining & Marketing', isChecked: false },

@@ -35,8 +35,10 @@ export default function SectorSelector(props) {
 	const handleCheckChildElement = (event) => {
 		let sectors = props.sectors
 		sectors.forEach(sector => {
-			if (sector.value === event.target.value)
+			if (sector.value === event.target.value) {
 				sector.isChecked = event.target.checked
+				sector.industries.forEach(industry => industry.isChecked = !industry.isChecked)
+			}
 		})
 
 		props.handleUpdate()

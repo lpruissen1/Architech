@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
-import IndustryCheckBoxContents from './IndustryCheckBoxContents.js';
+import Grid from '@material-ui/core/Grid';
 import IndustryCheckBoxContent from './IndustryCheckBoxContents.js';
 
 
@@ -31,24 +31,33 @@ export default function IndustryCheckBox(props) {
 	const classes = useStyles();
 
 	return (
-		<div>
-		{props.sectors && props.sectors.map(sector => {
-			return (
-				<div>
-					<FormControl>
-						<FormLabel className='industryLabel'>{sector.value}</FormLabel>
-						<FormGroup>
-							{sector.industries && sector.industries.map(industry => {
-								return (
-									<IndustryCheckBoxContent
-									className={classes.checkbox}
-									name={industry}
-								/>)
-							})
-						}
-						</FormGroup>
-					</FormControl>
-				</div>)})}
+		<div className='industryGridContainer'>
+			<Grid
+				container
+				spacing={5}
+			>
+			{props.sectors && props.sectors.map(sector => {
+				return (
+					<Grid item xs={4}>
+						<FormControl>
+							<FormLabel
+								className='industryLabel'
+							>
+								{sector.value}
+							</FormLabel>
+							<FormGroup>
+								{sector.industries && sector.industries.map(industry => {
+									return (
+										<IndustryCheckBoxContent
+										className={classes.checkbox}
+										name={industry}
+									/>)
+								})
+							}
+							</FormGroup>
+						</FormControl>
+					</ Grid>)})}
+			</ Grid>
 		</div>
 	)
 }
