@@ -30,9 +30,34 @@ const useStyles = makeStyles((theme) => ({
 export default function IndustryCheckBox(props) {
 	const classes = useStyles();
 
-	//const handleClick = (event) => {
+	const handleOnClick = (event) => {
 
-	//}
+		let values = event.target.value.split("|")
+		let sector = props.sectors.filter(sector => sector.value === values[0])[0]
+		let targetIndustry = values[1]
+		debugger
+		sector.industries && sector.industries.forEach(industry => {
+			if (industry.value === targetIndustry) {
+				industry.isChecked = !industry.isChecked
+			}
+		})
+
+		if (sector.industries.filter(industry => industry.isChecked === true).length === sector.industries.length) {
+			sector.isChecked = "checked"
+		}
+		else if (sector.industries.filter(industry => industry.isChecked === false).length === sector.industries.length) {
+			sector.isChecked = "unchecked"
+		}
+		else {
+			sector.isChecked = "partial"
+		}
+
+		if (props.sectors.filter(sector => sector.isChecked !== "checked").length > 0) {
+			props.setSelectAllChecked(false)
+		}
+
+		props.handleUpdate()
+	}
 
 	return (
 		<div className='industryGridContainer'>
@@ -53,10 +78,11 @@ export default function IndustryCheckBox(props) {
 								{sector.industries && sector.industries.map(industry => {
 									return (
 										<IndustryCheckBoxContent
-											handleUpdate={props.handleUpdate}
-										className={classes.checkbox}
-											name={industry}
-											//onClick = toggle sector button
+											className={classes.checkbox}
+											isChecked={industry.isChecked}
+											value={sector.value + "|" + industry.value}
+											onClick={handleOnClick}
+											label={industry.value}
 									/>)
 								})
 							}

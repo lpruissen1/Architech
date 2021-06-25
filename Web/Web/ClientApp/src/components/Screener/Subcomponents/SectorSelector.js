@@ -9,17 +9,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
-		margin: theme.spacing(2),
+		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
 	},
 	buttonChecked: {
-		margin: theme.spacing(2),
+		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
 		variant: 'contained',
 		fontWeight: 500,
+	},
+	buttonPartial: {
+		margin: theme.spacing(1),
+		textTransform: 'none',
+		fontSize: 14,
+		variant: 'contained',
+		fontWeight: 5000,
 	},
 	industryButton: {
 		margin: theme.spacing(2),
@@ -44,12 +51,12 @@ export default function SectorSelector(props) {
 	const handleAllChecked = () => {
 		let sectors = props.sectors
 		if (selectAllChecked) {
-			sectors.forEach(sector => sector.isChecked = false)
+			sectors.forEach(sector => sector.isChecked = "unchecked")
 			sectors.forEach(sector => sector.industries.forEach(industry => industry.isChecked = false))
 			setSelectAllChecked(false)	
 		}
 		else {
-			sectors.forEach(sector => sector.isChecked = true)
+			sectors.forEach(sector => sector.isChecked = "checked")
 			sectors.forEach(sector => sector.industries.forEach(industry => industry.isChecked = true))
 			setSelectAllChecked(true)
 		}
@@ -57,13 +64,18 @@ export default function SectorSelector(props) {
 		props.handleUpdate()
 	}
 
-	const handleCheckChildElement = (event) => {
+	const handleSectorOnClick = (event) => {
 		let sectors = props.sectors
 		sectors.forEach(sector => {
-			debugger
 			if (sector.value === event.currentTarget.value) {
-				sector.isChecked = !sector.isChecked
-				sector.industries.forEach(industry => industry.isChecked = sector.isChecked)
+				if (sector.isChecked === "checked") {
+					sector.isChecked = "unchecked"
+					sector.industries.forEach(industry => industry.isChecked = false)
+				}
+				else{
+					sector.isChecked = "checked"
+					sector.industries.forEach(industry => industry.isChecked = true)
+				}
 			}
 		})
 
@@ -78,6 +90,29 @@ export default function SectorSelector(props) {
 		setRenderIndustry(!renderIndustry)
 	}
 
+	const GetSectorButtonStyle = (status) => {
+		if (status === "unchecked") {
+			return {
+				className: classes.buttonUnchecked,
+				variant: "outlined",
+				color: "dimgray"
+			}
+		}
+		if (status === "checked") {
+			return {
+				className: classes.buttonChecked,
+				variant: "contained",
+				color: "primary"
+			}
+		}
+
+		return {
+			className: classes.buttonPartial,
+			variant: "contained",
+			color: "secondary"
+		}
+	}
+
 	return (
 		<div className = "sectorSelectorContainer">
 			<ul className="ks-cboxtags">
@@ -90,15 +125,16 @@ export default function SectorSelector(props) {
 				/>
 				{
 					props.sectors && props.sectors.map((sector) => {
+						let style = GetSectorButtonStyle(sector.isChecked) 
 						return (<Button
-							className={sector.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
+							className={style.className}
 							key={sector.value}
 							value={sector.value}
-							onClick={handleCheckChildElement}
-							variant={sector.isChecked ? 'contained' : 'outlined'}
+							onClick={handleSectorOnClick}
+							variant={style.variant}
 							disableElevation
 							disableRipple
-							color={sector.isChecked ? 'primary' : 'dimgray'}
+							color={style.color}
 							style={{ outline: 'none' }}>
 							{sector.value}
 						</Button>)
@@ -115,6 +151,7 @@ export default function SectorSelector(props) {
 			{renderIndustry && <IndustryCheckBox
 				sectors={props.sectors}
 				handleUpdate={props.handleUpdate}
+				setSelectAllChecked={setSelectAllChecked}
 			/>}
 		</div>
 	);

@@ -20,7 +20,7 @@ export function Screener(props) {
 
 	const [sectors, setSectors] = useState([
 		{
-			value: "Healthcare", isChecked: false, industries: [
+			value: "Healthcare", isChecked: "unchecked", industries: [
 				{ value: 'Biotechnology', isChecked: false },
 				{ value: 'Drug Manufacturers', isChecked: false },
 				{ value: 'Health Care Plans', isChecked: false },
@@ -32,7 +32,7 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Technology", isChecked: false, industries: [
+			value: "Technology", isChecked: "unchecked", industries: [
 				{ value: 'Application Software', isChecked: false },
 				{ value: 'Communication Equipment', isChecked: false },
 				{ value: 'Computer Hardware', isChecked: false },
@@ -41,7 +41,7 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Financial Services", isChecked: false, industries: [
+			value: "Financial Services", isChecked: "unchecked", industries: [
 				{ value: 'Asset Management', isChecked: false },
 				{ value: 'Banks', isChecked: false },
 				{ value: 'Brokerages & Exchanges', isChecked: false },
@@ -53,7 +53,7 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Industrials", isChecked: false, industries: [
+			value: "Industrials", isChecked: "unchecked", industries: [
 				{ value: 'Aerospace & Defense', isChecked: false },
 				{ value: 'Airlines', isChecked: false },
 				{ value: 'Business Services', isChecked: false },
@@ -67,7 +67,7 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Consumer Cyclical", isChecked: false, industries: [
+			value: "Consumer Cyclical", isChecked: "unchecked", industries: [
 				{ value: 'Advertising & Marketing Services', isChecked: false },
 				{ value: 'Autos', isChecked: false },
 				{ value: 'Entertainment', isChecked: false },
@@ -80,13 +80,13 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Utilities", isChecked: false, industries: [
+			value: "Utilities", isChecked: "unchecked", industries: [
 				{ value: 'Utilities - Independent Power Producers', isChecked: false },
 				{ value: 'Utilities - Regulated', isChecked: false },
 			]
 		},
 		{
-			value: "Basic Materials", isChecked: false, industries: [
+			value: "Basic Materials", isChecked: "unchecked", industries: [
 				{ value: 'Agriculture', isChecked: false },
 				{ value: 'Chemicals', isChecked: false },
 				{ value: 'Forest Products', isChecked: false },
@@ -95,17 +95,17 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Real Estate", isChecked: false, industries: [
+			value: "Real Estate", isChecked: "unchecked", industries: [
 				{ value: 'REITs', isChecked: false }
 			]
 		},
 		{
-			value: "Communication Services", isChecked: false, industries: [
+			value: "Communication Services", isChecked: "unchecked", industries: [
 				{ value: 'Communication Services', isChecked: false }
 			]
 		},
 		{
-			value: "Consumer Defensive", isChecked: false, industries: [
+			value: "Consumer Defensive", isChecked: "unchecked", industries: [
 				{ value: 'Beverages - Alcoholic', isChecked: false },
 				{ value: 'Beverages - Non-Alcoholic', isChecked: false },
 				{ value: 'Consumer Packaged Goods', isChecked: false },
@@ -114,7 +114,7 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Energy", isChecked: false, industries: [
+			value: "Energy", isChecked: "unchecked", industries: [
 				{ value: 'Oil & Gas - Drilling', isChecked: false },
 				{ value: 'Oil & Gas - E&P', isChecked: false },
 				{ value: 'Oil & Gas - Integrated', isChecked: false },
@@ -207,15 +207,6 @@ export function Screener(props) {
 		return []
 	}
 
-	const getActiveSectors = (sectorList) => {
-		let activeSectors = []
-		sectorList.forEach(sector => {
-			if (sector.isChecked === true)
-				activeSectors.push(sector.value)
-		})
-		return activeSectors
-	}
-
 	const getActiveMarkets = (marketList) => {
 		let activeMarkets = []
 
@@ -286,7 +277,7 @@ export function Screener(props) {
 			markets: [
 				"Sp500"
 			],
-			sectors: getActiveSectors(sectors),
+			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules
 		});
@@ -301,7 +292,7 @@ export function Screener(props) {
 			markets: [
 				"Sp500"
 			],
-			sectors: getActiveSectors(sectors),
+			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules
 		});

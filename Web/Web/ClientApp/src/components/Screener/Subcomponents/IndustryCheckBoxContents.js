@@ -6,22 +6,14 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default function IndustryCheckBoxContent(props) {
-	const [check, setCheck] = useState(props.name.isChecked)
-
-	const handleCheck = (event) => {
-		const checked = props.name.isChecked
-		props.name.isChecked = !checked
-
-		setCheck(props.name.isChecked)
-		props.handleUpdate()
-	}
 
 	return (
 		<FormControlLabel
 			control={
 				<Checkbox
-					checked={props.name.isChecked}
-					onChange={handleCheck}
+					onClick={props.onClick}
+					checked={props.isChecked}
+					value={props.value}
 					icon={
 						<CheckBoxOutlineBlankIcon
 							fontSize="small" />}
@@ -31,7 +23,7 @@ export default function IndustryCheckBoxContent(props) {
 							fontSize="small" />}
 				/>
 			}
-			label={props.name.value}
+			label={props.label}
 		/>
 	);
 }
