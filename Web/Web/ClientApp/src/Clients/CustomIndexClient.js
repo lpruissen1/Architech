@@ -11,7 +11,7 @@ class CustomIndexClient {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
-			}
+			}	
 		})
 
 		if (response.ok) {
@@ -59,7 +59,7 @@ class CustomIndexClient {
 			});
 	}
 
-async deleteCustomIndexRequest(userId, indexId) {
+	async deleteCustomIndexRequest(userId, indexId) {
 		await fetch(DELETE_API_URL + userId + '&indexId=' + indexId, {
 			method: 'DELETE',
 			headers: {
@@ -70,8 +70,8 @@ async deleteCustomIndexRequest(userId, indexId) {
 				return response.status
 			});
 	}
-  
-UpdateCustomIndex(userId, data = {}) {
+
+	UpdateCustomIndex(userId, data = {}) {
 		fetch(PUT_API_URL + userId, {
 			method: 'PUT',
 			headers: {
@@ -83,5 +83,6 @@ UpdateCustomIndex(userId, data = {}) {
 				return response.status
 			});
 	}
+}
 
 export default new CustomIndexClient();
