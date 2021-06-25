@@ -18,27 +18,30 @@ export function Layout(props) {
 	const [userId, setUserId] = useState("")
 
 	const updateLoggedIn = () => {
-		const token = AuthClient.getCurrentUser()
+		const userId = AuthClient.GetIdFromStoredJwt()
 
-		if (token) {
+		if (userId) {
 			setLoggedIn(true)
+			setUserId(userId)
 		}
 		else {
 			setLoggedIn(false)
 		}
 	}
 
-	useEffect(() => {updateLoggedIn()}, [])
+	useEffect(() => { updateLoggedIn() }, [])
+
+
 	return (
 		<div>
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} />
 			<Container>
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/screener/:indexID?' loggedIn={loggedIn} component={() => <Screener userID={userId} />} />
-				<AuthenticatedRoute exact path='/portfolios' loggedIn={loggedIn} component={() => <Portfolios userID={userId} />} />
-				<AuthenticatedRoute exact path='/research' loggedIn={loggedIn} component={Research} />
-				<AuthenticatedRoute exact path='/education' loggedIn={loggedIn} component={Education} />
-				<AuthenticatedRoute exact path='/profile' loggedIn={loggedIn} component={Profile} />
+				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
+				<AuthenticatedRoute exact path='/research' component={Research} />
+				<AuthenticatedRoute exact path='/education' component={Education} />
+				<AuthenticatedRoute exact path='/profile' component={Profile} />
 				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 			</Container>
@@ -46,12 +49,13 @@ export function Layout(props) {
 	);
 }
 
-export default function AuthenticatedRoute({ component: C, loggedIn, ...rest }) {
+export default function AuthenticatedRoute({ component: C, ...rest }) {
+	const userId = AuthClient.GetIdFromStoredJwt()
 	return (
 		<Route
 			{...rest}
 			render={props =>
-				loggedIn
+				userId
 					? <C {...props} />
 					: <Redirect to={{ pathname: '/login'}}  />} // we should add a little message to be passed in that can be displayed on this page to info the user why they have been logged out.
 		/>

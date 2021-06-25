@@ -22,7 +22,7 @@ export class NavMenu extends Component {
 	}
 
 	logout() {
-		AuthClient.logout()
+		AuthClient.Logout()
 		this.props.updateLoggedIn()
 	}
 
