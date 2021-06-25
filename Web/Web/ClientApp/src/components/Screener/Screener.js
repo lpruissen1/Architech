@@ -17,11 +17,12 @@ export function Screener(props) {
 		{ value: '', displayName: 'Useless', isChecked: true },
 		{ value: '', displayName: 'Useless', isChecked: true },
 		{ value: '', displayName: 'Useless', isChecked: true }])
+
 	const [sectors, setSectors] = useState([
 		{
 			value: "Healthcare", isChecked: false, industries: [
 				{ value: 'Biotechnology', isChecked: false },
-				{ value: 'Drug Manufacterers', isChecked: false },
+				{ value: 'Drug Manufacturers', isChecked: false },
 				{ value: 'Health Care Plans', isChecked: false },
 				{ value: 'Health Care Providers', isChecked: false },
 				{ value: 'Medical Devices', isChecked: false },

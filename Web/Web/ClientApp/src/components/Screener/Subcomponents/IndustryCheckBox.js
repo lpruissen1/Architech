@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
 export default function IndustryCheckBox(props) {
 	const classes = useStyles();
 
+	//const handleClick = (event) => {
+
+	//}
+
 	return (
 		<div className='industryGridContainer'>
 			<Grid
@@ -51,7 +55,8 @@ export default function IndustryCheckBox(props) {
 										<IndustryCheckBoxContent
 											handleUpdate={props.handleUpdate}
 										className={classes.checkbox}
-										name={industry}
+											name={industry}
+											//onClick = toggle sector button
 									/>)
 								})
 							}
