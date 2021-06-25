@@ -69,7 +69,7 @@ export default function SectorSelector(props) {
 				onClick={handleIndustryClick}
 				style={{ outline: 'none' }}
 			>Filter By Industry</Button>
-			{renderIndustry && <IndustryCheckBox />}
+			{renderIndustry && <IndustryCheckBox sectors={props.sectors} />}
 		</div>
 	);
 }

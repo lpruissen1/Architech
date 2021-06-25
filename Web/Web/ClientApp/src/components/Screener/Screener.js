@@ -139,10 +139,10 @@ export function Screener(props) {
 		
 		sectors.forEach(sector => {
 			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
-				tempSectors.push({value: sector.value, isChecked: true})
+				tempSectors.push({value: sector.value, isChecked: true, industries: sector.industries})
 			}
 			else {
-				tempSectors.push({value: sector.value, isChecked: false})
+				tempSectors.push({value: sector.value, isChecked: false, industries: sector.industries})
 			}
 		})
 
