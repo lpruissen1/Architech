@@ -45,7 +45,7 @@ export default function SectorSelector(props) {
 	}
 
 	const handleIndustryClick = () => {
-		setRenderIndustry(true)
+		setRenderIndustry(!renderIndustry)
 	}
 
 	return (
