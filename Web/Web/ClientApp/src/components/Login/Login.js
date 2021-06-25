@@ -42,7 +42,7 @@ export function Login(props) {
 	const history = useHistory();
 
     const loginUser = async () => {
-		const response = await AuthClient.login(username, password);
+		const response = await AuthClient.Login(username, password);
 		if (response) {
 			props.updateLoggedIn()
 			history.push('/')

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
+import AuthClient from '../../Clients/AuthClient';
 import ScreenerClient from '../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
@@ -134,7 +135,7 @@ export function Screener(props) {
 	const [index, setIndex] = useState(indexID)
 
 	const loadIndex = async () => {
-		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(props.userID, index)
+		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
 		let tempSectors = []
 		
 		sectors.forEach(sector => {
