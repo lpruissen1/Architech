@@ -49,6 +49,7 @@ export default function IndustryCheckBox(props) {
 								{sector.industries && sector.industries.map(industry => {
 									return (
 										<IndustryCheckBoxContent
+											handleUpdate={props.handleUpdate}
 										className={classes.checkbox}
 										name={industry}
 									/>)

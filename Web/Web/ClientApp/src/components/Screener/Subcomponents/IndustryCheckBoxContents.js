@@ -13,6 +13,7 @@ export default function IndustryCheckBoxContent(props) {
 		props.name.isChecked = !checked
 
 		setCheck(props.name.isChecked)
+		props.handleUpdate()
 	}
 
 	return (

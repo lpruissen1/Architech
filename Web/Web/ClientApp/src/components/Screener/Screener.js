@@ -224,6 +224,18 @@ export function Screener(props) {
 		return activeMarkets
 	}
 
+	const getActiveIndustries = () => {
+		let activeIndustries = []
+
+		sectors.forEach(sector => {
+			sector.industries.forEach(industry => {
+				if (industry.isChecked === true)
+ 					activeIndustries.push(industry.value)
+			})
+		})
+		return activeIndustries
+	}
+
 	const screen = async () => {
 		if (validate()) {
 			setLoading(true)
@@ -231,7 +243,7 @@ export function Screener(props) {
 
 			const tickers = await ScreenerClient.postScreeningRequest({
 				markets: getActiveMarkets(markets),
-				sectors: getActiveSectors(sectors),
+				industries: getActiveIndustries(),
 				rangedRule: rangedRules,
 				timedRangeRule: timedRangeRules
 			})

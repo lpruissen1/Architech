@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import CheckBox from './CheckBox.js';
 import IndustryCheckBox from './IndustryCheckBox.js';
 import './SectorSelector.css';
@@ -24,10 +24,20 @@ const useStyles = makeStyles((theme) => ({
 export default function SectorSelector(props) {
 	const classes = useStyles()
 	const [renderIndustry, setRenderIndustry] = useState(false)
+	const [selectAllChecked, setSelectAllChecked] = useState(false)
 
-	const handleAllChecked = (event) => {
+	const handleAllChecked = () => {
 		let sectors = props.sectors
-		sectors.forEach(sector => sector.isChecked = event.target.checked)
+		if (selectAllChecked) {
+			sectors.forEach(sector => sector.isChecked = false)
+			sectors.forEach(sector => sector.industries.forEach(industry => industry.isChecked = false))
+			setSelectAllChecked(false)	
+		}
+		else {
+			sectors.forEach(sector => sector.isChecked = true)
+			sectors.forEach(sector => sector.industries.forEach(industry => industry.isChecked = true))
+			setSelectAllChecked(true)
+		}
 
 		props.handleUpdate()
 	}
@@ -37,9 +47,13 @@ export default function SectorSelector(props) {
 		sectors.forEach(sector => {
 			if (sector.value === event.target.value) {
 				sector.isChecked = event.target.checked
-				sector.industries.forEach(industry => industry.isChecked = !industry.isChecked)
+				sector.industries.forEach(industry => industry.isChecked = event.target.checked)
 			}
 		})
+
+		if (sectors.filter(sector => sector.isChecked === false).length > 0) {
+			setSelectAllChecked(false)
+		}
 
 		props.handleUpdate()
 	}
@@ -53,15 +67,17 @@ export default function SectorSelector(props) {
 			<ul className="ks-cboxtags">
 				<CheckBox
 					type="checkbox"
-					handleCheckChildElement={handleAllChecked}
+					checked={selectAllChecked}
+					onClick={handleAllChecked}
 					id="5"
-					value="Toggle All Sectors"
+					value="Select All"
 				/>
 				{
 					props.sectors && props.sectors.map((sector) => {
 						return (<CheckBox
+							checked={sector.isChecked}
 							key={sector.value}
-							handleCheckChildElement={handleCheckChildElement}  {...sector}
+							onClick={handleCheckChildElement}  {...sector}
 						/>)
 					})
 				}
@@ -71,7 +87,10 @@ export default function SectorSelector(props) {
 				onClick={handleIndustryClick}
 				style={{ outline: 'none' }}
 			>Filter By Industry</Button>
-			{renderIndustry && <IndustryCheckBox sectors={props.sectors} />}
+			{renderIndustry && <IndustryCheckBox
+				sectors={props.sectors}
+				handleUpdate={props.handleUpdate}
+			/>}
 		</div>
 	);
 }
