@@ -86,8 +86,8 @@ export default function TimeRangedRule(props) {
 	}
 
 	const deleteRule = () => {
-		const ruleType = props.option.value
-		props.deleteTimedRangeRule(ruleType)
+		const rule = props.rule
+		props.deleteTimedRangeRule(rule)
 	}
 
 	return (
@@ -107,7 +107,9 @@ export default function TimeRangedRule(props) {
 				</div>
 			</div>
 			<div className="timePeriod-selector-container">
-				<TimePeriodSelector updateTimePeriod={updateTimePeriod} />
+				<TimePeriodSelector
+					updateTimePeriod={updateTimePeriod}
+					renderedTimeSpans={props.renderedTimeSpans}/>
 			</div>
 			<IconButton onClick={deleteRule} color="dimgrey" aria-label="delete">
 				<DeleteIcon />

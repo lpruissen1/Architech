@@ -25,11 +25,16 @@
 
 .sectorSelectorContainer {
 	font-size: 11px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
 }
 
 ul.ks-cboxtags {
 	list-style: none;
 	padding: 24px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 ul.ks-cboxtags li {
@@ -90,4 +95,36 @@ ul.ks-cboxtags li label::before {
 ul.ks-cboxtags li input[type="checkbox"] {
 	position: absolute;
 	opacity: 0;
+}
+
+.MuiFormControlLabel-root {
+	margin: 0px;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked:hover {
+	background-color: #fff !important;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked:focus {
+	background-color: #fff !important;
+}
+
+.industryLabel {
+	color: rgba(0, 0, 0, 0.7) !important;
+	font-size: 18px !important;
+	font-weight: 600 !important;
+}
+
+.MuiTypography-body1 {
+	color: rgba(0,0,0,0.7) !important;
+	font-size: 13px !important;
+}
+
+.industryButtonsContainer {
+	margin: 15px;
+	margin-left: 20px;
+}
+
+.industryGridContainer {
+	margin: 5%;
 }

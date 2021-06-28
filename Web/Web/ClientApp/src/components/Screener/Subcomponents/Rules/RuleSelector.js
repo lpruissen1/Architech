@@ -10,12 +10,22 @@ export default function RuleSelector(props) {
 		props.handleAddNewMetricClick(event)
 	}
 
+	const disableButton = (rule) => {
+		if (rule.type === 'ranged') {
+			const value = props.checkIfRangedRuleExists(rule.value)
+			return value
+		}
+
+		return false
+	}
+
 	const renderOptions = () => {
 		return (
 			<div className="flex">
 				{props.options && props.options.map((option) =>
-					<button key={option.value} className="button" type={option.type} value={option.value} onClick={superClickie}> {option.displayName} </button>
-				)}
+					disableButton(option)
+						? <button key={option.value} className="buttonDisabled" type={option.type} value={option.value}> {option.displayName} </button>
+						: <button key={option.value} className="button" type={option.type} value={option.value} onClick={superClickie}> {option.displayName} </button>)}
 			</div>
 		)
 	}

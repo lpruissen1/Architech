@@ -12,18 +12,117 @@ import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
+	const [markets, setMarkets] = useState([
+		{ value: 'Sp500', displayName: 'S&P 500', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true },
+		{ value: '', displayName: 'Useless', isChecked: true }])
+
 	const [sectors, setSectors] = useState([
-		{ value: "Healthcare", isChecked: false },
-		{ value: "Technology", isChecked: false },
-		{ value: "Financial Services", isChecked: false },
-		{ value: "Industrials", isChecked: false },
-		{ value: "Consumer Cyclical", isChecked: false },
-		{ value: "Utilities", isChecked: false },
-		{ value: "Basic Materials", isChecked: false },
-		{ value: "Real Estate", isChecked: false },
-		{ value: "Communication Services", isChecked: false },
-		{ value: "Consumer Defensive", isChecked: false },
-		{ value: "Energy", isChecked: false }
+		{
+			value: "Healthcare", isChecked: "unchecked", industries: [
+				{ value: 'Biotechnology', isChecked: false },
+				{ value: 'Drug Manufacturers', isChecked: false },
+				{ value: 'Health Care Plans', isChecked: false },
+				{ value: 'Health Care Providers', isChecked: false },
+				{ value: 'Medical Devices', isChecked: false },
+				{ value: 'Medical Diagnostics & Research', isChecked: false },
+				{ value: 'Medical Distribution', isChecked: false },
+				{ value: 'Medical Instruments & Equipment', isChecked: false }
+			]
+		},
+		{
+			value: "Technology", isChecked: "unchecked", industries: [
+				{ value: 'Application Software', isChecked: false },
+				{ value: 'Communication Equipment', isChecked: false },
+				{ value: 'Computer Hardware', isChecked: false },
+				{ value: 'Online Media', isChecked: false },
+				{ value: 'Semiconductors', isChecked: false },
+			]
+		},
+		{
+			value: "Financial Services", isChecked: "unchecked", industries: [
+				{ value: 'Asset Management', isChecked: false },
+				{ value: 'Banks', isChecked: false },
+				{ value: 'Brokerages & Exchanges', isChecked: false },
+				{ value: 'Credit Services', isChecked: false },
+				{ value: 'Insurance', isChecked: false },
+				{ value: 'Insurance - Life', isChecked: false },
+				{ value: 'Insurance - Property & Casualty', isChecked: false },
+				{ value: 'Insurance - Specialty', isChecked: false }
+			]
+		},
+		{
+			value: "Industrials", isChecked: "unchecked", industries: [
+				{ value: 'Aerospace & Defense', isChecked: false },
+				{ value: 'Airlines', isChecked: false },
+				{ value: 'Business Services', isChecked: false },
+				{ value: 'Consulting & Outsourcing', isChecked: false },
+				{ value: 'Employment Services', isChecked: false },
+				{ value: 'Engineering & Construction', isChecked: false },
+				{ value: 'Farm & Construction', isChecked: false },
+				{ value: 'Industrial Products', isChecked: false },
+				{ value: 'Transportation & Logistics', isChecked: false },
+				{ value: 'Waste Management', isChecked: false }
+			]
+		},
+		{
+			value: "Consumer Cyclical", isChecked: "unchecked", industries: [
+				{ value: 'Advertising & Marketing Services', isChecked: false },
+				{ value: 'Autos', isChecked: false },
+				{ value: 'Entertainment', isChecked: false },
+				{ value: 'Homebuilding & Construction', isChecked: false },
+				{ value: 'Manufacturing - Apparel & Furniture', isChecked: false },
+				{ value: 'Packaging & Containers', isChecked: false },
+				{ value: 'Personal Services', isChecked: false },
+				{ value: 'Retail - Apparel & Specialty', isChecked: false },
+				{ value: 'Travel & Leisure', isChecked: false },
+			]
+		},
+		{
+			value: "Utilities", isChecked: "unchecked", industries: [
+				{ value: 'Utilities - Independent Power Producers', isChecked: false },
+				{ value: 'Utilities - Regulated', isChecked: false },
+			]
+		},
+		{
+			value: "Basic Materials", isChecked: "unchecked", industries: [
+				{ value: 'Agriculture', isChecked: false },
+				{ value: 'Chemicals', isChecked: false },
+				{ value: 'Forest Products', isChecked: false },
+				{ value: 'Metals & Mining', isChecked: false },
+				{ value: 'Steel', isChecked: false },
+			]
+		},
+		{
+			value: "Real Estate", isChecked: "unchecked", industries: [
+				{ value: 'REITs', isChecked: false }
+			]
+		},
+		{
+			value: "Communication Services", isChecked: "unchecked", industries: [
+				{ value: 'Communication Services', isChecked: false }
+			]
+		},
+		{
+			value: "Consumer Defensive", isChecked: "unchecked", industries: [
+				{ value: 'Beverages - Alcoholic', isChecked: false },
+				{ value: 'Beverages - Non-Alcoholic', isChecked: false },
+				{ value: 'Consumer Packaged Goods', isChecked: false },
+				{ value: 'Tobacco Products', isChecked: false },
+				{ value: 'Retail - Defensive', isChecked: false },
+			]
+		},
+		{
+			value: "Energy", isChecked: "unchecked", industries: [
+				{ value: 'Oil & Gas - Drilling', isChecked: false },
+				{ value: 'Oil & Gas - E&P', isChecked: false },
+				{ value: 'Oil & Gas - Integrated', isChecked: false },
+				{ value: 'Oil & Gas - Midstream', isChecked: false },
+				{ value: 'Oil & Gas - Refining & Marketing', isChecked: false },
+				{ value: 'Oil & Gas - Services', isChecked: false },
+			]
+		}
 	])
 	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
@@ -42,10 +141,10 @@ export function Screener(props) {
 		
 		sectors.forEach(sector => {
 			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
-				tempSectors.push({value: sector.value, isChecked: true})
+				tempSectors.push({value: sector.value, isChecked: true, industries: sector.industries})
 			}
 			else {
-				tempSectors.push({value: sector.value, isChecked: false})
+				tempSectors.push({value: sector.value, isChecked: false, industries: sector.industries})
 			}
 		})
 
@@ -72,41 +171,92 @@ export function Screener(props) {
 	}
 
 	const deleteRangedRule = (selectedRule) => {
-		const resultingRules = rangedRules.filter(rule => rule.ruleType !== selectedRule);
+		const resultingRules = rangedRules.filter(rule => rule.id !== selectedRule.id);
 		setRangedRules(resultingRules)
 	}
 
 	const deleteTimedRangeRule = (selectedRule) => {
-		const resultingRules = timedRangeRules.filter(rule => rule.ruleType !== selectedRule);
+		const resultingRules = timedRangeRules.filter(rule => rule.id !== selectedRule.id);
 		setTimedRangeRules(resultingRules)
 	}
 
+	const checkIfRangedRuleExists = (rule) => {
+		if (rangedRules.filter(rangedRule => rangedRule.ruleType === rule).length > 0) {
+			return true
+		}
+		return false
+	}
 
-	const getActiveSectors = (sectorList) => {
-		let activeSectors = []
-		sectorList.forEach(sector => {
-			if (sector.isChecked === true)
-				activeSectors.push(sector.value)
+	const checkIfTimedRangeRuleExists = (rule) => {
+		const possibleTimeSpans = ['Quarter', 'HalfYear', 'Year', 'ThreeYears', 'FiveYears']
+
+		const selectedTimeSpans = getTimePeriodsForTimedRangeRule(rule)
+		const renderedTimeSpans = possibleTimeSpans.filter(timeSpan => !selectedTimeSpans.includes(timeSpan))
+
+		return renderedTimeSpans
+	}
+
+	const getTimePeriodsForTimedRangeRule = (rule) => {
+		const relevantTimedRangeRules = timedRangeRules.filter(timedRangeRule => timedRangeRule.ruleType === rule)
+		if (relevantTimedRangeRules.length > 1) {
+			const relevantTimePeriods = relevantTimedRangeRules.map(timeRule => timeRule.timePeriod)
+
+			return relevantTimePeriods
+		}
+
+		return []
+	}
+
+	const getActiveMarkets = (marketList) => {
+		let activeMarkets = []
+
+		marketList.forEach(market => {
+			if (market.isChecked === true)
+				activeMarkets.push(market.value)
 		})
-		return activeSectors
+		return activeMarkets
+	}
+
+	const getActiveIndustries = () => {
+		let activeIndustries = []
+
+		sectors.forEach(sector => {
+			sector.industries.forEach(industry => {
+				if (industry.isChecked === true)
+ 					activeIndustries.push(industry.value)
+			})
+		})
+		return activeIndustries
 	}
 
 	const screen = async () => {
-		setLoading(true)
-		setChangeMade(true)
+		if (validate()) {
+			setLoading(true)
+			setChangeMade(true)
 
-		const tickers = await ScreenerClient.postScreeningRequest({
-			markets: [
-				"Sp500"
-			],
-			"sectors": getActiveSectors(sectors),
-			"rangedRule": rangedRules,
-			"timedRangeRule": timedRangeRules
+			const tickers = await ScreenerClient.postScreeningRequest({
+				markets: getActiveMarkets(markets),
+				industries: getActiveIndustries(),
+				rangedRule: rangedRules,
+				timedRangeRule: timedRangeRules
+			})
+
+			setTickers(tickers)
+			setLoading(false)
+		}
+	}
+
+	// Create function to validate custom index then call in screener, if valid do the screening request
+	const validate = () => {
+
+		timedRangeRules.forEach(rule => {
+			if (rule.timePeriod === "") {
+				return false
+			}
 		})
 
-		setTickers(tickers)
-		setLoading(false)
-	}
+		return true
+	} 
 
 	const handleMount = () => {
 		if (index) {
@@ -115,9 +265,8 @@ export function Screener(props) {
 		}
 	}
 
-	useEffect(() => {handleMount()}, []);
-	useEffect(() => { screen() }, [rangedRules, sectors, timedRangeRules]);
-	//useEffect(() => { setChangeMade(true) }, [rangedRules, sectors, timedRangeRules] );
+	useEffect(() => { handleMount() }, []);
+	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules]);
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -128,7 +277,7 @@ export function Screener(props) {
 			markets: [
 				"Sp500"
 			],
-			sectors: getActiveSectors(sectors),
+			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules
 		});
@@ -143,7 +292,7 @@ export function Screener(props) {
 			markets: [
 				"Sp500"
 			],
-			sectors: getActiveSectors(sectors),
+			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules
 		});
@@ -166,16 +315,25 @@ export function Screener(props) {
 							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
 							collapseOpen={collapseOpen}
 							deleteRangedRule={deleteRangedRule}
-							deleteTimedRangeRule={deleteTimedRangeRule}/>
+							deleteTimedRangeRule={deleteTimedRangeRule}
+							checkIfRangedRuleExists={checkIfRangedRuleExists}
+							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+							markets={markets}
+						/>
 						<br/>
 						{indexID
-							? <UpdateButton changeMade={changeMade} handleUpdate={updateIndex}/>
-							: <SaveButton handleSave={saveIndex} />}
+							? <UpdateButton
+								changeMade={changeMade}
+								handleUpdate={updateIndex} />
+							: <SaveButton
+								handleSave={saveIndex} />}
 					</div>
 				</Card>
 				<Card className='tickerCard'>
 					<div className='tickerTableContainer'>
-						<TickerTable tickers={tickers} loading={loading} />
+						<TickerTable
+							tickers={tickers}
+							loading={loading} />
 					</div>
 				</Card>
 			</div>
