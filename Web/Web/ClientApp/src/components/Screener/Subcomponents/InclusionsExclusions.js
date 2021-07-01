@@ -84,7 +84,8 @@ export default function InclusionExclusion(props) {
 							closeIcon={null}
 							forcePopupIcon={false}
 							size='small'
-							value={currentInclusion}
+							value={currentInclusion && currentInclusion}
+							inputValue={currentInclusion && currentInclusion}
 							onChange={(event, newValue) => {
 								setCurrentInclusion(newValue);
 							}}
@@ -116,7 +117,8 @@ export default function InclusionExclusion(props) {
 							disableClearable
 							forcePopupIcon={false}
 							size='small'
-							value={currentExclusion}
+							value={currentExclusion && currentExclusion}
+							inputValue={currentExclusion && currentExclusion}
 							onChange={(event, newValue) => {
 								setCurrentExclusion(newValue);
 							}}
