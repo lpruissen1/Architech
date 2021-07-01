@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
 	button: {
 		margin: theme.spacing(1),
+		marginTop: theme.spacing(2),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
@@ -38,6 +39,10 @@ export default function InclusionExclusion(props) {
 
 	const updateExclusions = (event) => {
 		props.AddExclusion(currentExclusion)
+	}
+
+	const displayList = (tickers) => {
+
 	}
 
 	return (
@@ -73,7 +78,7 @@ export default function InclusionExclusion(props) {
 									disableElevation
 									disableRipple
 								>Include</Button>
-							}}/>
+							}} />
 					</Grid>
 						<Grid item xs={6} align="center">
 							<TextField id="outlined" variant="outlined" placeholder="Exclude Ticker" label="Exclude Tickers"
@@ -93,7 +98,14 @@ export default function InclusionExclusion(props) {
 									style={{ outline: 'none' }}
 									disableElevation
 									disableRipple
-								>Exclude</Button> }}/>
+								>Exclude</Button>
+							}} />
+						</Grid>
+						<Grid item xs={6} align="left">
+						<p1 className="list"> Inclusions: {props.inclusions.join(", ")} </p1>
+						</Grid>
+						<Grid item xs={6} align="left">
+						<p1 className="list"> Exclusions: {props.exclusions.join(", ")} </p1>
 						</Grid>
 					</Grid>
 				</div>}
