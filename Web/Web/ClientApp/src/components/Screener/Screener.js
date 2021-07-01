@@ -185,6 +185,11 @@ export function Screener(props) {
 		setExclusions([...exclusions, ticker])
 	}
 
+	const handleExclusionDelete = (deletedTicker) => {
+		const newExclusions = exclusions.filter(ticker => ticker !== deletedTicker)
+		setExclusions(newExclusions)
+	}
+
 	const deleteRangedRule = (selectedRule) => {
 		const resultingRules = rangedRules.filter(rule => rule.id !== selectedRule.id);
 		setRangedRules(resultingRules)
@@ -345,6 +350,7 @@ export function Screener(props) {
 							AddInclusion={handleInclusionAddition}
 							DeleteInclusion={handleInclusionDelete}
 							AddExclusion={handleExclusionAddition}
+							DeleteExclusion={handleExclusionDelete}
 						/>
 						<br/>
 						{indexID

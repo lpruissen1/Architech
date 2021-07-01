@@ -20,11 +20,14 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
-		backgroundColor: '#949494',
 		color: '#fff',
 	},
 	form: {
 		maxWidth: '300px',
+		borderColor: '#949494'
+	},
+	chip: {
+		margin: theme.spacing(0.25),
 	}
 }));
 
@@ -34,6 +37,8 @@ export default function InclusionExclusion(props) {
 	const [currentInclusion, setCurrentInclusion] = useState()
 	const [currentExclusion, setCurrentExclusion] = useState()
 
+	const options = ['MMM', 'ABT', 'ABMD']
+
 	const classes = useStyles()
 
 	const onClick = (event) => {
@@ -42,15 +47,20 @@ export default function InclusionExclusion(props) {
 
 	const updateInclusions = (event) => {
 		props.AddInclusion(currentInclusion)
+		setCurrentInclusion()
 	}
 
 	const updateExclusions = (event) => {
 		props.AddExclusion(currentExclusion)
+		setCurrentExclusion()
 	}
 
 	const inclusionDelete = (ticker) => {
-		debugger
 		props.DeleteInclusion(ticker)
+	}
+
+	const exclusionDelete = (ticker) => {
+		props.DeleteExclusion(ticker)
 	}
 
 	return (
@@ -71,15 +81,16 @@ export default function InclusionExclusion(props) {
 						<Autocomplete
 							className={classes.form}
 							disableClearable
+							closeIcon={null}
 							forcePopupIcon={false}
 							size='small'
 							value={currentInclusion}
 							onChange={(event, newValue) => {
 								setCurrentInclusion(newValue);
 							}}
-							options={['MMM', 'ABT', 'ABMD']}
+							options={options.filter(option => !props.inclusions.includes(option) && !props.exclusions.includes(option))}
 							renderInput={(params) => (
-								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers"
+								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" 
 									InputLabelProps={{
 										shrink: true,
 									}}
@@ -92,6 +103,7 @@ export default function InclusionExclusion(props) {
 											onClick={updateInclusions}
 											style={{ outline: 'none' }}
 											disableElevation
+											color='primary'
 											disableRipple
 										>Include</Button>
 									}} />)}
@@ -99,6 +111,7 @@ export default function InclusionExclusion(props) {
 					</Grid>
 						<Grid item xs={6} align="center">
 						<Autocomplete
+							color='secondary'
 							className={classes.form}
 							disableClearable
 							forcePopupIcon={false}
@@ -107,9 +120,9 @@ export default function InclusionExclusion(props) {
 							onChange={(event, newValue) => {
 								setCurrentExclusion(newValue);
 							}}
-							options={['MMM', 'ABT', 'ABMD']}
+							options={options.filter(option => !props.inclusions.includes(option) && !props.exclusions.includes(option))}
 							renderInput={(params) => (
-								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" label="Exclude Tickers"
+								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" color='secondary'
 									InputLabelProps={{
 										shrink: true,
 									}}
@@ -122,28 +135,49 @@ export default function InclusionExclusion(props) {
 											onClick={updateExclusions}
 											style={{ outline: 'none' }}
 											disableElevation
+											color='secondary'
 											disableRipple
 										>Exclude</Button>
 									}} /> )}
 								/>
 						</Grid>
 						<Grid item xs={6} align="left">
-							<ul className="list">
-							<h2> Inclusions: </h2>
-							{props.inclusions && props.inclusions.map((ticker) => {
-									return (
-										<Chip
-											key={ticker}
-											label={ticker}
-											variant='outlined'
-											onDelete={() => inclusionDelete(ticker)}
-									/>)
-							})
-							}
-							</ul>
+							<div className='chip-container'>
+								<ul className="list">
+								<h2> Inclusions: </h2>
+								{props.inclusions && props.inclusions.map((ticker) => {
+										return (
+											<Chip
+												color='primary'
+												className={classes.chip}
+												key={ticker}
+												label={ticker}
+												variant='contained'
+												onDelete={() => inclusionDelete(ticker)}
+										/>)
+								})
+								}
+								</ul>
+							</div>
 						</Grid>
 						<Grid item xs={6} align="left">
-						<p1 className="list"> Exclusions: {props.exclusions.join(", ")} </p1>
+						<div className='chip-container'>
+							<ul className="list">
+								<h2> Exclusions: </h2>
+								{props.exclusions && props.exclusions.map((ticker) => {
+									return (
+										<Chip
+											color='secondary'
+											className={classes.chip}
+											key={ticker}
+											label={ticker}
+											variant='contained'
+											onDelete={() => exclusionDelete(ticker)}
+										/>)
+								})
+								}
+							</ul>
+						</div>
 						</Grid>
 					</Grid>
 				</div>}

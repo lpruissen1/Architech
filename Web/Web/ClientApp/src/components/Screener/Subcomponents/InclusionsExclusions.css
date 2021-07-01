@@ -8,6 +8,15 @@
 	margin-top: 30px;
 }
 
-.list{
-	margin-left: 14.5%;
+.list {
+	margin-left: 5%;
 }
+
+.chip-container {
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+	list-style: none; 
+}
+
+
