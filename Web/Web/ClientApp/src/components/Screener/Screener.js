@@ -127,6 +127,8 @@ export function Screener(props) {
 	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
+	const [inclusions, setInclusions] = useState([])
+	const [exclusions, setExclusions] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
@@ -168,6 +170,14 @@ export function Screener(props) {
 
 	const handleTimedRangeRuleUpdate = (rule) => {
 		setTimedRangeRules([...timedRangeRules, rule])
+	}
+
+	const handleInclusionAddition = (ticker) => {
+		setInclusions([...inclusions, ticker])
+	}
+
+	const handleExclusionAddition = (ticker) => {
+		setExclusions([...exclusions, ticker])
 	}
 
 	const deleteRangedRule = (selectedRule) => {
@@ -238,7 +248,9 @@ export function Screener(props) {
 				markets: getActiveMarkets(markets),
 				industries: getActiveIndustries(),
 				rangedRule: rangedRules,
-				timedRangeRule: timedRangeRules
+				timedRangeRule: timedRangeRules,
+				inclusions: inclusions,
+				exclusions: exclusions
 			})
 
 			setTickers(tickers)
@@ -266,7 +278,7 @@ export function Screener(props) {
 	}
 
 	useEffect(() => { handleMount() }, []);
-	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules]);
+	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules, inclusions, exclusions]);
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
@@ -279,7 +291,9 @@ export function Screener(props) {
 			],
 			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
-			timedRangeRule: timedRangeRules
+			timedRangeRule: timedRangeRules,
+			inclusions: inclusions,
+			exclusions: exclusions
 		});
 
 		setIndex(newIndexID)
@@ -294,7 +308,9 @@ export function Screener(props) {
 			],
 			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
-			timedRangeRule: timedRangeRules
+			timedRangeRule: timedRangeRules,
+			inclusions: inclusions,
+			exclusions: exclusions
 		});
 
 		setChangeMade(false)
@@ -318,7 +334,11 @@ export function Screener(props) {
 							deleteTimedRangeRule={deleteTimedRangeRule}
 							checkIfRangedRuleExists={checkIfRangedRuleExists}
 							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+							inclusions={inclusions}
+							exclusions={exclusions}
 							markets={markets}
+							AddInclusion={handleInclusionAddition}
+							AddExclusion={handleExclusionAddition}
 						/>
 						<br/>
 						{indexID

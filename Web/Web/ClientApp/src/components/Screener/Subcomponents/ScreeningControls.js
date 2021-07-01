@@ -3,6 +3,7 @@ import SectorSelector from './SectorSelector';
 import BasicRulesSection from "./Rules/BasicRulesSection";
 import MarketSelector from './MarketSelector';
 import Collapsible from 'react-collapsible';
+import InclusionsExclusions from './InclusionsExclusions';
 import "../Screener.css"
 
 export default class ScreeningControls extends Component {
@@ -45,6 +46,13 @@ export default class ScreeningControls extends Component {
 						checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}
 						checkIfTimedRangeRuleExists={this.props.checkIfTimedRangeRuleExists}/>
 				</Collapsible>
+				<InclusionsExclusions
+					inclusions={this.props.inclusions}
+					exclusions={this.props.exclusions}
+					handleUpdate={this.props.handleUpdate}
+					AddInclusion={this.props.AddInclusion}
+					AddExclusion={this.props.AddExclusion}
+				/>
 			</div>
 		);
 	}
