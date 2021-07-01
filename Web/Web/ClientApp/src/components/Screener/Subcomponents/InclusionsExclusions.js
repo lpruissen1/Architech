@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import './InclusionsExclusions.css';
 import Grid from '@material-ui/core/Grid';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -18,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
+		backgroundColor: '#949494',
+		color: '#fff',
+	},
+	form: {
+		maxWidth: '300px',
 	}
 }));
 
@@ -41,10 +47,6 @@ export default function InclusionExclusion(props) {
 		props.AddExclusion(currentExclusion)
 	}
 
-	const displayList = (tickers) => {
-
-	}
-
 	return (
 		<div className='inclusion-exclusion-container'>
 			<Button
@@ -60,46 +62,64 @@ export default function InclusionExclusion(props) {
 					spacing={1}
 					justify="center">
 					<Grid item xs={6} align="center">
-						<TextField id="outlined" variant="outlined" placeholder="Include Ticker" label="Include Tickers"
-							InputLabelProps={{
-								shrink: true,
+						<Autocomplete
+							className={classes.form}
+							disableClearable
+							forcePopupIcon={false}
+							size='small'
+							value={currentInclusion}
+							onChange={(event, newValue) => {
+								setCurrentInclusion(newValue);
 							}}
-							onChange={(event) => {
-								setCurrentInclusion(event.target.value);
-							}}
-							autoComplete='off'
-							InputProps={{
-								endAdornment: <Button
-									variant='contained'
-									color='primary'
-									className={classes.buttonLowMargin}
-									onClick={updateInclusions}
-									style={{ outline: 'none' }}
-									disableElevation
-									disableRipple
-								>Include</Button>
-							}} />
+							options={['MMM', 'ABT', 'ABMD']}
+							renderInput={(params) => (
+								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers"
+									InputLabelProps={{
+										shrink: true,
+									}}
+									InputProps={{
+										...params.InputProps,
+										type: 'search',
+										endAdornment: <Button
+											variant='contained'
+											className={classes.buttonLowMargin}
+											onClick={updateExclusions}
+											style={{ outline: 'none' }}
+											disableElevation
+											disableRipple
+										>Include</Button>
+									}} />)}
+						/>
 					</Grid>
 						<Grid item xs={6} align="center">
-							<TextField id="outlined" variant="outlined" placeholder="Exclude Ticker" label="Exclude Tickers"
-								InputLabelProps={{
-									shrink: true,
-								}}
-								onChange={(event) => {
-									setCurrentExclusion(event.target.value);
-								}}
-							autoComplete='off'
-							InputProps={{
-								endAdornment: <Button
-									variant='contained'
-									color='primary'
-									className={classes.buttonLowMargin}
-									onClick={updateExclusions}
-									style={{ outline: 'none' }}
-									disableElevation
-									disableRipple
-								>Exclude</Button>
-							}} />
+						<Autocomplete
+							className={classes.form}
+							disableClearable
+							forcePopupIcon={false}
+							size='small'
+							value={currentExclusion}
+							onChange={(event, newValue) => {
+								setCurrentExclusion(newValue);
+							}}
+							options={['MMM', 'ABT', 'ABMD']}
+							renderInput={(params) => (
+								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" label="Exclude Tickers"
+									InputLabelProps={{
+										shrink: true,
+									}}
+									InputProps={{
+										...params.InputProps,
+										type: 'search',
+										endAdornment: <Button
+											variant='contained'
+											className={classes.buttonLowMargin}
+											onClick={updateExclusions}
+											style={{ outline: 'none' }}
+											disableElevation
+											disableRipple
+										>Exclude</Button>
+									}} /> )}
+								/>
 						</Grid>
 						<Grid item xs={6} align="left">
 						<p1 className="list"> Inclusions: {props.inclusions.join(", ")} </p1>
