@@ -176,6 +176,11 @@ export function Screener(props) {
 		setInclusions([...inclusions, ticker])
 	}
 
+	const handleInclusionDelete = (deletedTicker) => {
+		const newInclusions = inclusions.filter(ticker => ticker !== deletedTicker)
+		setInclusions(newInclusions)
+	}
+
 	const handleExclusionAddition = (ticker) => {
 		setExclusions([...exclusions, ticker])
 	}
@@ -338,6 +343,7 @@ export function Screener(props) {
 							exclusions={exclusions}
 							markets={markets}
 							AddInclusion={handleInclusionAddition}
+							DeleteInclusion={handleInclusionDelete}
 							AddExclusion={handleExclusionAddition}
 						/>
 						<br/>

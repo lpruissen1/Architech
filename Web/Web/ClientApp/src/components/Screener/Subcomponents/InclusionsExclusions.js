@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './InclusionsExclusions.css';
 import Grid from '@material-ui/core/Grid';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -47,6 +48,11 @@ export default function InclusionExclusion(props) {
 		props.AddExclusion(currentExclusion)
 	}
 
+	const inclusionDelete = (ticker) => {
+		debugger
+		props.DeleteInclusion(ticker)
+	}
+
 	return (
 		<div className='inclusion-exclusion-container'>
 			<Button
@@ -83,7 +89,7 @@ export default function InclusionExclusion(props) {
 										endAdornment: <Button
 											variant='contained'
 											className={classes.buttonLowMargin}
-											onClick={updateExclusions}
+											onClick={updateInclusions}
 											style={{ outline: 'none' }}
 											disableElevation
 											disableRipple
@@ -122,7 +128,19 @@ export default function InclusionExclusion(props) {
 								/>
 						</Grid>
 						<Grid item xs={6} align="left">
-						<p1 className="list"> Inclusions: {props.inclusions.join(", ")} </p1>
+							<ul className="list">
+							<h2> Inclusions: </h2>
+							{props.inclusions && props.inclusions.map((ticker) => {
+									return (
+										<Chip
+											key={ticker}
+											label={ticker}
+											variant='outlined'
+											onDelete={() => inclusionDelete(ticker)}
+									/>)
+							})
+							}
+							</ul>
 						</Grid>
 						<Grid item xs={6} align="left">
 						<p1 className="list"> Exclusions: {props.exclusions.join(", ")} </p1>

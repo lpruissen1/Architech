@@ -52,6 +52,7 @@ export default class ScreeningControls extends Component {
 					handleUpdate={this.props.handleUpdate}
 					AddInclusion={this.props.AddInclusion}
 					AddExclusion={this.props.AddExclusion}
+					DeleteInclusion={this.props.DeleteInclusion}
 				/>
 			</div>
 		);
