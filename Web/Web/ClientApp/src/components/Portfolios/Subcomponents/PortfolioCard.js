@@ -68,6 +68,40 @@ export function PortfolioCard(props) {
 		setModal(false)
 	}
 
+	const getSectorAndIndustryDisplay = () => {
+
+		const sectors = [
+			{name: "Industrials", industries: ['Aerospace & Defense','Airlines', 'Business Services','Consulting & Outsourcing','Employment Services','Engineering & Construction','Farm & Construction' ,'Industrial Products','Transportation & Logistics','Waste Management']},
+			{name: "Consumer Cyclical", industries: ['Advertising & Marketing Services', 'Autos', 'Entertainment', 'Homebuilding & Construction', 'Manufacturing - Apparel & Furniture', 'Packaging & Containers','Personal Services','Retail - Apparel & Specialty', 'Travel & Leisure']},
+			{name: "Financial Services", industries: ['Asset Management', 'Banks', 'Brokerages & Exchanges', 'Credit Services', 'Insurance', 'Insurance - Life', 'Insurance - Property & Casualty', 'Insurance - Specialty']},
+			{name: "Healthcare", industries: ['Biotechnology', 'Drug Manufacturers', 'Health Care Plans', 'Health Care Providers', 'Medical Devices', 'Medical Diagnostics & Research', 'Medical Distribution', 'Medical Instruments & Equipment']},
+			{name: "Energy", industries: ['Oil & Gas - Drilling', 'Oil & Gas - E&P', 'Oil & Gas - Integrated', 'Oil & Gas - Midstream', 'Oil & Gas - Refining & Marketing', 'Oil & Gas - Services']},
+			{name: "Technology", industries: ['Application Software', 'Communication Equipment', 'Computer Hardware', 'Online Media', 'Semiconductors']},
+			{name: "Basic Materials", industries: ['Agriculture', 'Chemicals', 'Forest Products', 'Metals & Mining', 'Steel']},
+			{name: "Consumer Defensive", industries: ['Beverages - Alcoholic', 'Beverages - Non-Alcoholic', 'Consumer Packaged Goods', 'Tobacco Products', 'Retail - Defensive']},
+			{name: "Utilities", industries: ['Utilities - Independent Power Producers', 'Utilities - Regulated']},
+			{name: "Real Estate", industries: ['REITs']},
+			{name: "Communication Services", industries: ['Communication Services']}
+		]
+
+		const displaySectors = []
+
+		sectors.forEach(sector => {
+			const activeIndustries = []
+			sector.industries.forEach(industry => {
+				if (props.portfolio.industries.includes(industry)) {
+					activeIndustries.push(industry)
+				}
+			})
+
+			if (activeIndustries.length > 0) {
+				displaySectors.push({ name: sector.name, industries: activeIndustries })
+			}
+		})
+		debugger
+		return displaySectors
+	}
+
 
 	const getMetricDisplayInfo = () => {
 		const prettyNames = [
@@ -157,8 +191,8 @@ export function PortfolioCard(props) {
 								data={props.portfolio.markets.join(", ")}
 								interiorTable={<h1> Blahhhh </h1>} />
 							<PortfolioTableRow
-								name="Industries"
-								data={props.portfolio.industries.join(", ")}
+								name="Sectors and Industries"
+								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
 								interiorTable={<h1> BRRRRR </h1>} />
 							<PortfolioTableRow
 								name="Basic Metrics"
