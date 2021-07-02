@@ -138,7 +138,8 @@ export function Screener(props) {
 	const loadIndex = async () => {
 		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
 		let tempSectors = []
-		
+
+		// change to checked/unchecked/partial
 		sectors.forEach(sector => {
 			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
 				tempSectors.push({value: sector.value, isChecked: true, industries: sector.industries})
@@ -268,6 +269,7 @@ export function Screener(props) {
 	useEffect(() => { handleMount() }, []);
 	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules]);
 
+	// Add sectors to request
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
 		
@@ -285,6 +287,7 @@ export function Screener(props) {
 		setIndex(newIndexID)
 	}
 
+	// Add sectors to request
 	const updateIndex = () => {
 		CustomIndexClient.UpdateCustomIndex(props.userID, {
 			userId: props.userID,

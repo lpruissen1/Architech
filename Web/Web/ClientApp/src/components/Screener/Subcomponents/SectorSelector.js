@@ -92,7 +92,7 @@ export default function SectorSelector(props) {
 			}
 		})
 
-		if (sectors.filter(sector => sector.isChecked === false).length > 0) {
+		if (sectors.filter(sector => sector.isChecked === "unchecked").length > 0) {
 			setSelectAllChecked(false)
 		}
 
