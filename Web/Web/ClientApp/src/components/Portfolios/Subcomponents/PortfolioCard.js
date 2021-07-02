@@ -3,8 +3,6 @@ import './NewPortfolioCard.css';
 import './PortfolioCard.css';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,8 +12,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import PortfolioTableRow from './PortfolioTableRow.js';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,7 +34,11 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'dimgrey'
 	},
 	tableHead: {
-		backgroundColor: theme.palette.primary.main
+		backgroundColor: theme.palette.primary.main,
+	},
+	headCells: {
+		paddingTop: 0,
+		paddingBottom: 0,
 	}
 }));
 
@@ -81,18 +81,39 @@ export function PortfolioCard(props) {
 			{ ruleType: "CoefficientOfVariation", displayName: "Coefficient of Variation" },
 		]
 
-		const tempRules = []
-		const names = []
-		debugger
+		const displayRules = []
+		
 		props.portfolio.rangedRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					tempRules.push({ displayName: name.displayName, min: rule.lower, max: rule.upper, timePeriod: '' })
+					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: '' })
 				}
 			})
 		})
 
-		return tempRules
+		props.portfolio.timedRangeRules.forEach(rule => {
+			prettyNames.forEach(name => {
+				if (name.ruleType === rule.ruleType) {
+					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: rule.timePeriod })
+				}
+			})
+		})
+
+		return displayRules
+	}
+
+	const numFormatter = (num) => {
+		if (num > 1000000 && num < 1000000000) {
+			return '$' + (num / 1000000).toFixed(0) + 'M';
+		} else if (num >= 1000000000 && num < 1000000000000) {
+			return '$' + (num / 1000000000).toFixed(0) + 'B';
+		} else if (num >= 1000000000000) {
+			return '$' + (num / 1000000000000).toFixed(2) + 'T';
+		} else if (num > 9999 && num < 100000) {
+			return '< $0.1M';
+		} else if (num < 10000) {
+			return '$' + num
+		}
 	}
 
 	return (
@@ -102,14 +123,13 @@ export function PortfolioCard(props) {
 					<Table aria-label="collapsible table">
 						<TableHead className={classes.tableHead}>
 							<TableRow>
-								<TableCell />
-								<TableCell>Blueprint Name</TableCell>
+								<TableCell className={classes.headCells} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
 								<TableCell align="right">
 									<Button
 										className={classes.editButton}
 										onClick={handleOnClick}>Edit</Button>
 								</TableCell>
-								<TableCell align="right">
+								<TableCell align="right" className={classes.headCells}>
 									{modal && (
 									<div className="deleteModal">
 										<h2> Are you sure you would like to delete this portfolio? </h2>
@@ -125,8 +145,8 @@ export function PortfolioCard(props) {
 											variant="outlined"
 											className={classes.modalButtonBack}> No, take me back </Button>
 									</div>)}
-									<IconButton className={classes.deleteButton} onClick={renderModal} color="white" aria-label="delete">
-										<DeleteIcon />
+									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete" className={classes.headCells}>
+										<DeleteIcon style={{ color: '#fff' }}/>
 									</IconButton>
 								</TableCell>       
 							</TableRow>

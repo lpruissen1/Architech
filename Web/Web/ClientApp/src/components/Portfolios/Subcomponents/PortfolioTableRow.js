@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Typography from '@material-ui/core/Typography';
 
 export default function PortfolioTableRow(props) {
 	const [open, setOpen] = useState(false);
@@ -14,14 +15,14 @@ export default function PortfolioTableRow(props) {
 		<React.Fragment>
 			<TableRow>
 				<TableCell>
-					<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+					<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{ outline: 'none' }}>
 						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 					</IconButton>
 				</TableCell>
 				<TableCell component="th" scope="row">
-					{props.name}
+					<Typography style={{ fontWeight: 600 }}>{props.name}</Typography>
 				</TableCell>
-				<TableCell align="right">{props.data}</TableCell>
+				<TableCell align="left"><Typography>{props.data}</Typography></TableCell>
 			</TableRow>
 			<TableRow>
 				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
