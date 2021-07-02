@@ -281,12 +281,11 @@ export function Screener(props) {
 	useEffect(() => { handleMount() }, []);
 	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules]);
 
-	// Add sectors to request
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
 		
 		CustomIndexClient.CreateCustomIndex({
-			userId: props.userID,
+			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: newIndexID, 
 			markets: [
 				"Sp500"
@@ -299,10 +298,9 @@ export function Screener(props) {
 		setIndex(newIndexID)
 	}
 
-	// Add sectors to request
 	const updateIndex = () => {
 		CustomIndexClient.UpdateCustomIndex(props.userID, {
-			userId: props.userID,
+			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: index,
 			markets: [
 				"Sp500"
