@@ -6,6 +6,7 @@ import './InclusionsExclusions.css';
 import Grid from '@material-ui/core/Grid';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Chip from '@material-ui/core/Chip';
+import StockPicker from './StockPickerAutocomplete.js';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	form: {
 		maxWidth: '300px',
-		borderColor: '#949494'
 	},
 	chip: {
 		margin: theme.spacing(0.25),
@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InclusionExclusion(props) {
 	const [renderFields, setRenderFields] = useState(false)
-	const [currentInclusion, setCurrentInclusion] = useState()
-	const [currentExclusion, setCurrentExclusion] = useState()
 
 	const options = ['MMM', 'ABT', 'ABMD']
 
@@ -46,13 +44,11 @@ export default function InclusionExclusion(props) {
 	}
 
 	const updateInclusions = (event) => {
-		props.AddInclusion(currentInclusion)
-		setCurrentInclusion()
+		props.AddInclusion(event.currentTarget.value)
 	}
 
 	const updateExclusions = (event) => {
-		props.AddExclusion(currentExclusion)
-		setCurrentExclusion()
+		props.AddExclusion(event.currentTarget.value)
 	}
 
 	const inclusionDelete = (ticker) => {
@@ -78,70 +74,38 @@ export default function InclusionExclusion(props) {
 					spacing={1}
 					justify="center">
 					<Grid item xs={6} align="center">
-						<Autocomplete
+						<StockPicker
 							className={classes.form}
-							disableClearable
-							closeIcon={null}
-							forcePopupIcon={false}
-							size='small'
-							value={currentInclusion && currentInclusion}
-							inputValue={currentInclusion && currentInclusion}
-							onChange={(event, newValue) => {
-								setCurrentInclusion(newValue);
-							}}
+							color='primary'
 							options={options.filter(option => !props.inclusions.includes(option) && !props.exclusions.includes(option))}
-							renderInput={(params) => (
-								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" 
-									InputLabelProps={{
-										shrink: true,
-									}}
-									InputProps={{
-										...params.InputProps,
-										type: 'search',
-										endAdornment: <Button
-											variant='contained'
-											className={classes.buttonLowMargin}
-											onClick={updateInclusions}
-											style={{ outline: 'none' }}
-											disableElevation
-											color='primary'
-											disableRipple
-										>Include</Button>
-									}} />)}
-						/>
+							onChange={updateInclusions}
+							endAdornment={
+								<Button
+									variant='contained'
+									className={classes.buttonLowMargin}
+									style={{ outline: 'none' }}
+									disableElevation
+									color='primary'
+									disableRipple
+								>Include</Button>}
+							/>
 					</Grid>
 						<Grid item xs={6} align="center">
-						<Autocomplete
-							color='secondary'
-							className={classes.form}
-							disableClearable
-							forcePopupIcon={false}
-							size='small'
-							value={currentExclusion && currentExclusion}
-							inputValue={currentExclusion && currentExclusion}
-							onChange={(event, newValue) => {
-								setCurrentExclusion(newValue);
-							}}
-							options={options.filter(option => !props.inclusions.includes(option) && !props.exclusions.includes(option))}
-							renderInput={(params) => (
-								<TextField {...params} id="outlined" variant="outlined" placeholder="Search Tickers" color='secondary'
-									InputLabelProps={{
-										shrink: true,
-									}}
-									InputProps={{
-										...params.InputProps,
-										type: 'search',
-										endAdornment: <Button
-											variant='contained'
-											className={classes.buttonLowMargin}
-											onClick={updateExclusions}
-											style={{ outline: 'none' }}
-											disableElevation
-											color='secondary'
-											disableRipple
-										>Exclude</Button>
-									}} /> )}
-								/>
+							<StockPicker
+								className={classes.form}
+								color='secondary'
+								options={options.filter(option => !props.inclusions.includes(option) && !props.exclusions.includes(option))}
+								onChange={updateExclusions}
+								endAdornment={
+									<Button
+										variant='contained'
+										className={classes.buttonLowMargin}
+										style={{ outline: 'none' }}
+										disableElevation
+										color='secondary'
+										disableRipple
+									>Exclude</Button>}
+							/>
 						</Grid>
 						<Grid item xs={6} align="left">
 							<div className='chip-container'>
