@@ -139,13 +139,25 @@ export function Screener(props) {
 		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
 		let tempSectors = []
 
-		// change to checked/unchecked/partial
 		sectors.forEach(sector => {
-			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
-				tempSectors.push({value: sector.value, isChecked: true, industries: sector.industries})
+			sector.industries.forEach(industry => {
+				if (loadedIndex.industries.includes(industry.value)) {
+					industry.isChecked = true
+				}
+
+				else {
+					industry.isChecked = false
+				}
+			})
+
+			if (sector.industries.filter(industry => industry.isChecked === true).length === sector.industries.length) {
+				tempSectors.push({ value: sector.value, isChecked: "checked", industries: sector.industries })
+			}
+			else if (sector.industries.filter(industry => industry.isChecked === false).length === sector.industries.length) {
+				tempSectors.push({ value: sector.value, isChecked: "unchecked", industries: sector.industries })
 			}
 			else {
-				tempSectors.push({value: sector.value, isChecked: false, industries: sector.industries})
+				tempSectors.push({ value: sector.value, isChecked: "partial", industries: sector.industries })
 			}
 		})
 
