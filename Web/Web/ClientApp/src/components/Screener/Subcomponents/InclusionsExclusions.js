@@ -1,12 +1,12 @@
-﻿import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import './InclusionsExclusions.css';
-import Grid from '@material-ui/core/Grid';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+﻿import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect  } from 'react';
+import './InclusionsExclusions.css';
 import StockPicker from './StockPickerAutocomplete.js';
+import StockInformationClient from '../../../Clients/StockInformationClient';
+
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -34,11 +34,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InclusionExclusion(props) {
 	const [renderFields, setRenderFields] = useState(false)
-
-	const options = ['MMM', 'ABT', 'ABMD']
+	const [options, setOptions] = useState([])
 
 	const classes = useStyles()
 
+	const GetOptions = async () => {
+		let response = await StockInformationClient.GetAllTickers()
+		setOptions(response)
+	}
 	const onClick = (event) => {
 		setRenderFields(!renderFields)
 	}
@@ -58,6 +61,8 @@ export default function InclusionExclusion(props) {
 	const exclusionDelete = (ticker) => {
 		props.DeleteExclusion(ticker)
 	}
+
+	useEffect(() => GetOptions(), []);
 
 	return (
 		<div className='inclusion-exclusion-container'>

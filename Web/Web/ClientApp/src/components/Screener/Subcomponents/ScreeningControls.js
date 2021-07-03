@@ -5,9 +5,8 @@ import MarketSelector from './MarketSelector';
 import Collapsible from 'react-collapsible';
 import InclusionsExclusions from './InclusionsExclusions';
 import "../Screener.css"
-import ManualSelection from './ManualSelection';
 
-export default class ScreeningControls extends Component {
+export default class ScreeningControls extends React.Component {
 	constructor(props) {
 		super(props);
 	}
