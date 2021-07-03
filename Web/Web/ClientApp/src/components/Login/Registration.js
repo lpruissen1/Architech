@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
 		width: '42ch',
 		fontWeight: '700',
 		color: 'white',
-		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: theme.palette.primary.main,
@@ -54,7 +53,7 @@ export function Registration(props) {
 	const history = useHistory();
 
 	const postUserRegistrationRequest = async (data) => {
-		const response = await AuthClient.register(data)
+		const response = await AuthClient.Register(data)
 		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
@@ -175,7 +174,7 @@ export function Registration(props) {
 							onChange={(e) => setUsername(e.target.value)}
 							autoComplete='off'
 							error={username ? usernameError : false}
-							helperText={usernameError && "*Must have at least 8 characters"}
+							helperText={username && usernameError ? "*Must have at least 8 characters" : ''}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Password" variant="outlined" placeholder="Password"
 							InputLabelProps={{
@@ -185,7 +184,7 @@ export function Registration(props) {
 							autoComplete='off'
 							type='password'
 							error={password ? passwordError : false}
-							helperText={passwordError && "*Must contain uppercase, lowercase, number, and symbol"}
+							helperText={password && passwordError ? "*Must contain uppercase, lowercase, number, and symbol" : ''}
 						/>
 						<TextField required id="outlined-required" className={classes.largeForm} label="Re-enter Password" variant="outlined" placeholder="Re-enter Password"
 							InputLabelProps={{
@@ -209,10 +208,17 @@ export function Registration(props) {
 						/>
 					</div>
 				</form>
-				{formValid ?
-					<Button onClick={registerUser} className={classes.button} variant="contained"> Register </Button>
-					:
-					<Button className={classes.button} variant="contained" disabled> Register </Button>
+				{formValid
+					? <Button
+						onClick={registerUser}
+						className={classes.button}
+						variant="contained"
+						disableElevation> Register </Button>
+					: <Button
+						className={classes.button}
+						variant="contained"
+						disabled
+						disableElevation> Register </Button>
 					}
 			</div>
 		</div>

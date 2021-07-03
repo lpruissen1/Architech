@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
 		width: '42ch',
 		fontWeight: '700',
 		color: 'white',
-		boxShadow: 'none',
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: theme.palette.primary.main,
@@ -43,7 +42,7 @@ export function Login(props) {
 	const history = useHistory();
 
     const loginUser = async () => {
-		const response = await AuthClient.login(username, password);
+		const response = await AuthClient.Login(username, password);
 		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
@@ -56,7 +55,7 @@ export function Login(props) {
 
     return (
         <div className="global-flex-container">
-            <div className="registration-card">
+			<div className="loginCard">
                 <form className={classes.root}>
                     <div className="flex-container">
                         <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Username" label="Username"
@@ -81,10 +80,16 @@ export function Login(props) {
                             autoComplete='off' />
                     </div>
                 </form>
-				<Button onClick={loginUser} className={classes.button} variant="contained"> Login </Button>
-				<Link className="registration-link" to="/register">
-					<p> Don't have an account? <span className = "signup">Sign up now!</span></p>
-				</Link>
+				<Button
+					onClick={loginUser}
+					className={classes.button}
+					variant="contained"
+					disableElevation> Login </Button>
+					<p className="registration-link"> Don't have an account? 
+						<Link to="/register">
+							<span className="signup"> Sign up now!</span>
+						</Link>
+					</p>
 			</div>
         </div>
     );

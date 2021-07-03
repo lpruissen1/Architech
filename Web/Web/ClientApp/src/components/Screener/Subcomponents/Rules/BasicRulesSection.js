@@ -13,11 +13,11 @@ export default class BasicRulesSection extends React.Component {
 			{ displayName: "Market Capitalizaton", value: "MarketCap", type: "ranged", selectorMin : 1, selectorMax : 2000000000000 },
 			{ displayName: "Dividend Yield", value: "DividendYield", type: "ranged", selectorMin: 0, selectorMax: 12 },
 			{ displayName: "Price to Earnings Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 2000 },
-			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToEarningsRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
-			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 1000 },
-			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 1000 },
-			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", timePeriod: "Year", selectorMin: -100, selectorMax: 2000 },
-			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", timePeriod: "Year", selectorMin: 0, selectorMax: 10 }
+			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToSalesRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
+			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 1000 },
+			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 2000 },
+			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", timePeriod: "", selectorMin: 0, selectorMax: 10 }
 		]
 	};
 
@@ -77,7 +77,12 @@ export default class BasicRulesSection extends React.Component {
 		this.props.timedRangeRules && this.props.timedRangeRules.map((rule) =>
 			appendedComponents.push(
 				<>
-					<TimedRangeRule option={this.state.options.find(option => option.value === rule.ruleType)} rule={rule} handleUpdate={this.props.handleUpdate}/>
+					<TimedRangeRule
+						option={this.state.options.find(option => option.value === rule.ruleType)}
+						rule={rule}
+						handleUpdate={this.props.handleUpdate}
+						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
+						renderedTimeSpans={this.props.checkIfTimedRangeRuleExists(rule.ruleType)}/>
 					<br />
 				</>
 			)
@@ -90,7 +95,10 @@ export default class BasicRulesSection extends React.Component {
 		return (
 			<>
 				{this.getAppendedComponents()}
-				<RuleSelector handleAddNewMetricClick={this.handleAddNewRuleNew} options={this.state.options} />
+				<RuleSelector
+					handleAddNewMetricClick={this.handleAddNewRuleNew}
+					options={this.state.options}
+					checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}/>
 			</>
 		);
 	}

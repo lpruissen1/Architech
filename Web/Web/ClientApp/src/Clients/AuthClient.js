@@ -4,7 +4,7 @@ import jwt from 'jwt-decode';
 const API_URL = "https://localhost:9001/User/"; // this will eventually need to be config
 
 class AuthService {
-	async login(username, password) {
+	async Login(username, password) {
 
 		const response = await fetch(API_URL + "login", {
 			method: 'POST',
@@ -16,18 +16,18 @@ class AuthService {
 
 		if (response.ok) {
 			const json = await response.json()
-			const id = this.getUserIdFromJwt(json.token)
+			const id = this.GetUserIdFromJwt(json.token)
 
 			Cookie.set("jwtToken", json.token, { expires: 1 / 24  })
 			return id
 		}
 	}
 
-	logout() {
+	Logout() {
 		Cookie.remove("jwtToken")
 	}
 
-	async register(registrationData) {
+	async Register(registrationData) {
 		const response = await fetch(API_URL + "create", {
 			method: 'POST',
 			headers: {
@@ -40,16 +40,25 @@ class AuthService {
 			const json = await response.json();
 			Cookie.set("jwtToken", json.token, { expires: 1 / 24 })
 
-			return this.getUserIdFromJwt(json.token)
+			return this.GetUserIdFromJwt(json.token)
 		}
 	}
 
-	getCurrentUser() {
+	GetCurrentUser() {
 		return Cookie.get("jwtToken")
 	}
 
-	getUserIdFromJwt(token) {
-		return jwt(token).nameid;
+	GetUserIdFromJwt(token) {
+		return jwt(token).nameid
+	}
+
+	GetIdFromStoredJwt() {
+		var token = this.GetCurrentUser()
+
+		if(token)
+			return this.GetUserIdFromJwt(token)
+
+		return ""
 	}
 }
 
