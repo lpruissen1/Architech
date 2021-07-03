@@ -21,7 +21,10 @@ export function Portfolios(props) {
 
 	const deletePortfolio = async (userId, indexId) => {
 		await CustomIndexClient.deleteCustomIndexRequest(userId, indexId)
-		loadPortfolios()
+
+		let temp = portfolios.filter(x => x.indexId != indexId);
+
+		setPortfolios(temp)
 	}
 
 	useEffect(() => { loadPortfolios() }, [])

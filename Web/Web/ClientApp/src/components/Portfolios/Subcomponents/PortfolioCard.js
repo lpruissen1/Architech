@@ -44,11 +44,11 @@ export const useStyles = makeStyles((theme) => ({
 
 export function PortfolioCard(props) {
 	const [modal, setModal] = useState(false)
-	const [rules, setRules] = useState()
 	const history = useHistory();
-	const handleOnClick = () => {
+	const handleEditOnClick = () => {
 		history.push({
 			pathname: `/screener/${props.portfolio.indexId}`,
+			state: { markets: 'Hello world' }
 		});
 	}
 
@@ -70,6 +70,7 @@ export function PortfolioCard(props) {
 
 	const getSectorAndIndustryDisplay = () => {
 
+		// move these into seperate repo
 		const sectors = [
 			{name: "Industrials", industries: ['Aerospace & Defense','Airlines', 'Business Services','Consulting & Outsourcing','Employment Services','Engineering & Construction','Farm & Construction' ,'Industrial Products','Transportation & Logistics','Waste Management']},
 			{name: "Consumer Cyclical", industries: ['Advertising & Marketing Services', 'Autos', 'Entertainment', 'Homebuilding & Construction', 'Manufacturing - Apparel & Furniture', 'Packaging & Containers','Personal Services','Retail - Apparel & Specialty', 'Travel & Leisure']},
@@ -103,6 +104,7 @@ export function PortfolioCard(props) {
 	}
 
 
+	// move these into seperate repo
 	const getMetricDisplayInfo = () => {
 		const prettyNames = [
 			{ ruleType: "MarketCap", displayName: "Market Capitalization" },
@@ -137,6 +139,7 @@ export function PortfolioCard(props) {
 	}
 
 	// Fix this to take the ruletype and value and return proper formatting (e.g. %, $, etc.)
+	// as well as this
 	const numFormatter = (num) => {
 		if (num > 1000000 && num < 1000000000) {
 			return '$' + (num / 1000000).toFixed(0) + 'M';
@@ -151,6 +154,7 @@ export function PortfolioCard(props) {
 		}
 	}
 
+	// this can be broken out 
 	const timePeriodFormatter = (timePeriod) => {
 		if (timePeriod === 'Quarter') {
 			return 'One Quarter'
@@ -164,8 +168,10 @@ export function PortfolioCard(props) {
 		else if (timePeriod === "ThreeYears") {
 			return "Three Years"
 		}
-		else 
+		else if(timePeriod === "FiveYears")
 			return "Five Years"
+
+		return "Nan"
 	}
 
 	return (
@@ -179,7 +185,7 @@ export function PortfolioCard(props) {
 								<TableCell align="right" style={{ width: '70%'}}>
 									<Button
 										className={classes.editButton}
-										onClick={handleOnClick}>Edit</Button>
+										onClick={handleEditOnClick}>Edit</Button>
 								</TableCell>
 								<TableCell align="right" className={classes.headCells}>
 									{modal && (

@@ -124,6 +124,7 @@ export function Screener(props) {
 			]
 		}
 	])
+
 	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
