@@ -111,7 +111,7 @@ export function PortfolioCard(props) {
 			{ ruleType: "PriceToSalesRatioTTM", displayName: "Price To Sales Ratio (ttm)" },
 			{ ruleType: "RevenueGrowthAnnualized", displayName: "Revenue Growth (annualized)" },
 			{ ruleType: "EPSGrowthAnnualized", displayName: "EPS Growth (annualized)" },
-			{ ruleType: "TrailingPerformanceAnnualized", displayName: "Trailing Performance (annualized)" },
+			{ ruleType: "AnnualizedTrailingPerformance", displayName: "Trailing Performance (annualized)" },
 			{ ruleType: "CoefficientOfVariation", displayName: "Coefficient of Variation" },
 		]
 
@@ -128,7 +128,7 @@ export function PortfolioCard(props) {
 		props.portfolio.timedRangeRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: rule.timePeriod })
+					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: timePeriodFormatter(rule.timePeriod) })
 				}
 			})
 		})
@@ -136,6 +136,7 @@ export function PortfolioCard(props) {
 		return displayRules
 	}
 
+	// Fix this to take the ruletype and value and return proper formatting (e.g. %, $, etc.)
 	const numFormatter = (num) => {
 		if (num > 1000000 && num < 1000000000) {
 			return '$' + (num / 1000000).toFixed(0) + 'M';
@@ -150,15 +151,32 @@ export function PortfolioCard(props) {
 		}
 	}
 
+	const timePeriodFormatter = (timePeriod) => {
+		if (timePeriod === 'Quarter') {
+			return 'One Quarter'
+		}
+		else if (timePeriod === 'HalfYear') {
+			return 'Two Quarters'
+		}
+		else if (timePeriod === 'Year') {
+			return 'One Year'
+		}
+		else if (timePeriod === "ThreeYears") {
+			return "Three Years"
+		}
+		else 
+			return "Five Years"
+	}
+
 	return (
 		<>
 			<div className="portfolioCard">
 				<TableContainer component={Paper}>
-					<Table aria-label="collapsible table">
+					<Table aria-label="collapsible table" size="small">
 						<TableHead className={classes.tableHead}>
 							<TableRow>
 								<TableCell className={classes.headCells} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
-								<TableCell align="right">
+								<TableCell align="right" style={{ width: '70%'}}>
 									<Button
 										className={classes.editButton}
 										onClick={handleOnClick}>Edit</Button>
@@ -193,7 +211,30 @@ export function PortfolioCard(props) {
 							<PortfolioTableRow
 								name="Sectors and Industries"
 								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
-								interiorTable={<h1> BRRRRR </h1>} />
+								interiorTable={
+									<>
+										<Typography variant="h6" gutterBottom component="div">
+											Sectors and Industries
+									</Typography>
+										<Table size="small" aria-label="purchases">
+											<TableHead>
+												<TableRow>
+													<TableCell>Sector</TableCell>
+													<TableCell>Industries</TableCell>
+												</TableRow>
+											</TableHead>
+											<TableBody>
+												{getSectorAndIndustryDisplay().map((sector) => (
+													<TableRow key={sector.name}>
+														<TableCell component="th" scope="row">
+															{sector.name}
+														</TableCell>
+														<TableCell>{sector.industries.join(', ')}</TableCell>
+													</TableRow>
+												))}
+											</TableBody>
+										</Table>
+									</>} />
 							<PortfolioTableRow
 								name="Basic Metrics"
 								data={getMetricDisplayInfo().map(metric => metric.displayName).join(", ")}
