@@ -98,7 +98,7 @@ export function PortfolioCard(props) {
 				displaySectors.push({ name: sector.name, industries: activeIndustries })
 			}
 		})
-		debugger
+		
 		return displaySectors
 	}
 
@@ -132,7 +132,7 @@ export function PortfolioCard(props) {
 				}
 			})
 		})
-
+		
 		return displayRules
 	}
 

@@ -22,7 +22,12 @@ export default function PortfolioTableRow(props) {
 				<TableCell component="th" scope="row">
 					<Typography style={{ fontWeight: 600 }}>{props.name}</Typography>
 				</TableCell>
-				<TableCell align="left"><Typography>{props.data}</Typography></TableCell>
+				<TableCell align="left">
+					{props.data
+						? <Typography>{props.data}</Typography>
+						: <Typography style={{ fontStyle: "oblique" }}>None</Typography>
+					}
+				</TableCell>
 			</TableRow>
 			<TableRow>
 				<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
