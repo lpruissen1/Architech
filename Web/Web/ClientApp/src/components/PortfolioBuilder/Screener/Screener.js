@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-import CustomIndexClient from '../../Clients/CustomIndexClient';
-import AuthClient from '../../Clients/AuthClient';
-import ScreenerClient from '../../Clients/ScreenerClient';
+import CustomIndexClient from '../../../Clients/CustomIndexClient';
+import AuthClient from '../../../Clients/AuthClient';
+import ScreenerClient from '../../../Clients/ScreenerClient';
 import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
 import UpdateButton from './Subcomponents/UpdateButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
-import { TickerTable } from './Subcomponents/TickerTable';
 import {useParams} from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -125,12 +124,10 @@ export function Screener(props) {
 		}
 	])
 
-	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [inclusions, setInclusions] = useState([])
 	const [exclusions, setExclusions] = useState([])
-	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
 
@@ -258,7 +255,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-			setLoading(true)
+			props.setLoading(true)
 			setChangeMade(true)
 
 			const tickers = await ScreenerClient.postScreeningRequest({
@@ -270,8 +267,8 @@ export function Screener(props) {
 				exclusions: exclusions
 			})
 
-			setTickers(tickers)
-			setLoading(false)
+			props.setTickers(tickers)
+			props.setLoading(false)
 		}
 	}
 
@@ -317,7 +314,7 @@ export function Screener(props) {
 	}
 
 	const updateIndex = () => {
-		CustomIndexClient.UpdateCustomIndex(props.userID, {
+		CustomIndexClient.UpdateCustomIndex(AuthClient.GetIdFromStoredJwt(), {
 			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: index,
 			markets: [
@@ -335,7 +332,6 @@ export function Screener(props) {
 
 	return (
 		<div>
-			<h1 id="tabelLabel" >Screener</h1>
 			<div className='rowThing'>
 				<Card className='screenerCard'>
 					<div>
@@ -366,13 +362,6 @@ export function Screener(props) {
 								handleUpdate={updateIndex} />
 							: <SaveButton
 								handleSave={saveIndex} />}
-					</div>
-				</Card>
-				<Card className='tickerCard'>
-					<div className='tickerTableContainer'>
-						<TickerTable
-							tickers={tickers}
-							loading={loading} />
 					</div>
 				</Card>
 			</div>
