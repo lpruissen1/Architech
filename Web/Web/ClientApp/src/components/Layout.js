@@ -38,8 +38,7 @@ export function Layout(props) {
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} />
 			<Container>
 				<Route exact path='/' component={Home} />
-				<Route exact path='/portfolioBuilder' component={PortfolioBuilder} />
-				<AuthenticatedRoute exact path='/screener/:indexID?' loggedIn={loggedIn} component={() => <Screener userID={userId} />} />
+				<AuthenticatedRoute exact path='/portfolioBuilder' component={PortfolioBuilder} />
 				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
 				<AuthenticatedRoute exact path='/research' component={Research} />
 				<AuthenticatedRoute exact path='/education' component={Education} />

@@ -1,23 +1,23 @@
 ﻿import AppBar from '@material-ui/core/AppBar';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
-import { Weighter } from './Weighting/Weighter';
 import { TickerTable } from './Screener/Subcomponents/TickerTable';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-const useStyles = makeStyles((theme) => ({
-}));
+import { Weighter } from './Weighting/Weighter';
 
 export function PortfolioBuilder(props) {
-	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
 	const [tickers, setTickers] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
+
+	let { indexID } = useParams();
+
+	const [index, setIndex] = useState(indexID)
 
 
 	const handleChange = (event, newValue) => {
