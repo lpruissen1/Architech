@@ -18,10 +18,6 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		textTransform: 'none',
 		fontSize: 16,
-		backgroundColor: theme.palette.primary.main,
-		"&:hover": {
-			backgroundColor: theme.palette.primary.dark
-		}
 	},
 	smallForm: {
 		margin: theme.spacing(1.25),
@@ -213,6 +209,8 @@ export function Registration(props) {
 						onClick={registerUser}
 						className={classes.button}
 						variant="contained"
+						color="primary"
+						style={{ outline: 'none' }}
 						disableElevation> Register </Button>
 					: <Button
 						className={classes.button}

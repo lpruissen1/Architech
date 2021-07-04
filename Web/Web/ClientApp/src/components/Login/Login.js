@@ -17,10 +17,6 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		textTransform: 'none',
 		fontSize: 16,
-		backgroundColor: theme.palette.primary.main,
-		"&:hover": {
-			backgroundColor: theme.palette.primary.dark
-		}
 	},
 	smallForm: {
 		margin: theme.spacing(1.5),
@@ -84,6 +80,8 @@ export function Login(props) {
 					onClick={loginUser}
 					className={classes.button}
 					variant="contained"
+					color="primary"
+					style={{ outline: 'none' }}
 					disableElevation> Login </Button>
 					<p className="registration-link"> Don't have an account? 
 						<Link to="/register">

@@ -39,6 +39,7 @@ export default function MarketSelector(props) {
 						<Button
 							onClick={handleCheck}
 							value={market.value}
+							style={{ outline: 'none' }}
 							className={market.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
 							variant={market.isChecked ? 'contained' : 'outlined'}
 							color={market.isChecked ? 'primary' : 'dimgray'}

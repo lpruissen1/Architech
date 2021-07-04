@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 600,
-		backgroundColor: theme.palette.primary
-	}
 }));
 
 export default function SaveButton(props) {
@@ -36,6 +34,7 @@ export default function SaveButton(props) {
 				variant='contained'
 				color='primary'
 				size="small"
+				style={{ outline: 'none' }}
 				className={checked ? classes.button : classes.buttonSaved}
 				disableElevation
 			>
