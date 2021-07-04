@@ -15,6 +15,10 @@ import Paper from '@material-ui/core/Paper';
 import PortfolioTableRow from './PortfolioTableRow.js';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import SectorAndIndustryTable from './SectorAndIndustryTable';
+import BasicMetricTable from './BasicMetricTable';
+import DeleteModal from './DeleteModal';
+import { get } from 'jquery';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
@@ -23,15 +27,6 @@ export const useStyles = makeStyles((theme) => ({
 	editButton: {
 		color: 'white',
 		marginLeft: 'auto'
-	},
-	modalButtonContinue: {
-		textTransform: 'none',
-		margin: theme.spacing(1),
-	},
-	modalButtonBack: {
-		textTransform: 'none',
-		margin: theme.spacing(1),
-		color: 'dimgrey'
 	},
 	tableHead: {
 		backgroundColor: theme.palette.primary.main,
@@ -72,17 +67,17 @@ export function PortfolioCard(props) {
 
 		// move these into seperate repo
 		const sectors = [
-			{name: "Industrials", industries: ['Aerospace & Defense','Airlines', 'Business Services','Consulting & Outsourcing','Employment Services','Engineering & Construction','Farm & Construction' ,'Industrial Products','Transportation & Logistics','Waste Management']},
-			{name: "Consumer Cyclical", industries: ['Advertising & Marketing Services', 'Autos', 'Entertainment', 'Homebuilding & Construction', 'Manufacturing - Apparel & Furniture', 'Packaging & Containers','Personal Services','Retail - Apparel & Specialty', 'Travel & Leisure']},
-			{name: "Financial Services", industries: ['Asset Management', 'Banks', 'Brokerages & Exchanges', 'Credit Services', 'Insurance', 'Insurance - Life', 'Insurance - Property & Casualty', 'Insurance - Specialty']},
-			{name: "Healthcare", industries: ['Biotechnology', 'Drug Manufacturers', 'Health Care Plans', 'Health Care Providers', 'Medical Devices', 'Medical Diagnostics & Research', 'Medical Distribution', 'Medical Instruments & Equipment']},
-			{name: "Energy", industries: ['Oil & Gas - Drilling', 'Oil & Gas - E&P', 'Oil & Gas - Integrated', 'Oil & Gas - Midstream', 'Oil & Gas - Refining & Marketing', 'Oil & Gas - Services']},
-			{name: "Technology", industries: ['Application Software', 'Communication Equipment', 'Computer Hardware', 'Online Media', 'Semiconductors']},
-			{name: "Basic Materials", industries: ['Agriculture', 'Chemicals', 'Forest Products', 'Metals & Mining', 'Steel']},
-			{name: "Consumer Defensive", industries: ['Beverages - Alcoholic', 'Beverages - Non-Alcoholic', 'Consumer Packaged Goods', 'Tobacco Products', 'Retail - Defensive']},
-			{name: "Utilities", industries: ['Utilities - Independent Power Producers', 'Utilities - Regulated']},
-			{name: "Real Estate", industries: ['REITs']},
-			{name: "Communication Services", industries: ['Communication Services']}
+			{ name: "Industrials", industries: ['Aerospace & Defense', 'Airlines', 'Business Services', 'Consulting & Outsourcing', 'Employment Services', 'Engineering & Construction', 'Farm & Construction', 'Industrial Products', 'Transportation & Logistics', 'Waste Management'] },
+			{ name: "Consumer Cyclical", industries: ['Advertising & Marketing Services', 'Autos', 'Entertainment', 'Homebuilding & Construction', 'Manufacturing - Apparel & Furniture', 'Packaging & Containers', 'Personal Services', 'Retail - Apparel & Specialty', 'Travel & Leisure'] },
+			{ name: "Financial Services", industries: ['Asset Management', 'Banks', 'Brokerages & Exchanges', 'Credit Services', 'Insurance', 'Insurance - Life', 'Insurance - Property & Casualty', 'Insurance - Specialty'] },
+			{ name: "Healthcare", industries: ['Biotechnology', 'Drug Manufacturers', 'Health Care Plans', 'Health Care Providers', 'Medical Devices', 'Medical Diagnostics & Research', 'Medical Distribution', 'Medical Instruments & Equipment'] },
+			{ name: "Energy", industries: ['Oil & Gas - Drilling', 'Oil & Gas - E&P', 'Oil & Gas - Integrated', 'Oil & Gas - Midstream', 'Oil & Gas - Refining & Marketing', 'Oil & Gas - Services'] },
+			{ name: "Technology", industries: ['Application Software', 'Communication Equipment', 'Computer Hardware', 'Online Media', 'Semiconductors'] },
+			{ name: "Basic Materials", industries: ['Agriculture', 'Chemicals', 'Forest Products', 'Metals & Mining', 'Steel'] },
+			{ name: "Consumer Defensive", industries: ['Beverages - Alcoholic', 'Beverages - Non-Alcoholic', 'Consumer Packaged Goods', 'Tobacco Products', 'Retail - Defensive'] },
+			{ name: "Utilities", industries: ['Utilities - Independent Power Producers', 'Utilities - Regulated'] },
+			{ name: "Real Estate", industries: ['REITs'] },
+			{ name: "Communication Services", industries: ['Communication Services'] }
 		]
 
 		const displaySectors = []
@@ -99,12 +94,10 @@ export function PortfolioCard(props) {
 				displaySectors.push({ name: sector.name, industries: activeIndustries })
 			}
 		})
-		
+
 		return displaySectors
 	}
 
-
-	// move these into seperate repo
 	const getMetricDisplayInfo = () => {
 		const prettyNames = [
 			{ ruleType: "MarketCap", displayName: "Market Capitalization" },
@@ -118,7 +111,7 @@ export function PortfolioCard(props) {
 		]
 
 		const displayRules = []
-		
+
 		props.portfolio.rangedRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
@@ -134,7 +127,7 @@ export function PortfolioCard(props) {
 				}
 			})
 		})
-		
+
 		return displayRules
 	}
 
@@ -188,21 +181,11 @@ export function PortfolioCard(props) {
 										onClick={handleEditOnClick}>Edit</Button>
 								</TableCell>
 								<TableCell align="right" className={classes.headCells}>
-									{modal && (
-									<div className="deleteModal">
-										<h2> Are you sure you would like to delete this portfolio? </h2>
-										<p> Deleting an active portfolio will result in all holdings being sold. </p>
-										<Button
-											onClick={handleDelete}
-											color="primary"
-											variant='contained'
-											className={classes.modalButtonContinue}
-											disableElevation> Yes, delete portfolio </Button>
-										<Button
-											onClick={closeModal}
-											variant="outlined"
-											className={classes.modalButtonBack}> No, take me back </Button>
-									</div>)}
+									{modal &&
+										<DeleteModal
+											handleDelete={handleDelete}
+											closeModal={closeModal} />
+									}
 									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete" className={classes.headCells}>
 										<DeleteIcon style={{ color: '#fff' }}/>
 									</IconButton>
@@ -218,66 +201,19 @@ export function PortfolioCard(props) {
 								name="Sectors and Industries"
 								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
 								interiorTable={
-									<>
-										<Typography variant="h6" gutterBottom component="div">
-											Sectors and Industries
-									</Typography>
-										<Table size="small" aria-label="purchases">
-											<TableHead>
-												<TableRow>
-													<TableCell>Sector</TableCell>
-													<TableCell>Industries</TableCell>
-												</TableRow>
-											</TableHead>
-											<TableBody>
-												{getSectorAndIndustryDisplay().map((sector) => (
-													<TableRow key={sector.name}>
-														<TableCell component="th" scope="row">
-															{sector.name}
-														</TableCell>
-														<TableCell>{sector.industries.join(', ')}</TableCell>
-													</TableRow>
-												))}
-											</TableBody>
-										</Table>
-									</>} />
+									<SectorAndIndustryTable
+										getSectorAndIndustryDisplay={getSectorAndIndustryDisplay} />
+								} />
 							<PortfolioTableRow
 								name="Basic Metrics"
 								data={getMetricDisplayInfo().map(metric => metric.displayName).join(", ")}
-								interiorTable={
-									<>
-									<Typography variant="h6" gutterBottom component="div">
-										Basic Metrics
-									</Typography>
-									<Table size="small" aria-label="purchases">
-										<TableHead>
-											<TableRow>
-												<TableCell>Metric Type</TableCell>
-												<TableCell>Min</TableCell>
-												<TableCell>Max</TableCell>
-												<TableCell>Time Period</TableCell>
-											 </TableRow>
-										</TableHead>
-									<TableBody>
-									  {getMetricDisplayInfo().map((metric) => (
-										<TableRow key={metric.displayName}>
-										  <TableCell component="th" scope="row">
-											{metric.displayName}
-										  </TableCell>
-										  <TableCell>{metric.min}</TableCell>
-										  <TableCell>{metric.max}</TableCell>
-										  <TableCell>{metric.timePeriod}</TableCell>
-										</TableRow>
-									  ))}
-									</TableBody>
-									</Table>
-									</>
-								} />
+								interiorTable={<BasicMetricTable
+									getMetricDisplayInfo={getMetricDisplayInfo} />}
+							/>
 						</TableBody>
 					</Table>
 				</TableContainer>
 			</div>
 		</>
-
 	);
 }
