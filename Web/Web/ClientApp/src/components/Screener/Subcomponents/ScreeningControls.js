@@ -1,5 +1,5 @@
 import React from 'react';
-import SectorSelector from './SectorSelector';
+import SectorSelector from './Sector/SectorSelector';
 import BasicRulesSection from "./Rules/BasicRulesSection";
 import MarketSelector from './MarketSelector';
 import Collapsible from 'react-collapsible';

@@ -2,6 +2,7 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import PropTypes from 'prop-types';
 import React from 'react';
 import './SectorSelector.css';
 
@@ -26,5 +27,13 @@ export default function IndustryCheckBoxContent(props) {
 			label={props.label}
 		/>
 	);
+
+}
+
+IndustryCheckBoxContent.propTypes = {
+	isChecked: PropTypes.bool,
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onClick: PropTypes.func
 }
 

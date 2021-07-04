@@ -35,7 +35,7 @@ export default function IndustryCheckBox(props) {
 		let values = event.target.value.split("|")
 		let sector = props.sectors.filter(sector => sector.value === values[0])[0]
 		let targetIndustry = values[1]
-		debugger
+
 		sector.industries && sector.industries.forEach(industry => {
 			if (industry.value === targetIndustry) {
 				industry.isChecked = !industry.isChecked
