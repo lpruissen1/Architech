@@ -42,7 +42,6 @@ const RuleSlider = withStyles({
 			boxShadow: 'inherit',
 		},
 	},
-	active: {},
 	valueLabel: {
 		left: 'calc(-50%)',
 		fontSize: 10,
@@ -97,7 +96,6 @@ export default function TimeRangedRule(props) {
 				<div className={classes.root}>
 					<RuleSlider
 						valueLabelDisplay="auto"
-						aria-label="pretto slider"
 						min={props.option.selectorMin}
 						max={props.option.selectorMax}
 						value={value}
@@ -111,7 +109,7 @@ export default function TimeRangedRule(props) {
 					updateTimePeriod={updateTimePeriod}
 					renderedTimeSpans={props.renderedTimeSpans}/>
 			</div>
-			<IconButton onClick={deleteRule} color="dimgrey" aria-label="delete">
+			<IconButton onClick={deleteRule} aria-label="delete">
 				<DeleteIcon />
 			</IconButton>
 		</div>

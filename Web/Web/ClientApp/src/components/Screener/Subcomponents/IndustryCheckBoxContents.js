@@ -1,9 +1,9 @@
-﻿import React, { useState } from 'react';
-import './SectorSelector.css';
+﻿import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import React from 'react';
+import './SectorSelector.css';
 
 export default function IndustryCheckBoxContent(props) {
 
@@ -11,6 +11,7 @@ export default function IndustryCheckBoxContent(props) {
 		<FormControlLabel
 			control={
 				<Checkbox
+					color='primary'
 					onClick={props.onClick}
 					checked={props.isChecked}
 					value={props.value}

@@ -143,7 +143,11 @@ export function PortfolioCard(props) {
 								<TableCell align="right" style={{ width: '70%'}}>
 									<Button
 										className={classes.editButton}
-										onClick={handleEditOnClick}>Edit</Button>
+										onClick={handleEditOnClick}
+										style={{ outline: 'none' }}
+									>
+										Edit
+									</Button>
 								</TableCell>
 								<TableCell align="right" className={classes.headCells}>
 									{modal &&
@@ -151,7 +155,7 @@ export function PortfolioCard(props) {
 											handleDelete={handleDelete}
 											closeModal={closeModal} />
 									}
-									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete" className={classes.headCells}>
+									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff', outline: 'none' }} aria-label="delete">
 										<DeleteIcon style={{ color: '#fff' }}/>
 									</IconButton>
 								</TableCell>       

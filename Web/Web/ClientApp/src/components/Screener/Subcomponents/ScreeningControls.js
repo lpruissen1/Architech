@@ -6,57 +6,52 @@ import Collapsible from 'react-collapsible';
 import InclusionsExclusions from './InclusionsExclusions';
 import "../Screener.css"
 
-export default class ScreeningControls extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+export default function ScreeningControls(props) {
 
-	render() {
-		return (
-			<div>
-				<Collapsible
-					className='Collapsible'
-					trigger='Markets'
-					open={this.props.collapseOpen}>
-					<MarketSelector
-						markets={this.props.markets}
-						handleUpdate={this.props.handleUpdate}
-					/>
-				</Collapsible>
-				<Collapsible
-					className='Collapsible'
-					trigger="Sectors"
-					open={this.props.collapseOpen}>
-					<SectorSelector
-						sectors={this.props.sectors}
-						handleUpdate={this.props.handleUpdate} />
-				</Collapsible>
-				<Collapsible
-					className='Collapsible'
-					trigger="Basic Metrics"
-					open={this.props.collapseOpen}>
-					<BasicRulesSection
-						rangedRules={this.props.rangedRules}
-						timedRangeRules={this.props.timedRangeRules}
-						handleUpdate={this.props.handleUpdate}
-						handleRangedRuleUpdate={this.props.handleRangedRuleUpdate}
-						handleTimedRangeRuleUpdate={this.props.handleTimedRangeRuleUpdate}
-						deleteRangedRule={this.props.deleteRangedRule}
-						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
-						checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}
-						checkIfTimedRangeRuleExists={this.props.checkIfTimedRangeRuleExists}/>
-				</Collapsible>
-				<InclusionsExclusions
-					inclusions={this.props.inclusions}
-					exclusions={this.props.exclusions}
-					handleUpdate={this.props.handleUpdate}
-					AddInclusion={this.props.AddInclusion}
-					AddExclusion={this.props.AddExclusion}
-					DeleteInclusion={this.props.DeleteInclusion}
-					DeleteExclusion={this.props.DeleteExclusion}
+	return (
+		<>
+			<Collapsible
+				className='Collapsible'
+				trigger='Markets'
+				open={props.collapseOpen}>
+				<MarketSelector
+					markets={props.markets}
+					handleUpdate={props.handleUpdate}
 				/>
-			</div>
-		);
-	}
+			</Collapsible>
+			<Collapsible
+				className='Collapsible'
+				trigger="Sectors"
+				open={props.collapseOpen}>
+				<SectorSelector
+					sectors={props.sectors}
+					handleUpdate={props.handleUpdate} />
+			</Collapsible>
+			<Collapsible
+				className='Collapsible'
+				trigger="Basic Metrics"
+				open={props.collapseOpen}>
+				<BasicRulesSection
+					rangedRules={props.rangedRules}
+					timedRangeRules={props.timedRangeRules}
+					handleUpdate={props.handleUpdate}
+					handleRangedRuleUpdate={props.handleRangedRuleUpdate}
+					handleTimedRangeRuleUpdate={props.handleTimedRangeRuleUpdate}
+					deleteRangedRule={props.deleteRangedRule}
+					deleteTimedRangeRule={props.deleteTimedRangeRule}
+					checkIfRangedRuleExists={props.checkIfRangedRuleExists}
+					checkIfTimedRangeRuleExists={props.checkIfTimedRangeRuleExists} />
+			</Collapsible>
+			<InclusionsExclusions
+				inclusions={props.inclusions}
+				exclusions={props.exclusions}
+				handleUpdate={props.handleUpdate}
+				AddInclusion={props.AddInclusion}
+				AddExclusion={props.AddExclusion}
+				DeleteInclusion={props.DeleteInclusion}
+				DeleteExclusion={props.DeleteExclusion}
+			/>
+		</>
+	)
 }
 

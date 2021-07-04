@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import Loading from './Loading';
 import EmptyTickerTable from './EmptyTickerTable';
 
 export class TickerTable extends Component {
-	constructor(props) {
-		super(props)
-	}
-	static renderStockDataTable(tickers, loading) {
-		if (!Array.isArray(tickers))
-			return "Loading";
 
+	static renderStockDataTable(tickers) {
 		if (tickers.length === 0) 
-			return (<EmptyTickerTable />)
-						
+			return (<EmptyTickerTable />)						
 
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
@@ -22,7 +15,6 @@ export class TickerTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{loading && <Loading />}
 					{tickers.map(stockdatum =>
 						<tr key={stockdatum}><td>{stockdatum}</td></tr>
 					)}
@@ -32,7 +24,7 @@ export class TickerTable extends Component {
 	}
 
 	render() {
-		let contents = TickerTable.renderStockDataTable(this.props.tickers, this.props.loading);
+		let contents = TickerTable.renderStockDataTable(this.props.tickers);
 
 		return (
 			<div>

@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: 'lightgrey',
-		textTransform: 'none',
 		"&:hover": {
 			backgroundColor: "#F1F1F1"
 		}
@@ -31,6 +30,7 @@ export function NewPortfolioCard(props) {
 			onClick={props.onClick}
 			variant="contained"
 			disableElevation
+			style={{ outline: 'none' }}
 			startIcon={<AddIcon />}> Create new blueprint </Button>
 	);
 } 

@@ -1,7 +1,7 @@
-﻿import React, { useState } from 'react';
+﻿import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import './MarketSelector.css';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
@@ -35,14 +35,14 @@ export default function MarketSelector(props) {
 		<div className='flex-market-container'>
 			{props.markets && props.markets.map(market => {
 				return (
-					<div className="marketButtons">
+					<div className="marketButtons" key={market.value}>
 						<Button
 							onClick={handleCheck}
 							value={market.value}
 							style={{ outline: 'none' }}
 							className={market.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
 							variant={market.isChecked ? 'contained' : 'outlined'}
-							color={market.isChecked ? 'primary' : 'dimgray'}
+							color={market.isChecked ? 'primary' : 'default'}
 							disableElevation
 							disableRipple
 						>

@@ -22,7 +22,7 @@ export function Portfolios(props) {
 	const deletePortfolio = async (userId, indexId) => {
 		await CustomIndexClient.deleteCustomIndexRequest(userId, indexId)
 
-		let temp = portfolios.filter(x => x.indexId != indexId);
+		let temp = portfolios.filter(x => x.indexId !== indexId);
 
 		setPortfolios(temp)
 	}

@@ -91,7 +91,6 @@ export default function RangedRule(props) {
 					<div className={classes.root}>
 						<RuleSlider
 							valueLabelDisplay="auto"
-							aria-label="pretto slider"
 							min={props.option.selectorMin}
 							max={props.option.selectorMax}
 							value={value}
@@ -102,7 +101,7 @@ export default function RangedRule(props) {
 				</div>
 				<div>
 				</div>
-				<IconButton onClick={deleteRule} color="dimgrey" aria-label="delete">
+				<IconButton onClick={deleteRule} aria-label="delete">
 					<DeleteIcon />
 				</IconButton>
 			</div>

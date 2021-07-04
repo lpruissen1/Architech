@@ -1,35 +1,12 @@
-﻿import React, { useState } from 'react';
-import './SectorSelector.css';
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
+﻿import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import React from 'react';
 import IndustryCheckBoxContent from './IndustryCheckBoxContents.js';
-
-
-const useStyles = makeStyles((theme) => ({
-	checkbox: {
-		color: '#696969',
-		'&$checked': {
-			color: theme.palette.primary.main,
-			backgroundColor: "transparent !important",
-		'&:hover': {
-			backgroundColor: 'transparent !important'
-		}
-	},
-	iconButton: {
-		"&:hover": {
-			backgroundColor: "green"
-		}
-	},
-	checked: {},
-	},
-}));
+import './SectorSelector.css';
 
 export default function IndustryCheckBox(props) {
-	const classes = useStyles();
-
 	const handleOnClick = (event) => {
 
 		let values = event.target.value.split("|")
@@ -67,7 +44,7 @@ export default function IndustryCheckBox(props) {
 			>
 			{props.sectors && props.sectors.map(sector => {
 				return (
-					<Grid item xs={4}>
+					<Grid item xs={4} key={sector.value}>
 						<FormControl>
 							<FormLabel
 								className='industryLabel'
@@ -77,8 +54,8 @@ export default function IndustryCheckBox(props) {
 							<FormGroup>
 								{sector.industries && sector.industries.map(industry => {
 									return (
-										<IndustryCheckBoxContent
-											className={classes.checkbox}
+										<IndustryCheckBoxContent 
+											key={industry.value}
 											isChecked={industry.isChecked}
 											value={sector.value + "|" + industry.value}
 											onClick={handleOnClick}

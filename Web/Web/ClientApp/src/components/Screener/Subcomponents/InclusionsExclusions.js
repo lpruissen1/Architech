@@ -42,6 +42,7 @@ export default function InclusionExclusion(props) {
 		let response = await StockInformationClient.GetAllTickers()
 		setOptions(response)
 	}
+
 	const onClick = (event) => {
 		setRenderFields(!renderFields)
 	}
@@ -62,7 +63,7 @@ export default function InclusionExclusion(props) {
 		props.DeleteExclusion(ticker)
 	}
 
-	useEffect(() => GetOptions(), []);
+	useEffect(() => { GetOptions() }, []);
 
 	return (
 		<div className='inclusion-exclusion-container'>
@@ -123,7 +124,6 @@ export default function InclusionExclusion(props) {
 												className={classes.chip}
 												key={ticker}
 												label={ticker}
-												variant='contained'
 												onDelete={() => inclusionDelete(ticker)}
 										/>)
 								})
@@ -142,7 +142,6 @@ export default function InclusionExclusion(props) {
 											className={classes.chip}
 											key={ticker}
 											label={ticker}
-											variant='contained'
 											onDelete={() => exclusionDelete(ticker)}
 										/>)
 								})

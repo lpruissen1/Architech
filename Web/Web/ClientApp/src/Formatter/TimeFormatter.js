@@ -9,7 +9,7 @@ const TimePeriodFormatter = (timePeriod) => {
 	else if (timePeriod === 'Year') {
 		return 'One Year'
 	}
-	else if (timePeriod === "ThreeYears") {
+	else if (timePeriod === "ThreeYear") {
 		return "Three Years"
 	}
 	else

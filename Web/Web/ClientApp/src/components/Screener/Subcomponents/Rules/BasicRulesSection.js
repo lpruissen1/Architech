@@ -63,20 +63,20 @@ export default class BasicRulesSection extends React.Component {
 
 		this.props.rangedRules && this.props.rangedRules.map((rule) =>
 			appendedComponents.push(
-				<>
+				<div key={rule.id}>
 					<RangedRule
 						option={this.state.options.find(option => option.value === rule.ruleType)}
 						rule={rule}
 						handleUpdate={this.props.handleUpdate}
 						deleteRangedRule={this.props.deleteRangedRule}/>
 					<br />
-				</>
+				</div>
 			)
 		)
 
 		this.props.timedRangeRules && this.props.timedRangeRules.map((rule) =>
 			appendedComponents.push(
-				<>
+				<div key={rule.id}>
 					<TimedRangeRule
 						option={this.state.options.find(option => option.value === rule.ruleType)}
 						rule={rule}
@@ -84,7 +84,7 @@ export default class BasicRulesSection extends React.Component {
 						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
 						renderedTimeSpans={this.props.checkIfTimedRangeRuleExists(rule.ruleType)}/>
 					<br />
-				</>
+				</div>
 			)
 		)
 
