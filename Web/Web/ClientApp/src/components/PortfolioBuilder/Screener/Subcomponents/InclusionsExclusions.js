@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect  } from 'react';
 import './InclusionsExclusions.css';
 import StockPicker from './StockPickerAutocomplete.js';
-import StockInformationClient from '../../../Clients/StockInformationClient';
+import StockInformationClient from '../../../../Clients/StockInformationClient';
 
 
 const useStyles = makeStyles((theme) => ({
