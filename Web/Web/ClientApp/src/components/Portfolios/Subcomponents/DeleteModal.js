@@ -1,19 +1,14 @@
-﻿import React, { useState } from 'react';
+﻿import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import './NewPortfolioCard.css';
 import './PortfolioCard.css';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-	modalButtonContinue: {
+	modalButton: {
 		textTransform: 'none',
 		margin: theme.spacing(1),
-	},
-	modalButtonBack: {
-		textTransform: 'none',
-		margin: theme.spacing(1),
-		color: 'dimgrey'
 	}
 }));
 
@@ -29,12 +24,12 @@ export default function DeleteModal(props) {
 				onClick={props.handleDelete}
 				color="primary"
 				variant='contained'
-				className={classes.modalButtonContinue}
+				className={classes.modalButton}
 				disableElevation> Yes, delete portfolio </Button>
 			<Button
 				onClick={props.closeModal}
 				variant="outlined"
-				className={classes.modalButtonBack}> No, take me back </Button>
+				className={classes.modalButton}> No, take me back </Button>
 		</div>
 	)
 }
