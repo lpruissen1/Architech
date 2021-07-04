@@ -1,0 +1,22 @@
+﻿.inclusion-exclusion-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.inclusion-exclusion-contents{
+	margin-top: 30px;
+}
+
+.list {
+	margin-left: 5%;
+}
+
+.chip-container {
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+	list-style: none; 
+}
+
+
