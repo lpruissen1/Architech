@@ -1,7 +1,6 @@
-﻿import React, { useState } from 'react'
-import Button from '@material-ui/core/Button';
+﻿import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -18,7 +17,7 @@ export default function UpdateButton(props) {
 
 	return (
 		<>
-			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossOrigin="anonymous" />
 			<Button
 				onClick={props.handleUpdate}
 				variant='contained'

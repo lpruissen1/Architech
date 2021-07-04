@@ -30,6 +30,7 @@ export function NewPortfolioCard(props) {
 			onClick={props.onClick}
 			variant="contained"
 			disableElevation
+			style={{ outline: 'none' }}
 			startIcon={<AddIcon />}> Create new blueprint </Button>
 	);
 } 
