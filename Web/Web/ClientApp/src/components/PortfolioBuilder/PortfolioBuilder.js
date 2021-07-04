@@ -7,12 +7,10 @@ import React from 'react';
 import { Screener } from './Screener/Screener';
 import { Weighter } from './Weighting/Weighter';
 import { TickerTable } from './Screener/Subcomponents/TickerTable';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		backgroundColor: theme.palette.background.paper,
-	},
 }));
 
 export function PortfolioBuilder(props) {
@@ -27,32 +25,36 @@ export function PortfolioBuilder(props) {
 	};
 
 	return (
-		<div className={classes.root}>
-			<AppBar position="static">
-				<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-					<Tab label="Screening" />
-					<Tab label="Weighting" />
-					<Tab label="BackTesting" />
-				</Tabs>
-			</AppBar>
-			<TabPanel value={value} index={0}>
-				<Screener setLoading={setLoading} setTickers={setTickers}/>
-			</TabPanel>
-			<TabPanel value={value} index={1}>
-				<Weighter />
-			</TabPanel>
-			<TabPanel value={value} index={2}>
-				Item Three
-			</TabPanel>
-			<div className='tickerTableContainer'>
-				<div className='tickerCard'>
-					<TickerTable
-						tickers={tickers}
-						loading={loading}
-					/>
-				</div>
-			</div>
-		</div>
+			<Grid container spacing={3}>
+				<Grid item xs={9}>
+					<Paper>
+						<AppBar position="static">
+							<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+								<Tab label="Screening" />
+								<Tab label="Weighting" />
+								<Tab label="BackTesting" />
+							</Tabs>
+						</AppBar>
+						<TabPanel value={value} index={0}>
+							<Screener setLoading={setLoading} setTickers={setTickers}/>
+						</TabPanel>
+						<TabPanel value={value} index={1}>
+							<Weighter />
+						</TabPanel>
+						<TabPanel value={value} index={2}>
+							Item Three
+						</TabPanel>
+					</Paper>
+				</Grid>
+				<Grid item xs={3}>
+					<Paper>
+						<TickerTable
+							tickers={tickers}
+							loading={loading}
+						/>
+					</Paper>
+				</Grid>
+			</Grid>
 	);
 }
 

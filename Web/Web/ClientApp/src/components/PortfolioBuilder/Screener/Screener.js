@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import CustomIndexClient from '../../../Clients/CustomIndexClient';
-import AuthClient from '../../../Clients/AuthClient';
-import ScreenerClient from '../../../Clients/ScreenerClient';
-import './Screener.css';
-import SaveButton from './Subcomponents/SaveButton';
-import UpdateButton from './Subcomponents/UpdateButton';
-import ScreeningControls from './Subcomponents/ScreeningControls';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import AuthClient from '../../../Clients/AuthClient';
+import CustomIndexClient from '../../../Clients/CustomIndexClient';
+import ScreenerClient from '../../../Clients/ScreenerClient';
+import SaveButton from './Subcomponents/SaveButton';
+import ScreeningControls from './Subcomponents/ScreeningControls';
+import UpdateButton from './Subcomponents/UpdateButton';
 
 export function Screener(props) {
 	const [markets, setMarkets] = useState([
@@ -332,39 +330,34 @@ export function Screener(props) {
 
 	return (
 		<div>
-			<div className='rowThing'>
-				<Card className='screenerCard'>
-					<div>
-						<ScreeningControls
-							sectors={sectors}
-							rangedRules={rangedRules}
-							timedRangeRules={timedRangeRules}
-							handleUpdate={screen}
-							handleRangedRuleUpdate={handleRangedRuleUpdate}
-							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
-							collapseOpen={collapseOpen}
-							deleteRangedRule={deleteRangedRule}
-							deleteTimedRangeRule={deleteTimedRangeRule}
-							checkIfRangedRuleExists={checkIfRangedRuleExists}
-							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
-							inclusions={inclusions}
-							exclusions={exclusions}
-							markets={markets}
-							AddInclusion={handleInclusionAddition}
-							DeleteInclusion={handleInclusionDelete}
-							AddExclusion={handleExclusionAddition}
-							DeleteExclusion={handleExclusionDelete}
-						/>
-						<br/>
-						{indexID
-							? <UpdateButton
-								changeMade={changeMade}
-								handleUpdate={updateIndex} />
-							: <SaveButton
-								handleSave={saveIndex} />}
-					</div>
-				</Card>
-			</div>
+			<ScreeningControls
+				sectors={sectors}
+				rangedRules={rangedRules}
+				timedRangeRules={timedRangeRules}
+				handleUpdate={screen}
+				handleRangedRuleUpdate={handleRangedRuleUpdate}
+				handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
+				collapseOpen={collapseOpen}
+				deleteRangedRule={deleteRangedRule}
+				deleteTimedRangeRule={deleteTimedRangeRule}
+				checkIfRangedRuleExists={checkIfRangedRuleExists}
+				checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+				inclusions={inclusions}
+				exclusions={exclusions}
+				markets={markets}
+				AddInclusion={handleInclusionAddition}
+				DeleteInclusion={handleInclusionDelete}
+				AddExclusion={handleExclusionAddition}
+				DeleteExclusion={handleExclusionDelete}
+			/>
+			<br/>
+			{indexID
+				? <UpdateButton
+					changeMade={changeMade}
+					handleUpdate={updateIndex} />
+				: <SaveButton
+					handleSave={saveIndex} />
+			}
 		</div>
 	)
 }

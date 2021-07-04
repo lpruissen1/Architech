@@ -1,36 +1,27 @@
+import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import SectorSelector from './SectorSelector';
-import BasicRulesSection from "./Rules/BasicRulesSection";
-import MarketSelector from './MarketSelector';
-import Collapsible from 'react-collapsible';
 import InclusionsExclusions from './InclusionsExclusions';
-import "../Screener.css"
+import MarketSelector from './MarketSelector';
+import BasicRulesSection from "./Rules/BasicRulesSection";
+import SectorSelector from './SectorSelector';
 
 export default function ScreeningControls(props) {
 
 	return (
-		<>
-			<Collapsible
-				className='Collapsible'
-				trigger='Markets'
-				open={props.collapseOpen}>
+		<Grid container spacing={1}>
+			<Grid item xs={12}>
 				<MarketSelector
 					markets={props.markets}
 					handleUpdate={props.handleUpdate}
 				/>
-			</Collapsible>
-			<Collapsible
-				className='Collapsible'
-				trigger="Sectors"
-				open={props.collapseOpen}>
+			</Grid>
+			<Grid item xs={12}>
 				<SectorSelector
 					sectors={props.sectors}
-					handleUpdate={props.handleUpdate} />
-			</Collapsible>
-			<Collapsible
-				className='Collapsible'
-				trigger="Basic Metrics"
-				open={props.collapseOpen}>
+					handleUpdate={props.handleUpdate}
+				/>
+			</Grid>
+			<Grid item xs={12}>
 				<BasicRulesSection
 					rangedRules={props.rangedRules}
 					timedRangeRules={props.timedRangeRules}
@@ -40,18 +31,21 @@ export default function ScreeningControls(props) {
 					deleteRangedRule={props.deleteRangedRule}
 					deleteTimedRangeRule={props.deleteTimedRangeRule}
 					checkIfRangedRuleExists={props.checkIfRangedRuleExists}
-					checkIfTimedRangeRuleExists={props.checkIfTimedRangeRuleExists} />
-			</Collapsible>
-			<InclusionsExclusions
-				inclusions={props.inclusions}
-				exclusions={props.exclusions}
-				handleUpdate={props.handleUpdate}
-				AddInclusion={props.AddInclusion}
-				AddExclusion={props.AddExclusion}
-				DeleteInclusion={props.DeleteInclusion}
-				DeleteExclusion={props.DeleteExclusion}
-			/>
-		</>
+					checkIfTimedRangeRuleExists={props.checkIfTimedRangeRuleExists}
+				/>
+			</Grid>
+			<Grid item xs={12}>
+				<InclusionsExclusions
+					inclusions={props.inclusions}
+					exclusions={props.exclusions}
+					handleUpdate={props.handleUpdate}
+					AddInclusion={props.AddInclusion}
+					AddExclusion={props.AddExclusion}
+					DeleteInclusion={props.DeleteInclusion}
+					DeleteExclusion={props.DeleteExclusion}
+				/>
+			</Grid>
+		</Grid>
 	)
 }
 
