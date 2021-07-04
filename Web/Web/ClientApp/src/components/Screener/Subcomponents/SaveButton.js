@@ -23,7 +23,7 @@ export default function SaveButton(props) {
 
 	return (
 		<>
-			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossOrigin="anonymous" />
 			<Button
 				onClick={handleSaveClick}
 				variant='contained'

@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 16,
 		backgroundColor: 'lightgrey',
-		textTransform: 'none',
 		"&:hover": {
 			backgroundColor: "#F1F1F1"
 		}

@@ -14,9 +14,9 @@ import { v4 as uuidv4 } from 'uuid';
 export function Screener(props) {
 	const [markets, setMarkets] = useState([
 		{ value: 'Sp500', displayName: 'S&P 500', isChecked: true },
-		{ value: '', displayName: 'Useless', isChecked: true },
-		{ value: '', displayName: 'Useless', isChecked: true },
-		{ value: '', displayName: 'Useless', isChecked: true }])
+		{ value: 'Useless1', displayName: 'Useless1', isChecked: true },
+		{ value: 'Useless2', displayName: 'Useless2', isChecked: true },
+		{ value: 'Useless3', displayName: 'Useless3', isChecked: true }])
 
 	const [sectors, setSectors] = useState([
 		{
@@ -170,16 +170,7 @@ export function Screener(props) {
 	}
 
 	const handleRangedRuleUpdate = (rule) => {
-		const rules = rangedRules;
-
-		if (!rules.find(function (existingRule, index) {
-			if (existingRule.id === rule.id)
-				return true;
-		})) {
-			// if new rule 
-			setRangedRules([...rangedRules, rule])
-		}
-		screen()
+		setRangedRules([...rangedRules, rule])
 	}
 
 	const handleTimedRangeRuleUpdate = (rule) => {
@@ -224,7 +215,7 @@ export function Screener(props) {
 	}
 
 	const checkIfTimedRangeRuleExists = (rule) => {
-		const possibleTimeSpans = ['Quarter', 'HalfYear', 'Year', 'ThreeYears', 'FiveYears']
+		const possibleTimeSpans = ['Quarter', 'HalfYear', 'Year', 'ThreeYear', 'FiveYear']
 
 		const selectedTimeSpans = getTimePeriodsForTimedRangeRule(rule)
 		const renderedTimeSpans = possibleTimeSpans.filter(timeSpan => !selectedTimeSpans.includes(timeSpan))

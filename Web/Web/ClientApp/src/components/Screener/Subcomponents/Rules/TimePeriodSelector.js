@@ -1,9 +1,9 @@
-﻿import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+﻿import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -20,8 +20,8 @@ export default function TimePeriodSelector(props) {
 		{ value: 'Quarter', displayName: 'One Quarter' },
 		{ value: 'HalfYear', displayName: 'Two Quarters' },
 		{ value: 'Year', displayName: 'One Year' },
-		{ value: 'ThreeYears', displayName: 'Three Years' },
-		{ value: 'FiveYears', displayName: 'Five Years' }])
+		{ value: 'ThreeYear', displayName: 'Three Years' },
+		{ value: 'FiveYear', displayName: 'Five Years' }])
 
 	const handleTimePeriodUpdate = (event) => {
 		handleChange(event)
@@ -47,6 +47,7 @@ export default function TimePeriodSelector(props) {
 		for (let i = 0; i < timeSpans.length; i++) {
 			appendedComponents.push(
 				<MenuItem
+					key={timeSpans[i].value}
 					value={timeSpans[i].value}
 					disabled={!props.renderedTimeSpans.includes(timeSpans[i].value)}>{timeSpans[i].displayName}</MenuItem>
 			)

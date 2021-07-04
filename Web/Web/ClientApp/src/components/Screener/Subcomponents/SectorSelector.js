@@ -5,9 +5,6 @@ import React, { useState } from "react";
 import IndustryCheckBox from './IndustryCheckBox.js';
 import './SectorSelector.css';
 
-
-
-
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
 		textTransform: 'none',
@@ -145,7 +142,7 @@ export default function SectorSelector(props) {
 					props.sectors && props.sectors.map((sector) => {
 						let style = GetSectorButtonStyle(sector.isChecked) 
 						return (
-						<Grid item xs={3}>
+						<Grid item xs={3} key={sector.value}>
 							<Button
 								className={style.className}
 								key={sector.value}

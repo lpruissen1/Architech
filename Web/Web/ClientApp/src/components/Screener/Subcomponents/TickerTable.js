@@ -22,7 +22,7 @@ export class TickerTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{loading && <Loading />}
+					{loading && <tr><td><Loading /></td></tr>}
 					{tickers.map(stockdatum =>
 						<tr key={stockdatum}><td>{stockdatum}</td></tr>
 					)}

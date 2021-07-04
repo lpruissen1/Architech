@@ -151,7 +151,7 @@ export function PortfolioCard(props) {
 											handleDelete={handleDelete}
 											closeModal={closeModal} />
 									}
-									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete" className={classes.headCells}>
+									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete">
 										<DeleteIcon style={{ color: '#fff' }}/>
 									</IconButton>
 								</TableCell>       
