@@ -18,7 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import SectorAndIndustryTable from './SectorAndIndustryTable';
 import BasicMetricTable from './BasicMetricTable';
 import DeleteModal from './DeleteModal';
-import { get } from 'jquery';
+import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
+import NumberFormatter from '../../../Formatter/NumberFormatter';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
@@ -115,7 +116,7 @@ export function PortfolioCard(props) {
 		props.portfolio.rangedRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: '' })
+					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: '' })
 				}
 			})
 		})
@@ -123,48 +124,12 @@ export function PortfolioCard(props) {
 		props.portfolio.timedRangeRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					displayRules.push({ displayName: name.displayName, min: numFormatter(rule.lower), max: numFormatter(rule.upper), timePeriod: timePeriodFormatter(rule.timePeriod) })
+					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: TimePeriodFormatter(rule.timePeriod) })
 				}
 			})
 		})
 
 		return displayRules
-	}
-
-	// Fix this to take the ruletype and value and return proper formatting (e.g. %, $, etc.)
-	// as well as this
-	const numFormatter = (num) => {
-		if (num > 1000000 && num < 1000000000) {
-			return '$' + (num / 1000000).toFixed(0) + 'M';
-		} else if (num >= 1000000000 && num < 1000000000000) {
-			return '$' + (num / 1000000000).toFixed(0) + 'B';
-		} else if (num >= 1000000000000) {
-			return '$' + (num / 1000000000000).toFixed(2) + 'T';
-		} else if (num > 9999 && num < 100000) {
-			return '< $0.1M';
-		} else if (num < 10000) {
-			return '$' + num
-		}
-	}
-
-	// this can be broken out 
-	const timePeriodFormatter = (timePeriod) => {
-		if (timePeriod === 'Quarter') {
-			return 'One Quarter'
-		}
-		else if (timePeriod === 'HalfYear') {
-			return 'Two Quarters'
-		}
-		else if (timePeriod === 'Year') {
-			return 'One Year'
-		}
-		else if (timePeriod === "ThreeYears") {
-			return "Three Years"
-		}
-		else if(timePeriod === "FiveYears")
-			return "Five Years"
-
-		return "Nan"
 	}
 
 	return (

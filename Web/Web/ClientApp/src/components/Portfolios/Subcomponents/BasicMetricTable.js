@@ -17,9 +17,9 @@ export default function BasicMetricTable(props) {
 			<TableHead>
 				<TableRow>
 					<TableCell>Metric Type</TableCell>
-					<TableCell>Min</TableCell>
-					<TableCell>Max</TableCell>
-					<TableCell>Time Period</TableCell>
+					<TableCell align='right'>Min</TableCell>
+					<TableCell align='right'>Max</TableCell>
+					<TableCell align='right'>Time Period</TableCell>
 				</TableRow>
 			</TableHead>
 			<TableBody>
@@ -28,9 +28,9 @@ export default function BasicMetricTable(props) {
 						<TableCell component="th" scope="row">
 							{metric.displayName}
 						</TableCell>
-						<TableCell>{metric.min}</TableCell>
-						<TableCell>{metric.max}</TableCell>
-						<TableCell>{metric.timePeriod}</TableCell>
+						<TableCell align='right'>{metric.min}</TableCell>
+						<TableCell align='right'>{metric.max}</TableCell>
+						<TableCell align='right'>{metric.timePeriod}</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
