@@ -9,13 +9,6 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 600, 
-	},
-	buttonSaved: {
-		margin: theme.spacing(1),
-		textTransform: 'none',
-		fontSize: 14,
-		fontWeight: 600,
-		backgroundColor: theme.palette.primary
 	}
 }));
 
@@ -36,7 +29,8 @@ export default function SaveButton(props) {
 				variant='contained'
 				color='primary'
 				size="small"
-				className={checked ? classes.button : classes.buttonSaved}
+				style={{ outline: 'none' }}
+				className={classes.button}
 				disableElevation
 			>
 				{checked ? 'Save Index' : 'Saved'}

@@ -16,7 +16,7 @@ export default class BasicRulesSection extends React.Component {
 			{ displayName: "Price to Sales Ratio (ttm)", value: "PriceToSalesRatioTTM", type: "ranged", selectorMin: 0, selectorMax: 250 },
 			{ displayName: "Revenue Growth (annualized)", value: "RevenueGrowthAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 1000 },
 			{ displayName: "EPS Growth (annualized)", value: "EPSGrowthAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 1000 },
-			{ displayName: "Trailing Performance (annualized)", value: "TrailingPerformanceAnnualized", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 2000 },
+			{ displayName: "Trailing Performance (annualized)", value: "AnnualizedTrailingPerformance", type: "timedRange", timePeriod: "", selectorMin: -100, selectorMax: 2000 },
 			{ displayName: "Coefficient of Variation", value: "CoefficientOfVariation", type: "timedRange", timePeriod: "", selectorMin: 0, selectorMax: 10 }
 		]
 	};

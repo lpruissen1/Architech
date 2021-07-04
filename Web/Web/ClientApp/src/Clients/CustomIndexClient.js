@@ -22,6 +22,7 @@ class CustomIndexClient {
 					indexId: portfolio.indexId,
 					markets: portfolio.markets,
 					sectors: portfolio.sectors,
+					industries: portfolio.industries,
 					rangedRules: portfolio.rangedRule,
 					timedRangeRules: portfolio.timedRangeRule
 				}

@@ -2,10 +2,24 @@
 import './NewPortfolioCard.css';
 import './PortfolioCard.css';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import PortfolioTableRow from './PortfolioTableRow.js';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import SectorAndIndustryTable from './SectorAndIndustryTable';
+import BasicMetricTable from './BasicMetricTable';
+import DeleteModal from './DeleteModal';
+import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
+import NumberFormatter from '../../../Formatter/NumberFormatter';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
@@ -15,23 +29,22 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		marginLeft: 'auto'
 	},
-	modalButtonContinue: {
-		textTransform: 'none',
-		margin: theme.spacing(1),
+	tableHead: {
+		backgroundColor: theme.palette.primary.main,
 	},
-	modalButtonBack: {
-		textTransform: 'none',
-		margin: theme.spacing(1),
-		color: 'dimgrey'
+	headCells: {
+		paddingTop: 0,
+		paddingBottom: 0,
 	}
 }));
 
 export function PortfolioCard(props) {
 	const [modal, setModal] = useState(false)
 	const history = useHistory();
-	const handleOnClick = () => {
+	const handleEditOnClick = () => {
 		history.push({
 			pathname: `/screener/${props.portfolio.indexId}`,
+			state: { markets: 'Hello world' }
 		});
 	}
 
@@ -51,53 +64,121 @@ export function PortfolioCard(props) {
 		setModal(false)
 	}
 
+	const getSectorAndIndustryDisplay = () => {
+
+		// move these into seperate repo
+		const sectors = [
+			{ name: "Industrials", industries: ['Aerospace & Defense', 'Airlines', 'Business Services', 'Consulting & Outsourcing', 'Employment Services', 'Engineering & Construction', 'Farm & Construction', 'Industrial Products', 'Transportation & Logistics', 'Waste Management'] },
+			{ name: "Consumer Cyclical", industries: ['Advertising & Marketing Services', 'Autos', 'Entertainment', 'Homebuilding & Construction', 'Manufacturing - Apparel & Furniture', 'Packaging & Containers', 'Personal Services', 'Retail - Apparel & Specialty', 'Travel & Leisure'] },
+			{ name: "Financial Services", industries: ['Asset Management', 'Banks', 'Brokerages & Exchanges', 'Credit Services', 'Insurance', 'Insurance - Life', 'Insurance - Property & Casualty', 'Insurance - Specialty'] },
+			{ name: "Healthcare", industries: ['Biotechnology', 'Drug Manufacturers', 'Health Care Plans', 'Health Care Providers', 'Medical Devices', 'Medical Diagnostics & Research', 'Medical Distribution', 'Medical Instruments & Equipment'] },
+			{ name: "Energy", industries: ['Oil & Gas - Drilling', 'Oil & Gas - E&P', 'Oil & Gas - Integrated', 'Oil & Gas - Midstream', 'Oil & Gas - Refining & Marketing', 'Oil & Gas - Services'] },
+			{ name: "Technology", industries: ['Application Software', 'Communication Equipment', 'Computer Hardware', 'Online Media', 'Semiconductors'] },
+			{ name: "Basic Materials", industries: ['Agriculture', 'Chemicals', 'Forest Products', 'Metals & Mining', 'Steel'] },
+			{ name: "Consumer Defensive", industries: ['Beverages - Alcoholic', 'Beverages - Non-Alcoholic', 'Consumer Packaged Goods', 'Tobacco Products', 'Retail - Defensive'] },
+			{ name: "Utilities", industries: ['Utilities - Independent Power Producers', 'Utilities - Regulated'] },
+			{ name: "Real Estate", industries: ['REITs'] },
+			{ name: "Communication Services", industries: ['Communication Services'] }
+		]
+
+		const displaySectors = []
+
+		sectors.forEach(sector => {
+			const activeIndustries = []
+			sector.industries.forEach(industry => {
+				if (props.portfolio.industries.includes(industry)) {
+					activeIndustries.push(industry)
+				}
+			})
+
+			if (activeIndustries.length > 0) {
+				displaySectors.push({ name: sector.name, industries: activeIndustries })
+			}
+		})
+
+		return displaySectors
+	}
+
+	const getMetricDisplayInfo = () => {
+		const prettyNames = [
+			{ ruleType: "MarketCap", displayName: "Market Capitalization" },
+			{ ruleType: "DividendYield", displayName: "Dividend Yield" },
+			{ ruleType: "PriceToEarningsRatioTTM", displayName: "Price To Earnings Ratio (ttm)" },
+			{ ruleType: "PriceToSalesRatioTTM", displayName: "Price To Sales Ratio (ttm)" },
+			{ ruleType: "RevenueGrowthAnnualized", displayName: "Revenue Growth (annualized)" },
+			{ ruleType: "EPSGrowthAnnualized", displayName: "EPS Growth (annualized)" },
+			{ ruleType: "AnnualizedTrailingPerformance", displayName: "Trailing Performance (annualized)" },
+			{ ruleType: "CoefficientOfVariation", displayName: "Coefficient of Variation" },
+		]
+
+		const displayRules = []
+
+		props.portfolio.rangedRules.forEach(rule => {
+			prettyNames.forEach(name => {
+				if (name.ruleType === rule.ruleType) {
+					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: '' })
+				}
+			})
+		})
+
+		props.portfolio.timedRangeRules.forEach(rule => {
+			prettyNames.forEach(name => {
+				if (name.ruleType === rule.ruleType) {
+					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: TimePeriodFormatter(rule.timePeriod) })
+				}
+			})
+		})
+
+		return displayRules
+	}
+
 	return (
 		<>
 			<div className="portfolioCard">
-				<table>
-					<tr>
-						<th colSpan="2">
-							<div className="header">
-								<h2>Blueprint Name</h2>
-								<Button className={classes.editButton} onClick={handleOnClick}>
-									Edit
-								</Button>
-								{modal && (
-									<div className="deleteModal">
-										<h2> Are you sure you would like to delete this portfolio? </h2>
-										<p> Deleting an active portfolio will result in all holdings being sold. </p>
-										<Button
-											onClick={handleDelete}
-											color="primary"
-											variant='contained'
-											className={classes.modalButtonContinue}
-											disableElevation> Yes, delete portfolio </Button>
-										<Button
-											onClick={closeModal}
-											variant="outlined"
-											className={classes.modalButtonBack}> No, take me back </Button>
-									</div>)}
-								<IconButton className={classes.deleteButton} onClick={renderModal} color="white" aria-label="delete">
-									<DeleteIcon />
-								</IconButton>
-							</div>
-						</th>
-					</tr>
-					<tr>
-						<td>Sectors:</td>
-						<td>{props.portfolio.sectors}</td>
-					</tr>
-					<tr>
-						<td>Industries:</td>
-						<td>{props.portfolio.industries}</td>
-					</tr>
-					<tr>
-						<td>Basic Metrics:</td>
-						<td></td>
-					</tr>
-				</table>
+				<TableContainer component={Paper}>
+					<Table aria-label="collapsible table" size="small">
+						<TableHead className={classes.tableHead}>
+							<TableRow>
+								<TableCell className={classes.headCells} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
+								<TableCell align="right" style={{ width: '70%'}}>
+									<Button
+										className={classes.editButton}
+										onClick={handleEditOnClick}>Edit</Button>
+								</TableCell>
+								<TableCell align="right" className={classes.headCells}>
+									{modal &&
+										<DeleteModal
+											handleDelete={handleDelete}
+											closeModal={closeModal} />
+									}
+									<IconButton className={classes.deleteButton} onClick={renderModal} style={{color: '#fff' }} aria-label="delete" className={classes.headCells}>
+										<DeleteIcon style={{ color: '#fff' }}/>
+									</IconButton>
+								</TableCell>       
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							<PortfolioTableRow
+								name="Markets"
+								data={props.portfolio.markets.join(", ")}
+								interiorTable={<h1> Blahhhh </h1>} />
+							<PortfolioTableRow
+								name="Sectors and Industries"
+								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
+								interiorTable={
+									<SectorAndIndustryTable
+										getSectorAndIndustryDisplay={getSectorAndIndustryDisplay} />
+								} />
+							<PortfolioTableRow
+								name="Basic Metrics"
+								data={getMetricDisplayInfo().map(metric => metric.displayName).join(", ")}
+								interiorTable={<BasicMetricTable
+									getMetricDisplayInfo={getMetricDisplayInfo} />}
+							/>
+						</TableBody>
+					</Table>
+				</TableContainer>
 			</div>
 		</>
-
 	);
 }

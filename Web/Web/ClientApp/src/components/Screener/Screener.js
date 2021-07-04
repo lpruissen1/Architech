@@ -20,39 +20,6 @@ export function Screener(props) {
 
 	const [sectors, setSectors] = useState([
 		{
-			value: "Healthcare", isChecked: "unchecked", industries: [
-				{ value: 'Biotechnology', isChecked: false },
-				{ value: 'Drug Manufacturers', isChecked: false },
-				{ value: 'Health Care Plans', isChecked: false },
-				{ value: 'Health Care Providers', isChecked: false },
-				{ value: 'Medical Devices', isChecked: false },
-				{ value: 'Medical Diagnostics & Research', isChecked: false },
-				{ value: 'Medical Distribution', isChecked: false },
-				{ value: 'Medical Instruments & Equipment', isChecked: false }
-			]
-		},
-		{
-			value: "Technology", isChecked: "unchecked", industries: [
-				{ value: 'Application Software', isChecked: false },
-				{ value: 'Communication Equipment', isChecked: false },
-				{ value: 'Computer Hardware', isChecked: false },
-				{ value: 'Online Media', isChecked: false },
-				{ value: 'Semiconductors', isChecked: false },
-			]
-		},
-		{
-			value: "Financial Services", isChecked: "unchecked", industries: [
-				{ value: 'Asset Management', isChecked: false },
-				{ value: 'Banks', isChecked: false },
-				{ value: 'Brokerages & Exchanges', isChecked: false },
-				{ value: 'Credit Services', isChecked: false },
-				{ value: 'Insurance', isChecked: false },
-				{ value: 'Insurance - Life', isChecked: false },
-				{ value: 'Insurance - Property & Casualty', isChecked: false },
-				{ value: 'Insurance - Specialty', isChecked: false }
-			]
-		},
-		{
 			value: "Industrials", isChecked: "unchecked", industries: [
 				{ value: 'Aerospace & Defense', isChecked: false },
 				{ value: 'Airlines', isChecked: false },
@@ -80,9 +47,46 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Utilities", isChecked: "unchecked", industries: [
-				{ value: 'Utilities - Independent Power Producers', isChecked: false },
-				{ value: 'Utilities - Regulated', isChecked: false },
+			value: "Financial Services", isChecked: "unchecked", industries: [
+				{ value: 'Asset Management', isChecked: false },
+				{ value: 'Banks', isChecked: false },
+				{ value: 'Brokerages & Exchanges', isChecked: false },
+				{ value: 'Credit Services', isChecked: false },
+				{ value: 'Insurance', isChecked: false },
+				{ value: 'Insurance - Life', isChecked: false },
+				{ value: 'Insurance - Property & Casualty', isChecked: false },
+				{ value: 'Insurance - Specialty', isChecked: false }
+			]
+		},
+		{
+			value: "Healthcare", isChecked: "unchecked", industries: [
+				{ value: 'Biotechnology', isChecked: false },
+				{ value: 'Drug Manufacturers', isChecked: false },
+				{ value: 'Health Care Plans', isChecked: false },
+				{ value: 'Health Care Providers', isChecked: false },
+				{ value: 'Medical Devices', isChecked: false },
+				{ value: 'Medical Diagnostics & Research', isChecked: false },
+				{ value: 'Medical Distribution', isChecked: false },
+				{ value: 'Medical Instruments & Equipment', isChecked: false }
+			]
+		},
+		{
+			value: "Energy", isChecked: "unchecked", industries: [
+				{ value: 'Oil & Gas - Drilling', isChecked: false },
+				{ value: 'Oil & Gas - E&P', isChecked: false },
+				{ value: 'Oil & Gas - Integrated', isChecked: false },
+				{ value: 'Oil & Gas - Midstream', isChecked: false },
+				{ value: 'Oil & Gas - Refining & Marketing', isChecked: false },
+				{ value: 'Oil & Gas - Services', isChecked: false },
+			]
+		},
+		{
+			value: "Technology", isChecked: "unchecked", industries: [
+				{ value: 'Application Software', isChecked: false },
+				{ value: 'Communication Equipment', isChecked: false },
+				{ value: 'Computer Hardware', isChecked: false },
+				{ value: 'Online Media', isChecked: false },
+				{ value: 'Semiconductors', isChecked: false },
 			]
 		},
 		{
@@ -95,16 +99,6 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Real Estate", isChecked: "unchecked", industries: [
-				{ value: 'REITs', isChecked: false }
-			]
-		},
-		{
-			value: "Communication Services", isChecked: "unchecked", industries: [
-				{ value: 'Communication Services', isChecked: false }
-			]
-		},
-		{
 			value: "Consumer Defensive", isChecked: "unchecked", industries: [
 				{ value: 'Beverages - Alcoholic', isChecked: false },
 				{ value: 'Beverages - Non-Alcoholic', isChecked: false },
@@ -114,16 +108,23 @@ export function Screener(props) {
 			]
 		},
 		{
-			value: "Energy", isChecked: "unchecked", industries: [
-				{ value: 'Oil & Gas - Drilling', isChecked: false },
-				{ value: 'Oil & Gas - E&P', isChecked: false },
-				{ value: 'Oil & Gas - Integrated', isChecked: false },
-				{ value: 'Oil & Gas - Midstream', isChecked: false },
-				{ value: 'Oil & Gas - Refining & Marketing', isChecked: false },
-				{ value: 'Oil & Gas - Services', isChecked: false },
+			value: "Utilities", isChecked: "unchecked", industries: [
+				{ value: 'Utilities - Independent Power Producers', isChecked: false },
+				{ value: 'Utilities - Regulated', isChecked: false },
+			]
+		},
+		{
+			value: "Real Estate", isChecked: "unchecked", industries: [
+				{ value: 'REITs', isChecked: false }
+			]
+		},
+		{
+			value: "Communication Services", isChecked: "unchecked", industries: [
+				{ value: 'Communication Services', isChecked: false }
 			]
 		}
 	])
+
 	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
@@ -138,13 +139,26 @@ export function Screener(props) {
 	const loadIndex = async () => {
 		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
 		let tempSectors = []
-		
+
 		sectors.forEach(sector => {
-			if (loadedIndex.sectors && loadedIndex.sectors.includes(sector.value)) {
-				tempSectors.push({value: sector.value, isChecked: true, industries: sector.industries})
+			sector.industries.forEach(industry => {
+				if (loadedIndex.industries.includes(industry.value)) {
+					industry.isChecked = true
+				}
+
+				else {
+					industry.isChecked = false
+				}
+			})
+
+			if (sector.industries.filter(industry => industry.isChecked === true).length === sector.industries.length) {
+				tempSectors.push({ value: sector.value, isChecked: "checked", industries: sector.industries })
+			}
+			else if (sector.industries.filter(industry => industry.isChecked === false).length === sector.industries.length) {
+				tempSectors.push({ value: sector.value, isChecked: "unchecked", industries: sector.industries })
 			}
 			else {
-				tempSectors.push({value: sector.value, isChecked: false, industries: sector.industries})
+				tempSectors.push({ value: sector.value, isChecked: "partial", industries: sector.industries })
 			}
 		})
 
@@ -272,7 +286,7 @@ export function Screener(props) {
 		const newIndexID = uuidv4()
 		
 		CustomIndexClient.CreateCustomIndex({
-			userId: props.userID,
+			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: newIndexID, 
 			markets: [
 				"Sp500"
@@ -287,7 +301,7 @@ export function Screener(props) {
 
 	const updateIndex = () => {
 		CustomIndexClient.UpdateCustomIndex(props.userID, {
-			userId: props.userID,
+			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: index,
 			markets: [
 				"Sp500"

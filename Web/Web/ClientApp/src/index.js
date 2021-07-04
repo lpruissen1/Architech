@@ -12,9 +12,9 @@ const rootElement = document.getElementById('root');
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			light: '#82E1B6',
-			main: '#2E9B7F',
-			dark: '#176F6A',
+			light: '#57AF98',
+			main: '#298B72',
+			dark: '#1B5D4C',
 		},
 		error: {
 			light: '#FFF2C5',
