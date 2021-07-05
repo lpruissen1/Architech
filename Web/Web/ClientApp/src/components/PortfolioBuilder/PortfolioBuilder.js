@@ -17,7 +17,7 @@ export function PortfolioBuilder(props) {
 
 	let { indexID } = useParams();
 
-	const [index, setIndex] = useState(indexID)
+	const [indexId, setIndexId] = useState(indexID)
 
 
 	const handleChange = (event, newValue) => {
@@ -36,7 +36,7 @@ export function PortfolioBuilder(props) {
 							</Tabs>
 						</AppBar>
 						<TabPanel value={value} index={0}>
-							<Screener setLoading={setLoading} setTickers={setTickers}/>
+						<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
 							<Weighter />

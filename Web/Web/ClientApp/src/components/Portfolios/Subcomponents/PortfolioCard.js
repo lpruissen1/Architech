@@ -43,7 +43,7 @@ export function PortfolioCard(props) {
 	const history = useHistory();
 	const handleEditOnClick = () => {
 		history.push({
-			pathname: `/screener/${props.portfolio.indexId}`,
+			pathname: `/portfolioBuilder/${props.portfolio.indexId}`,
 			state: { markets: 'Hello world' }
 		});
 	}

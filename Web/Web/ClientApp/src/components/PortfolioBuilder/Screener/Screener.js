@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import AuthClient from '../../../Clients/AuthClient';
 import CustomIndexClient from '../../../Clients/CustomIndexClient';
@@ -128,10 +127,7 @@ export function Screener(props) {
 	const [exclusions, setExclusions] = useState([])
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
-
-	let { indexID } = useParams();
-
-	const [index, setIndex] = useState(indexID)
+	const [index, setIndex] = useState(props.indexId)
 
 	const loadIndex = async () => {
 		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
@@ -351,7 +347,7 @@ export function Screener(props) {
 				DeleteExclusion={handleExclusionDelete}
 			/>
 			<br/>
-			{indexID
+			{index
 				? <UpdateButton
 					changeMade={changeMade}
 					handleUpdate={updateIndex} />
