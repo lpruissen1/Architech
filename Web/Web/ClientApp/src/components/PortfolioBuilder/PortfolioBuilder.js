@@ -9,6 +9,21 @@ import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
 import { TickerTable } from './Screener/Subcomponents/TickerTable';
 import { Weighter } from './Weighting/Weighter';
+import { makeStyles } from '@material-ui/core/styles';
+import './PortfolioBuilder.css';
+
+export const useStyles = makeStyles((theme) => ({
+	indicator: {
+		backgroundColor: '#fff'
+	},
+	root: {
+		textTransform: 'none',
+	},
+	appBar: {
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+	}
+}));
 
 export function PortfolioBuilder(props) {
 	const [value, setValue] = React.useState(0);
@@ -19,6 +34,8 @@ export function PortfolioBuilder(props) {
 
 	const [index, setIndex] = useState(indexID)
 
+	const classes = useStyles()
+
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -28,11 +45,18 @@ export function PortfolioBuilder(props) {
 			<Grid container spacing={3}>
 				<Grid item xs={9}>
 					<Paper>
-						<AppBar position="static">
-							<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-								<Tab label="Screening" />
-								<Tab label="Weighting" />
-								<Tab label="BackTesting" />
+					<AppBar className={classes.appBar} elevation={1} position="static">
+						<Tabs
+							classes={{
+								indicator: classes.indicator
+							}}
+							style={{ outline: 'none' }}
+							value={value}
+							onChange={handleChange}
+							aria-label="simple tabs example">
+							<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
+							<Tab className={classes.root} style={{ outline: 'none' }} label="Weighting" />
+							<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
 							</Tabs>
 						</AppBar>
 						<TabPanel value={value} index={0}>
