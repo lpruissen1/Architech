@@ -41,7 +41,7 @@ export class NavMenu extends Component {
 											<NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/portfolioBuilder">Portfolio Builder</NavLink>
+											<NavLink tag={Link} className="text-dark" to="/screener">Screener</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-dark" to="/portfolios">Portfolios</NavLink>

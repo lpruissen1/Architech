@@ -9,8 +9,7 @@ import { Registration } from './Login/Registration';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
-import { Screener } from './PortfolioBuilder/Screener/Screener';
-import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
+import { Screener } from './Screener/Screener';
 import { NavMenu } from './NavMenu';
 
 export function Layout(props) {
@@ -38,7 +37,7 @@ export function Layout(props) {
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} />
 			<Container>
 				<Route exact path='/' component={Home} />
-				<AuthenticatedRoute exact path='/portfolioBuilder' component={PortfolioBuilder} />
+				<AuthenticatedRoute exact path='/screener/:indexID?' loggedIn={loggedIn} component={() => <Screener userID={userId} />} />
 				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
 				<AuthenticatedRoute exact path='/research' component={Research} />
 				<AuthenticatedRoute exact path='/education' component={Education} />

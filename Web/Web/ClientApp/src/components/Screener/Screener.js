@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-import AuthClient from '../../../Clients/AuthClient';
-import CustomIndexClient from '../../../Clients/CustomIndexClient';
-import ScreenerClient from '../../../Clients/ScreenerClient';
+import React, { useState, useEffect } from 'react';
+import Card from 'react-bootstrap/Card';
+import CustomIndexClient from '../../Clients/CustomIndexClient';
+import AuthClient from '../../Clients/AuthClient';
+import ScreenerClient from '../../Clients/ScreenerClient';
+import './Screener.css';
 import SaveButton from './Subcomponents/SaveButton';
-import ScreeningControls from './Subcomponents/ScreeningControls';
 import UpdateButton from './Subcomponents/UpdateButton';
+import ScreeningControls from './Subcomponents/ScreeningControls';
+import { TickerTable } from './Subcomponents/TickerTable';
+import {useParams} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export function Screener(props) {
 	const [markets, setMarkets] = useState([
@@ -122,10 +125,12 @@ export function Screener(props) {
 		}
 	])
 
+	const [tickers, setTickers] = useState([])
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [inclusions, setInclusions] = useState([])
 	const [exclusions, setExclusions] = useState([])
+	const [loading, setLoading] = useState(true)
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
 
@@ -253,7 +258,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-			props.setLoading(true)
+			setLoading(true)
 			setChangeMade(true)
 
 			const tickers = await ScreenerClient.postScreeningRequest({
@@ -265,8 +270,8 @@ export function Screener(props) {
 				exclusions: exclusions
 			})
 
-			props.setTickers(tickers)
-			props.setLoading(false)
+			setTickers(tickers)
+			setLoading(false)
 		}
 	}
 
@@ -312,7 +317,7 @@ export function Screener(props) {
 	}
 
 	const updateIndex = () => {
-		CustomIndexClient.UpdateCustomIndex(AuthClient.GetIdFromStoredJwt(), {
+		CustomIndexClient.UpdateCustomIndex(props.userID, {
 			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: index,
 			markets: [
@@ -330,34 +335,47 @@ export function Screener(props) {
 
 	return (
 		<div>
-			<ScreeningControls
-				sectors={sectors}
-				rangedRules={rangedRules}
-				timedRangeRules={timedRangeRules}
-				handleUpdate={screen}
-				handleRangedRuleUpdate={handleRangedRuleUpdate}
-				handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
-				collapseOpen={collapseOpen}
-				deleteRangedRule={deleteRangedRule}
-				deleteTimedRangeRule={deleteTimedRangeRule}
-				checkIfRangedRuleExists={checkIfRangedRuleExists}
-				checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
-				inclusions={inclusions}
-				exclusions={exclusions}
-				markets={markets}
-				AddInclusion={handleInclusionAddition}
-				DeleteInclusion={handleInclusionDelete}
-				AddExclusion={handleExclusionAddition}
-				DeleteExclusion={handleExclusionDelete}
-			/>
-			<br/>
-			{indexID
-				? <UpdateButton
-					changeMade={changeMade}
-					handleUpdate={updateIndex} />
-				: <SaveButton
-					handleSave={saveIndex} />
-			}
+			<h1 id="tabelLabel" >Screener</h1>
+			<div className='rowThing'>
+				<Card className='screenerCard'>
+					<div>
+						<ScreeningControls
+							sectors={sectors}
+							rangedRules={rangedRules}
+							timedRangeRules={timedRangeRules}
+							handleUpdate={screen}
+							handleRangedRuleUpdate={handleRangedRuleUpdate}
+							handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
+							collapseOpen={collapseOpen}
+							deleteRangedRule={deleteRangedRule}
+							deleteTimedRangeRule={deleteTimedRangeRule}
+							checkIfRangedRuleExists={checkIfRangedRuleExists}
+							checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+							inclusions={inclusions}
+							exclusions={exclusions}
+							markets={markets}
+							AddInclusion={handleInclusionAddition}
+							DeleteInclusion={handleInclusionDelete}
+							AddExclusion={handleExclusionAddition}
+							DeleteExclusion={handleExclusionDelete}
+						/>
+						<br/>
+						{indexID
+							? <UpdateButton
+								changeMade={changeMade}
+								handleUpdate={updateIndex} />
+							: <SaveButton
+								handleSave={saveIndex} />}
+					</div>
+				</Card>
+				<Card className='tickerCard'>
+					<div className='tickerTableContainer'>
+						<TickerTable
+							tickers={tickers}
+							loading={loading} />
+					</div>
+				</Card>
+			</div>
 		</div>
 	)
 }
