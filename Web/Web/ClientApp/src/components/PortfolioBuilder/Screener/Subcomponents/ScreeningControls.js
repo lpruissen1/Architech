@@ -26,7 +26,7 @@ export default function ScreeningControls(props) {
 					/>
 			</Grid>
 			<Grid item xs={12}>
-				<Box className="rule-selector-container">
+				<Typography style={{ marginTop: 20, marginLeft: 10 }} variant='h6'>Add Metrics</Typography>
 				<BasicRulesSection
 					rangedRules={props.rangedRules}
 					timedRangeRules={props.timedRangeRules}
@@ -38,7 +38,6 @@ export default function ScreeningControls(props) {
 					checkIfRangedRuleExists={props.checkIfRangedRuleExists}
 					checkIfTimedRangeRuleExists={props.checkIfTimedRangeRuleExists}
 					/>
-				</Box>
 			</Grid>
 			<Grid item xs={12}>
 				<Box className="inclusion-selector-container">

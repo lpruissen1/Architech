@@ -1,7 +1,9 @@
 ﻿import React, { useState } from "react";
 import Slider from '@material-ui/core/Slider';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TimePeriodSelector from "./TimePeriodSelector";
@@ -30,6 +32,7 @@ function numFormatter(num) {
 const RuleSlider = withStyles({
 	root: {
 		height: 8,
+		maxWidth: 240
 	},
 	thumb: {
 		height: 20,
@@ -91,27 +94,36 @@ export default function TimeRangedRule(props) {
 
 	return (
 		<div className="ranged-rule-container">
-			<div className="display-name">{props.option.displayName}</div>
-			<div className="ranged-slider-container">
-				<div className={classes.root}>
-					<RuleSlider
-						valueLabelDisplay="auto"
-						min={props.option.selectorMin}
-						max={props.option.selectorMax}
-						value={value}
-						valueLabelFormat={value => <div>{numFormatter(value)}</div>}
-						onChange={updateView}
-						onChangeCommitted={updateRuleRanges} />
-				</div>
-			</div>
-			<div className="timePeriod-selector-container">
-				<TimePeriodSelector
-					updateTimePeriod={updateTimePeriod}
-					renderedTimeSpans={props.renderedTimeSpans}/>
-			</div>
-			<IconButton onClick={deleteRule} aria-label="delete">
-				<DeleteIcon />
-			</IconButton>
+			<Grid container
+				spacing={1}
+				direction="row"
+				alignItems="flex-end">
+				<Grid item xs={4} justifyContent="flex-start">
+					<Typography style={{ marginBottom: 14 }}>{props.option.displayName}</Typography>
+				</Grid>
+				<Grid item xs={4} justifyContent="flex-start">
+					<div className={classes.root}>
+						<RuleSlider
+							valueLabelDisplay="auto"
+							min={props.option.selectorMin}
+							max={props.option.selectorMax}
+							value={value}
+							valueLabelFormat={value => <div>{numFormatter(value)}</div>}
+							onChange={updateView}
+							onChangeCommitted={updateRuleRanges} />
+					</div>
+				</Grid>
+				<Grid item xs={3} justify="center" align="center">
+					<TimePeriodSelector
+						updateTimePeriod={updateTimePeriod}
+						renderedTimeSpans={props.renderedTimeSpans}/>
+				</Grid>
+				<Grid item xs={1} justifyContent='flex-end'>
+					<IconButton onClick={deleteRule} aria-label="delete">
+						<DeleteIcon />
+					</IconButton>
+				</Grid>
+			</Grid>
 		</div>
 	);
 }

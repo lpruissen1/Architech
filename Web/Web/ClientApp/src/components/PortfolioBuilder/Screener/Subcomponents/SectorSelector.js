@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 	},
 	industryButton: {
-		margin: theme.spacing(2),
+		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
