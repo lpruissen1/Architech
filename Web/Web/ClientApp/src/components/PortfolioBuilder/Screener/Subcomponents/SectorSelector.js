@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: 14,
 		fontWeight: 500,
 		backgroundColor: '#fff',
-		color: theme.palette.primary.main,
+		color: theme.palette.primary.dark,
 		'&:hover': {
 			backgroundColor: '#fff',
 			color: theme.palette.primary.dark,

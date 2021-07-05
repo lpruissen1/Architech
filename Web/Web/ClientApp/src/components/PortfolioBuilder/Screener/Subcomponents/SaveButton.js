@@ -5,10 +5,11 @@ import './SaveButton.css'
 
 const useStyles = makeStyles((theme) => ({
 	button: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(2),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 600, 
+		minWidth: 200
 	}
 }));
 
@@ -22,7 +23,7 @@ export default function SaveButton(props) {
 	}
 
 	return (
-		<>
+		<div style={{display: 'flex', justifyContent: 'flex-end'}}>
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossOrigin="anonymous" />
 			<Button
 				onClick={handleSaveClick}
@@ -35,5 +36,5 @@ export default function SaveButton(props) {
 			>
 				{checked ? 'Save Index' : 'Saved'}
 			</Button>
-		</>)
+		</ div>)
 }
