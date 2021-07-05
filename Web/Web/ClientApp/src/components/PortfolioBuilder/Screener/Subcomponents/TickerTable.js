@@ -6,7 +6,7 @@ export class TickerTable extends Component {
 	static renderStockDataTable(tickers) {
 		if (tickers.length === 0) 
 			return (<EmptyTickerTable />)						
-
+		debugger;
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead>
