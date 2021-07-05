@@ -39,7 +39,7 @@ export function PortfolioBuilder(props) {
 						<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
-							<Weighter />
+						<Weighter tickers={tickers} />
 						</TabPanel>
 						<TabPanel value={value} index={2}>
 							Item Three
