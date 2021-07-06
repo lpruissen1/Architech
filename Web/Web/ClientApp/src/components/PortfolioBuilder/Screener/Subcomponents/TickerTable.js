@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TickerTableRow from './TickerTableRow';
 import { makeStyles } from '@material-ui/core/styles';
+import './TickerTable.css';
+
 
 export const useStyles = makeStyles((theme) => ({
 	tableHead: {
@@ -23,19 +25,20 @@ export default function TickerTable(props) {
 
 	const renderStockDataTable = (tickers) => {
 		if (tickers.length === 0) 
-			return (<EmptyTickerTable />)					
+			return (<EmptyTickerTable style={{ height: 640 }} />)					
 
 		return (
-			<TableContainer component={Paper} style={{ borderRadius: 8 }}>
-					<Table aria-label="collapsible table" size="small">
+			<div className='tickerTable'>
+			<TableContainer component={Paper} style={{ borderRadius: 8, height: 640 }}>
+					<Table stickyHeader aria-label="collapsible table" size="small">
 					<TableHead className={classes.tableHead}>
-						<TableRow style={{ height: 48 }}>
-								<TableCell style={{ width: 10 }}>
+							<TableRow className={classes.tableHead} style={{ height: 48 }}>
+								<TableCell className={classes.tableHead} style={{ width: 10 }}>
 								</TableCell>
-								<TableCell style={{ color: '#fff' }}>
+								<TableCell className={classes.tableHead} style={{ color: '#fff' }}>
 								<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Ticker</Typography>
 								</TableCell>
-								<TableCell>
+								<TableCell className={classes.tableHead}>
 									<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Weight</Typography>
 								</TableCell>
 							</TableRow>
@@ -51,6 +54,7 @@ export default function TickerTable(props) {
 						</TableBody>
 					</Table>
 				</TableContainer>
+			</div>
 		);
 	}
 

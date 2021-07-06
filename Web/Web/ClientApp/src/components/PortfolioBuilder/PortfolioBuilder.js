@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	root: {
 		textTransform: 'none',
+		fontSize: 15
 	},
 	appBar: {
 		borderTopLeftRadius: 8,

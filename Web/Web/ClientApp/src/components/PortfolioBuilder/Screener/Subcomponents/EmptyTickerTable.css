@@ -1,7 +1,8 @@
 ﻿.emptyTickerTable {
 	text-align: center;
 	padding: 8px;
-	margin-top: 30%;
+	margin-top: 8px;
+	height: 640px;
 }
 
 .text-container {
