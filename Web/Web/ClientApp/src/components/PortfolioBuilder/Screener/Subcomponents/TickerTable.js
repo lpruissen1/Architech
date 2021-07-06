@@ -5,18 +5,24 @@ export class TickerTable extends Component {
 
 	static renderStockDataTable(tickers) {
 		if (tickers.length === 0) 
-			return (<EmptyTickerTable />)						
-		debugger;
+			return (<EmptyTickerTable />)
+
+			debugger						
+
 		return (
 			<table className='table table-striped' aria-labelledby="tabelLabel">
 				<thead>
 					<tr>
 						<th>Ticker</th>
+						<th>Weight</th>
 					</tr>
 				</thead>
 				<tbody>
-					{tickers.map(stockdatum =>
-						<tr key={stockdatum}><td>{stockdatum}</td></tr>
+					{tickers && tickers.map(stockdatum =>
+						<tr key={stockdatum.ticker}>
+							<td>{stockdatum.ticker}</td>
+							<td>{stockdatum.weight}</td>
+						</tr>
 					)}
 				</tbody>
 			</table>

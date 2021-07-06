@@ -60,10 +60,10 @@ export function PortfolioBuilder(props) {
 							</Tabs>
 						</AppBar>
 						<TabPanel value={value} index={0}>
-						<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
+							<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
-						<Weighter tickers={tickers} />
+							<Weighter tickers={tickers} setTickers={setTickers} />
 						</TabPanel>
 						<TabPanel value={value} index={2}>
 							Item Three

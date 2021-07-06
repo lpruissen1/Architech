@@ -18,15 +18,16 @@ export function Weighter(props) {
 	const classes = useStyles();
 	const [options, _] = useState(GetWeightingOptions())
 	const [selection, setSelection] = useState("")
-	const [weights, setWeights] = useState();
 
 	const handleCheck = (event) => {
 		setSelection(event.currentTarget.value)
 	}
 
-	const handleWeighting = () => {
-		var result = WeightingClient.postWeightingRequest(selection, props.tickers)
-		setWeights(result)
+	const handleWeighting = async () => {
+		if (selection !== "") {
+			var result = await WeightingClient.postWeightingRequest(selection, props.tickers.map(thing => { return thing.ticker }))
+			props.setTickers(result.tickers)
+		}
 	}
 
 	useEffect(() => { handleWeighting() }, [selection])

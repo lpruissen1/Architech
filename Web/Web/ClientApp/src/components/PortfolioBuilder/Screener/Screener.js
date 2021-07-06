@@ -249,11 +249,11 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-			debugger
+
 			props.setLoading(true)
 			setChangeMade(true)
 
-			const tickers = await ScreenerClient.postScreeningRequest({
+			const response = await ScreenerClient.postScreeningRequest({
 				markets: getActiveMarkets(markets),
 				industries: getActiveIndustries(),
 				rangedRule: rangedRules,
@@ -262,14 +262,14 @@ export function Screener(props) {
 				exclusions: exclusions
 			})
 
-			props.setTickers(tickers)
+			props.setTickers(response.tickers)
 			props.setLoading(false)
 		}
 	}
 
 	// Create function to validate custom index then call in screener, if valid do the screening request
 	const validate = () => {
-		debugger
+
 		timedRangeRules.forEach(rule => {
 			if (rule.timePeriod === "") {
 				return false
