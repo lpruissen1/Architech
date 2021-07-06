@@ -25,7 +25,7 @@ export default function TickerTable(props) {
 
 	const renderStockDataTable = (tickers) => {
 		if (tickers.length === 0) 
-			return (<EmptyTickerTable style={{ height: 640 }} />)					
+			return (<EmptyTickerTable />)					
 
 		return (
 			<div className='tickerTable'>
