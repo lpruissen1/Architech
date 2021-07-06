@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
-import { TickerTable } from './Screener/Subcomponents/TickerTable';
+import TickerTable from './Screener/Subcomponents/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
 import './PortfolioBuilder.css';
@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
 	appBar: {
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
+		height: 48
 	}
 }));
 
