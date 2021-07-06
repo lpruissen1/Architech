@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect  } from 'react';
 import './InclusionsExclusions.css';
-import StockPicker from './StockPickerAutocomplete.js';
+import StockPicker from '../../../Generic/StockPicker.js';
 import StockInformationClient from '../../../../Clients/StockInformationClient';
 
 

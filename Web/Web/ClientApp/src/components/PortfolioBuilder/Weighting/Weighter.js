@@ -1,8 +1,11 @@
 ﻿import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
 import WeightingClient from '../../../Clients/WeightingClient';
+import GetWeightingOptions from './WeightingOptionsRepo'
+import StockPicker from '../../Generic/StockPicker'
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -33,6 +36,7 @@ export function Weighter(props) {
 	useEffect(() => { handleWeighting() }, [selection])
 
 	return (
+		<div>
 		<Grid container spacing={1}>
 			{options.map(option => {
 				return (
@@ -52,10 +56,25 @@ export function Weighter(props) {
 					</Grid>
 				)
 			})}
-		</Grid>)
+		</Grid>
+		<ManualWeighting/>
+		</div>
+	)
 }
 
-
-const GetWeightingOptions = () => {
-	return ([{ displayName: "Equally", value: "Equal" }, { displayName: "By Market Capitalization", value: "MarketCap" }, { displayName: "By Dividend Yield", value: "DividendYield"}]);
+export function ManualWeighting(props) {
+	return(<>
+		<StockPicker
+			color='Primary'
+			options={props.inclusions}
+			endAdornment={ <></>}
+		/>
+		<TextField>
+		</TextField>
+		<Button>
+		</Button>
+	</>
+	)
+	//<DisplayTable>
+	//</DisplayTable>
 }
