@@ -249,7 +249,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-
+			
 			props.setLoading(true)
 			setChangeMade(true)
 
@@ -269,13 +269,12 @@ export function Screener(props) {
 
 	// Create function to validate custom index then call in screener, if valid do the screening request
 	const validate = () => {
-
-		timedRangeRules.forEach(rule => {
-			if (rule.timePeriod === "") {
-				return false
+		
+		for(let i = 0; i < timedRangeRules.length; i++) {
+			if (timedRangeRules[i].timePeriod === "") {
+					return false
+				}
 			}
-		})
-
 		return true
 	} 
 
