@@ -8,7 +8,9 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 600, 
-		boxShadow: 'none'
+		boxShadow: 'none',
+		marginRight: 20,
+		minWidth: 200
 	}
 }));
 
@@ -16,7 +18,7 @@ export default function UpdateButton(props) {
 	const classes = useStyles();
 
 	return (
-		<>
+		<div style={{ display: 'flex', justifyContent: 'flex-end', minWidth: 100 }}>
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossOrigin="anonymous" />
 			<Button
 				onClick={props.handleUpdate}
@@ -26,5 +28,5 @@ export default function UpdateButton(props) {
 				style={{ outline: 'none' }}
 				className={classes.button}>Update Index</Button>
 			{!props.changeMade && <p> Changes saved successfully </p>}
-		</>)
+		</ div>)
 }

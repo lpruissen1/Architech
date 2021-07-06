@@ -4,11 +4,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import './Rules.css';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 140,
+		minWidth: 100,
+		fontSize: 12
 	},
 }));
 
@@ -57,10 +59,10 @@ export default function TimePeriodSelector(props) {
 	}
 
 	return (
-		<div>
+		<div className='time-selector-container'>
 			<FormControl
 				className={classes.formControl}>
-				<InputLabel id="demo-controlled-open-select-label">Time Period</InputLabel>
+				<InputLabel id="demo-controlled-open-select-label" style={{ fontSize: 12 }}>Time Period</InputLabel>
 				<Select
 					labelId="demo-controlled-open-select-label"
 					id="demo-controlled-open-select"

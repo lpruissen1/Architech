@@ -1,4 +1,4 @@
-﻿const API_URL = 'https://localhost:5001/Screening/FuckYourself';
+﻿export const API_URL = 'https://localhost:5001/Screening/FuckYourself';
 
 class ScreenerClient {
 

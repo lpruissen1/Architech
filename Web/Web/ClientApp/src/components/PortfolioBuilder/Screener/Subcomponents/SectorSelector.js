@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
+		paddingLeft: 10,
+		paddingRight: 10,
 		borderColor: '#696969',
 		color: '#696969',
 		width: '100%',
@@ -20,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: 14,
 		variant: 'contained',
 		fontWeight: 500,
+		paddingLeft: 10,
+		paddingRight: 10,
 		color: '#fff',
 		width: '100%',
 		borderRadius: 10,
@@ -31,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'rgba(41, 139, 114, .6)',
 		color: '#fff',
 		width: '100%',
+		paddingLeft: 10,
+		paddingRight: 10,
 		borderRadius: 10,
 		'&:hover': {
 			backgroundColor: 'rgba(41, 139, 114, .7)',
@@ -38,12 +44,12 @@ const useStyles = makeStyles((theme) => ({
 
 	},
 	industryButton: {
-		margin: theme.spacing(2),
+		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
 		backgroundColor: '#fff',
-		color: theme.palette.primary.main,
+		color: theme.palette.primary.dark,
 		'&:hover': {
 			backgroundColor: '#fff',
 			color: theme.palette.primary.dark,

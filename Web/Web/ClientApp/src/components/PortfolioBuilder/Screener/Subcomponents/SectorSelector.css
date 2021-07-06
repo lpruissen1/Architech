@@ -27,8 +27,11 @@
 	font-size: 11px;
 	display: flex;
 	flex-direction: column;
-	align-content: center;
+	justify-content: center;
+	align-items: center;
 	padding: 10px;
+	margin-top: 20px;
+	min-height: 160px;
 }
 
 ul.ks-cboxtags {
@@ -128,4 +131,9 @@ ul.ks-cboxtags li input[type="checkbox"] {
 
 .industryGridContainer {
 	margin: 5%;
+}
+
+.market-selector-container {
+	min-height: 300px;
+	margin: auto;
 }

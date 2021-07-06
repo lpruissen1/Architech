@@ -23,8 +23,8 @@ export default class BasicRulesSection extends React.Component {
 
 	// this should be abstracted out into some other type of functionality because this would be used for advanced rule selection as well
 	handleAddNewRuleNew = (event) => {
-		if ("ranged" === event.target.attributes.type.value) {
-			const ruleType = event.target.attributes.value.value
+		if ("ranged" === event.currentTarget.attributes.type.value) {
+			const ruleType = event.currentTarget.attributes.value.value
 			this.props.handleRangedRuleUpdate({
 				id: v4(),
 				ruleType: ruleType,
@@ -33,8 +33,8 @@ export default class BasicRulesSection extends React.Component {
 			})
 		}
 
-		if ("timedRange" === event.target.attributes.type.value) {
-			const ruleType = event.target.attributes.value.value
+		if ("timedRange" === event.currentTarget.attributes.type.value) {
+			const ruleType = event.currentTarget.attributes.value.value
 			this.props.handleTimedRangeRuleUpdate({
 				id: v4(),
 				ruleType: ruleType,

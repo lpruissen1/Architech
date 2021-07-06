@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Redirect } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { Redirect, Route } from 'react-router';
 import { Container } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
 import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
 import { Registration } from './Login/Registration';
+import { NavMenu } from './NavMenu';
+import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
-import { Screener } from './Screener/Screener';
-import { NavMenu } from './NavMenu';
 
 export function Layout(props) {
 
@@ -37,7 +37,7 @@ export function Layout(props) {
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} />
 			<Container>
 				<Route exact path='/' component={Home} />
-				<AuthenticatedRoute exact path='/screener/:indexID?' loggedIn={loggedIn} component={() => <Screener userID={userId} />} />
+				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
 				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
 				<AuthenticatedRoute exact path='/research' component={Research} />
 				<AuthenticatedRoute exact path='/education' component={Education} />

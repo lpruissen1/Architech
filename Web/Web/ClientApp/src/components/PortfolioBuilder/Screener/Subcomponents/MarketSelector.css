@@ -4,6 +4,9 @@
 	padding-left: 10%;
 	padding-right: 10%;
 	font-size: 12px;
+	min-height: 140px;
+	justify-content: center;
+	align-items: center;
 }
 
 .marketButtons {

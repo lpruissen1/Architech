@@ -4,17 +4,10 @@ import React from 'react';
 import './MarketSelector.css';
 
 const useStyles = makeStyles((theme) => ({
-	buttonUnchecked: {
+	button: {
 		margin: theme.spacing(2),
 		textTransform: 'none',
 		fontSize: 14,
-		fontWeight: 500,
-	},
-	buttonChecked: {
-		margin: theme.spacing(2),
-		textTransform: 'none',
-		fontSize: 14,
-		variant: 'contained',
 		fontWeight: 500,
 	}
 }));
@@ -40,7 +33,7 @@ export default function MarketSelector(props) {
 							onClick={handleCheck}
 							value={market.value}
 							style={{ outline: 'none' }}
-							className={market.isChecked ? classes.buttonChecked : classes.buttonUnchecked}
+							className={classes.button}
 							variant={market.isChecked ? 'contained' : 'outlined'}
 							color={market.isChecked ? 'primary' : 'default'}
 							disableElevation
