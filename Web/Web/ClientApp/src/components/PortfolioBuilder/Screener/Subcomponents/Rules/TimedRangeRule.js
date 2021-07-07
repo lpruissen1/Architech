@@ -32,7 +32,7 @@ function numFormatter(num) {
 const RuleSlider = withStyles({
 	root: {
 		height: 8,
-		maxWidth: 240
+		width: 240
 	},
 	thumb: {
 		height: 20,

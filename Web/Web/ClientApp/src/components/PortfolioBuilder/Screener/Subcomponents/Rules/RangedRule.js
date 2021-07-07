@@ -1,7 +1,9 @@
 ﻿import React, { useState } from "react";
 import Slider from '@material-ui/core/Slider';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -29,6 +31,7 @@ function numFormatter(num) {
 const RuleSlider = withStyles({
 	root: {
 		height: 8,
+		width: 240,
 	},
 	thumb: {
 		height: 20,
@@ -84,10 +87,15 @@ export default function RangedRule(props) {
 	}
 
 	return (
-		<>
-			<div className="rule-container">
-				<div className="display-name">{props.option.displayName}</div>
-				<div className="slider-container">
+		<div className="ranged-rule-container">
+			<Grid container
+				spacing={1}
+				direction="row"
+				alignItems="flex-end">
+				<Grid item xs={4} justifyContent="flex-start">
+					<Typography style={{ marginBottom: 14 }}>{props.option.displayName}</Typography>
+				</Grid>
+				<Grid item xs={4} justifyContent="flex-start">
 					<div className={classes.root}>
 						<RuleSlider
 							valueLabelDisplay="auto"
@@ -98,13 +106,15 @@ export default function RangedRule(props) {
 							onChange={updateView}
 							onChangeCommitted={updateRuleRanges}/>
 					</div>
-				</div>
-				<div>
-				</div>
-				<IconButton onClick={deleteRule} aria-label="delete">
-					<DeleteIcon />
-				</IconButton>
-			</div>
-		</>
+				</Grid>
+				<Grid item xs={3} justify="center" align="center">
+				</Grid>
+				<Grid item xs={1} justifyContent='flex-end'>
+					<IconButton onClick={deleteRule} aria-label="delete">
+						<DeleteIcon />
+					</IconButton>
+				</Grid>
+			</Grid>
+		</div>
 	);
 }

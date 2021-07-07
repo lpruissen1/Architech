@@ -1,10 +1,11 @@
 ﻿import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect  } from 'react';
 import './InclusionsExclusions.css';
-import StockPicker from './StockPickerAutocomplete.js';
+import StockPicker from '../../../Generic/StockPicker.js';
 import StockInformationClient from '../../../../Clients/StockInformationClient';
 
 
@@ -43,10 +44,6 @@ export default function InclusionExclusion(props) {
 		setOptions(response)
 	}
 
-	const onClick = (event) => {
-		setRenderFields(!renderFields)
-	}
-
 	const updateInclusions = (event) => {
 		props.AddInclusion(event.currentTarget.value)
 	}
@@ -67,13 +64,7 @@ export default function InclusionExclusion(props) {
 
 	return (
 		<div className='inclusion-exclusion-container'>
-			<Button
-				className={classes.button}
-				onClick={onClick}
-				style={{ outline: 'none' }}
-				color='primary'
-				> Edit Tickers Manually </Button>
-			{renderFields && 
+				<Typography variant='h6'>Manually Adjust Tickers</Typography>
 				<div className="inclusion-exclusion-contents">
 				<Grid
 					container
@@ -106,7 +97,8 @@ export default function InclusionExclusion(props) {
 									<Button
 										variant='contained'
 										className={classes.buttonLowMargin}
-										style={{ outline: 'none' }}
+										style={{
+											outline: 'none', color: '#7b6b21' }}
 										disableElevation
 										color='secondary'
 										disableRipple
@@ -150,6 +142,6 @@ export default function InclusionExclusion(props) {
 						</div>
 						</Grid>
 					</Grid>
-				</div>}
+				</div>
 		</div>)
 }

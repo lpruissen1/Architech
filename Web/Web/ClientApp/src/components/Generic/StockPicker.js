@@ -2,7 +2,7 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-export default function StockPickerAutocomplete(props) {
+export default function StockPicker(props) {
 	const [value, setValue] = useState(null)
 
 	const clickNClear = (event) => {

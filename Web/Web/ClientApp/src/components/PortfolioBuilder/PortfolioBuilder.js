@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
-import { TickerTable } from './Screener/Subcomponents/TickerTable';
+import TickerTable from './Screener/Subcomponents/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
 import './PortfolioBuilder.css';
@@ -18,10 +18,12 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	root: {
 		textTransform: 'none',
+		fontSize: 15
 	},
 	appBar: {
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
+		height: 48
 	}
 }));
 
@@ -44,22 +46,22 @@ export function PortfolioBuilder(props) {
 	return (
 			<Grid container spacing={3}>
 				<Grid item xs={9}>
-					<Paper>
-					<AppBar className={classes.appBar} elevation={1} position="static">
+				<Paper style={{ borderRadius: 8, height: 640, overflow: 'scroll' }}>
+					<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }} >
 						<Tabs
 							classes={{
 								indicator: classes.indicator
 							}}
-							style={{ outline: 'none' }}
+							style={{ outline: 'none'}}
 							value={value}
 							onChange={handleChange}
 							aria-label="simple tabs example">
 							<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
 							<Tab className={classes.root} style={{ outline: 'none' }} label="Weighting" />
 							<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
-							</Tabs>
-						</AppBar>
-						<TabPanel value={value} index={0}>
+						</Tabs>
+					</AppBar>
+					<TabPanel value={value} index={0}>
 							<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
@@ -71,7 +73,7 @@ export function PortfolioBuilder(props) {
 					</Paper>
 				</Grid>
 				<Grid item xs={3}>
-					<Paper>
+					<Paper style={{ position: 'fixed', borderRadius: 8, height: 640 }}>
 						<TickerTable
 							tickers={tickers}
 							loading={loading}
