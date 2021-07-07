@@ -1,5 +1,6 @@
 ﻿.tickerTable {
 	overflow: scroll;
+	padding-bottom: 0px;
 }
 ::-webkit-scrollbar {
 	width: 0px;

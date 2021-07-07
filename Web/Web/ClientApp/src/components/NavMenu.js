@@ -28,9 +28,9 @@ export class NavMenu extends Component {
 
 	render() {
 		return (
-			<header>
-				<Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-					<Container>
+			<header className='stick-nav'>
+				<Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" dark>
+					<Container style={{backgroundColor: '#298B72'}}>
 						<NavbarBrand tag={Link} to="/">Architech</NavbarBrand>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 						<Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
@@ -38,25 +38,25 @@ export class NavMenu extends Component {
 								{this.props.loggedIn ? (
 									<>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+											<NavLink tag={Link} className="text-light" to="/">Home</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/portfolioBuilder">Portfolio Builder</NavLink>
+											<NavLink tag={Link} className="text-light" to="/portfolioBuilder">Portfolio Builder</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/portfolios">Portfolios</NavLink>
+											<NavLink tag={Link} className="text-light" to="/portfolios">Portfolios</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/research">Research</NavLink>
+											<NavLink tag={Link} className="text-light" to="/research">Research</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/education">Education</NavLink>
+											<NavLink tag={Link} className="text-light" to="/education">Education</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-dark" to="/profile">Profile</NavLink>
+											<NavLink tag={Link} className="text-light" to="/profile">Profile</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} onClick={this.logout} className="text-dark" to="/">Logout</NavLink>
+											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
 										</NavItem>
 									</>
 								) : (

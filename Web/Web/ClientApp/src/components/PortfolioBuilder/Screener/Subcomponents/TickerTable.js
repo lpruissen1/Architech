@@ -29,7 +29,7 @@ export default function TickerTable(props) {
 
 		return (
 			<div className='tickerTable'>
-			<TableContainer component={Paper} style={{ borderRadius: 8, height: 640 }}>
+			<TableContainer style={{ borderRadius: 8, height: 640 }}>
 					<Table stickyHeader aria-label="collapsible table" size="small">
 					<TableHead className={classes.tableHead}>
 							<TableRow className={classes.tableHead} style={{ height: 48 }}>

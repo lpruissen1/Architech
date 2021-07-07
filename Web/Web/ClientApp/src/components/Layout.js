@@ -34,7 +34,7 @@ export function Layout(props) {
 
 	return (
 		<div>
-			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} />
+			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
 			<Container>
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />

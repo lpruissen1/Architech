@@ -73,7 +73,7 @@ export function PortfolioBuilder(props) {
 					</Paper>
 				</Grid>
 				<Grid item xs={3}>
-					<Paper>
+					<Paper style={{ position: 'fixed' }}>
 						<TickerTable
 							tickers={tickers}
 							loading={loading}
