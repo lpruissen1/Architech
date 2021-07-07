@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
+		paddingLeft: 10,
+		paddingRight: 10,
+		borderRadius: 10,
+		minWidth: 140
 	}
 }));
 
