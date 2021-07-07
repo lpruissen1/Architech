@@ -22,41 +22,36 @@ export default function TickerTable(props) {
 
 	const classes = useStyles();
 
-	const renderStockDataTable = (tickers) => {
-		if (tickers.length === 0) 
-			return (<EmptyTickerTable />)					
-
 		return (
 			<div className='tickerTable'>
-			<TableContainer style={{ borderRadius: 8, height: 640 }}>
-					<Table stickyHeader aria-label="collapsible table" size="small">
-					<TableHead className={classes.tableHead}>
-							<TableRow className={classes.tableHead} style={{ height: 48 }}>
-								<TableCell className={classes.tableHead} style={{ width: 10 }}>
-								</TableCell>
-								<TableCell className={classes.tableHead} style={{ color: '#fff' }}>
-								<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Ticker</Typography>
-								</TableCell>
-								<TableCell className={classes.tableHead}>
-									<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Weight</Typography>
-								</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{tickers && tickers.map(stockdatum =>
-								<TickerTableRow 
-									key = {stockdatum.ticker}
-									ticker={stockdatum.ticker}
-									weight={stockdatum.weight}
-								/>
-							)}
-						</TableBody>
-					</Table>
+				<TableContainer style={{ borderRadius: 8, height: 640 }}>
+					{props.tickers.length === 0
+						? <EmptyTickerTable />
+						: <Table stickyHeader aria-label="collapsible table" size="small">
+							<TableHead className={classes.tableHead}>
+								<TableRow className={classes.tableHead} style={{ height: 48 }}>
+									<TableCell className={classes.tableHead} style={{ width: 10 }}>
+									</TableCell>
+									<TableCell className={classes.tableHead} style={{ color: '#fff' }}>
+										<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Ticker</Typography>
+									</TableCell>
+									<TableCell className={classes.tableHead}>
+										<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Weight</Typography>
+									</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{props.tickers && props.tickers.map(stockdatum =>
+									<TickerTableRow
+										key={stockdatum.ticker}
+										ticker={stockdatum.ticker}
+										weight={stockdatum.weight}
+									/>
+								)}
+							</TableBody>
+						</Table>}
 				</TableContainer>
 			</div>
 		);
-	}
-
-	return(renderStockDataTable(props.tickers))
 }
 
