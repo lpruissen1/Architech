@@ -10,6 +10,7 @@ import { Screener } from './Screener/Screener';
 import TickerTable from './Screener/Subcomponents/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
+import RaisedCard from '../GeneralComponents/RaisedCard';
 import './PortfolioBuilder.css';
 
 export const useStyles = makeStyles((theme) => ({
@@ -48,39 +49,46 @@ export function PortfolioBuilder(props) {
 	return (
 			<Grid container spacing={3}>
 				<Grid item xs={9}>
-				<Paper style={{ borderRadius: 8, height: 640, overflow: 'scroll', backgroundColor: '#202020' }}>
-					<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }} >
-						<Tabs
-							classes={{
-								indicator: classes.indicator
-							}}
-							style={{ outline: 'none'}}
-							value={value}
-							onChange={handleChange}
-							aria-label="simple tabs example">
-							<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
-							<Tab className={classes.root} style={{ outline: 'none' }} label="Weighting" />
-							<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
-						</Tabs>
-					</AppBar>
-					<TabPanel value={value} index={0}>
-							<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId}/>
-						</TabPanel>
-						<TabPanel value={value} index={1}>
-							<Weighter tickers={tickers} setTickers={setTickers} />
-						</TabPanel>
-						<TabPanel value={value} index={2}>
-							Item Three
-						</TabPanel>
-					</Paper>
+				<RaisedCard
+					style={{ height: 640, overflow: 'scroll'}}
+					children={
+						<>
+							<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }}>
+								<Tabs
+									classes={{
+										indicator: classes.indicator
+									}}
+									style={{ outline: 'none' }}
+									value={value}
+									onChange={handleChange}
+									aria-label="simple tabs example">
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Weighting" />
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
+								</Tabs>
+							</AppBar>
+							<TabPanel value={value} index={0}>
+								<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId} />
+							</TabPanel>
+							<TabPanel value={value} index={1}>
+								<Weighter tickers={tickers} setTickers={setTickers} />
+							</TabPanel>
+							<TabPanel value={value} index={2}>
+										Item Three
+							</TabPanel>
+						</>
+					}
+					/>
 				</Grid>
 				<Grid item xs={3}>
-					<Paper style={{ position: 'fixed', borderRadius: 8, height: 640 }}>
+				<RaisedCard
+					style={{ position: 'fixed', height: 640, minWidth: 300 }}
+					children={
 						<TickerTable
 							tickers={tickers}
 							loading={loading}
-						/>
-					</Paper>
+						/>}
+					/>
 				</Grid>
 			</Grid>
 	);
