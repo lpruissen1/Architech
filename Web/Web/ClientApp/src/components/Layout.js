@@ -11,6 +11,7 @@ import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
+import { Dashboard} from './Dashboard/Dashboard';
 
 export function Layout(props) {
 
@@ -33,10 +34,11 @@ export function Layout(props) {
 
 
 	return (
-		<div>
+		<div style={{ backgroundColor: '#121212' }}>
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
-			<Container>
+			<Container style={{ backgroundColor: '#121212' }}>
 				<Route exact path='/' component={Home} />
+				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
 				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
 				<AuthenticatedRoute exact path='/research' component={Research} />

@@ -14,7 +14,10 @@ import './TickerTable.css';
 
 export const useStyles = makeStyles((theme) => ({
 	tableHead: {
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: '#242424',
+	},
+	table: {
+		color: '#d0d0d0'
 	}
 }));
 
@@ -27,16 +30,16 @@ export default function TickerTable(props) {
 				<TableContainer style={{ borderRadius: 8, height: 640 }}>
 					{props.tickers.length === 0
 						? <EmptyTickerTable />
-						: <Table stickyHeader aria-label="collapsible table" size="small">
+						: <Table className={classes.table} style={{ backgroundColor: '#202020'}} stickyHeader aria-label="collapsible table" size="small">
 							<TableHead className={classes.tableHead}>
 								<TableRow className={classes.tableHead} style={{ height: 48 }}>
-									<TableCell className={classes.tableHead} style={{ width: 10 }}>
+									<TableCell className={classes.tableHead} style={{ width: 10, borderBottom: 'none'  }}>
 									</TableCell>
-									<TableCell className={classes.tableHead} style={{ color: '#fff' }}>
-										<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Ticker</Typography>
+									<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: 'none'   }}>
+										<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Ticker</Typography>
 									</TableCell>
-									<TableCell className={classes.tableHead}>
-										<Typography variant='h6' style={{ color: '#fff', fontSize: 15 }}>Weight</Typography>
+									<TableCell style={{ borderBottom: 'none' }} className={classes.tableHead}>
+										<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Weight</Typography>
 									</TableCell>
 								</TableRow>
 							</TableHead>

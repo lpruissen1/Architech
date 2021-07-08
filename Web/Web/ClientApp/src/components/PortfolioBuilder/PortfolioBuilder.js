@@ -14,7 +14,7 @@ import './PortfolioBuilder.css';
 
 export const useStyles = makeStyles((theme) => ({
 	indicator: {
-		backgroundColor: '#fff'
+		backgroundColor: '#64ffda'
 	},
 	root: {
 		textTransform: 'none',
@@ -23,7 +23,9 @@ export const useStyles = makeStyles((theme) => ({
 	appBar: {
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
-		height: 48
+		height: 48,
+		backgroundColor: '#242424',
+		color: '#fff'
 	}
 }));
 
@@ -46,7 +48,7 @@ export function PortfolioBuilder(props) {
 	return (
 			<Grid container spacing={3}>
 				<Grid item xs={9}>
-				<Paper style={{ borderRadius: 8, height: 640, overflow: 'scroll' }}>
+				<Paper style={{ borderRadius: 8, height: 640, overflow: 'scroll', backgroundColor: '#202020' }}>
 					<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }} >
 						<Tabs
 							classes={{

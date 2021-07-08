@@ -13,14 +13,10 @@ html {
   }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
 .stick-nav {
 	position: sticky;
 	top: 0;
-	background-color: #298B72;
+	background-color: #121212;
 	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
 	z-index: 1;
 }

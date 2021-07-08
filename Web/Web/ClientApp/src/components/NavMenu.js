@@ -31,12 +31,13 @@ export class NavMenu extends Component {
 	render() {
 		return (
 			<header className='stick-nav'>
-				<Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 pb-0" dark>
-					<Container style={{backgroundColor: '#298B72', paddingRight: 30}}>
+				<Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3 pb-0" dark>
+					<Container style={{ backgroundColor: '#121212', paddingRight: 30}}>
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-							<img style={{ width: 32, height: 32, marginRight: 10 }} src={Logo} alt="Architech Logo" />
-								<Typography variant="h6" style={{ fontWeight: 700, color: '#fff', fontSize: 28 }}>architech</Typography>
+								<img style={{
+									width: 32, height: 32, marginRight: 10, backgroundColor: '64ffda' }} src={Logo} alt="Architech Logo" />
+								<Typography variant="h6" style={{ fontWeight: 600, color: '#fff', fontSize: 28 }}>architech</Typography>
 							</div>
 						</NavbarBrand>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -45,7 +46,7 @@ export class NavMenu extends Component {
 								{this.props.loggedIn ? (
 									<>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/">Home</NavLink>
+											<NavLink tag={Link} className="text-light" to="/dashboard">Dashboard</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-light" to="/portfolioBuilder">Portfolio Builder</NavLink>

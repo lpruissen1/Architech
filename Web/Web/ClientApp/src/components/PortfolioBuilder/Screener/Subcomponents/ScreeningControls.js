@@ -12,21 +12,21 @@ export default function ScreeningControls(props) {
 	return (
 		<Grid container spacing={1}>
 			<Grid item xs={12}>
-				<Typography style={{ marginTop: 20, marginLeft: 10 }} variant='h6'>Choose Your Markets</Typography>
+				<Typography style={{ marginTop: 20, marginLeft: 10, color:'#fff' }} variant='h6'>Choose Your Markets</Typography>
 				<MarketSelector
 					markets={props.markets}
 					handleUpdate={props.handleUpdate}
 					/>
 			</Grid>
 			<Grid item xs={12}>
-				<Typography style={{ marginLeft: 10 }} variant='h6'>Choose Your Sectors</Typography>
+				<Typography style={{ marginLeft: 10, color: '#fff' }} variant='h6'>Choose Your Sectors</Typography>
 				<SectorSelector
 					sectors={props.sectors}
 					handleUpdate={props.handleUpdate}
 					/>
 			</Grid>
 			<Grid item xs={12}>
-				<Typography style={{ marginTop: 20, marginLeft: 10 }} variant='h6'>Add Metrics</Typography>
+				<Typography style={{ marginTop: 20, marginLeft: 10, color: '#fff' }} variant='h6'>Add Metrics</Typography>
 				<BasicRulesSection
 					rangedRules={props.rangedRules}
 					timedRangeRules={props.timedRangeRules}

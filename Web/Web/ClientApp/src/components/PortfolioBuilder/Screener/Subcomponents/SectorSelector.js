@@ -12,10 +12,11 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 		paddingLeft: 10,
 		paddingRight: 10,
-		borderColor: '#696969',
-		color: '#696969',
+		borderColor: '#d0d0d0',
+		color: '#d0d0d0',
 		width: '100%',
 		borderRadius: 10,
+		border: '2px solid'
 	},
 	buttonChecked: {
 		textTransform: 'none',
@@ -24,9 +25,12 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 		paddingLeft: 10,
 		paddingRight: 10,
-		color: '#fff',
+		color: '#64ffda',
+		backgroundColor: theme.palette.primary.main,
 		width: '100%',
 		borderRadius: 10,
+		borderColor: '#64ffda',
+		border: '2px solid'
 	},
 	buttonPartial: {
 		textTransform: 'none',
