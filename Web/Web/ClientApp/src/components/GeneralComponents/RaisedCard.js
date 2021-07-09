@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
 	root: {
-		backgroundColor: '#112240',
+		backgroundColor: '#202020',
 		boxShadow: '0px 1px 10px #000000',
 		borderRadius: 8
 	}
