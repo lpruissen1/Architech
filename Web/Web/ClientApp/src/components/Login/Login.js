@@ -26,6 +26,10 @@ export const useStyles = makeStyles((theme) => ({
 	largeForm: {
 		margin: theme.spacing(1.5),
 		width: '43ch',
+		"& .MuiInputBase-root": {
+			color: '#fff',
+			height: 60
+		}
 	}
 }));
 
@@ -61,14 +65,14 @@ export function Login(props) {
 						<div className="flex-container">
 								<TextField required id="outlined-required" className={classes.largeForm} variant="filled" label="Username"
 									InputLabelProps={{
-										shrink: true,
+										style: {color: '#c0c0c0'},
 									}}
 									onChange={(event) => {
 										setUsername(event.target.value);
 									}}
 									error={credentialError}
 									autoComplete='off'
-									style={{backgroundColor: '#525252', borderRadius: 4}}
+									style={{backgroundColor: '#525252', borderRadius: 4, fontColor: '#fff'}}
 							/>
 							<TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
 								InputLabelProps={{
