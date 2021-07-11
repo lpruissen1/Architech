@@ -68,7 +68,7 @@ export function Login(props) {
 									}}
 									error={credentialError}
 									autoComplete='off'
-									style={{backgroundColor: '#fff', borderRadius: 4}}
+									style={{backgroundColor: '#525252', borderRadius: 4}}
 							/>
 							<TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
 								InputLabelProps={{
