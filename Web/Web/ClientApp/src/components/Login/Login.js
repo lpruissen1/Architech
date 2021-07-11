@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField';
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from '@material-ui/core/Button';
 import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
@@ -8,6 +9,9 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import RaisedCard from '../GeneralComponents/RaisedCard';
 import LargeTextInput from '../GeneralComponents/LargeTextInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+
 
 export const useStyles = makeStyles((theme) => ({
 	button: {
@@ -42,6 +46,9 @@ export function Login(props) {
     const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [credentialError, setCredentialError] = useState(false)
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClickShowPassword = () => setShowPassword(!showPassword);
+	const handleMouseDownPassword = () => setShowPassword(!showPassword);
 	const history = useHistory();
 
     const loginUser = async () => {
@@ -78,20 +85,20 @@ export function Login(props) {
 										setPassword(event.target.value);
 									}}
 									error={credentialError}
+									type={showPassword ? "text" : "password"}
 									helperText={credentialError ? "Invalid Credentials" : ""}
-									type='password'
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<IconButton
+													aria-label="toggle password visibility"
+													onClick={handleClickShowPassword}
+													onMouseDown={handleMouseDownPassword}
+												>
+													{showPassword ? <Visibility /> : <VisibilityOff />}
+												</IconButton>
+											</InputAdornment>)}}
 							/>
-							<TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
-								InputLabelProps={{
-									shrink: true,
-								}}
-								onChange={(event) => {
-									setPassword(event.target.value);
-								}}
-								type='password'
-								error={credentialError}
-								helperText={credentialError? "Invalid Credentials" : ""}
-								autoComplete='off' />
 						</div>
 					</form>
 					<Button

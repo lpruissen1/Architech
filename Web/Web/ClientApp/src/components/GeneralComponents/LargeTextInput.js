@@ -30,6 +30,7 @@ export default function LargeTextInput(props) {
 			style={{ backgroundColor: '#525252', borderRadius: 4, fontColor: '#fff' }}
 			helperText={props.helperText}
 			type={props.type}
+			InputProps={props.InputProps && props.InputProps}
 		/>
 	)
 }
