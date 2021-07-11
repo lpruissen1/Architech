@@ -6,6 +6,7 @@ import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import RaisedCard from '../GeneralComponents/RaisedCard';
 
 export const useStyles = makeStyles((theme) => ({
 	button: {
@@ -24,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	largeForm: {
 		margin: theme.spacing(1.5),
-		width: '43ch'
+		width: '43ch',
 	}
 }));
 
@@ -51,44 +52,53 @@ export function Login(props) {
 
     return (
         <div className="global-flex-container">
-			<div className="loginCard">
-                <form className={classes.root}>
-                    <div className="flex-container">
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Username" label="Username"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(event) => {
-                                setUsername(event.target.value);
-							}}
-							error={credentialError}
-                            autoComplete='off' />
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(event) => {
-                                setPassword(event.target.value);
-							}}
-							type='password'
-							error={credentialError}
-							helperText={credentialError? "Invalid Credentials" : ""}
-                            autoComplete='off' />
-                    </div>
-                </form>
-				<Button
-					onClick={loginUser}
-					className={classes.button}
-					variant="contained"
-					color="primary"
-					style={{ outline: 'none' }}
-					disableElevation> Login </Button>
+			<RaisedCard
+				className="loginCard"
+				style={{display: 'block', marginTop: '5%', paddingTop: 40, paddingLeft: 20, paddingRight: 20, paddingBottom: 40 }}
+				children={
+					<>
+					<form className={classes.root}>
+						<div className="flex-container">
+								<TextField required id="outlined-required" className={classes.largeForm} variant="filled" label="Username"
+									InputLabelProps={{
+										shrink: true,
+									}}
+									onChange={(event) => {
+										setUsername(event.target.value);
+									}}
+									error={credentialError}
+									autoComplete='off'
+									style={{backgroundColor: '#fff', borderRadius: 4}}
+							/>
+							<TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
+								InputLabelProps={{
+									shrink: true,
+								}}
+								onChange={(event) => {
+									setPassword(event.target.value);
+								}}
+								type='password'
+								error={credentialError}
+								helperText={credentialError? "Invalid Credentials" : ""}
+								autoComplete='off' />
+						</div>
+					</form>
+					<Button
+						onClick={loginUser}
+						className={classes.button}
+						variant="contained"
+						color="primary"
+						style={{ outline: 'none' }}
+							disableElevation>
+							Login
+					</Button>
 					<p className="registration-link"> Don't have an account? 
 						<Link to="/register">
 							<span className="signup"> Sign up now!</span>
 						</Link>
 					</p>
-			</div>
+					</>}
+			/>
         </div>
     );
 }

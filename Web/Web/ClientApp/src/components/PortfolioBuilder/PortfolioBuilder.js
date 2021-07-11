@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
 		height: 48,
-		backgroundColor: '#242424',
+		backgroundColor: '#404040',
 		color: '#fff'
 	}
 }));
@@ -46,7 +46,7 @@ export function PortfolioBuilder(props) {
 	};
 
 	return (
-			<Grid container spacing={3}>
+		<Grid container spacing={3}>
 				<Grid item xs={9}>
 				<RaisedCard
 					style={{ height: 640, overflow: 'scroll'}}
@@ -79,7 +79,7 @@ export function PortfolioBuilder(props) {
 					}
 					/>
 				</Grid>
-				<Grid item xs={3}>
+			<Grid container item xs={3} justify="center">
 				<RaisedCard
 					style={{ position: 'fixed', height: 640, minWidth: 300 }}
 					children={

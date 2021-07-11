@@ -14,7 +14,7 @@ import './TickerTable.css';
 
 export const useStyles = makeStyles((theme) => ({
 	tableHead: {
-		backgroundColor: '#242424',
+		backgroundColor: '#404040',
 	},
 	table: {
 		color: '#d0d0d0'
@@ -30,7 +30,7 @@ export default function TickerTable(props) {
 				<TableContainer style={{ borderRadius: 8, height: 640 }}>
 					{props.tickers.length === 0
 						? <EmptyTickerTable />
-						: <Table className={classes.table} style={{ backgroundColor: '#202020'}} stickyHeader aria-label="collapsible table" size="small">
+						: <Table className={classes.table} style={{ backgroundColor: '#363636'}} stickyHeader aria-label="collapsible table" size="small">
 							<TableHead className={classes.tableHead}>
 								<TableRow className={classes.tableHead} style={{ height: 48 }}>
 									<TableCell className={classes.tableHead} style={{ width: 10, borderBottom: 'none'  }}>

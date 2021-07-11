@@ -34,9 +34,9 @@ export function Layout(props) {
 
 
 	return (
-		<div style={{ backgroundColor: '#121212' }}>
+		<div style={{ backgroundColor: '#303030' }}>
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
-			<Container style={{ backgroundColor: '#121212' }}>
+			<div style={{ backgroundColor: '#303030', marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
@@ -46,7 +46,7 @@ export function Layout(props) {
 				<AuthenticatedRoute exact path='/profile' component={Profile} />
 				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
-			</Container>
+			</div>
 		</div>
 	);
 }

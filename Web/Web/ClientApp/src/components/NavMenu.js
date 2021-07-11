@@ -31,12 +31,12 @@ export class NavMenu extends Component {
 	render() {
 		return (
 			<header className='stick-nav'>
-				<Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3 pb-0" dark>
-					<Container style={{ backgroundColor: '#121212', paddingRight: 30}}>
+				<Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3 pb-0 pl-0 pr-0" dark>
+					<div style={{ backgroundColor: '#303030', marginLeft: '5%', marginRight: '5%', display: 'flex', flexDirection: 'row', width: '100%'}}>
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 								<img style={{
-									width: 32, height: 32, marginRight: 10, backgroundColor: '64ffda' }} src={Logo} alt="Architech Logo" />
+									width: 32, height: 32, marginRight: 10, backgroundColor: '64ffda', marginLeft: 0 }} src={Logo} alt="Architech Logo" />
 								<Typography variant="h6" style={{ fontWeight: 600, color: '#fff', fontSize: 28 }}>architech</Typography>
 							</div>
 						</NavbarBrand>
@@ -74,7 +74,7 @@ export class NavMenu extends Component {
 								)}
 							</ul>
 						</Collapse>
-					</Container>
+					</div>
 				</Navbar>
 			</header>
 		);
