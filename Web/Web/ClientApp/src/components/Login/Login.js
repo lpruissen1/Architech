@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import RaisedCard from '../GeneralComponents/RaisedCard';
+import LargeTextInput from '../GeneralComponents/LargeTextInput';
 
 export const useStyles = makeStyles((theme) => ({
 	button: {
@@ -28,7 +29,8 @@ export const useStyles = makeStyles((theme) => ({
 		width: '43ch',
 		"& .MuiInputBase-root": {
 			color: '#fff',
-			height: 60
+			height: 60,
+			textAlign: 'center'
 		}
 	}
 }));
@@ -63,16 +65,21 @@ export function Login(props) {
 					<>
 					<form className={classes.root}>
 						<div className="flex-container">
-								<TextField required id="outlined-required" className={classes.largeForm} variant="filled" label="Username"
-									InputLabelProps={{
-										style: {color: '#c0c0c0'},
-									}}
+							<LargeTextInput
+									label="Username"
 									onChange={(event) => {
 										setUsername(event.target.value);
 									}}
 									error={credentialError}
-									autoComplete='off'
-									style={{backgroundColor: '#525252', borderRadius: 4, fontColor: '#fff'}}
+								/>
+							<LargeTextInput
+									label="Password"
+									onChange={(event) => {
+										setPassword(event.target.value);
+									}}
+									error={credentialError}
+									helperText={credentialError ? "Invalid Credentials" : ""}
+									type='password'
 							/>
 							<TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
 								InputLabelProps={{
