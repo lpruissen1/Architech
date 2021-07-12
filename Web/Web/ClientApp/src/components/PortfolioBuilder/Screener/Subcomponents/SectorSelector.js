@@ -134,7 +134,7 @@ export default function SectorSelector(props) {
 		<div className = "sectorSelectorContainer">
 			<Grid
 				container
-				spacing={1}
+				spacing={2}
 			>
 				<Grid item xs={3}>
 					<Button

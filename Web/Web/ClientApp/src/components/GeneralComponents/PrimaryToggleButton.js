@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.main,
 		color: '#303030',
 		minWidth: 140,
+		border: '2px solid rgba(255,215,100)'
 	},
 	buttonUnchecked: {
 		margin: theme.spacing(2),

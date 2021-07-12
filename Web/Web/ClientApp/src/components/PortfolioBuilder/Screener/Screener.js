@@ -242,7 +242,7 @@ export function Screener(props) {
 		sectors.forEach(sector => {
 			sector.industries.forEach(industry => {
 				if (industry.isChecked === true)
- 					activeIndustries.push(industry.value)
+					activeIndustries.push(industry.value)
 			})
 		})
 		return activeIndustries
@@ -250,7 +250,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-			
+
 			props.setLoading(true)
 			setChangeMade(true)
 
@@ -270,14 +270,14 @@ export function Screener(props) {
 
 	// Create function to validate custom index then call in screener, if valid do the screening request
 	const validate = () => {
-		
-		for(let i = 0; i < timedRangeRules.length; i++) {
+
+		for (let i = 0; i < timedRangeRules.length; i++) {
 			if (timedRangeRules[i].timePeriod === "") {
-					return false
-				}
+				return false
 			}
+		}
 		return true
-	} 
+	}
 
 	const handleMount = () => {
 		if (index) {
@@ -291,10 +291,10 @@ export function Screener(props) {
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
-		
+
 		CustomIndexClient.CreateCustomIndex({
 			userId: AuthClient.GetIdFromStoredJwt(),
-			indexId: newIndexID, 
+			indexId: newIndexID,
 			markets: [
 				"Sp500"
 			],
@@ -326,7 +326,7 @@ export function Screener(props) {
 	}
 
 	return (
-		<div>
+		<div style={{padding: 10}}>
 			<ScreeningControls
 				sectors={sectors}
 				rangedRules={rangedRules}

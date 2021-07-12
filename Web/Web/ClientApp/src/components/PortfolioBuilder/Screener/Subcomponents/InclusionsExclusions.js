@@ -63,7 +63,7 @@ export default function InclusionExclusion(props) {
 	useEffect(() => { GetOptions() }, []);
 
 	return (
-		<div className='inclusion-exclusion-container'>
+		<div style={{ color: '#fff' }} className='inclusion-exclusion-container'>
 				<Typography variant='h6'>Manually Adjust Tickers</Typography>
 				<div className="inclusion-exclusion-contents">
 				<Grid
