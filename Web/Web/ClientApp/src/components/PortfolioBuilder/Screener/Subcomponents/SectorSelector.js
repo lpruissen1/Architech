@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import IndustryCheckBox from './IndustryCheckBox.js';
 import './SectorSelector.css';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import PrimaryTextButton from '../../../GeneralComponents/PrimaryTextButton';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
@@ -47,16 +48,6 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: theme.palette.primary.main,
 		'&:hover': {
 			backgroundColor: fade(theme.palette.primary.main, 0.7),
-		},
-	},
-	industryButton: {
-		margin: theme.spacing(1),
-		textTransform: 'none',
-		fontSize: 14,
-		fontWeight: 500,
-		color: theme.palette.primary.dark,
-		'&:hover': {
-			color: theme.palette.primary.dark,
 		},
 	}
 }));
@@ -169,13 +160,10 @@ export default function SectorSelector(props) {
 					})
 				}
 			</Grid>
-			<Button
-				className={classes.industryButton}
+			<PrimaryTextButton
 				onClick={handleIndustryClick}
-				style={{ outline: 'none' }}
-			>
-				Filter By Industry
-			</Button>
+				text='Filter By Industry'
+			/>
 			{renderIndustry && <IndustryCheckBox
 				sectors={props.sectors}
 				handleUpdate={props.handleUpdate}

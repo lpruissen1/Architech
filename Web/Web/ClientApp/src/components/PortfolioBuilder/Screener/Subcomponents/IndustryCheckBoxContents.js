@@ -7,11 +7,13 @@ import './SectorSelector.css';
 
 export default function IndustryCheckBoxContent(props) {
 
+	const textColor = '#d0d0d0'
+
 	return (
 		<FormControlLabel
 			control={
 				<Checkbox
-					style={{color: '#d0d0d0'}}
+					style={{color: textColor}}
 					color='primary'
 					onClick={props.onClick}
 					checked={props.isChecked}
@@ -25,7 +27,7 @@ export default function IndustryCheckBoxContent(props) {
 							fontSize="small" />}
 				/>
 			}
-			style={{color: '#d0d0d0'}}
+			style={{color: textColor}}
 			label={props.label}
 		/>
 	);

@@ -37,7 +37,7 @@ export default function IndustryCheckBox(props) {
 	}
 
 	return (
-		<div className='industryGridContainer'>
+		<div style={{ justifyContent: 'center' }} className='industryGridContainer'>
 			<Grid
 				container
 				spacing={5}
