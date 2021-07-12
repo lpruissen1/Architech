@@ -16,17 +16,17 @@ export default function SectorAndIndustryTable(props) {
 		<Table size="small" aria-label="purchases">
 			<TableHead>
 				<TableRow>
-					<TableCell>Sector</TableCell>
-					<TableCell>Industries</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Sector</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Industries</TableCell>
 				</TableRow>
 			</TableHead>
 			<TableBody>
 				{props.getSectorAndIndustryDisplay().map((sector) => (
 					<TableRow key={sector.name}>
-						<TableCell component="th" scope="row">
+						<TableCell component="th" scope="row" style={{ color: '#d0d0d0' }}>
 							{sector.name}
 						</TableCell>
-						<TableCell>{sector.industries.join(', ')}</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>{sector.industries.join(', ')}</TableCell>
 					</TableRow>
 				))}
 			</TableBody>

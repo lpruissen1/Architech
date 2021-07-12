@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import RaisedCard from '../../GeneralComponents/RaisedCard';
 import PortfolioTableRow from './PortfolioTableRow.js';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,14 +23,14 @@ import NumberFormatter from '../../../Formatter/NumberFormatter';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
-		color: 'white',
+		color: '#d0d0d0',
 	},
 	editButton: {
-		color: 'white',
+		color: '#d0d0d0',
 		marginLeft: 'auto'
 	},
 	tableHead: {
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: '#484848',
 	},
 	headCells: {
 		paddingTop: 0,
@@ -133,14 +133,14 @@ export function PortfolioCard(props) {
 	}
 
 	return (
-		<>
-			<div className="portfolioCard">
-				<TableContainer component={Paper}>
-					<Table aria-label="collapsible table" size="small">
+		<RaisedCard style={{ borderRadius: 8 }}>
+			<div className="portfolioCard" style={{ marginBottom: 20 }}>
+				<TableContainer style={{ borderRadius: 8 }}>
+					<Table aria-label="collapsible table" size="small" style={{ backgroundColor: '#363636' }}>
 						<TableHead className={classes.tableHead}>
-							<TableRow>
-								<TableCell className={classes.headCells} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
-								<TableCell align="right" style={{ width: '70%'}}>
+							<TableRow style={{ borderBottom: 'none' }}>
+								<TableCell className={classes.headCells} style={{ borderBottom: 'none'}} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
+								<TableCell align="right" style={{ width: '70%', borderBottom: 'none'}}>
 									<Button
 										className={classes.editButton}
 										onClick={handleEditOnClick}
@@ -149,7 +149,7 @@ export function PortfolioCard(props) {
 										Edit
 									</Button>
 								</TableCell>
-								<TableCell align="right" className={classes.headCells}>
+								<TableCell style={{ borderBottom: 'none' }} align="right" className={classes.headCells}>
 									{modal &&
 										<DeleteModal
 											handleDelete={handleDelete}
@@ -183,6 +183,6 @@ export function PortfolioCard(props) {
 					</Table>
 				</TableContainer>
 			</div>
-		</>
+		</RaisedCard>
 	);
 }
