@@ -36,8 +36,8 @@ export class NavMenu extends Component {
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 								<img style={{
-									width: 32, height: 32, marginRight: 10, backgroundColor: '64ffda', marginLeft: 0 }} src={Logo} alt="Architech Logo" />
-								<Typography variant="h6" style={{ fontWeight: 600, color: '#fff', fontSize: 28 }}>architech</Typography>
+									width: 32, height: 32, marginRight: 10, marginLeft: 0 }} src={Logo} alt="Architech Logo" />
+								<Typography variant="h6" style={{ fontWeight: 600, color: '#fff', fontSize: 28 }}>ARCHITECH</Typography>
 							</div>
 						</NavbarBrand>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />

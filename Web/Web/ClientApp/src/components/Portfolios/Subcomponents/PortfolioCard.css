@@ -28,3 +28,7 @@ h2 {
 table {
 	width: 100%;
 }
+
+.MuiTableCell-root {
+	border-bottom: #606060;
+}

@@ -14,7 +14,7 @@ import './PortfolioBuilder.css';
 
 export const useStyles = makeStyles((theme) => ({
 	indicator: {
-		backgroundColor: '#64ffda'
+		backgroundColor: 'rgba(255,215,100)'
 	},
 	root: {
 		textTransform: 'none',

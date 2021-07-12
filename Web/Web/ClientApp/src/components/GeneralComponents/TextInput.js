@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 // where did you come from and what was the state of where you came from
-export default function LargeTextInput(props) {
+export default function TextInput(props) {
 
 	const classes = useStyles();
 
@@ -27,7 +27,7 @@ export default function LargeTextInput(props) {
 			onChange={props.onChange}
 			error={props.error}
 			autoComplete='off'
-			style={{ backgroundColor: '#525252', borderRadius: 4, fontColor: '#fff' }}
+			style={{ backgroundColor: '#525252', borderRadius: 4, fontColor: '#fff', width: props.width}}
 			helperText={props.helperText}
 			type={props.type}
 			InputProps={props.InputProps && props.InputProps}

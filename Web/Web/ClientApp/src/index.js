@@ -12,8 +12,7 @@ const rootElement = document.getElementById('root');
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: 'rgba(100, 255, 215, 0.20)',
-			dark: 'rgba(100, 255, 215, 0.70)'
+			main: 'rgba(255,215,100)',
 		},
 		secondary: {
 			main: '#F6D743',

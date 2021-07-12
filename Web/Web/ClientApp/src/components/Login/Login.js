@@ -8,34 +8,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import RaisedCard from '../GeneralComponents/RaisedCard';
-import LargeTextInput from '../GeneralComponents/LargeTextInput';
+import TextInput from '../GeneralComponents/TextInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import PrimaryActionButton from '../GeneralComponents/PrimaryActionButton';
 
 
 export const useStyles = makeStyles((theme) => ({
-	button: {
-		margin: '0 auto',
-		marginTop: '14px',
-		display: "flex",
-		width: '42ch',
-		fontWeight: '700',
-		color: 'white',
-		textTransform: 'none',
-		fontSize: 16,
-	},
-	smallForm: {
-		margin: theme.spacing(1.5),
-		width: '20ch'
-	},
-	largeForm: {
-		margin: theme.spacing(1.5),
-		width: '43ch',
-		"& .MuiInputBase-root": {
-			color: '#fff',
-			height: 60,
-			textAlign: 'center'
-		}
+	visibility: {
+	color: '#c0c0c0',
+	outline: 'none'
 	}
 }));
 
@@ -72,14 +54,16 @@ export function Login(props) {
 					<>
 					<form className={classes.root}>
 						<div className="flex-container">
-							<LargeTextInput
+								<TextInput
+									width='43ch'
 									label="Username"
 									onChange={(event) => {
 										setUsername(event.target.value);
 									}}
 									error={credentialError}
 								/>
-							<LargeTextInput
+								<TextInput
+									width= '43ch'
 									label="Password"
 									onChange={(event) => {
 										setPassword(event.target.value);
@@ -95,24 +79,21 @@ export function Login(props) {
 													onClick={handleClickShowPassword}
 													onMouseDown={handleMouseDownPassword}
 												>
-													{showPassword ? <Visibility /> : <VisibilityOff />}
+													{showPassword ? <Visibility className={classes.visibility} /> : <VisibilityOff className={classes.visibility} />}
 												</IconButton>
 											</InputAdornment>)}}
 							/>
 						</div>
 					</form>
-					<Button
+					<PrimaryActionButton
 						onClick={loginUser}
-						className={classes.button}
-						variant="contained"
-						color="primary"
-						style={{ outline: 'none' }}
-							disableElevation>
-							Login
-					</Button>
-					<p className="registration-link"> Don't have an account? 
+						text='Login'
+						width='42ch'
+					/>
+					<p style={{ color: '#c0c0c0', margin: 14, textAlign: 'center', marginBottom: 0 }}
+					> Don't have an account? 
 						<Link to="/register">
-							<span className="signup"> Sign up now!</span>
+								<span style={{ color: 'rgba(255,215,100)', fontWeight: 600,  }}> Sign up now!</span>
 						</Link>
 					</p>
 					</>}

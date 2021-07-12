@@ -12,10 +12,8 @@ export const useStyles = makeStyles((theme) => ({
 		paddingRight: 10,
 		borderRadius: 10,
 		backgroundColor: theme.palette.primary.main,
-		color: 'rgba(100, 255, 215)',
+		color: '#303030',
 		minWidth: 140,
-		border: '2px solid',
-		borderColor: 'rgba(100, 255, 215)'
 	},
 	buttonUnchecked: {
 		margin: theme.spacing(2),

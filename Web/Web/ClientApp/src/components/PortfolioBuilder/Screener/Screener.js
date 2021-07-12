@@ -6,6 +6,7 @@ import ScreenerClient from '../../../Clients/ScreenerClient';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import UpdateButton from './Subcomponents/UpdateButton';
+import PrimaryActionButton from '../../GeneralComponents/PrimaryActionButton';
 
 export function Screener(props) {
 	const [markets, setMarkets] = useState([
@@ -348,9 +349,9 @@ export function Screener(props) {
 			/>
 			<br/>
 			{index
-				? <UpdateButton
-					changeMade={changeMade}
-					handleUpdate={updateIndex} />
+				? <PrimaryActionButton
+					onChange={updateIndex}
+					text='Save Index'/>
 				: <SaveButton
 					handleSave={saveIndex} />
 			}

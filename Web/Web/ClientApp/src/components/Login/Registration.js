@@ -5,7 +5,13 @@ import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
-import { validateEmail, validatePassword, validateUsername, validateName, validatePasswordMatch}  from './RegistrationValidationHelpers'
+import { validateEmail, validatePassword, validateUsername, validateName, validatePasswordMatch } from './RegistrationValidationHelpers'
+import TextInput from '../GeneralComponents/TextInput.js';
+import RaisedCard from '../GeneralComponents/RaisedCard.js';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 // we should move all these to their own files
 export const useStyles = makeStyles((theme) => ({
@@ -18,14 +24,10 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'white',
 		textTransform: 'none',
 		fontSize: 16,
-	},
-	smallForm: {
-		margin: theme.spacing(1.25),
-		width: '20ch'
-	},
-	largeForm: {
-		margin: theme.spacing(1.25),
-		width: '43ch'
+	}, 
+	visibility: {
+		color: '#c0c0c0',
+		outline: 'none'
 	}
 }));
 
@@ -46,6 +48,12 @@ export function Registration(props) {
 	const [passwordError, setPasswordError] = useState(false)
 	const [passwordMatchError, setPasswordMatchError] = useState(false)
 	const [formValid, setFormValid] = useState(false)
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClickShowPassword = () => setShowPassword(!showPassword);
+	const handleMouseDownPassword = () => setShowPassword(!showPassword);
+	const [showPasswordMatch, setShowPasswordMatch] = useState(false);
+	const handleClickShowPasswordMatch = () => setShowPasswordMatch(!showPasswordMatch);
+	const handleMouseDownPasswordMatch = () => setShowPasswordMatch(!showPasswordMatch);
 	const history = useHistory();
 
 	const postUserRegistrationRequest = async (data) => {
@@ -142,69 +150,83 @@ export function Registration(props) {
 
 	return (
 		<div className="global-flex-container">
-			<div className="registration-card">
-				<form className={classes.root}>
-					<div className="flex-container">
-						<div className="nameRow">
-							<TextField required id="outlined-required" className={classes.smallForm} label="First Name" variant="outlined" placeholder="First Name"
-								InputLabelProps={{
-									shrink: true,
-								}}
-								onChange={(e) => setFirstName(e.target.value)}
-								autoComplete='off'
-								error={firstName ? firstNameError : false}
+			<RaisedCard
+				style={{ display: 'block', marginTop: '3%', paddingLeft: 20, paddingRight: 20, paddingTop: 40, paddingBottom: 40 }}
+			>
+					<form className={classes.root}>
+						<div className="flex-container">
+							<div className="nameRow">
+								<TextInput
+									width='20ch'
+									label='First Name'
+									error={firstName ? firstNameError : false}
+									onChange={(e) => setFirstName(e.target.value)}
+								/>
+								<TextInput
+									width='20ch'
+									label='Last Name'
+									error={lastName ? lastNameError : false}
+									onChange={(e) => setLastName(e.target.value)}
+								/>
+							</div>
+							<TextInput
+								width='43ch'
+								label='Username'
+								error={username ? usernameError : false}
+								onChange={(e) => setUsername(e.target.value)}
+								helperText={username && usernameError ? "*Must have at least 8 characters" : ''}
 							/>
-							<TextField required id="outlined-required" className={classes.smallForm} label="Last Name" variant="outlined" placeholder="Last Name"
-								InputLabelProps={{
-									shrink: true,
+							<TextInput
+								width='43ch'
+								label='Password'
+								type={showPassword ? "text" : "password"}
+								error={password ? passwordError : false}
+								onChange={(e) => setPassword(e.target.value)}
+								helperText={password && passwordError ? "*Must contain uppercase, lowercase, number, and symbol" : ''}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												aria-label="toggle password visibility"
+												onClick={handleClickShowPassword}
+												onMouseDown={handleMouseDownPassword}
+											>
+												{showPassword ? <Visibility className={classes.visibility} /> : <VisibilityOff className={classes.visibility} />}
+											</IconButton>
+										</InputAdornment>)
 								}}
-								onChange={(e) => setLastName(e.target.value)}
-								autoComplete='off'
-								error={lastName ? lastNameError : false}
+							/>
+							<TextInput
+								width='43ch'
+								label='Re-enter Password'
+								type='password'
+								onChange={(e) => setPasswordMatch(e.target.value)}
+								error={passwordMatch ? passwordMatchError : false}
+								helperText={passwordMatchError
+									? "*Passwords do not match"
+									: ''}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												aria-label="toggle password visibility"
+												onClick={handleClickShowPasswordMatch}
+												onMouseDown={handleMouseDownPasswordMatch}
+											>
+												{showPasswordMatch ? <Visibility className={classes.visibility} /> : <VisibilityOff className={classes.visibility} />}
+											</IconButton>
+										</InputAdornment>)
+								}}
+							/>
+							<TextInput
+								width='43ch'
+								label='Email'
+								error={email ? emailError : false}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</div>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Username" variant="outlined" placeholder="Username"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							onChange={(e) => setUsername(e.target.value)}
-							autoComplete='off'
-							error={username ? usernameError : false}
-							helperText={username && usernameError ? "*Must have at least 8 characters" : ''}
-						/>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Password" variant="outlined" placeholder="Password"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							onChange={(e) => setPassword(e.target.value)}
-							autoComplete='off'
-							type='password'
-							error={password ? passwordError : false}
-							helperText={password && passwordError ? "*Must contain uppercase, lowercase, number, and symbol" : ''}
-						/>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Re-enter Password" variant="outlined" placeholder="Re-enter Password"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							onChange={(e) => setPasswordMatch(e.target.value)}
-							autoComplete='off'
-							type='password'
-							error={passwordMatch ? passwordMatchError : false}
-							helperText={passwordMatchError
-								? "*Passwords do not match"
-								: ''}
-						/>
-						<TextField required id="outlined-required" className={classes.largeForm} label="Email" variant="outlined" placeholder="Email"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							onChange={(e) => setEmail(e.target.value)}
-							autoComplete='off'
-							error={email ? emailError : false}
-						/>
-					</div>
-				</form>
-				{formValid
+					</form>
+					{formValid
 					? <Button
 						onClick={registerUser}
 						className={classes.button}
@@ -216,9 +238,8 @@ export function Registration(props) {
 						className={classes.button}
 						variant="contained"
 						disabled
-						disableElevation> Register </Button>
-					}
-			</div>
+						disableElevation> Register </Button>}
+				</RaisedCard>
 		</div>
 	);
 }

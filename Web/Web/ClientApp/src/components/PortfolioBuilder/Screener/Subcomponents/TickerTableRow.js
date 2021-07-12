@@ -14,15 +14,15 @@ export default function TickerTableRow(props) {
 	return (
 		<React.Fragment>
 			<TableRow>
-				<TableCell style={{ maxWidth: 10, justifyContent: 'flex-start', paddingLeft: 0, borderBottomColor: '#363636' }} align="left">
+				<TableCell style={{ maxWidth: 10, justifyContent: 'flex-start', paddingLeft: 0, borderBottomColor: '#545454' }} align="left">
 					<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{ marginLeft: 2, outline: 'none', color: '#d0d0d0' }}>
 						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 					</IconButton>
 				</TableCell>
-				<TableCell component="th" scope="row" style={{ color: '#d0d0d0', borderBottomColor: '#363636'  }}>
+				<TableCell component="th" scope="row" style={{ color: '#d0d0d0', borderBottomColor: '#545454'  }}>
 					<Typography style={{ fontWeight: 600 }}>{props.ticker}</Typography>
 				</TableCell>
-				<TableCell style={{ color: '#d0d0d0', borderBottomColor: '#363636'  }} align="left">
+				<TableCell style={{ color: '#d0d0d0', borderBottomColor: '#545454'  }} align="left">
 					{props.weight
 						? <Typography>{Math.round((props.weight + Number.EPSILON) * 100) / 100}%</Typography>
 						: <Typography>-</Typography>
@@ -30,7 +30,7 @@ export default function TickerTableRow(props) {
 				</TableCell>
 			</TableRow>
 			<TableRow>
-				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderBottomColor: '#363636'  }} colSpan={6}>
+				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderBottomColor: '#545454'  }} colSpan={6}>
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<Box margin={1}>
 							{props.interiorTable}
