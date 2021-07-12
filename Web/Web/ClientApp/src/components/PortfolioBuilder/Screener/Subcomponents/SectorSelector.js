@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from "react";
 import IndustryCheckBox from './IndustryCheckBox.js';
 import './SectorSelector.css';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {
@@ -25,37 +26,36 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 		paddingLeft: 10,
 		paddingRight: 10,
-		color: '#64ffda',
+		color: '#303030',
 		backgroundColor: theme.palette.primary.main,
 		width: '100%',
 		borderRadius: 10,
-		borderColor: '#64ffda',
-		border: '2px solid'
+		border: '2px solid',
+		borderColor: theme.palette.primary.main
 	},
 	buttonPartial: {
 		textTransform: 'none',
 		fontSize: 14,
 		variant: 'contained',
-		backgroundColor: 'rgba(41, 139, 114, .6)',
-		color: '#fff',
+		backgroundColor: fade(theme.palette.primary.main, 0.6),
+		color: '#303030',
 		width: '100%',
 		paddingLeft: 10,
 		paddingRight: 10,
 		borderRadius: 10,
+		border: '2px solid',
+		borderColor: theme.palette.primary.main,
 		'&:hover': {
-			backgroundColor: 'rgba(41, 139, 114, .7)',
+			backgroundColor: fade(theme.palette.primary.main, 0.7),
 		},
-
 	},
 	industryButton: {
 		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
 		fontWeight: 500,
-		backgroundColor: '#fff',
 		color: theme.palette.primary.dark,
 		'&:hover': {
-			backgroundColor: '#fff',
 			color: theme.palette.primary.dark,
 		},
 	}

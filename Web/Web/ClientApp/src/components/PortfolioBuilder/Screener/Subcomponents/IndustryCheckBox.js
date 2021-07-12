@@ -47,6 +47,7 @@ export default function IndustryCheckBox(props) {
 					<Grid item xs={4} key={sector.value}>
 						<FormControl>
 							<FormLabel
+								style={{color: '#c0c0c0'}}
 								className='industryLabel'
 							>
 								{sector.value}
