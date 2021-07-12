@@ -22,7 +22,7 @@ export default function PrimaryTextButton(props) {
 		<Button
 			className={classes.industryButton}
 			onClick={props.onClick}
-			style={{ outline: 'none' }}
+			style={{ outline: 'none', ...props.style }}
 		>
 			{props.text}
 		</Button>

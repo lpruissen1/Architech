@@ -20,14 +20,11 @@ import BasicMetricTable from './BasicMetricTable';
 import DeleteModal from './DeleteModal';
 import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
 import NumberFormatter from '../../../Formatter/NumberFormatter';
+import PrimaryTextButton from '../../GeneralComponents/PrimaryTextButton';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
 		color: '#d0d0d0',
-	},
-	editButton: {
-		color: '#d0d0d0',
-		marginLeft: 'auto'
 	},
 	tableHead: {
 		backgroundColor: '#484848',
@@ -141,13 +138,12 @@ export function PortfolioCard(props) {
 							<TableRow style={{ borderBottom: 'none' }}>
 								<TableCell className={classes.headCells} style={{ borderBottom: 'none'}} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
 								<TableCell align="right" style={{ width: '70%', borderBottom: 'none'}}>
-									<Button
-										className={classes.editButton}
+									<PrimaryTextButton
 										onClick={handleEditOnClick}
-										style={{ outline: 'none' }}
-									>
-										Edit
-									</Button>
+										text='Edit'
+										style={{height: 30, marginTop: 0, marginBottom: 0}}
+									/>
+
 								</TableCell>
 								<TableCell style={{ borderBottom: 'none' }} align="right" className={classes.headCells}>
 									{modal &&
