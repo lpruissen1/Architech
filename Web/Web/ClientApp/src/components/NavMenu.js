@@ -4,6 +4,7 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import './NavMenu.css';
 import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
+import LogoFont from './ArchitechLogoFont.svg';
 import Typography from '@material-ui/core/Typography';
 
 export class NavMenu extends Component {
@@ -36,8 +37,11 @@ export class NavMenu extends Component {
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 								<img style={{
-									width: 32, height: 32, marginRight: 10, marginLeft: 0 }} src={Logo} alt="Architech Logo" />
-								<Typography variant="h6" style={{ fontWeight: 600, color: '#fff', fontSize: 28 }}>ARCHITECH</Typography>
+									width: 32, height: 32, marginRight: 10, marginLeft: 0, marginBottom: 2
+								}} src={Logo} alt="Architech Logo" />
+								<img style={{
+									 height: 32, marginLeft: 0
+								}} src={LogoFont} alt="Architech Logo Font" />
 							</div>
 						</NavbarBrand>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
