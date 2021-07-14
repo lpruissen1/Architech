@@ -140,7 +140,7 @@ export function PortfolioCard(props) {
 								<TableCell align="right" style={{ width: '70%', borderBottom: 'none'}}>
 									<PrimaryTextButton
 										onClick={handleEditOnClick}
-										text='Edit'
+										text='Edit Portfolio'
 										style={{height: 30, marginTop: 0, marginBottom: 0}}
 									/>
 

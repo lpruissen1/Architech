@@ -4,6 +4,7 @@ import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import { PortfolioCard } from './Subcomponents/PortfolioCard';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
+import PrimaryActionButton from '../GeneralComponents/PrimaryActionButton';
 import './Portfolios.css';
 
 export function Portfolios(props) {
@@ -31,8 +32,13 @@ export function Portfolios(props) {
 
 	return (
 		<div>
-			<h1>Your Blueprints</h1>
-			<NewPortfolioCard onClick={clickie} />
+			<h1 style={{ color: '#d0d0d0' }}>Your Blueprints</h1>
+			<PrimaryActionButton
+				onClick={clickie}
+				style={{ marginTop: 10, marginBottom: 20, marginLeft: 0, marginRight: 0 }}
+				width= '100%'
+				text='+ Create New Blueprint'
+			/>
 			{
 				portfolios && portfolios.map((portfolio) => {
 					return (

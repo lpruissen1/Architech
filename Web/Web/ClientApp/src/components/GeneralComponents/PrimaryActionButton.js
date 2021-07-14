@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'rgba(255,215,100)',
 		color: '#303030',
 		'&:hover': {
-			backgroundColor: theme.palette.primary.main,
+			backgroundColor: theme.palette.primary.dark,
 			boxShadow: 'none',
 		},
 	}
@@ -29,7 +29,7 @@ export default function PrimaryActionButton(props) {
 			onClick={props.onClick}
 			className={classes.root}
 			variant="contained"
-			style={{ outline: 'none', width: props.width }}
+			style={{ outline: 'none', width: props.width, ...props.style }}
 			disableElevation
 		>
 			{props.text}
