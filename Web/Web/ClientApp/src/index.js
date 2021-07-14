@@ -25,10 +25,9 @@ const theme = createMuiTheme({
 			contrastText: '#7A0E22',
 		},
 		warning: {
-			light: '#FFF2C5',
-			main: '#FFEAA8',
-			dark: '#FFE192',
-			contrastText: '#7A4F15'
+			light: '#FFB396',
+			main: '#FF6551',
+			dark: '#B7282F',
 		},
 		info: {
 			dark: '#005787',
@@ -37,10 +36,9 @@ const theme = createMuiTheme({
 			contrastText: '#002D5A'
 		},
 		success: {
-			light: '#DFFDE4',
-			main: '#9FF3BC',
-			dark: '#5cd89f',
-			contrastText: '#116762'
+			light: '#92ffe5',
+			main: '#64ffda',
+			dark: '#46b298',
 		},
 	}
 })

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import IndustryCheckBox from './IndustryCheckBox.js';
 import './SectorSelector.css';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import PrimaryTextButton from '../../../GeneralComponents/PrimaryTextButton';
+import PrimaryTextButton from '../../../Generic/PrimaryTextButton';
 
 const useStyles = makeStyles((theme) => ({
 	buttonUnchecked: {

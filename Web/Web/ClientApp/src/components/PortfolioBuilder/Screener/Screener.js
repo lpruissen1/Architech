@@ -6,7 +6,7 @@ import ScreenerClient from '../../../Clients/ScreenerClient';
 import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
 import UpdateButton from './Subcomponents/UpdateButton';
-import PrimaryActionButton from '../../GeneralComponents/PrimaryActionButton';
+import PrimaryActionButton from '../../Generic/PrimaryActionButton';
 
 export function Screener(props) {
 	const [markets, setMarkets] = useState([

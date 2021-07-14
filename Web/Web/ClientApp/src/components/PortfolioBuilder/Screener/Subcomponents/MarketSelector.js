@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import PrimaryToggleButton from '../../../GeneralComponents/PrimaryToggleButton';
+import PrimaryToggleButton from '../../../Generic/PrimaryToggleButton';
 import './MarketSelector.css';
 
 export default function MarketSelector(props) {

@@ -9,7 +9,7 @@ import { Screener } from './Screener/Screener';
 import TickerTable from './Screener/Subcomponents/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
-import RaisedCard from '../GeneralComponents/RaisedCard';
+import RaisedCard from '../Generic/RaisedCard';
 import './PortfolioBuilder.css';
 
 export const useStyles = makeStyles((theme) => ({

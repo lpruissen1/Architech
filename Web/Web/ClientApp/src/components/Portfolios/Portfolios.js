@@ -4,7 +4,7 @@ import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
 import { PortfolioCard } from './Subcomponents/PortfolioCard';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
-import PrimaryActionButton from '../GeneralComponents/PrimaryActionButton';
+import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import './Portfolios.css';
 
 export function Portfolios(props) {

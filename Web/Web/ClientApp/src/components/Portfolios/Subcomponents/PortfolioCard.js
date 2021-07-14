@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import RaisedCard from '../../GeneralComponents/RaisedCard';
+import RaisedCard from '../../Generic/RaisedCard';
 import PortfolioTableRow from './PortfolioTableRow.js';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ import BasicMetricTable from './BasicMetricTable';
 import DeleteModal from './DeleteModal';
 import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
 import NumberFormatter from '../../../Formatter/NumberFormatter';
-import PrimaryTextButton from '../../GeneralComponents/PrimaryTextButton';
+import PrimaryTextButton from '../../Generic/PrimaryTextButton';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {

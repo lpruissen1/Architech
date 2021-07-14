@@ -6,8 +6,8 @@ import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import { validateEmail, validatePassword, validateUsername, validateName, validatePasswordMatch } from './RegistrationValidationHelpers'
-import TextInput from '../GeneralComponents/TextInput.js';
-import RaisedCard from '../GeneralComponents/RaisedCard.js';
+import TextInput from '../Generic/TextInput.js';
+import RaisedCard from '../Generic/RaisedCard.js';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from "@material-ui/icons/Visibility";
