@@ -96,11 +96,13 @@ export default class BasicRulesSection extends React.Component {
 	render() {
 		return (
 			<>
-				{this.getAppendedComponents()}
 				<RuleSelector
+					style={{marginBottom: 50}}
 					handleAddNewMetricClick={this.handleAddNewRuleNew}
 					options={this.state.options}
-					checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}/>
+					checkIfRangedRuleExists={this.props.checkIfRangedRuleExists} />
+
+				{this.getAppendedComponents()}
 			</>
 		);
 	}
