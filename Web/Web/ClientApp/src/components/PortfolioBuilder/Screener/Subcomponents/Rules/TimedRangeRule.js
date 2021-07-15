@@ -38,7 +38,7 @@ const RuleSlider = withStyles({
 		height: 20,
 		width: 20,
 		backgroundColor: '#fff',
-		border: '2px solid currentColor',
+		border: '2px solid #fff',
 		marginTop: -6,
 		marginLeft: -10,
 		'&:focus, &:hover, &$active': {
@@ -66,7 +66,7 @@ export default function TimeRangedRule(props) {
 	const [high, setHigh] = useState(props.rule.upper);
 	const [low, setLow] = useState(props.rule.lower);
 	const classes = useStyles();
-	const fontColor = '#d0d0d0'
+	const fontColor = '#fff'
 
 	const updateView = (event, newValue) => {
 		setValue(newValue);
@@ -100,7 +100,7 @@ export default function TimeRangedRule(props) {
 				direction="row"
 				alignItems="flex-end">
 				<Grid style={{ color: fontColor }} item xs={4} justifyContent="flex-start">
-					<Typography style={{ marginBottom: 14 }}>{props.option.displayName}</Typography>
+					<Typography style={{ marginBottom: 14, marginLeft: 30 }}>{props.option.displayName}</Typography>
 				</Grid>
 				<Grid item xs={4} justifyContent="flex-start">
 					<div className={classes.root}>

@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 	icon: {
 		fill: '#c0c0c0',
 	},
-	input: {
-		zIndex: 1
+	paper: {
+		backgroundColor: '#545454'
 	}
 }));
 
@@ -44,7 +44,7 @@ export default function RuleSelector(props) {
 	}
 
 		return (
-			<div className="rule-container">
+			<div style={{ marginTop: 0, marginBottom: 40, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 				<FormControl style={{ width: 400, marginTop: 0 }}>
 					<InputLabel style={{ zIndex: 1, marginLeft: 10, color: '#d0d0d0', fontSize: 14 }} id="demo-simple-select-filled-label">Select A Metric</InputLabel>
 					<Select
@@ -53,7 +53,7 @@ export default function RuleSelector(props) {
 						inputProps={{
 							classes: {
 								icon: classes.icon,
-								input: classes.input
+								paper: classes.paper     
 							},
 						}}
 						MenuProps={{
@@ -62,6 +62,9 @@ export default function RuleSelector(props) {
 								horizontal: "left"
 							},
 							getContentAnchorEl: null,
+							classes: {
+								paper: classes.paper
+							},
 						}}
 					>
 					{props.options && props.options.map((option) =>
@@ -74,6 +77,7 @@ export default function RuleSelector(props) {
 								> {option.displayName} 
 								</MenuItem>
 							: <MenuItem
+								style={{backgroundColor: '#545454', color: '#d0d0d0'}}
 								value={{ type: option.type, value: option.value }}
 								type={option.type}
 								> {option.displayName} 
