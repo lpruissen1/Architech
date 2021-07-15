@@ -351,6 +351,7 @@ export function Screener(props) {
 			{index
 				? <PrimaryActionButton
 					onChange={updateIndex}
+					style={{marginBottom: 20}}
 					text='Save Index'/>
 				: <SaveButton
 					handleSave={saveIndex} />
