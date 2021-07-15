@@ -349,12 +349,15 @@ export function Screener(props) {
 			/>
 			<br/>
 			{index
+
 				? <PrimaryActionButton
-					onChange={updateIndex}
-					style={{marginBottom: 20}}
-					text='Save Index'/>
-				: <SaveButton
-					handleSave={saveIndex} />
+					onClick={updateIndex}
+					style={{ marginBottom: 20 }}
+					text={changeMade ? 'Update Index*' : 'Update Index'} />
+				: <PrimaryActionButton
+					onClick={saveIndex}
+					style={{ marginBottom: 20 }}
+					text='Save Index' />
 			}
 		</div>
 	)
