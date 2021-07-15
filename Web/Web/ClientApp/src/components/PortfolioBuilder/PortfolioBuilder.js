@@ -33,6 +33,7 @@ export function PortfolioBuilder(props) {
 	const [value, setValue] = React.useState(0);
 	const [tickers, setTickers] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
+	const [inclusions, setInclusions] = useState([])
 
 	let { indexID } = useParams();
 
@@ -40,6 +41,15 @@ export function PortfolioBuilder(props) {
 
 	const classes = useStyles()
 
+	const handleInclusionAddition = (ticker) => {
+		if (!inclusions.includes(ticker))
+			setInclusions([...inclusions, ticker])
+	}
+
+	const handleInclusionDelete = (deletedTicker) => {
+		const newInclusions = inclusions.filter(ticker => ticker !== deletedTicker)
+		setInclusions(newInclusions)
+	}
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -67,10 +77,21 @@ export function PortfolioBuilder(props) {
 								</Tabs>
 							</AppBar>
 							<TabPanel value={value} index={0}>
-								<Screener setLoading={setLoading} setTickers={setTickers} indexId={indexId} />
+								<Screener
+									setLoading={setLoading}
+									setTickers={setTickers}
+									indexId={indexId}
+									inclusions={inclusions}
+									handleInclusionAddition={handleInclusionAddition}
+									handleInclusionDelete={handleInclusionDelete}
+								/>
 							</TabPanel>
 							<TabPanel value={value} index={1}>
-								<Weighter tickers={tickers} setTickers={setTickers} />
+								<Weighter
+									tickers={tickers}
+									setTickers={setTickers}
+									inclusions={inclusions}
+								/>
 							</TabPanel>
 							<TabPanel value={value} index={2}>
 										Item Three

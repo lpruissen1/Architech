@@ -2,11 +2,12 @@
 
 export class WeightingClient {
 
-	async postWeightingRequest(weightingOption, tickers) {
+	async postWeightingRequest(weightingOption, tickers, manualWeights) {
 
 		const data = {
 			Option: weightingOption,
-			Tickers: tickers
+			Tickers: tickers,
+			manualWeights: manualWeights
 		}
 
 		const response = await fetch(API_URL, {

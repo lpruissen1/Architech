@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
 import WeightingClient from '../../../Clients/WeightingClient';
 import GetWeightingOptions from './WeightingOptionsRepo'
-import StockPicker from '../../Generic/StockPicker'
+import ManualWeighting from './ManualWeighting'
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -21,14 +21,36 @@ export function Weighter(props) {
 	const classes = useStyles();
 	const [options, _] = useState(GetWeightingOptions())
 	const [selection, setSelection] = useState("")
+	const [manualWeights, setManualWeights] = useState([])
 
 	const handleCheck = (event) => {
 		setSelection(event.currentTarget.value)
 	}
 
+	const handleManualWeight = (ticker, weight) => {
+
+		if (manualWeights.filter(entry => entry.ticker === ticker).length > 0) {
+			let remainder = manualWeights.filter(entry => entry.ticker !== ticker)
+
+			remainder.push({ ticker: ticker, weight: weight })
+
+			setManualWeights(remainder)
+
+			handleWeighting()
+
+			return
+		}
+
+		let tempWeights = manualWeights
+		tempWeights.push({ ticker: ticker, weight: weight })
+		setManualWeights(tempWeights)
+
+		handleWeighting()
+	}
+
 	const handleWeighting = async () => {
 		if (selection !== "") {
-			var result = await WeightingClient.postWeightingRequest(selection, props.tickers.map(thing => { return thing.ticker }))
+			var result = await WeightingClient.postWeightingRequest(selection, props.tickers.map(thing => { return thing.ticker }), manualWeights)
 			props.setTickers(result.tickers)
 		}
 	}
@@ -57,24 +79,10 @@ export function Weighter(props) {
 				)
 			})}
 		</Grid>
-		<ManualWeighting/>
+			<ManualWeighting
+				options={props.inclusions}
+				handleManualWeight={handleManualWeight}
+			/>
 		</div>
 	)
-}
-
-export function ManualWeighting(props) {
-	return(<>
-		<StockPicker
-			color='Primary'
-			options={props.inclusions}
-			endAdornment={ <></>}
-		/>
-		<TextField>
-		</TextField>
-		<Button>
-		</Button>
-	</>
-	)
-	//<DisplayTable>
-	//</DisplayTable>
 }
