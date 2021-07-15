@@ -29,6 +29,7 @@ export default function PrimaryActionButton(props) {
 			onClick={props.onClick}
 			className={classes.root}
 			variant="contained"
+			disabled={props.disabled}
 			style={{ outline: 'none', width: props.width, ...props.style }}
 			disableElevation
 		>
