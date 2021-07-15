@@ -3,9 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AuthClient from '../../../Clients/AuthClient';
 import CustomIndexClient from '../../../Clients/CustomIndexClient';
 import ScreenerClient from '../../../Clients/ScreenerClient';
-import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
-import UpdateButton from './Subcomponents/UpdateButton';
 import PrimaryActionButton from '../../Generic/PrimaryActionButton';
 
 export function Screener(props) {
