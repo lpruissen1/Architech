@@ -44,6 +44,26 @@ export default function ManualWeighting(props) {
 		setWeight(null)
 	}
 
+	const getHelperText = () => {
+		let weightSum = 0
+
+		debugger
+
+		for (let i = 0; i < props.manualWeights.length; i++) {
+			weightSum += props.manualWeights[i].weight
+		}
+
+		if (weight > 100) {
+			return 'Weight must be less than 100%'
+		}
+
+		else if (weightSum + weight > 100) {
+			return 'Total weight can not exceeed 100%'
+		}
+
+		return ''
+	}
+
 	return (
 		<>
 			<Grid container spacing={1}>
@@ -63,7 +83,7 @@ export default function ManualWeighting(props) {
 						classes={{ paper: classes.paper }}
 						renderInput={(params) => (
 							<TextField {...params} id="outlined" variant="outlined"
-								placeholder="Select A Ticker"
+								placeholder="Select Ticker"
 								InputLabelProps={{
 									shrink: true,
 								}}
@@ -77,18 +97,18 @@ export default function ManualWeighting(props) {
 				<Grid item xs={2} align='left' style={{ padding: 20 }}>
 					<TextField
 						style={{ marginTop: 20, width: '18ch'}}
-						label="Enter A Weight"
+						label="Enter Weight"
 						onChange={(event) => {
-							setWeight(event.target.value);
+							setWeight(Number(event.target.value));
 						}}
 						value={weight ? weight : '' }
-						error={weight > 100 ? true : false}
-						helperText={weight > 100 ? "Weight must be less than 100%" : ""}
+						error={getHelperText() !== '' ? true : false}
+						helperText={getHelperText()}
 					/>
 				</Grid>
 				<Grid item xs={2} align='left' style={{ padding: 20 }}>
 					<PrimaryActionButton
-						disabled={value && weight ? false : true}
+						disabled={value && weight && getHelperText() === '' ? false : true}
 						style={{ fontSize: 12, marginTop: 34 }}
 						onClick={submitWeight}
 						text='Set Weight'
@@ -97,7 +117,7 @@ export default function ManualWeighting(props) {
 				<Grid item xs={6} align='left' style={{ padding: 20 }}>
 					<>
 						<ul className="list" style={{ marginLeft: 0, paddingLeft: 0, maxWidth: 300 }}>
-							<Typography>Manual Weights: </Typography>
+							<Typography style={{ color: '#d0d0d0' }}>Manual Weights: </Typography>
 							{props.manualWeights && props.manualWeights.map((entry) => {
 								return (
 									<Chip
