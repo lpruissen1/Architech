@@ -48,6 +48,12 @@ export function Weighter(props) {
 		handleWeighting()
 	}
 
+	const deleteManualWeight = (ticker) => {
+		let tempWeights = manualWeights
+
+		setManualWeights(tempWeights.filter(entry => entry.ticker !== ticker))
+	}
+
 	const handleWeighting = async () => {
 		if (selection !== "") {
 			var result = await WeightingClient.postWeightingRequest(selection, props.tickers.map(thing => { return thing.ticker }), manualWeights)
@@ -82,6 +88,8 @@ export function Weighter(props) {
 			<ManualWeighting
 				options={props.inclusions}
 				handleManualWeight={handleManualWeight}
+				manualWeights={manualWeights}
+				deleteManualWeight={deleteManualWeight}
 			/>
 		</div>
 	)
