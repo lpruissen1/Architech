@@ -17,6 +17,21 @@ export const useStyles = makeStyles((theme) => ({
 			backgroundColor: theme.palette.primary.dark,
 			boxShadow: 'none',
 		},
+	},
+	disabledButton: {
+		margin: theme.spacing(2),
+		textTransform: 'none',
+		fontSize: 16,
+		fontWeight: 700,
+		paddingLeft: 10,
+		paddingRight: 10,
+		borderRadius: 4,
+		backgroundColor: '#727272',
+		color: '#303030',
+		'&:hover': {
+			backgroundColor: '#727272',
+			boxShadow: 'none',
+		},
 	}
 }));
 
@@ -26,8 +41,8 @@ export default function PrimaryActionButton(props) {
 
 	return (
 		<Button
-			onClick={props.onClick}
-			className={classes.root}
+			onClick={!props.disabled && props.onClick}
+			className={props.disabled ? classes.disabledButton : classes.root}
 			variant="contained"
 			style={{ outline: 'none', width: props.width, ...props.style }}
 			disableElevation
