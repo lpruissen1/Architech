@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import App from './App';
+import { App } from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -44,12 +44,15 @@ const theme = createMuiTheme({
 })
 
 ReactDOM.render(
-	<BrowserRouter basename={baseUrl}>
-		<MuiThemeProvider theme={theme}>
-			<App />
-		</MuiThemeProvider>
-	</BrowserRouter>,
-		rootElement);
+	<MuiThemeProvider theme={theme}>
+		<div style={{ backgroundColor: '#303030' }}>
+			<BrowserRouter basename={baseUrl}>
+				<App />
+			</BrowserRouter>
+		</div>
+	</MuiThemeProvider>,
+	rootElement
+);
 
 registerServiceWorker();
 

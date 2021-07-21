@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router';
-import { Container } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
+import { Dashboard } from './Dashboard/Dashboard';
 import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
@@ -11,9 +11,9 @@ import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
-import { Dashboard} from './Dashboard/Dashboard';
+import './custom.css';
 
-export function Layout(props) {
+export function App(props) {
 
 	const [loggedIn, setLoggedIn] = useState()
 	const [userId, setUserId] = useState("")
@@ -34,9 +34,9 @@ export function Layout(props) {
 
 
 	return (
-		<div style={{ backgroundColor: '#303030' }}>
+		<>
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
-			<div style={{ backgroundColor: '#303030', marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
+			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
@@ -47,7 +47,7 @@ export function Layout(props) {
 				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 			</div>
-		</div>
+		</>
 	);
 }
 

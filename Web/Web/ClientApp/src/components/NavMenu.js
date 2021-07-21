@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import './NavMenu.css';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
-import Typography from '@material-ui/core/Typography';
+import './NavMenu.css';
 
 export class NavMenu extends Component {
 	constructor(props) {
