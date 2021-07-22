@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import './NavMenu.css';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
-import Typography from '@material-ui/core/Typography';
+import LogoFont from './ArchitechLogoFont.svg';
+import './NavMenu.css';
 
 export class NavMenu extends Component {
 	constructor(props) {
@@ -31,12 +31,16 @@ export class NavMenu extends Component {
 	render() {
 		return (
 			<header className='stick-nav'>
-				<Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 pb-0" dark>
-					<Container style={{backgroundColor: '#298B72', paddingRight: 30}}>
+				<Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3 pb-0 pl-0 pr-0" dark>
+					<div style={{marginLeft: '5%', marginRight: '5%', display: 'flex', flexDirection: 'row', width: '100%'}}>
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-							<img style={{ width: 32, height: 32, marginRight: 10 }} src={Logo} alt="Architech Logo" />
-								<Typography variant="h6" style={{ fontWeight: 700, color: '#fff', fontSize: 28 }}>architech</Typography>
+								<img style={{
+									width: 32, height: 32, marginRight: 10, marginLeft: 0, marginBottom: 2
+								}} src={Logo} alt="Architech Logo" />
+								<img style={{
+									 height: 32, marginLeft: 0
+								}} src={LogoFont} alt="Architech Logo Font" />
 							</div>
 						</NavbarBrand>
 						<NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -45,7 +49,7 @@ export class NavMenu extends Component {
 								{this.props.loggedIn ? (
 									<>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/">Home</NavLink>
+											<NavLink tag={Link} className="text-light" to="/dashboard">Dashboard</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} className="text-light" to="/portfolioBuilder">Portfolio Builder</NavLink>
@@ -73,7 +77,7 @@ export class NavMenu extends Component {
 								)}
 							</ul>
 						</Collapse>
-					</Container>
+					</div>
 				</Navbar>
 			</header>
 		);

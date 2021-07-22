@@ -1,40 +1,32 @@
 ﻿import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import './Rules.css';
 
 const useStyles = makeStyles((theme) => ({
-	button: {
-		textTransform: 'none',
-		fontSize: 12,
-		fontWeight: 500,
-		paddingLeft: 20,
-		paddingRight: 20,
-		borderColor: '#696969',
-		color: '#696969',
-		width: '100%',
-		borderRadius: 10,
-	},
-	newMetricButton: {
-		margin: '0 auto',
-		display: "flex",
-		width: '100%',
-		color: 'rgb(70, 70, 70)',
-		boxShadow: 'none',
-		textTransform: 'none',
-		fontSize: 14,
-		backgroundColor: 'lightgrey',
-		"&:hover": {
-			backgroundColor: "#F1F1F1"
+	select: {
+		backgroundColor: '#545454',
+		borderRadius: 4,
+		'&:before': {
+			borderColor: '#c0c0c0',
+		},
+		'&:after': {
+			borderColor: '#c0c0c0',
 		}
+	},
+	icon: {
+		fill: '#c0c0c0',
+	},
+	paper: {
+		backgroundColor: '#545454'
 	}
 }));
 
 export default function RuleSelector(props) {
 	const [displayList, setDisplayList] = useState(true);
-	const clickie = () => setDisplayList(!displayList)
 	const classes = useStyles()
 
 	const superClickie = (event) => {
@@ -42,7 +34,7 @@ export default function RuleSelector(props) {
 		props.handleAddNewMetricClick(event)
 	}
 
-	const disableButton = (rule) => {
+	const disableOption = (rule) => {
 		if (rule.type === 'ranged') {
 			const value = props.checkIfRangedRuleExists(rule.value)
 			return value
@@ -51,48 +43,49 @@ export default function RuleSelector(props) {
 		return false
 	}
 
-	const renderOptions = () => {
 		return (
-			<div className = "rule-container">
-				<Grid container spacing={1}>
+			<div style={{ marginTop: 0, marginBottom: 40, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+				<FormControl style={{ width: 400, marginTop: 0 }}>
+					<InputLabel style={{ zIndex: 1, marginLeft: 10, color: '#d0d0d0', fontSize: 14 }} id="demo-simple-select-filled-label">Select A Metric</InputLabel>
+					<Select
+						onChange={superClickie}
+						className={classes.select}
+						inputProps={{
+							classes: {
+								icon: classes.icon,
+								paper: classes.paper     
+							},
+						}}
+						MenuProps={{
+							anchorOrigin: {
+								vertical: "bottom",
+								horizontal: "left"
+							},
+							getContentAnchorEl: null,
+							classes: {
+								paper: classes.paper
+							},
+						}}
+					>
 					{props.options && props.options.map((option) =>
-						disableButton(option)
-							? <Grid item xs={6}>
-								<Button
-									style={{ outline: 'none' }}
-									key={option.value}
-									variant="outlined"
-									disabled
-									className={classes.button}
-									type={option.type}
-									value={option.value}
-								> {option.displayName} </Button>
-							</Grid>
-							: <Grid item xs={6}>
-								<Button
-									style={{ outline: 'none'}}
-									key={option.value}
-									variant="outlined"
-									className={classes.button}
-									type={option.type}
-									value={option.value}
-									onClick={superClickie}
-								> {option.displayName} </Button>
-							</Grid>
+						disableOption(option)
+							? 
+							<MenuItem
+								disabled
+								value={option.value}
+								type={option.type}
+								> {option.displayName} 
+								</MenuItem>
+							: <MenuItem
+								style={{backgroundColor: '#545454', color: '#d0d0d0'}}
+								value={{ type: option.type, value: option.value }}
+								type={option.type}
+								> {option.displayName} 
+							</MenuItem>
 					)}
-				</Grid>
+					</Select>
+				</FormControl>
 			</div>
 		)
-	}
-
-	const display = displayList ? renderOptions() :
-			<div className="button-container">
-				<Button className={classes.newMetricButton} onClick={clickie}>
-					<Typography style={{ fontWeight: 700 }}>+ Add New Metric</Typography>
-				</Button>
-			</div>;
-
-    return (
-		<>{display}</>
-    );
 }
+

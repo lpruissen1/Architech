@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router';
-import { Container } from 'reactstrap';
 import AuthClient from '../Clients/AuthClient';
+import { Dashboard } from './Dashboard/Dashboard';
 import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
@@ -11,8 +11,9 @@ import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
+import './custom.css';
 
-export function Layout(props) {
+export function App(props) {
 
 	const [loggedIn, setLoggedIn] = useState()
 	const [userId, setUserId] = useState("")
@@ -33,10 +34,11 @@ export function Layout(props) {
 
 
 	return (
-		<div>
+		<>
 			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
-			<Container>
+			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
 				<Route exact path='/' component={Home} />
+				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
 				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
 				<AuthenticatedRoute exact path='/research' component={Research} />
@@ -44,8 +46,8 @@ export function Layout(props) {
 				<AuthenticatedRoute exact path='/profile' component={Profile} />
 				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
-			</Container>
-		</div>
+			</div>
+		</>
 	);
 }
 

@@ -1,30 +1,23 @@
 ﻿import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField';
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from '@material-ui/core/Button';
 import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import RaisedCard from '../Generic/RaisedCard';
+import TextInput from '../Generic/TextInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import PrimaryActionButton from '../Generic/PrimaryActionButton';
+
 
 export const useStyles = makeStyles((theme) => ({
-	button: {
-		margin: '0 auto',
-		marginTop: '14px',
-		display: "flex",
-		width: '42ch',
-		fontWeight: '700',
-		color: 'white',
-		textTransform: 'none',
-		fontSize: 16,
-	},
-	smallForm: {
-		margin: theme.spacing(1.5),
-		width: '20ch'
-	},
-	largeForm: {
-		margin: theme.spacing(1.5),
-		width: '43ch'
+	visibility: {
+	color: '#c0c0c0',
+	outline: 'none'
 	}
 }));
 
@@ -35,6 +28,9 @@ export function Login(props) {
     const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [credentialError, setCredentialError] = useState(false)
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClickShowPassword = () => setShowPassword(!showPassword);
+	const handleMouseDownPassword = () => setShowPassword(!showPassword);
 	const history = useHistory();
 
     const loginUser = async () => {
@@ -51,44 +47,57 @@ export function Login(props) {
 
     return (
         <div className="global-flex-container">
-			<div className="loginCard">
-                <form className={classes.root}>
-                    <div className="flex-container">
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Username" label="Username"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(event) => {
-                                setUsername(event.target.value);
-							}}
-							error={credentialError}
-                            autoComplete='off' />
-                        <TextField required id="outlined-required" className={classes.largeForm} variant="outlined" placeholder="Password" label="Password"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={(event) => {
-                                setPassword(event.target.value);
-							}}
-							type='password'
-							error={credentialError}
-							helperText={credentialError? "Invalid Credentials" : ""}
-                            autoComplete='off' />
-                    </div>
-                </form>
-				<Button
-					onClick={loginUser}
-					className={classes.button}
-					variant="contained"
-					color="primary"
-					style={{ outline: 'none' }}
-					disableElevation> Login </Button>
-					<p className="registration-link"> Don't have an account? 
+			<RaisedCard
+				className="loginCard"
+				style={{display: 'block', marginTop: '5%', paddingTop: 40, paddingLeft: 20, paddingRight: 20, paddingBottom: 40 }}
+				children={
+					<>
+					<form className={classes.root}>
+						<div className="flex-container">
+								<TextInput
+									width='43ch'
+									label="Username"
+									onChange={(event) => {
+										setUsername(event.target.value);
+									}}
+									error={credentialError}
+								/>
+								<TextInput
+									width= '43ch'
+									label="Password"
+									onChange={(event) => {
+										setPassword(event.target.value);
+									}}
+									error={credentialError}
+									type={showPassword ? "text" : "password"}
+									helperText={credentialError ? "Invalid Credentials" : ""}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<IconButton
+													aria-label="toggle password visibility"
+													onClick={handleClickShowPassword}
+													onMouseDown={handleMouseDownPassword}
+												>
+													{showPassword ? <Visibility className={classes.visibility} /> : <VisibilityOff className={classes.visibility} />}
+												</IconButton>
+											</InputAdornment>)}}
+							/>
+						</div>
+					</form>
+					<PrimaryActionButton
+						onClick={loginUser}
+						text='Login'
+						width='42ch'
+					/>
+					<p style={{ color: '#c0c0c0', margin: 14, textAlign: 'center', marginBottom: 0 }}
+					> Don't have an account? 
 						<Link to="/register">
-							<span className="signup"> Sign up now!</span>
+								<span style={{ color: 'rgba(255,215,100)', fontWeight: 600,  }}> Sign up now!</span>
 						</Link>
 					</p>
-			</div>
+					</>}
+			/>
         </div>
     );
 }

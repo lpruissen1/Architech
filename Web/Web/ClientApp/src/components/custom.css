@@ -16,3 +16,7 @@ code {
 html {
 	overflow-y: scroll;
 }
+
+body {
+	background-color: #303030;
+}

@@ -1,23 +1,8 @@
-﻿import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+﻿import React from 'react';
+import PrimaryToggleButton from '../../../Generic/PrimaryToggleButton';
 import './MarketSelector.css';
 
-const useStyles = makeStyles((theme) => ({
-	button: {
-		margin: theme.spacing(2),
-		textTransform: 'none',
-		fontSize: 14,
-		fontWeight: 500,
-		paddingLeft: 10,
-		paddingRight: 10,
-		borderRadius: 10,
-		minWidth: 140
-	}
-}));
-
 export default function MarketSelector(props) {
-	const classes = useStyles();
 
 	const handleCheck = (event) => {
 		props.markets.forEach(market => {
@@ -33,19 +18,12 @@ export default function MarketSelector(props) {
 			{props.markets && props.markets.map(market => {
 				return (
 					<div className="marketButtons" key={market.value}>
-						<Button
+						<PrimaryToggleButton
 							onClick={handleCheck}
 							value={market.value}
-							style={{ outline: 'none' }}
-							className={classes.button}
-							variant={market.isChecked ? 'contained' : 'outlined'}
-							color={market.isChecked ? 'primary' : 'default'}
-							disableElevation
-							disableRipple
-						>
-							{market.displayName}
-						</Button>
-						<p> Market description </p>
+							checked={market.isChecked}
+							text={market.displayName}
+						/>
 					</div>
 				)
 			})}

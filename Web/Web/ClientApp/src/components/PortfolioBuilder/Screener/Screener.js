@@ -3,9 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import AuthClient from '../../../Clients/AuthClient';
 import CustomIndexClient from '../../../Clients/CustomIndexClient';
 import ScreenerClient from '../../../Clients/ScreenerClient';
-import SaveButton from './Subcomponents/SaveButton';
 import ScreeningControls from './Subcomponents/ScreeningControls';
-import UpdateButton from './Subcomponents/UpdateButton';
+import PrimaryActionButton from '../../Generic/PrimaryActionButton';
 
 export function Screener(props) {
 	const [markets, setMarkets] = useState([
@@ -123,7 +122,6 @@ export function Screener(props) {
 
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
-	const [inclusions, setInclusions] = useState([])
 	const [exclusions, setExclusions] = useState([])
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
@@ -166,16 +164,6 @@ export function Screener(props) {
 
 	const handleTimedRangeRuleUpdate = (rule) => {
 		setTimedRangeRules([...timedRangeRules, rule])
-	}
-
-	const handleInclusionAddition = (ticker) => {
-		if (!inclusions.includes(ticker))
-			setInclusions([...inclusions, ticker])
-	}
-
-	const handleInclusionDelete = (deletedTicker) => {
-		const newInclusions = inclusions.filter(ticker => ticker !== deletedTicker)
-		setInclusions(newInclusions)
 	}
 
 	const handleExclusionAddition = (ticker) => {
@@ -241,7 +229,7 @@ export function Screener(props) {
 		sectors.forEach(sector => {
 			sector.industries.forEach(industry => {
 				if (industry.isChecked === true)
- 					activeIndustries.push(industry.value)
+					activeIndustries.push(industry.value)
 			})
 		})
 		return activeIndustries
@@ -249,7 +237,7 @@ export function Screener(props) {
 
 	const screen = async () => {
 		if (validate()) {
-			
+
 			props.setLoading(true)
 			setChangeMade(true)
 
@@ -258,7 +246,7 @@ export function Screener(props) {
 				industries: getActiveIndustries(),
 				rangedRule: rangedRules,
 				timedRangeRule: timedRangeRules,
-				inclusions: inclusions,
+				inclusions: props.inclusions,
 				exclusions: exclusions
 			})
 
@@ -269,14 +257,14 @@ export function Screener(props) {
 
 	// Create function to validate custom index then call in screener, if valid do the screening request
 	const validate = () => {
-		
-		for(let i = 0; i < timedRangeRules.length; i++) {
+
+		for (let i = 0; i < timedRangeRules.length; i++) {
 			if (timedRangeRules[i].timePeriod === "") {
-					return false
-				}
+				return false
 			}
+		}
 		return true
-	} 
+	}
 
 	const handleMount = () => {
 		if (index) {
@@ -286,21 +274,21 @@ export function Screener(props) {
 	}
 
 	useEffect(() => { handleMount() }, []);
-	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules, inclusions, exclusions]);
+	useEffect(() => { screen() }, [markets, rangedRules, sectors, timedRangeRules, props.inclusions, exclusions]);
 
 	const saveIndex = () => {
 		const newIndexID = uuidv4()
-		
+
 		CustomIndexClient.CreateCustomIndex({
 			userId: AuthClient.GetIdFromStoredJwt(),
-			indexId: newIndexID, 
+			indexId: newIndexID,
 			markets: [
 				"Sp500"
 			],
 			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules,
-			inclusions: inclusions,
+			inclusions: props.inclusions,
 			exclusions: exclusions
 		});
 
@@ -317,7 +305,7 @@ export function Screener(props) {
 			industries: getActiveIndustries(),
 			rangedRule: rangedRules,
 			timedRangeRule: timedRangeRules,
-			inclusions: inclusions,
+			inclusions: props.inclusions,
 			exclusions: exclusions
 		});
 
@@ -325,7 +313,7 @@ export function Screener(props) {
 	}
 
 	return (
-		<div>
+		<div style={{padding: 10}}>
 			<ScreeningControls
 				sectors={sectors}
 				rangedRules={rangedRules}
@@ -338,21 +326,25 @@ export function Screener(props) {
 				deleteTimedRangeRule={deleteTimedRangeRule}
 				checkIfRangedRuleExists={checkIfRangedRuleExists}
 				checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
-				inclusions={inclusions}
+				inclusions={props.inclusions}
 				exclusions={exclusions}
 				markets={markets}
-				AddInclusion={handleInclusionAddition}
-				DeleteInclusion={handleInclusionDelete}
+				AddInclusion={props.handleInclusionAddition}
+				DeleteInclusion={props.handleInclusionDelete}
 				AddExclusion={handleExclusionAddition}
 				DeleteExclusion={handleExclusionDelete}
 			/>
 			<br/>
 			{index
-				? <UpdateButton
-					changeMade={changeMade}
-					handleUpdate={updateIndex} />
-				: <SaveButton
-					handleSave={saveIndex} />
+
+				? <PrimaryActionButton
+					onClick={updateIndex}
+					style={{ marginBottom: 20 }}
+					text={changeMade ? 'Update Index*' : 'Update Index'} />
+				: <PrimaryActionButton
+					onClick={saveIndex}
+					style={{ marginBottom: 20 }}
+					text='Save Index' />
 			}
 		</div>
 	)

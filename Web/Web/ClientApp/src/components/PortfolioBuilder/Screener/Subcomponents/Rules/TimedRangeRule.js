@@ -38,7 +38,7 @@ const RuleSlider = withStyles({
 		height: 20,
 		width: 20,
 		backgroundColor: '#fff',
-		border: '2px solid currentColor',
+		border: '2px solid #fff',
 		marginTop: -6,
 		marginLeft: -10,
 		'&:focus, &:hover, &$active': {
@@ -66,6 +66,7 @@ export default function TimeRangedRule(props) {
 	const [high, setHigh] = useState(props.rule.upper);
 	const [low, setLow] = useState(props.rule.lower);
 	const classes = useStyles();
+	const fontColor = '#fff'
 
 	const updateView = (event, newValue) => {
 		setValue(newValue);
@@ -93,13 +94,13 @@ export default function TimeRangedRule(props) {
 	}
 
 	return (
-		<div className="ranged-rule-container">
+		<div className="ranged-rule-container" style={{ borderTop: '1px solid #545454', borderBottom: '1px solid #545454' }}>
 			<Grid container
 				spacing={1}
 				direction="row"
 				alignItems="flex-end">
-				<Grid item xs={4} justifyContent="flex-start">
-					<Typography style={{ marginBottom: 14 }}>{props.option.displayName}</Typography>
+				<Grid style={{ color: fontColor }} item xs={4} justifyContent="flex-start">
+					<Typography style={{ marginBottom: 14, marginLeft: 30 }}>{props.option.displayName}</Typography>
 				</Grid>
 				<Grid item xs={4} justifyContent="flex-start">
 					<div className={classes.root}>
@@ -119,7 +120,7 @@ export default function TimeRangedRule(props) {
 						renderedTimeSpans={props.renderedTimeSpans}/>
 				</Grid>
 				<Grid item xs={1} justifyContent='flex-end'>
-					<IconButton onClick={deleteRule} aria-label="delete">
+					<IconButton style={{ color: fontColor }} onClick={deleteRule} aria-label="delete">
 						<DeleteIcon />
 					</IconButton>
 				</Grid>

@@ -29,7 +29,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 10px;
+	padding: 30px;
 	margin-top: 20px;
 	min-height: 160px;
 }
@@ -114,13 +114,12 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 .industryLabel {
-	color: rgba(0, 0, 0, 0.7) !important;
+	color: #d0d0d0 !important;
 	font-size: 18px !important;
 	font-weight: 600 !important;
 }
 
 .MuiTypography-body1 {
-	color: rgba(0,0,0,0.7) !important;
 	font-size: 13px !important;
 }
 

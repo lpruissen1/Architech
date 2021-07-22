@@ -23,8 +23,10 @@ export default class BasicRulesSection extends React.Component {
 
 	// this should be abstracted out into some other type of functionality because this would be used for advanced rule selection as well
 	handleAddNewRuleNew = (event) => {
-		if ("ranged" === event.currentTarget.attributes.type.value) {
-			const ruleType = event.currentTarget.attributes.value.value
+
+		debugger 
+		if ("ranged" === event.target.value.type) {
+			const ruleType = event.target.value.value
 			this.props.handleRangedRuleUpdate({
 				id: v4(),
 				ruleType: ruleType,
@@ -33,8 +35,8 @@ export default class BasicRulesSection extends React.Component {
 			})
 		}
 
-		if ("timedRange" === event.currentTarget.attributes.type.value) {
-			const ruleType = event.currentTarget.attributes.value.value
+		if ("timedRange" === event.target.value.type) {
+			const ruleType = event.target.value.value
 			this.props.handleTimedRangeRuleUpdate({
 				id: v4(),
 				ruleType: ruleType,
@@ -94,11 +96,13 @@ export default class BasicRulesSection extends React.Component {
 	render() {
 		return (
 			<>
-				{this.getAppendedComponents()}
 				<RuleSelector
+					style={{marginBottom: 50}}
 					handleAddNewMetricClick={this.handleAddNewRuleNew}
 					options={this.state.options}
-					checkIfRangedRuleExists={this.props.checkIfRangedRuleExists}/>
+					checkIfRangedRuleExists={this.props.checkIfRangedRuleExists} />
+
+				{this.getAppendedComponents()}
 			</>
 		);
 	}

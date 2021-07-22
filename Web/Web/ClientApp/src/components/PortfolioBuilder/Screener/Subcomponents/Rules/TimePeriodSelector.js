@@ -12,6 +12,22 @@ const useStyles = makeStyles((theme) => ({
 		minWidth: 100,
 		fontSize: 12
 	},
+	select: {
+		backgroundColor: '#545454',
+		borderRadius: 4,
+		'&:before': {
+			borderColor: '#c0c0c0',
+		},
+		'&:after': {
+			borderColor: '#c0c0c0',
+		}
+	},
+	icon: {
+		fill: '#c0c0c0',
+	},
+	paper: {
+		backgroundColor: '#545454'
+	}
 }));
 
 export default function TimePeriodSelector(props) {
@@ -49,6 +65,7 @@ export default function TimePeriodSelector(props) {
 		for (let i = 0; i < timeSpans.length; i++) {
 			appendedComponents.push(
 				<MenuItem
+					style={{backgroundColor: '#545454', color: '#d0d0d0', fontSize: 12}}
 					key={timeSpans[i].value}
 					value={timeSpans[i].value}
 					disabled={!props.renderedTimeSpans.includes(timeSpans[i].value)}>{timeSpans[i].displayName}</MenuItem>
@@ -62,8 +79,9 @@ export default function TimePeriodSelector(props) {
 		<div className='time-selector-container'>
 			<FormControl
 				className={classes.formControl}>
-				<InputLabel id="demo-controlled-open-select-label" style={{ fontSize: 12 }}>Time Period</InputLabel>
+				<InputLabel style={{ zIndex: 1, marginLeft: 5, marginTop: 2, color: '#d0d0d0', fontSize: 12 }}id="demo-controlled-open-select-label">Time Period</InputLabel>
 				<Select
+					className={classes.select}
 					labelId="demo-controlled-open-select-label"
 					id="demo-controlled-open-select"
 					open={open}
@@ -71,7 +89,23 @@ export default function TimePeriodSelector(props) {
 					onOpen={handleOpen}
 					value={time}
 					onChange={handleTimePeriodUpdate}
-					placeholder=''>
+					placeholder=''
+					inputProps={{
+						classes: {
+							icon: classes.icon,
+						},
+					}}
+					MenuProps={{
+						anchorOrigin: {
+							vertical: "bottom",
+							horizontal: "left"
+						},
+						getContentAnchorEl: null,
+						classes: {
+							paper: classes.paper,
+						},
+					}}
+					>
 					{createMenuItems()}
 				</Select>
 			</FormControl>
