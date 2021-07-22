@@ -32,7 +32,7 @@ export class NavMenu extends Component {
 		return (
 			<header className='stick-nav'>
 				<Navbar className="navbar-expand-sm navbar-toggleable-sm mb-3 pb-0 pl-0 pr-0" dark>
-					<div style={{ backgroundColor: '#303030', marginLeft: '5%', marginRight: '5%', display: 'flex', flexDirection: 'row', width: '100%'}}>
+					<div style={{marginLeft: '5%', marginRight: '5%', display: 'flex', flexDirection: 'row', width: '100%'}}>
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 								<img style={{
