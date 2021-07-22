@@ -2,6 +2,7 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
 	paper: {
@@ -51,4 +52,13 @@ export default function StockPicker(props) {
 					}
 				/>)}
 		/>)
+}
+
+StockPicker.propTypes = {
+	text: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
+	checked: PropTypes.bool.isRequired,
+	width: PropTypes.number,
+	style: PropTypes.object
 }

@@ -1,9 +1,10 @@
-﻿import { makeStyles } from '@material-ui/core/styles';
+﻿import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import React from "react";
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
-	industryButton: {
+	primaryTextButton: {
 		margin: theme.spacing(1),
 		textTransform: 'none',
 		fontSize: 14,
@@ -20,11 +21,18 @@ export default function PrimaryTextButton(props) {
 
 	return (
 		<Button
-			className={classes.industryButton}
+			className={classes.primaryTextButton}
 			onClick={props.onClick}
 			style={{ outline: 'none', ...props.style }}
 		>
 			{props.text}
 		</Button>
 	)
+}
+
+PrimaryTextButton.propTypes = {
+	text: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
+	width: PropTypes.number,
+	style: PropTypes.object
 }

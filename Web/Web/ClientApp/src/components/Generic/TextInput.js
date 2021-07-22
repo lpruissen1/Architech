@@ -1,6 +1,8 @@
 ﻿import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
 
 export const useStyles = makeStyles((theme) => ({
 	largeForm: {
@@ -33,4 +35,11 @@ export default function TextInput(props) {
 			InputProps={props.InputProps && props.InputProps}
 		/>
 	)
+}
+
+TextInput.propTypes = {
+	label: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+	type: PropTypes.string.isRequired,
+	width: PropTypes.number,
 }

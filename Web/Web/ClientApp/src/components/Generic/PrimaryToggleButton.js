@@ -1,6 +1,7 @@
 ﻿import Button from '@material-ui/core/Button';
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export const useStyles = makeStyles((theme) => ({
 	buttonChecked: {
@@ -48,6 +49,15 @@ export default function PrimaryToggleButton(props) {
 		>
 			{props.text}
 		</Button> 
-		)
+	)
+}
+
+PrimaryToggleButton.propTypes = {
+	text: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
+	checked: PropTypes.bool.isRequired,
+	width: PropTypes.number,
+	style: PropTypes.object
 }
 
