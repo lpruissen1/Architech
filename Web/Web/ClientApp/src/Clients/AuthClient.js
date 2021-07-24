@@ -1,7 +1,7 @@
 ﻿import Cookie from "js-cookie";
 import jwt from 'jwt-decode';
 
-const API_URL = "https://localhost:9001/User/"; // this will eventually need to be config
+const API_URL = "https://localhost:9001/Auth/"; // this will eventually need to be config
 
 class AuthService {
 	async Login(username, password) {
