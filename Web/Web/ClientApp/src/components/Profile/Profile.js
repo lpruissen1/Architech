@@ -25,17 +25,23 @@ export function Profile() {
 						</Grid>
 						<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
 							<Typography variant="body1">
-								{userInfo ? 'Username:   ' + userInfo.username : <Skeleton />}
-							</Typography>
-						</Grid>
-						<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
-							<Typography variant="body1">
 								{userInfo ? 'Name:   ' + userInfo.firstName + ' ' + userInfo.lastName : <Skeleton />}
 							</Typography>
 						</Grid>
-						<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
+						<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20,paddingBottom: 30}}>
 							<Typography variant="body1">
 								{userInfo ? 'Email:   ' + userInfo.email : <Skeleton />}
+							</Typography>
+						</Grid>
+						<Grid item xs={12} align="flex-start">
+							<Typography variant="h6">
+								{userInfo ? 'Account Information' : <Skeleton />}
+							</Typography>
+							<div style={{ height: 2, backgroundColor: '#d0d0d0' }}></div>
+						</Grid>
+						<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
+							<Typography variant="body1">
+								{userInfo ? 'Username:   ' + userInfo.username : <Skeleton />}
 							</Typography>
 						</Grid>
 					</>
