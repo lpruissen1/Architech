@@ -7,6 +7,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import PersonalInfoWorkflow from './PersonalInfoWorkflow';
+import DisclosuresWorkflow from './DisclosuresWorkflow';
+import AgreementsWorkflow from './AgreementsWorkflow';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -53,7 +56,7 @@ function getSteps() {
 function getStepContent(stepIndex) {
 	switch (stepIndex) {
 		case 0:
-			return 'Select campaign settings...';
+			return <PersonalInfoWorkflow />
 		case 1:
 			return 'What is an ad group anyways?';
 		case 2:
@@ -81,7 +84,7 @@ export default function RegisterModal(props) {
 	};
 
 	return (
-		<RaisedCard style={{ boxShadow: 'none', width: '60%', height: '70%', margin: 'auto' }}>
+		<RaisedCard style={{ boxShadow: 'none', width: '75%', height: '80%', margin: 'auto' }}>
 			<div className={classes.root} style={{ backgroundColor: 'none' }}>
 				<Grid container style={{ height: '100%' }}>
 					<Grid item xs={12} style={{ height: '25%' }}>
