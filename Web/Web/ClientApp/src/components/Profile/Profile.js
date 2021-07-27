@@ -18,7 +18,7 @@ export function Profile() {
 		<div style={{ width: '100%', height: '100%' }}>
 			{ modal &&
 				<div className='premium-modal'>
-					<RegisterModal />
+				<RegisterModal userInfo={userInfo}/>
 				</div >
 			}
 		<Grid container spacing={1} style={{ color: '#fff', position: 'relative', paddingLeft: 50, paddingRight: 50, paddingTop: 20 }}>

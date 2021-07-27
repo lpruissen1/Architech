@@ -44,6 +44,7 @@ export default function TextInput(props) {
 			onChange={props.onChange}
 			error={props.error}
 			autoComplete='off'
+			value={props.value}
 			style={{ borderRadius: 4, fontColor: '#fff', width: props.width}}
 			helperText={props.helperText}
 			type={props.type}
@@ -57,4 +58,5 @@ TextInput.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 	width: PropTypes.number,
+	value: PropTypes.string
 }

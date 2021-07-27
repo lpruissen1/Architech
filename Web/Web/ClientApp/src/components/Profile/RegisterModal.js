@@ -49,38 +49,36 @@ const useStyles = makeStyles((theme) => ({
 },
 }));
 
-function getSteps() {
-	return ['Personal Information', 'Disclosures', 'Agreements'];
-}
-
-function getStepContent(stepIndex) {
-	switch (stepIndex) {
-		case 0:
-			return <PersonalInfoWorkflow />
-		case 1:
-			return 'What is an ad group anyways?';
-		case 2:
-			return 'This is the bit I really care about!';
-		default:
-			return 'Unknown stepIndex';
-	}
-}
-
 export default function RegisterModal(props) {
 	const classes = useStyles();
-	const [activeStep, setActiveStep] = React.useState(0);
+	const [activeStep, setActiveStep] = useState(0);
+
+	const getSteps = () => {
+		return ['Personal Information', 'Disclosures', 'Agreements'];
+	}
+
+	const getStepContent = (stepIndex) => {
+		switch (stepIndex) {
+			case 0:
+				return <PersonalInfoWorkflow userInfo={props.userInfo} />
+			case 1:
+				return 'What is an ad group anyways?';
+			case 2:
+				return 'This is the bit I really care about!';
+			default:
+				return 'Unknown stepIndex';
+		}
+	}
+
 	const steps = getSteps();
 
 	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1);
+		const tempStep = activeStep + 1
+		setActiveStep(tempStep);
 	};
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
-	};
-
-	const handleReset = () => {
-		setActiveStep(0);
 	};
 
 	return (
