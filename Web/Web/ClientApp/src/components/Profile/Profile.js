@@ -1,12 +1,10 @@
 ﻿import React, { useEffect, useState } from 'react';
-import RaisedCard from '../Generic/RaisedCard';
 import UserClient from '../../Clients/UserClient';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
-import './PremiumModal.css';
-import RegisterModal from './RegisterModal';
+import RegisterModal from '../TradingRegistration/RegisterModal';
 
 export function Profile() {
 	const [userInfo, setUserInfo] = useState()
@@ -18,7 +16,7 @@ export function Profile() {
 		<div style={{ width: '100%', height: '100%' }}>
 			{ modal &&
 				<div className='premium-modal'>
-				<RegisterModal userInfo={userInfo}/>
+				<RegisterModal/>
 				</div >
 			}
 		<Grid container spacing={1} style={{ color: '#fff', position: 'relative', paddingLeft: 50, paddingRight: 50, paddingTop: 20 }}>

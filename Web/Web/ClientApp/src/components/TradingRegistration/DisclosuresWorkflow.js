@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
 	radio: {
@@ -25,14 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DisclosuresWorkflow(props) {
 	const classes = useStyles();
-	const [fundingSource, setFundingSource] = useState();
-	const [isControlledPerson, setIsControlledPerson] = useState(false)
-	const [isAffiliatedExchangeOrFinra, setIsAffiliatedExchangeOrFinra] = useState(false)
-	const [isPoliticallyExposed, setIsPoliticallyExposed] = useState(false)
-	const [immediateFamilyExposed, setImmediateFamilyExposed] = useState(false)
 
 	const handleChange = (event) => { 
-		setFundingSource(event.target.value);
+		props.setFundingSource(event.target.value);
 	};
 
 	return (
@@ -43,7 +37,7 @@ export default function DisclosuresWorkflow(props) {
 			<Grid item xs={6} style={{ color: '#c0c0c0', paddingLeft: '10%' }}><Typography variant='body1'>Select all that apply</Typography></Grid>
 			<Grid item xs={6} style={{ paddingLeft: '5%', paddingTop: 10 }}>
 				<FormControl component="fieldset">
-					<RadioGroup aria-label="gender" name="gender1" value={fundingSource} onChange={handleChange}>
+					<RadioGroup aria-label="gender" name="gender1" value={props.fundingSource} onChange={handleChange}>
 						<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="employment_income" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Employment Income" />
 						<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="investments" control={<Radio classes={{ root: classes.radio, checked: classes.checked }}/>} label="Investments" />
 						<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="inheritance" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Inheritance" />
@@ -57,26 +51,26 @@ export default function DisclosuresWorkflow(props) {
 				<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
 					control={<Radio
 						classes={{ root: classes.radio, checked: classes.checked }}
-						checked={isControlledPerson}
-						onChange={() => setIsControlledPerson(!isControlledPerson)} />}
+						checked={props.isControlledPerson}
+						onChange={() => props.setIsControlledPerson(!props.isControlledPerson)} />}
 					label="I am a controlled person (defined by XYZ)" />
 				<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
 					control={<Radio
 						classes={{ root: classes.radio, checked: classes.checked }}
-						checked={isAffiliatedExchangeOrFinra}
-						onChange={() => setIsAffiliatedExchangeOrFinra(!isAffiliatedExchangeOrFinra)} />}
+						checked={props.isAffiliatedExchangeOrFinra}
+						onChange={() => props.setIsAffiliatedExchangeOrFinra(!props.isAffiliatedExchangeOrFinra)} />}
 					label="I am affiliated with an exchange or FINRA" />
 				<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
 					control={<Radio
 						classes={{ root: classes.radio, checked: classes.checked }}
-						checked={isPoliticallyExposed}
-						onChange={() => setIsPoliticallyExposed(!isPoliticallyExposed)} />}
+						checked={props.isPoliticallyExposed}
+						onChange={() => props.setIsPoliticallyExposed(!props.isPoliticallyExposed)} />}
 					label="I am politically exposed" />
 				<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
 					control={<Radio
 						classes={{ root: classes.radio, checked: classes.checked }}
-						checked={immediateFamilyExposed}
-						onChange={() => setImmediateFamilyExposed(!immediateFamilyExposed)} />}
+						checked={props.immediateFamilyExposed}
+						onChange={() => props.setImmediateFamilyExposed(!props.immediateFamilyExposed)} />}
 					label="I have an immediate family member who is politically exposed" />
 			</Grid> 
 		</Grid>

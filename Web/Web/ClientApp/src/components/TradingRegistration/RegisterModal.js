@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import RaisedCard from '../Generic/RaisedCard';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import PersonalInfoWorkflow from './PersonalInfoWorkflow';
 import DisclosuresWorkflow from './DisclosuresWorkflow';
 import AgreementsWorkflow from './AgreementsWorkflow';
+import UserClient from '../../Clients/UserClient';
+import './PremiumModal.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -51,6 +53,31 @@ const useStyles = makeStyles((theme) => ({
 export default function RegisterModal(props) {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
+	const [firstName, setFirstName] = useState()
+	const [lastName, setLastName] = useState()
+	const [address, setAddress] = useState()
+	const [city, setCity] = useState()
+	const [state, setState] = useState()
+	const [postalCode, setPostalCode] = useState()
+	const [email, setEmail] = useState()
+	const [phoneNumber, setPhoneNumber] = useState()
+	const [dateOfBirth, setDateOfBirth] = useState()
+	const [taxResidency, setTaxResidency] = useState()
+
+	const [fundingSource, setFundingSource] = useState();
+	const [isControlledPerson, setIsControlledPerson] = useState(false)
+	const [isAffiliatedExchangeOrFinra, setIsAffiliatedExchangeOrFinra] = useState(false)
+	const [isPoliticallyExposed, setIsPoliticallyExposed] = useState(false)
+	const [immediateFamilyExposed, setImmediateFamilyExposed] = useState(false)
+
+	const loadInfo = async () => {
+		const info = await UserClient.GetInfo()
+		setFirstName(info.firstName)
+		setLastName(info.lastName)
+		setEmail(info.email)
+	}
+
+	useEffect(async () => await loadInfo(), [])
 
 	const getSteps = () => {
 		return ['Personal Information', 'Disclosures', 'Agreements'];
@@ -59,11 +86,43 @@ export default function RegisterModal(props) {
 	const getStepContent = (stepIndex) => {
 		switch (stepIndex) {
 			case 0:
-				return <PersonalInfoWorkflow userInfo={props.userInfo} />
+				return <PersonalInfoWorkflow
+					firstName={firstName}
+					lastName={lastName}
+					email={email}
+					address={address}
+					city={city}
+					state={state}
+					postalCode={postalCode}
+					phoneNumber={phoneNumber}
+					dateOfBirth={dateOfBirth}
+					taxResidency={taxResidency}
+					setFirstName={setFirstName}
+					setLastName={setLastName}
+					setEmail={setEmail}
+					setAddress={setAddress}
+					setCity={setCity}
+					setState={setState}
+					setPostalCode={setPostalCode}
+					setPhoneNumber={setPhoneNumber}
+					setDateOfBirth={setDateOfBirth}
+					setTaxResidency={setTaxResidency}
+				/>
 			case 1:
-				return <DisclosuresWorkflow />;
+				return <DisclosuresWorkflow
+					isControlledPerson={isControlledPerson}
+					isPoliticallyExposed={isPoliticallyExposed}
+					isAffiliatedExchangeOrFinra={isAffiliatedExchangeOrFinra}
+					immediateFamilyExposed={immediateFamilyExposed}
+					fundingSource={fundingSource}
+					setFundingSource={setFundingSource}
+					setIsPoliticallyExposed={setIsPoliticallyExposed}
+					setIsControlledPerson={setIsControlledPerson}
+					setIsAffiliatedExchangeOrFinra={setIsAffiliatedExchangeOrFinra}
+					setImmediateFamilyExposed={setImmediateFamilyExposed}
+				/>;
 			case 2:
-				return 'This is the bit I really care about!';
+				return <AgreementsWorkflow />
 			default:
 				return 'Unknown stepIndex';
 		}
