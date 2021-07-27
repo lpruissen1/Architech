@@ -5,7 +5,6 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PersonalInfoWorkflow from './PersonalInfoWorkflow';
 import DisclosuresWorkflow from './DisclosuresWorkflow';
@@ -62,7 +61,7 @@ export default function RegisterModal(props) {
 			case 0:
 				return <PersonalInfoWorkflow userInfo={props.userInfo} />
 			case 1:
-				return 'What is an ad group anyways?';
+				return <DisclosuresWorkflow />;
 			case 2:
 				return 'This is the bit I really care about!';
 			default:

@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import Grid from '@material-ui/core/Grid';
-import UserClient from '../../Clients/UserClient';
 
 export default function PersonalInfoWorkflow(props) {
 	const [firstName, setFirstName] = useState(props.userInfo.firstName)
