@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TickerTableRow from './TickerTableRow';
 import { makeStyles } from '@material-ui/core/styles';
 import './TickerTable.css';
+import TickerInfoTable from './TickerInfoTable';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,7 @@ export default function TickerTable(props) {
 										key={stockdatum.ticker}
 										ticker={stockdatum.ticker}
 										weight={stockdatum.weight}
+										interiorTable={<TickerInfoTable tickerInfo={props.tickerInfo.filter(entry => entry.ticker === stockdatum.ticker)} />}
 									/>
 								)}
 							</TableBody>

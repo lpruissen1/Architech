@@ -87,7 +87,7 @@ export function PortfolioBuilder(props) {
 							</TabPanel>
 							<TabPanel value={value} index={1}>
 								<Weighter
-									tickers={tickers}
+									tickers={tickers.ticker}
 									setTickers={setTickers}
 									inclusions={inclusions}
 								/>
@@ -106,6 +106,7 @@ export function PortfolioBuilder(props) {
 						<TickerTable
 							tickers={tickers}
 							loading={loading}
+							tickerInfo={tickers}
 						/>}
 					/>
 				</Grid>
