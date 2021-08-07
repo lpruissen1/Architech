@@ -13,21 +13,29 @@ export default function TickerInfoTable(props) {
 			<Table size="small">
 			<TableBody>
 				<TableRow>
-						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>Name</TableCell>
+						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454', width: '50%' }}>Name</TableCell>
 						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>{props.tickerInfo[0].name}</TableCell>
 				</TableRow>
 				<TableRow>
-						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>Sector</TableCell>
+						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454', width: '50%' }}>Sector</TableCell>
 						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>{props.tickerInfo[0].sector}</TableCell>
 				</TableRow>
 				<TableRow>
-						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>Market Cap</TableCell>
+						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454', width: '50%' }}>Market Cap</TableCell>
 						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>{NumberFormatter(props.tickerInfo[0].marketCap, "MarketCap")}</TableCell>
 				</TableRow>
 				<TableRow>
-						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>Current Price</TableCell>
+						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454', width: '50%' }}>Current Price</TableCell>
 						<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>${props.tickerInfo[0].currentPrice}</TableCell>
 				</TableRow>
+					{props.screeningRules && props.screeningRules.map(rule => {
+						return (
+							<>
+								<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454', width: '50%' }}>{rule.ruleType.split(/(?=[A-Z])/).join(" ")}</TableCell>
+								<TableCell align='left' style={{ color: fontColor, borderBottom: 'none', fontSize: 11, borderBottom: '1px solid #545454' }}>{NumberFormatter(rule.value)}</TableCell>
+							</>
+						)
+					})}
 			</TableBody>
 			</Table>
 		</>

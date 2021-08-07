@@ -50,7 +50,7 @@ export default function TickerTable(props) {
 										key={stockdatum.ticker}
 										ticker={stockdatum.ticker}
 										weight={stockdatum.weight}
-										interiorTable={<TickerInfoTable tickerInfo={props.tickerInfo.filter(entry => entry.ticker === stockdatum.ticker)} />}
+										interiorTable={<TickerInfoTable tickerInfo={props.tickerInfo.filter(entry => entry.ticker === stockdatum.ticker)} screeningRules={stockdatum.screeningParameterValues} />}
 									/>
 								)}
 							</TableBody>

@@ -19,7 +19,7 @@
 	}
 
 	else {
-		return num + '%'
+		return num.toFixed(2) + '%'
 	}
 }
 
