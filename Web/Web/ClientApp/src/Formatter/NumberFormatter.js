@@ -1,5 +1,5 @@
 ﻿const NumberFormatter = (num, ruleType) => {
-
+	debugger
 	if (ruleType === "MarketCap") {
 		if (num > 1000000 && num < 1000000000) {
 			return '$' + (num / 1000000).toFixed(0) + 'M';
@@ -14,12 +14,20 @@
 		}
 	}
 
-	else if (ruleType === "CoefficientOfVariation") {
-		return num
+	else if (ruleType === "DividendYield") {
+		return num.toFixed(2) + '%'
+	}
+
+	else if (ruleType === "RevenueGrowthAnnualized") {
+		return num.toFixed(2) + '%'
+	}
+
+	else if (ruleType === "EPSGrowthAnnualized") {
+		return num.toFixed(2) + '%'
 	}
 
 	else {
-		return num.toFixed(2) + '%'
+		return num.toFixed(2)
 	}
 }
 

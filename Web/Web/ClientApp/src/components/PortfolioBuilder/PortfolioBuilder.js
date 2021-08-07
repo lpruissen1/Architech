@@ -101,7 +101,7 @@ export function PortfolioBuilder(props) {
 				</Grid>
 			<Grid container item xs={3} justify="center">
 				<RaisedCard
-					style={{ position: 'fixed', height: 640, minWidth: 300 }}
+					style={{ position: 'fixed', height: 640, width: '22%' }}
 					children={
 						<TickerTable
 							tickers={tickers}
