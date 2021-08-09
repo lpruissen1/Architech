@@ -30,9 +30,9 @@ export default function TickerTableRow(props) {
 				</TableCell>
 			</TableRow>
 			<TableRow>
-				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderBottomColor: '#545454'  }} colSpan={6}>
+				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderBottomColor: '#545454', backgroundColor: '#424242'  }} colSpan={6}>
 					<Collapse in={open} timeout="auto" unmountOnExit>
-						<Box margin={1}>
+						<Box style={{ background: '#424242' }}>
 							{props.interiorTable}
 						</Box>
 					</Collapse>

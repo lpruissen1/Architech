@@ -250,7 +250,7 @@ export function Screener(props) {
 				exclusions: exclusions
 			})
 
-			props.setTickers(response.tickers)
+			props.setTickers(response.securities)
 			props.setLoading(false)
 		}
 	}

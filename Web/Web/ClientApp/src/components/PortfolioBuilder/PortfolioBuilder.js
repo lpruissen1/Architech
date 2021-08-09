@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
-import TickerTable from './Screener/Subcomponents/TickerTable';
+import TickerTable from './TickerTable/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
 import RaisedCard from '../Generic/RaisedCard';
@@ -87,7 +87,7 @@ export function PortfolioBuilder(props) {
 							</TabPanel>
 							<TabPanel value={value} index={1}>
 								<Weighter
-									tickers={tickers}
+									tickers={tickers.ticker}
 									setTickers={setTickers}
 									inclusions={inclusions}
 								/>
@@ -101,11 +101,12 @@ export function PortfolioBuilder(props) {
 				</Grid>
 			<Grid container item xs={3} justify="center">
 				<RaisedCard
-					style={{ position: 'fixed', height: 640, minWidth: 300 }}
+					style={{ position: 'fixed', height: 640, width: '22%' }}
 					children={
 						<TickerTable
 							tickers={tickers}
 							loading={loading}
+							tickerInfo={tickers}
 						/>}
 					/>
 				</Grid>
