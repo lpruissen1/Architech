@@ -23,8 +23,6 @@ export default class BasicRulesSection extends React.Component {
 
 	// this should be abstracted out into some other type of functionality because this would be used for advanced rule selection as well
 	handleAddNewRuleNew = (event) => {
-
-		debugger 
 		if ("ranged" === event.target.value.type) {
 			const ruleType = event.target.value.value
 			this.props.handleRangedRuleUpdate({

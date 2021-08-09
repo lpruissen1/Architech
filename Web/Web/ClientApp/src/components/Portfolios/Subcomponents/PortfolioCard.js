@@ -19,7 +19,7 @@ import SectorAndIndustryTable from './SectorAndIndustryTable';
 import BasicMetricTable from './BasicMetricTable';
 import DeleteModal from './DeleteModal';
 import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
-import NumberFormatter from '../../../Formatter/NumberFormatter';
+import UnitFormatter from '../../../Formatter/NumberFormatter';
 import PrimaryTextButton from '../../Generic/PrimaryTextButton';
 
 export const useStyles = makeStyles((theme) => ({
@@ -113,7 +113,7 @@ export function PortfolioCard(props) {
 		props.portfolio.rangedRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: '' })
+					displayRules.push({ displayName: name.displayName, min: UnitFormatter(rule.lower, rule.ruleType), max: UnitFormatter(rule.upper, rule.ruleType), timePeriod: '' })
 				}
 			})
 		})
@@ -121,7 +121,7 @@ export function PortfolioCard(props) {
 		props.portfolio.timedRangeRules.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
-					displayRules.push({ displayName: name.displayName, min: NumberFormatter(rule.lower, rule.ruleType), max: NumberFormatter(rule.upper, rule.ruleType), timePeriod: TimePeriodFormatter(rule.timePeriod) })
+					displayRules.push({ displayName: name.displayName, min: UnitFormatter(rule.lower, rule.ruleType), max: UnitFormatter(rule.upper, rule.ruleType), timePeriod: TimePeriodFormatter(rule.timePeriod) })
 				}
 			})
 		})

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
-import TickerTable from './Screener/Subcomponents/TickerTable';
+import TickerTable from './TickerTable/TickerTable';
 import { Weighter } from './Weighting/Weighter';
 import { makeStyles } from '@material-ui/core/styles';
 import RaisedCard from '../Generic/RaisedCard';

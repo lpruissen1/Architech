@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import NumberFormatter from '../../../../../Formatter/NumberFormatter'
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -13,20 +14,6 @@ const useStyles = makeStyles((theme) => ({
 		width: '50%'
 	},
 }));
-
-function numFormatter(num) {
-	if (num > 1000000 && num < 1000000000) {
-		return (num / 1000000).toFixed(0) + 'M';
-	} else if (num >= 1000000000 && num < 1000000000000) {
-		return (num / 1000000000).toFixed(0) + 'B';
-	} else if (num >= 1000000000000) {
-		return (num / 1000000000000).toFixed(2) + 'T';
-	} else if (num > 9999 && num < 100000) {
-		return '< 0.1M';
-	} else if (num < 10000) {
-		return num
-	}
-}
 
 const RuleSlider = withStyles({
 	root: {
@@ -104,7 +91,7 @@ export default function RangedRule(props) {
 							min={props.option.selectorMin}
 							max={props.option.selectorMax}
 							value={value}
-							valueLabelFormat={value => <div>{numFormatter(value)}</div>}
+							valueLabelFormat={value => <div>{NumberFormatter.NumberFormatter(value)}</div>}
 							onChange={updateView}
 							onChangeCommitted={updateRuleRanges}/>
 					</div>
