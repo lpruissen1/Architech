@@ -10,7 +10,9 @@ import PersonalInfoWorkflow from './PersonalInfoWorkflow';
 import DisclosuresWorkflow from './DisclosuresWorkflow';
 import AgreementsWorkflow from './AgreementsWorkflow';
 import UserClient from '../../Clients/UserClient';
+import AccountsClient from '../../Clients/AccountsClient';
 import './PremiumModal.css';
+import { post } from 'jquery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -79,6 +81,36 @@ export default function RegisterModal(props) {
 
 	useEffect(async () => await loadInfo(), [])
 
+	const CreateTradingAccount = () => {
+		const body = {
+			userId: AuthClient.GetIdFromStoredJwt(),
+			firstName: firstName,
+			lastName: lastName,
+			taxIdNumber: "111-27-0000",
+			phoneNumber: phoneNumber,
+			emailAddress: email,
+			streetAddress: address,
+			city: city,
+			state: state,
+			postalCode: postalCode,
+			dateOfBirth: dateOfBirth,
+			countryOfTaxResidency: taxResidency,
+			fundingSource: "employment_income",
+			isControlledPerson: isControlledPerson,
+			isAffiliatedExchangeOrFinra: isAffiliatedExchangeOrFinra,
+			isPoliticallyExposed: isPoliticallyExposed,
+			immediateFamilyExposed: immediateFamilyExposed,
+			photoIdFront: "string",
+			photoIdBack: "string",
+			ipAddress: "string",
+			customerAgreementSignedAt: "string",
+			marginAgreementSignedAt: "string",
+			accountAgreementSignedAt: "string"
+		}
+	}
+
+	//Personal Info, Tax Info, Disclosures, Agreements. Need to make fourth part of slider. Make entire modal bigger. 
+	//Set "Finish" button to make request to AccountsClient and then display loading (or if finished the status)
 	const getSteps = () => {
 		return ['Personal Information', 'Disclosures', 'Agreements'];
 	}
