@@ -3,17 +3,19 @@ import UserClient from '../../Clients/UserClient';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router-dom';
-import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import PrimaryLinkButton from '../Generic/PrimaryLinkButton';
 
 export function Profile() {
 	const [userInfo, setUserInfo] = useState()
-	const [modal, setModal] = useState(false)
 
-	const history = useHistory();
-	const handleOnClick = useCallback(() => history.push('/tradingRegistration'), [history]);
+	useEffect(() => {
+		const loadInfo = async () => {
+			const info = await UserClient.GetInfo()
+			setUserInfo(info)
+		}
 
-	useEffect(async () => setUserInfo(await UserClient.GetInfo()), [])
+		loadInfo();
+	}, []);
 
 	return (
 		<div style={{ width: '100%', height: '100%' }}>
@@ -32,7 +34,7 @@ export function Profile() {
 					</Grid>
 					<Grid item xs={6}>
 						<Grid container justifyContent='flex-end'>
-							<PrimaryActionButton text="Start Trading" style={{ fontSize: 12 }} onClick={handleOnClick} />
+							<PrimaryLinkButton text="Start Trading" to="/tradingRegistration" style={{ fontSize: 12 }} />
 						</Grid>
 					</Grid>
 				</Grid>

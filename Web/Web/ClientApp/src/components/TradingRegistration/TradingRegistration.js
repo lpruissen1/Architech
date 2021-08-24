@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 },
 }));
 
-export default function RegisterModal(props) {
+export default function TradingRegistration() {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = useState(0);
 	const [firstName, setFirstName] = useState()
@@ -80,7 +80,16 @@ export default function RegisterModal(props) {
 		setEmail(info.email)
 	}
 
-	useEffect(async () => await loadInfo(), [])
+	useEffect(() => {
+		const loadInfo = async () => {
+			const info = await UserClient.GetInfo()
+			setFirstName(info.firstName)
+			setLastName(info.lastName)
+			setEmail(info.email)
+		}
+
+		loadInfo();
+	}, []);
 
 	const createTradingAccount = () => {
 		const body = {
