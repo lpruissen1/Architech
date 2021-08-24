@@ -11,6 +11,7 @@ import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
+import TradingRegistration from './TradingRegistration/TradingRegistration';
 import './custom.css';
 
 export function App(props) {
@@ -44,6 +45,7 @@ export function App(props) {
 				<AuthenticatedRoute exact path='/research' component={Research} />
 				<AuthenticatedRoute exact path='/education' component={Education} />
 				<AuthenticatedRoute exact path='/profile' component={Profile} />
+				<AuthenticatedRoute exact path='/tradingRegistration' component={TradingRegistration} />
 				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
 			</div>

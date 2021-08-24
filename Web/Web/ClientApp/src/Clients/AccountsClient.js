@@ -1,9 +1,7 @@
-﻿import AccountsClient from "./AccountsClient";
-
-const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
+﻿const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
 
 class AccountsClient {
-	async CreateTradingAccount() {
+	async CreateTradingAccount(data) {
 		fetch(API_URL + "create", {
 			method: 'POST',
 			headers: {

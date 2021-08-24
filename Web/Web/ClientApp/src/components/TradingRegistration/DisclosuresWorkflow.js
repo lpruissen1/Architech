@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import OutlinedTextInput from '../Generic/OutlinedTextInput';
 
 const useStyles = makeStyles((theme) => ({
 	radio: {
@@ -73,6 +74,24 @@ export default function DisclosuresWorkflow(props) {
 						onChange={() => props.setImmediateFamilyExposed(!props.immediateFamilyExposed)} />}
 					label="I have an immediate family member who is politically exposed" />
 			</Grid> 
+			<Grid item xs={12} style={{ paddingRight: 20 }}>
+				<OutlinedTextInput label='Street Address' width='100%' onChange={(event) => props.setAddress(event.target.value)} />
+			</Grid>
+			<Grid item xs={5}>
+				<OutlinedTextInput label='City' onChange={(event) => props.setCity(event.target.value)} />
+			</Grid>
+			<Grid item xs={3}>
+				<OutlinedTextInput label='State' onChange={(event) => props.setState(event.target.value)} />
+			</Grid>
+			<Grid item xs={4}>
+				<OutlinedTextInput label='Postal Code' onChange={(event) => props.setPostalCode(event.target.value)} />
+			</Grid>
+			<Grid item xs={12} style={{ paddingRight: 20 }}>
+				<OutlinedTextInput label='Email Address' value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
+			</Grid>
+			<Grid item xs={12} style={{ paddingRight: 20 }}>
+				<OutlinedTextInput label='Phone Number' width='100%' onChange={(event) => props.setPhoneNumber(event.target.value)} />
+			</Grid>
 		</Grid>
 	)
 }
