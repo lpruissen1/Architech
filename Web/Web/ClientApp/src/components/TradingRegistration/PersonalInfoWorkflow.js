@@ -6,6 +6,7 @@ import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
+import ImageInput from '../Generic/ImageConverter';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +53,7 @@ export default function PersonalInfoWorkflow(props) {
 			</Grid>
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 24 }}><Typography variant='h6'>Identity Verification</Typography></Grid>
 			<Grid item xs={12}>
-				<Typography> Doc Upload Here </Typography>
+				<ImageInput setImage={props.setIdFront}/>
 			</Grid>
 			<Grid item xs={12}>
 				<Grid container spacing={1}>
