@@ -31,33 +31,54 @@ export default function DisclosuresWorkflow(props) {
 	};
 
 	return (
-		<Grid container spacing={1} style={{ paddingLeft: '16%', paddingRight: '12%'}}>
-			<Grid item xs={6} style={{ color: '#f0f0f0' }}><Typography variant='h6'>Funding</Typography></Grid>
-			<Grid item xs={6} style={{ color: '#f0f0f0', paddingLeft: '10%' }}><Typography variant='h6'>Restrictions</Typography></Grid>
-			<Grid item xs={6} style={{ color: '#c0c0c0' }}><Typography variant='body1'>Primary source of funds for this account</Typography></Grid>
-			<Grid item xs={6} style={{ color: '#c0c0c0', paddingLeft: '10%' }}><Typography variant='body1'>Select all that apply</Typography></Grid>
-			<Grid item xs={6} style={{ paddingLeft: '5%', paddingTop: 10 }}>
-				
+		<Grid container spacing={1}>
+			<Grid item xs={12}>
+				<Grid container spacing={1}>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24}}><Typography variant='h6'>Funding</Typography></Grid>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 14 }}><Typography variant='body1'>Primary source of funds for this account</Typography></Grid>
+					<Grid align='left' justify='left' style={{ marginLeft: 24 }} item xs={12}>
+					<FormControl component="fieldset">
+						<RadioGroup aria-label="gender" name="gender1" value={props.fundingSource} onChange={handleChange}>
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="employment_income" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Employment Income" />
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="investments" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Investments" />
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="inheritance" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Inheritance" />
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="business_income" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Business Income" />
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="savings" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Savings" />
+							<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="family" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Family" />
+						</RadioGroup>
+						</FormControl>
+					</Grid>
+				</Grid>
 			</Grid>
-			<Grid item xs={6} style={{ paddingLeft: '15%', paddingTop: 10 }}>
-			</Grid> 
-			<Grid item xs={12} style={{ paddingRight: 20 }}>
-				<OutlinedTextInput label='Street Address' width='100%' onChange={(event) => props.setAddress(event.target.value)} />
-			</Grid>
-			<Grid item xs={5}>
-				<OutlinedTextInput label='City' onChange={(event) => props.setCity(event.target.value)} />
-			</Grid>
-			<Grid item xs={3}>
-				<OutlinedTextInput label='State' onChange={(event) => props.setState(event.target.value)} />
-			</Grid>
-			<Grid item xs={4}>
-				<OutlinedTextInput label='Postal Code' onChange={(event) => props.setPostalCode(event.target.value)} />
-			</Grid>
-			<Grid item xs={12} style={{ paddingRight: 20 }}>
-				<OutlinedTextInput label='Email Address' value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
-			</Grid>
-			<Grid item xs={12} style={{ paddingRight: 20 }}>
-				<OutlinedTextInput label='Phone Number' width='100%' onChange={(event) => props.setPhoneNumber(event.target.value)} />
+			<Grid item xs={12}>
+				<Grid container spacing={1}>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24 }}><Typography variant='h6'>Funding</Typography></Grid>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 14 }}><Typography variant='body1'>Primary source of funds for this account</Typography></Grid>
+					<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
+						control={<Radio
+							classes={{ root: classes.radio, checked: classes.checked }}
+							checked={props.isControlledPerson}
+							onChange={() => props.setIsControlledPerson(!props.isControlledPerson)} />}
+						label="I am a controlled person (defined by XYZ)" />
+					<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
+						control={<Radio
+							classes={{ root: classes.radio, checked: classes.checked }}
+							checked={props.isAffiliatedExchangeOrFinra}
+							onChange={() => props.setIsAffiliatedExchangeOrFinra(!props.isAffiliatedExchangeOrFinra)} />}
+						label="I am affiliated with an exchange or FINRA" />
+					<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
+						control={<Radio
+							classes={{ root: classes.radio, checked: classes.checked }}
+							checked={props.isPoliticallyExposed}
+							onChange={() => props.setIsPoliticallyExposed(!props.isPoliticallyExposed)} />}
+						label="I am politically exposed" />
+					<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }}
+						control={<Radio
+							classes={{ root: classes.radio, checked: classes.checked }}
+							checked={props.immediateFamilyExposed}
+							onChange={() => props.setImmediateFamilyExposed(!props.immediateFamilyExposed)} />}
+						label="I have an immediate family member who is politically exposed" />
+				</Grid>
 			</Grid>
 		</Grid>
 	)

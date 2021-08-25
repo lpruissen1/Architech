@@ -1,12 +1,12 @@
 ﻿import Button from "@material-ui/core/Button";
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import Grid from '@material-ui/core/Grid';
 
 export default function ImageInput(props) {
 
 	const [image, setImage] = useState()
 
 	const convert = (e) => {
-		debugger
 		const reader = new FileReader();
 		reader.readAsDataURL(e.target.files[0]);
 
@@ -20,26 +20,32 @@ export default function ImageInput(props) {
 	}
 
 	return (
-		<>
-			<img src={image}/>
+		<Grid container spacing={4}>
+			<Grid item xs={6}> 
 			<input
 				accept="image/*"
 				style={{
 					display: "none"
 				}}
-				id="button-file"
+					id={props.id}
 				type="file"
 				onChange={convert}
 			/>
-			<label htmlFor="button-file">
+				<label htmlFor={props.id}>
 				<Button
+					style={{textTransform: 'none'}}
 					variant="contained"
 					color="primary"
 					component="span"
+					disableElevation
 				>
-					Add Additional Images
-         </Button>
-			</label>
-		</>
+					{props.label}
+				</Button>
+				</label>
+			</Grid>
+			<Grid item xs={6}>
+				<img src={image} style={{ maxHeight: 160, maxWidth: 160 }} />
+			</Grid>
+		</Grid>
 	);
 }
