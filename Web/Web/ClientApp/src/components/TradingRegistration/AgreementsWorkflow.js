@@ -2,7 +2,7 @@
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { Document, Page } from 'react-pdf/dist/umd/entry.webpack';
 
 export default function AgreementsWorkflow(props) {
 	const [numPages, setNumPages] = useState(null);

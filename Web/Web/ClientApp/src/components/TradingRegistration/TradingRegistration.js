@@ -68,6 +68,7 @@ export default function TradingRegistration() {
 	const [idFront, setIdFront] = useState()
 	const [idBack, setIdBack] = useState()
 	const [aggrementTimestamp, setAggrementTimestamp] = useState()
+	const [ssn, setSsn] = useState()
 
 	const [fundingSource, setFundingSource] = useState();
 	const [isControlledPerson, setIsControlledPerson] = useState(false)
@@ -139,7 +140,7 @@ export default function TradingRegistration() {
 	//Personal Info, Tax Info, Disclosures, Agreements. Need to make fourth part of slider. Make entire modal bigger. 
 	//Set "Finish" button to make request to AccountsClient and then display loading (or if finished the status)
 	const getSteps = () => {
-		return ['Personal', 'Contact', 'Agreements', 'Review'];
+		return ['Personal', 'Disclosures', 'Agreements', 'Review'];
 	}
 
 	const getStepContent = (stepIndex) => {
@@ -181,6 +182,8 @@ export default function TradingRegistration() {
 					setIsControlledPerson={setIsControlledPerson}
 					setIsAffiliatedExchangeOrFinra={setIsAffiliatedExchangeOrFinra}
 					setImmediateFamilyExposed={setImmediateFamilyExposed}
+					ssn={ssn}
+					setSsn={setSsn}
 				/>;
 			case 2:
 				return <AgreementsWorkflow setTimestamp={setAggrementTimestamp}/>
@@ -238,7 +241,7 @@ export default function TradingRegistration() {
 					</Stepper>
 					</Grid>
 				<Grid align='center' justify = 'center' item xs={12} style={{ height: '40%' }}>
-					<div style={{ width: '70%', height: '100%', background: '#363636'}}>
+					<div style={{ width: '70%', height: '100%', background: '#363636', borderRadius: 4}}>
 						{getStepContent(activeStep)}
 					</div>
 					</Grid>
