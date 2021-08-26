@@ -67,12 +67,25 @@ export default function TradingRegistration() {
 	const [taxResidency, setTaxResidency] = useState()
 	const [idFront, setIdFront] = useState()
 	const [idBack, setIdBack] = useState()
+	const [aggrementTimestamp, setAggrementTimestamp] = useState()
 
 	const [fundingSource, setFundingSource] = useState();
 	const [isControlledPerson, setIsControlledPerson] = useState(false)
 	const [isAffiliatedExchangeOrFinra, setIsAffiliatedExchangeOrFinra] = useState(false)
 	const [isPoliticallyExposed, setIsPoliticallyExposed] = useState(false)
 	const [immediateFamilyExposed, setImmediateFamilyExposed] = useState(false)
+
+	const RetrieveClientIpAddress = async () => {
+		const response = await fetch("https://geolocation-db.com/json/", {
+			method: 'GET'
+		});
+
+		if (response.ok) {
+			const json = await response.json();
+
+			return json.IPv4
+		}
+	}
 
 	const loadInfo = async () => {
 		const info = await UserClient.GetInfo()
@@ -92,7 +105,9 @@ export default function TradingRegistration() {
 		loadInfo();
 	}, []);
 
-	const createTradingAccount = () => {
+	const createTradingAccount = async () => {
+		const ipAddress = await RetrieveClientIpAddress()
+		console.log(ipAddress)
 		const body = {
 			userId: AuthClient.GetIdFromStoredJwt(),
 			firstName: firstName,
@@ -113,9 +128,8 @@ export default function TradingRegistration() {
 			immediateFamilyExposed: immediateFamilyExposed,
 			photoIdFront: idFront,
 			photoIdBack: idBack,
-			ipAddress: "185.13.21.99",
+			ipAddress: ipAddress,
 			customerAgreementSignedAt: "2020-09-11T18:13:44Z",
-			marginAgreementSignedAt: "2020-09-11T18:13:44Z",
 			accountAgreementSignedAt: "2020-09-11T18:13:44Z"
 		}
 
@@ -169,7 +183,7 @@ export default function TradingRegistration() {
 					setImmediateFamilyExposed={setImmediateFamilyExposed}
 				/>;
 			case 2:
-				return <AgreementsWorkflow />
+				return <AgreementsWorkflow setTimestamp={setAggrementTimestamp}/>
 			case 3:
 				return <ReviewPage />
 			default:
@@ -190,36 +204,37 @@ export default function TradingRegistration() {
 
 	return (
 		<div style={{ width: '100%', height: '100%', backgroundColor: 'none' }}>
+			<Button style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }} variant="contained" color="primary" onClick={createTradingAccount}>
+				Apply
+			</Button>
 			<Grid
 				container
 				style={{ height: '100%' }}>
-				<Grid
-					item
-					xs={12} style={{ height: 160}}>
-				<Stepper activeStep={activeStep}
-					alternativeLabel
-					style={{ backgroundColor: 'transparent', marginTop: 24}}
-				>
-					{steps.map((label) => (
-						<Step key={label}>
-							<StepLabel
-								classes={{
-									alternativeLabel: classes.alternativeLabel,
-									labelContainer: classes.labelContainer
-								}}
-								StepIconProps={{
-									classes: {
-										root: classes.step,
-										completed: classes.completed,
-										active: classes.active,
-										disabled: classes.disabled
-									}
-								}}
-							>
-								{label}
-							</StepLabel>
-						</Step>
-					))}
+				<Grid item xs={12} style={{ height: 160}}>
+					<Stepper activeStep={activeStep}
+						alternativeLabel
+						style={{ backgroundColor: 'transparent', marginTop: 24}}
+					>
+						{steps.map((label) => (
+							<Step key={label}>
+								<StepLabel
+									classes={{
+										alternativeLabel: classes.alternativeLabel,
+										labelContainer: classes.labelContainer
+									}}
+									StepIconProps={{
+										classes: {
+											root: classes.step,
+											completed: classes.completed,
+											active: classes.active,
+											disabled: classes.disabled
+										}
+									}}
+								>
+									{label}
+								</StepLabel>
+							</Step>
+						))}
 					</Stepper>
 					</Grid>
 				<Grid align='center' justify = 'center' item xs={12} style={{ height: '40%' }}>
@@ -242,7 +257,7 @@ export default function TradingRegistration() {
 							<Grid item xs={6} style={{ display: 'flex', justifyContent:'flex-end' }}>
 							<Button style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }} variant="contained" color="primary" onClick={handleNext}>
 									{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-								</Button>
+							</Button>
 							</Grid>
 						</Grid>
 					</Grid>
