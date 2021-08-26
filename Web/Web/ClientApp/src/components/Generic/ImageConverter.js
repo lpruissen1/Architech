@@ -1,6 +1,8 @@
 ﻿import Button from "@material-ui/core/Button";
 import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function ImageInput(props) {
 
@@ -19,9 +21,13 @@ export default function ImageInput(props) {
 		};
 	}
 
+	const handleDelete = () => {
+		setImage()
+	}
+
 	return (
 		<Grid container spacing={4}>
-			<Grid item xs={6}> 
+			<Grid item xs={5}> 
 			<input
 				accept="image/*"
 				style={{
@@ -43,8 +49,15 @@ export default function ImageInput(props) {
 				</Button>
 				</label>
 			</Grid>
-			<Grid item xs={6}>
-				<img src={image} style={{ maxHeight: 160, maxWidth: 160 }} />
+			<Grid item xs={7} style={{ paddingLeft: 0 }}>
+				{image &&
+					<div style={{ display: 'flex', padding: 10, backgroundColor: '#545454', borderRadius: 8, justifyContent: 'center', position: 'relative' }}>
+						<IconButton onClick={handleDelete} style={{ position: 'absolute', top:0, right: 0, outline: 'none'}}>
+							<HighlightOffIcon style={{ color: '#d0d0d0'}} />
+						</IconButton>
+						<img src={image} style={{ maxHeight: 160, maxWidth: 160, margin: 0}} />
+					</div>
+				}
 			</Grid>
 		</Grid>
 	);
