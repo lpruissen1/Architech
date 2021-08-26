@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(1),
 		color: '#c0c0c0',
 		textTransform: 'none',
+		borderColor: '#c0c0c0'
 	},
 	step: {
 		color: '#727272',
@@ -33,9 +34,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 		"&$active": {
 			color: '#e0fff8'
-		},
-		"&$disabled": {
-			color: "red"
 		}
     },
 	alternativeLabel: {
@@ -67,7 +65,7 @@ export default function TradingRegistration() {
 	const [taxResidency, setTaxResidency] = useState()
 	const [idFront, setIdFront] = useState()
 	const [idBack, setIdBack] = useState()
-	const [aggrementTimestamp, setAggrementTimestamp] = useState()
+	const [agreementTimestamp, setAgreementTimestamp] = useState()
 	const [ssn, setSsn] = useState()
 
 	const [fundingSource, setFundingSource] = useState();
@@ -113,7 +111,7 @@ export default function TradingRegistration() {
 			userId: AuthClient.GetIdFromStoredJwt(),
 			firstName: firstName,
 			lastName: lastName,
-			taxIdNumber: "111-27-0000",
+			taxIdNumber: ssn,
 			phoneNumber: phoneNumber,
 			emailAddress: email,
 			streetAddress: address,
@@ -130,15 +128,13 @@ export default function TradingRegistration() {
 			photoIdFront: idFront,
 			photoIdBack: idBack,
 			ipAddress: ipAddress,
-			customerAgreementSignedAt: "2020-09-11T18:13:44Z",
-			accountAgreementSignedAt: "2020-09-11T18:13:44Z"
+			customerAgreementSignedAt: agreementTimestamp,
+			accountAgreementSignedAt: agreementTimestamp
 		}
 
 		AccountsClient.CreateTradingAccount(body)
 	}
 
-	//Personal Info, Tax Info, Disclosures, Agreements. Need to make fourth part of slider. Make entire modal bigger. 
-	//Set "Finish" button to make request to AccountsClient and then display loading (or if finished the status)
 	const getSteps = () => {
 		return ['Personal', 'Disclosures', 'Agreements', 'Review'];
 	}
@@ -186,7 +182,7 @@ export default function TradingRegistration() {
 					setSsn={setSsn}
 				/>;
 			case 2:
-				return <AgreementsWorkflow setTimestamp={setAggrementTimestamp}/>
+				return <AgreementsWorkflow setTimestamp={setAgreementTimestamp}/>
 			case 3:
 				return <ReviewPage />
 			default:
@@ -205,11 +201,20 @@ export default function TradingRegistration() {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
 
+	const getButtonText = (active, length) => {
+		if (active < length - 2) {
+			return 'Next'
+		}
+
+		else if (active === length - 2) {
+			return 'Review'
+		}
+
+		return 'Finish'
+	}
+
 	return (
 		<div style={{ width: '100%', height: '100%', backgroundColor: 'none' }}>
-			<Button style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }} variant="contained" color="primary" onClick={createTradingAccount}>
-				Apply
-			</Button>
 			<Grid
 				container
 				style={{ height: '100%' }}>
@@ -248,7 +253,8 @@ export default function TradingRegistration() {
 					<Grid item xs={12}>
 						<Grid container>
 							<Grid item xs={6}>
-								<Button
+							<Button
+								variant='outlined'
 								style={{marginLeft: 20, marginBottom: 24, outline: 'none', minWidth: 100}}
 								disabled={activeStep === 0}
 								onClick={handleBack}
@@ -258,8 +264,13 @@ export default function TradingRegistration() {
 								</Button>
 							</Grid>
 							<Grid item xs={6} style={{ display: 'flex', justifyContent:'flex-end' }}>
-							<Button style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }} variant="contained" color="primary" onClick={handleNext}>
-									{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+							<Button
+								style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }}
+								variant="contained"
+								color="primary"
+								onClick={activeStep === steps.length - 1 ? createTradingAccount : handleNext}
+							>
+									{getButtonText(activeStep, steps.length)}
 							</Button>
 							</Grid>
 						</Grid>
