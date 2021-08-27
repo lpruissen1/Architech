@@ -120,16 +120,15 @@ export default function TradingRegistration() {
 			postalCode: postalCode,
 			dateOfBirth: dateOfBirth,
 			countryOfTaxResidency: taxResidency,
-			fundingSource: "employment_income",
-			isControlledPerson: isControlledPerson,
-			isAffiliatedExchangeOrFinra: isAffiliatedExchangeOrFinra,
-			isPoliticallyExposed: isPoliticallyExposed,
-			immediateFamilyExposed: immediateFamilyExposed,
+			fundingSource: fundingSource,
+			isControlledPerson: (isControlledPerson === 'true'),
+			isAffiliatedExchangeOrFinra: (isAffiliatedExchangeOrFinra === 'true'),
+			isPoliticallyExposed: (isPoliticallyExposed === 'true'),
+			immediateFamilyExposed: (immediateFamilyExposed === 'true'),
 			photoIdFront: idFront,
 			photoIdBack: idBack,
 			ipAddress: ipAddress,
-			customerAgreementSignedAt: agreementTimestamp,
-			accountAgreementSignedAt: agreementTimestamp
+			customerAndAccountAgreementSignedAt: agreementTimestamp,
 		}
 
 		AccountsClient.CreateTradingAccount(body)
