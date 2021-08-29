@@ -14,7 +14,8 @@ export default function AgreementsWorkflow(props) {
 		setNumPages(numPages);
 	}
 
-	function onCheck() {
+	function onCheck(event) {
+		props.setAgreed(!props.agreed)
 		props.setTimestamp(Date.now())
 	}
 
@@ -55,7 +56,7 @@ export default function AgreementsWorkflow(props) {
 					style={{ color: textColor }}
 					color='primary'
 					onClick={onCheck}
-					checked={props.isChecked}
+					checked={props.agreed}
 					value={props.value}
 					icon={
 						<CheckBoxOutlineBlankIcon

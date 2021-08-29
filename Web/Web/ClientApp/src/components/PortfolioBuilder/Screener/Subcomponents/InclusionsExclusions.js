@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect  } from 'react';
 import './InclusionsExclusions.css';
-import StockPicker from '../../../Generic/StockPicker.js';
+import StockPicker from '../../../Generic/StatePicker.js';
 import StockInformationClient from '../../../../Clients/StockInformationClient';
 
 

@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 export default function ImageInput(props) {
 
-	const [image, setImage] = useState()
+	const [image, setImage] = useState(props.value)
 
 	const convert = (e) => {
 		const reader = new FileReader();

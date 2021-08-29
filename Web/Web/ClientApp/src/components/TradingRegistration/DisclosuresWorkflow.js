@@ -52,7 +52,7 @@ export default function DisclosuresWorkflow(props) {
 				<Grid container spacing={1}>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 14 }}><Typography variant='h6'>SSN Verification</Typography></Grid>
 					<Grid align='left' justify='left' item xs={12} style={{ paddingLeft: 70 }}>
-						<OutlinedTextInput label='SSN' width='30%' value={props.ssn} onChange={(event) => props.setSsn(event.target.value)} />
+						<OutlinedTextInput label='SSN' value={props.ssn} width='30%' value={props.ssn} onChange={(event) => props.setSsn(event.target.value)} />
 					</Grid>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30}}><Typography variant='h6'>Funding</Typography></Grid>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 14 }}><Typography variant='body1'>Primary source of funds for this account (select one)</Typography></Grid>

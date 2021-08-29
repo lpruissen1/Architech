@@ -30,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 // where did you come from and what was the state of where you came from
-export default function TextInput(props) {
+export default function OutlinedTextInput(props) {
 
 	const classes = useStyles();
 
@@ -53,7 +53,7 @@ export default function TextInput(props) {
 	)
 }
 
-TextInput.propTypes = {
+OutlinedTextInput.propTypes = {
 	label: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,

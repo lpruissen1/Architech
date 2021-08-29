@@ -74,6 +74,8 @@ export default function TradingRegistration() {
 	const [isPoliticallyExposed, setIsPoliticallyExposed] = useState(false)
 	const [immediateFamilyExposed, setImmediateFamilyExposed] = useState(false)
 
+	const [agreed, setAgreed] = useState(false)
+
 	const RetrieveClientIpAddress = async () => {
 		const response = await fetch("https://geolocation-db.com/json/", {
 			method: 'GET'
@@ -152,6 +154,8 @@ export default function TradingRegistration() {
 					phoneNumber={phoneNumber}
 					dateOfBirth={dateOfBirth}
 					taxResidency={taxResidency}
+					idFront={idFront}
+					idBack={idBack}
 					setFirstName={setFirstName}
 					setLastName={setLastName}
 					setEmail={setEmail}
@@ -181,7 +185,7 @@ export default function TradingRegistration() {
 					setSsn={setSsn}
 				/>;
 			case 2:
-				return <AgreementsWorkflow setTimestamp={setAgreementTimestamp}/>
+				return <AgreementsWorkflow setTimestamp={setAgreementTimestamp} agreed={agreed} setAgreed={setAgreed}/>
 			case 3:
 				return <ReviewPage />
 			default:
