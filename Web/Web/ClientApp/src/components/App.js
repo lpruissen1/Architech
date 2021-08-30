@@ -6,12 +6,13 @@ import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
 import { Registration } from './Login/Registration';
-import { NavMenu } from './NavMenu';
+import { NavMenu } from './Header';
 import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
 import './custom.css';
+import LeftNav from './LeftNav';
 
 export function App(props) {
 
@@ -35,7 +36,7 @@ export function App(props) {
 
 	return (
 		<>
-			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
+			<LeftNav/>
 			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
