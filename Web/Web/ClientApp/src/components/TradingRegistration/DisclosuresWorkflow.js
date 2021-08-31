@@ -47,35 +47,47 @@ export default function DisclosuresWorkflow(props) {
 	}
 
 	return (
-		<Grid container spacing={1} style={{ paddingLeft: 20, paddingRight: 20, marginBottom: 36 }}>
+		<Grid container spacing={1} style={{ paddingLeft: '2%', paddingRight: '2%', marginBottom: 40 }}>
 			<Grid item xs={12}>
 				<Grid container spacing={1}>
-					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 14 }}><Typography variant='h6'>SSN Verification</Typography></Grid>
-					<Grid align='left' justify='left' item xs={12} style={{ paddingLeft: 70 }}>
-						<OutlinedTextInput label='SSN' value={props.ssn} width='30%' value={props.ssn} onChange={(event) => props.setSsn(event.target.value)} />
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 24 }}><Typography variant='h6'>SSN Verification</Typography></Grid>
+					<Grid align='left' justify='left' item xs={12} style={{ paddingLeft: '5%' }}>
+						<Grid container spacing={1}>
+							<Grid item xs={4} style={{ paddingLeft: '5%' }}><OutlinedTextInput label='SSN' value={props.ssn} width='100%' value={props.ssn} onChange={(event) => props.setSsn(event.target.value)} /></Grid>
+							<Grid item xs={8} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+								<div style={{ backgroundColor: '#727272', borderRadius: 4, padding: 10, paddingLeft: 16, display: "inline-block", boxShadow: '0px 0px 16px 4px rgba(0, 0, 0, 0.2)' }}>
+									<div style={{ color: '#f0f0f0' }}>
+										<Typography variant="subtitle1">Why do we need this information?</Typography>
+									</div>
+									<div style={{ color: '#d0d0d0' }}>
+										<Typography variant="body2">Your SSN is used by our brokerage partner to verify your identity in accordance with KYC requirements</Typography>
+									</div>
+								</div>
+							</Grid>
+						</Grid>
 					</Grid>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30}}><Typography variant='h6'>Funding</Typography></Grid>
-					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 14 }}><Typography variant='body1'>Primary source of funds for this account (select one)</Typography></Grid>
-					<Grid align='left' justify='left' style={{ marginLeft: 24 }} item xs={12}>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 24 }}><Typography variant='body1'>Primary source of funds for this account (select one)</Typography></Grid>
+					<Grid align='left' justify='left' style={{ marginLeft: '5%' }} item xs={12}>
 					<FormControl component="fieldset">
 							<RadioGroup aria-label="gender" name="gender1" value={props.fundingSource} onChange={handleChange}>
 								<Grid container spacing={1} style={{ paddingLeft: 60 }}>
-									<Grid item xs={4}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="employment_income" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Employment Income" />
 									</Grid>
-									<Grid item xs={8}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="investments" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Investments" />
 									</Grid>
-									<Grid item xs={4}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="inheritance" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Inheritance" />
 									</Grid>
-									<Grid item xs={8}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="business_income" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Business Income" />
 									</Grid>
-									<Grid item xs={4}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="savings" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Savings" />
 									</Grid>
-									<Grid item xs={8}>
+									<Grid style={{ paddingLeft: '10%' }} item xs={4}>
 										<FormControlLabel style={{ color: '#c0c0c0', fontSize: 11 }} value="family" control={<Radio classes={{ root: classes.radio, checked: classes.checked }} />} label="Family" />
 									</Grid>
 								</Grid>
