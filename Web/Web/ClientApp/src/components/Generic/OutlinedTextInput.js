@@ -23,9 +23,15 @@ export const useStyles = makeStyles((theme) => ({
 				borderColor: theme.palette.info.main,
 			},
 		},
+		"& .MuiOutlinedInput-root.Mui-disabled": {
+			color: "#969696",
+			'& fieldset': {
+				borderColor: '#848484',
+			},
+		}
 	},
 	multilineColor: {
-		color: '#c0c0c0',
+		color: '#f0f0f0',
 	}
 }));
 
@@ -37,15 +43,16 @@ export default function OutlinedTextInput(props) {
 	return (
 		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='smalll' label={props.label}
 			InputLabelProps={{
-				style: { color: '#c0c0c0', backgroundColor: '#363636', paddingRight: 10 },
+				style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
 				shrink: true
 			}}
 			classes={{ input: classes.input }}
 			onChange={props.onChange}
+			disabled={props.disabled}
 			error={props.error}
 			autoComplete='off'
 			value={props.value}
-			style={{ borderRadius: 4, fontColor: '#fff', width: props.width}}
+			style={{ borderRadius: 4, fontColor: '#ffffff', width: props.width}}
 			helperText={props.helperText}
 			type={props.type}
 			InputProps={{ className: classes.multilineColor }}

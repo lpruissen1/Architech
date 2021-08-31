@@ -4,6 +4,7 @@ import React from 'react';
 import ImageInput from '../Generic/ImageConverter';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import StatePicker from '../Generic/StatePicker';
+import DatePicker from '../Generic/DatePicker';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
@@ -23,20 +24,20 @@ export default function PersonalInfoWorkflow(props) {
 					<Grid item xs={12}>
 						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
 							<Grid item xs={4}>
-								<OutlinedTextInput label='First Name' value={props.firstName} width='100%' onChange={(event) => props.setFirstName(event.target.value)} />
+								<OutlinedTextInput label='First Name' disabled={true} value={props.firstName} width='100%' onChange={(event) => props.setFirstName(event.target.value)} />
 							</Grid>
 							<Grid item xs={4}>
-								<OutlinedTextInput label='Last Name' value={props.lastName} width='100%' onChange={(event) => props.setLastName(event.target.value)} />
+								<OutlinedTextInput label='Last Name' disabled={true} value={props.lastName} width='100%' onChange={(event) => props.setLastName(event.target.value)} />
 							</Grid>
 							<Grid item xs={4}>
-								<OutlinedTextInput label='Date of Birth' value={props.dateOfBirth} width='100%' type="date" onChange={(event) => props.setDateOfBirth(event.target.value)} />
+								<DatePicker label='Date of Birth *' value={props.dateOfBirth} width='100%' setHighLevelState={props.setDateOfBirth} />
 							</Grid>
 						</Grid>
 				`	</Grid>
 					<Grid item xs={12}>
 						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
 							<Grid item xs={8}>
-								<OutlinedTextInput label='Email Address' value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
+								<OutlinedTextInput label='Email Address' disabled={true} value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
 							</Grid>
 							<Grid item xs={4}>
 								<OutlinedTextInput label='Phone Number' value={props.phoneNumber} width='100%' onChange={(event) => props.setPhoneNumber(event.target.value)} />

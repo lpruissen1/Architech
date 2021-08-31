@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
 		},
 	},
 	multilineColor: {
-		color: '#c0c0c0',
+		color: '#f0f0f0',
 	},
 	paper: {
 		backgroundColor: '#545454',
@@ -58,7 +58,7 @@ export default function StatePicker(props) {
 				<TextField {...params} id="outlined" variant="outlined"
 					InputLabelProps={{
 						shrink: true,
-						style: { color: '#c0c0c0', backgroundColor: '#363636', paddingRight: 10 },
+						style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
 
 					}}
 					style={{ borderRadius: 4, color: '#fff', width: props.width }}
