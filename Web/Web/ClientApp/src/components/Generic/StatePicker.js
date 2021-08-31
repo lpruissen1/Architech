@@ -31,6 +31,9 @@ export const useStyles = makeStyles((theme) => ({
 	paper: {
 		backgroundColor: '#545454',
 		color: '#d0d0d0'
+	},
+	inputRoot: {
+		color: '#f0f0f0'
 	}
 }));
 
@@ -53,7 +56,10 @@ export default function StatePicker(props) {
 				setValue(newValue);
 			}}
 			options={options}
-			classes={{ paper: classes.paper }}
+			classes={{
+				paper: classes.paper,
+				inputRoot: classes.inputRoot
+			}}
 			renderInput={(params) => (
 				<TextField {...params} id="outlined" variant="outlined"
 					InputLabelProps={{
@@ -65,6 +71,7 @@ export default function StatePicker(props) {
 					className={classes.root}
 					label={props.label}
 					color={props.color}
+					
 				/>)}
 		/>)
 }

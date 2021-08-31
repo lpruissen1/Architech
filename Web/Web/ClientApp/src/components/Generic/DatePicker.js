@@ -47,7 +47,7 @@ export default function DatePicker(props) {
 
 	const classes = useStyles();
 
-	const [selectedDate, handleDateChange] = useState()
+	const [selectedDate, handleDateChange] = useState(null)
 
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -74,6 +74,7 @@ export default function DatePicker(props) {
 					handleDateChange(val);
 					props.setHighLevelState(moment(val).format('MM-DD-YYYY'));
 				}}
+				emptyLabel="" 
 			/>
 		</MuiPickersUtilsProvider>
 	)
