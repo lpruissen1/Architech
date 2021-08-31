@@ -49,11 +49,20 @@ export default function DisclosuresWorkflow(props) {
 	return (
 		<Grid container spacing={1} style={{ paddingLeft: '2%', paddingRight: '2%', marginBottom: 40 }}>
 			<Grid item xs={12}>
-				<Grid container spacing={1}>
-					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 24 }}><Typography variant='h6'>SSN Verification</Typography></Grid>
-					<Grid align='left' justify='left' item xs={12} style={{ paddingLeft: '5%' }}>
+				<Grid container spacing={1} style={{ marginBottom: 24 }}>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 36 }}><Typography variant='h5'>SSN Verification</Typography></Grid>
+					<Grid align='left' justify='left' item xs={12} style={{ paddingLeft: '10%' }}>
 						<Grid container spacing={1}>
-							<Grid item xs={4} style={{ paddingLeft: '5%' }}><OutlinedTextInput label='SSN' value={props.ssn} width='100%' value={props.ssn} onChange={(event) => props.setSsn(event.target.value)} /></Grid>
+							<Grid item xs={4} style={{ paddingLeft: '5%' }}>
+								<OutlinedTextInput
+									label='SSN'
+									value={props.ssn}
+									width='100%'
+									value={props.ssn}
+									onChange={(event) => props.setSsn(event.target.value)}
+									placeholder="XXX-XX-XXXX"
+								/>
+							</Grid>
 							<Grid item xs={8} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
 								<div style={{ backgroundColor: '#727272', borderRadius: 4, padding: 10, paddingLeft: 16, display: "inline-block", boxShadow: '0px 0px 16px 4px rgba(0, 0, 0, 0.2)' }}>
 									<div style={{ color: '#f0f0f0' }}>
@@ -66,7 +75,7 @@ export default function DisclosuresWorkflow(props) {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30}}><Typography variant='h6'>Funding</Typography></Grid>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 48, marginBottom: 10}}><Typography variant='h5'>Funding</Typography></Grid>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 24 }}><Typography variant='body1'>Primary source of funds for this account (select one)</Typography></Grid>
 					<Grid align='left' justify='left' style={{ marginLeft: '5%' }} item xs={12}>
 					<FormControl component="fieldset">
@@ -98,7 +107,7 @@ export default function DisclosuresWorkflow(props) {
 			</Grid>
 			<Grid item xs={12}>
 				<Grid container spacing={1} style={{ marginBottom: 48 }}>
-					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30 }}><Typography variant='h6'>Additional Disclosures</Typography></Grid>
+					<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30, marginBottom: 10 }}><Typography variant='h5'>Additional Disclosures</Typography></Grid>
 					<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 24 }}><Typography variant='body1'>Select true or false for each of the following statements</Typography></Grid>
 					<Grid item xs={6} align='right' justify='right' style={{ color: '#c0c0c0' }}>
 						<Typography variant='body2' style={{ marginTop: 8 }}>I am a controlled person (defined by XYZ)</Typography>

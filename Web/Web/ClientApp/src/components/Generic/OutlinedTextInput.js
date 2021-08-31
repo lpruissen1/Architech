@@ -54,6 +54,7 @@ export default function OutlinedTextInput(props) {
 			value={props.value}
 			style={{ borderRadius: 4, fontColor: '#ffffff', width: props.width}}
 			helperText={props.helperText}
+			placeholder={props.placeholder}
 			type={props.type}
 			InputProps={{ className: classes.multilineColor }}
 		/>

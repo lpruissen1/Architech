@@ -18,7 +18,7 @@ export default function PersonalInfoWorkflow(props) {
 
 	return (
 		<Grid container spacing={1} style={{ paddingLeft: 20, paddingRight: 20 }}>
-			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 24}}><Typography variant='h6'>Personal Information</Typography></Grid>
+			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 36}}><Typography variant='h5'>Personal Information</Typography></Grid>
 			<Grid item xs={12}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
@@ -69,8 +69,8 @@ export default function PersonalInfoWorkflow(props) {
 				`	</Grid>
 				</Grid>
 			</Grid>
-			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24 }}><Typography variant='h6'>Identity Verification</Typography></Grid>
-			<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 30 }}><Typography variant='body1'>Upload images of the front and back of your driver's license</Typography></Grid>
+			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 10 }}><Typography variant='h5'>Identity Verification</Typography></Grid>
+			<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 36 }}><Typography variant='body1'>Upload images of the front and back of your driver's license</Typography></Grid>
 			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 30  }}>
 				<ImageInput key='front' value={props.idFront} setImage={props.setIdFront} label="Upload ID Front" id='front'/>
 			</Grid>
