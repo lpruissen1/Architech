@@ -67,6 +67,8 @@ export default function TradingRegistration() {
 	const [idBack, setIdBack] = useState()
 	const [agreementTimestamp, setAgreementTimestamp] = useState()
 	const [ssn, setSsn] = useState()
+	const [ssnError, setSsnError] = useState(false)
+	const [formValid, setFormValid] = useState(false)
 
 	const [fundingSource, setFundingSource] = useState();
 	const [isControlledPerson, setIsControlledPerson] = useState(false)
@@ -90,13 +92,6 @@ export default function TradingRegistration() {
 		}
 	}
 
-	const loadInfo = async () => {
-		const info = await UserClient.GetInfo()
-		setFirstName(info.firstName)
-		setLastName(info.lastName)
-		setEmail(info.email)
-	}
-
 	useEffect(() => {
 		const loadInfo = async () => {
 			const info = await UserClient.GetInfo()
@@ -107,6 +102,20 @@ export default function TradingRegistration() {
 
 		loadInfo();
 	}, []);
+
+	useEffect(() => { validateForm() }, [ssnError, agreed])
+
+	const validateForm = () => {
+		const errorList = [ssnError, agreed]
+
+		if (errorList.indexOf(true) === -1) {
+			setFormValid(true)
+		}
+		else {
+			setFormValid(false)
+		}
+	}
+
 
 	const createTradingAccount = async () => {
 		const ipAddress = await RetrieveClientIpAddress()
@@ -187,6 +196,7 @@ export default function TradingRegistration() {
 					setImmediateFamilyExposed={setImmediateFamilyExposed}
 					ssn={ssn}
 					setSsn={setSsn}
+					setSsnError={setSsnError}
 				/>;
 			case 2:
 				return <AgreementsWorkflow

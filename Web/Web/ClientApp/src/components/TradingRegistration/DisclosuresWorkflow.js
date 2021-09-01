@@ -46,6 +46,31 @@ export default function DisclosuresWorkflow(props) {
 		props.setImmediateFamilyExposed(event.target.value)
 	}
 
+	const handleSnnChange = (event) => {
+		if (validateSsn(event.target.value)) {
+			props.setSsnError(false)
+		}
+		else {
+			props.setSsnError(true)
+		}
+
+		props.setSsn(event.target.value)
+	}
+
+	const validateSsn = (ssn) => {
+		const ssnRegex = /^\d+$/
+
+		if (!ssnRegex.test(ssn)) {
+			return false
+		}
+
+		if (ssn.length != 9) {
+			return false
+		}
+
+		return true
+	}
+
 	return (
 		<Grid container spacing={1} style={{ paddingLeft: '2%', paddingRight: '2%', marginBottom: 40 }}>
 			<Grid item xs={12}>
@@ -59,8 +84,9 @@ export default function DisclosuresWorkflow(props) {
 									value={props.ssn}
 									width='100%'
 									value={props.ssn}
-									onChange={(event) => props.setSsn(event.target.value)}
+									onChange={handleSnnChange}
 									placeholder="XXX-XX-XXXX"
+									helperText={props.ssn && props.ssnError ? "*Must have at least 9 characters" : ''}
 								/>
 							</Grid>
 							<Grid item xs={8} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
