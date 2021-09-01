@@ -75,6 +75,8 @@ export default function TradingRegistration() {
 	const [immediateFamilyExposed, setImmediateFamilyExposed] = useState(false)
 
 	const [agreed, setAgreed] = useState(false)
+	const [idFrontFileName, setIdFrontFileName] = useState()
+	const [idBackFileName, setIdBackFileName] = useState()
 
 	const RetrieveClientIpAddress = async () => {
 		const response = await fetch("https://geolocation-db.com/json/", {
@@ -168,6 +170,8 @@ export default function TradingRegistration() {
 					setTaxResidency={setTaxResidency}
 					setIdFront={setIdFront}
 					setIdBack={setIdBack}
+					setIdFrontFileName={setIdFrontFileName}
+					setIdBackFileName={setIdBackFileName}
 				/>
 			case 1:
 				return <DisclosuresWorkflow
@@ -185,9 +189,35 @@ export default function TradingRegistration() {
 					setSsn={setSsn}
 				/>;
 			case 2:
-				return <AgreementsWorkflow setTimestamp={setAgreementTimestamp} agreed={agreed} setAgreed={setAgreed}/>
+				return <AgreementsWorkflow
+					setTimestamp={setAgreementTimestamp}
+					agreed={agreed}
+					setAgreed={setAgreed}
+				/>
 			case 3:
-				return <ReviewPage />
+				return <ReviewPage
+					firstName={firstName}
+					lastName={lastName}
+					email={email}
+					address={address}
+					city={city}
+					state={state}
+					postalCode={postalCode}
+					phoneNumber={phoneNumber}
+					dateOfBirth={dateOfBirth}
+					taxResidency={taxResidency}
+					isControlledPerson={isControlledPerson}
+					isPoliticallyExposed={isPoliticallyExposed}
+					isAffiliatedExchangeOrFinra={isAffiliatedExchangeOrFinra}
+					immediateFamilyExposed={immediateFamilyExposed}
+					fundingSource={fundingSource}
+					ssn={ssn}
+					agreed={agreed}
+					idFront={idFront}
+					idBack={idBack}
+					idFrontFileName={idFrontFileName}
+					idBackFileName={idBackFileName}
+				/>
 			default:
 				return 'Unknown stepIndex';
 		}

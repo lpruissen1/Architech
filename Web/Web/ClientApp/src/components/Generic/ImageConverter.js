@@ -12,6 +12,8 @@ export default function ImageInput(props) {
 		const reader = new FileReader();
 		reader.readAsDataURL(e.target.files[0]);
 
+		props.setFileName(e.target.files[0].name)
+
 		reader.onload = () => {
 			setImage(reader.result)
 			props.setImage(reader.result)

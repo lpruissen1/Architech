@@ -40,7 +40,7 @@ export default function PersonalInfoWorkflow(props) {
 								<OutlinedTextInput label='Email Address' disabled={true} value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
 							</Grid>
 							<Grid item xs={4}>
-								<OutlinedTextInput label='Phone Number' value={props.phoneNumber} width='100%' onChange={(event) => props.setPhoneNumber(event.target.value)} />
+								<OutlinedTextInput label='Phone Number' placeholder='XXX-XXX-XXXX' value={props.phoneNumber} width='100%' onChange={(event) => props.setPhoneNumber(event.target.value)} />
 							</Grid>
 						</Grid>
 				`	</Grid>
@@ -72,10 +72,10 @@ export default function PersonalInfoWorkflow(props) {
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 10 }}><Typography variant='h5'>Identity Verification</Typography></Grid>
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 36 }}><Typography variant='body1'>Upload images of the front and back of your driver's license</Typography></Grid>
 			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 30  }}>
-				<ImageInput key='front' value={props.idFront} setImage={props.setIdFront} label="Upload ID Front" id='front'/>
+				<ImageInput key='front' value={props.idFront} setImage={props.setIdFront} setFileName={props.setIdFrontFileName} label="Upload ID Front" id='front'/>
 			</Grid>
 			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 30 }}>
-				<ImageInput key='back' value={props.idBack} setImage={props.setIdBack} label="Upload ID Back" id='back'/>
+				<ImageInput key='back' value={props.idBack} setImage={props.setIdBack} setFileName={props.setIdBackFileName} label="Upload ID Back" id='back'/>
 			</Grid>
 		</Grid>
 	)

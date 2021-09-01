@@ -24,7 +24,7 @@ export default function AgreementsWorkflow(props) {
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 30, marginBottom: 10 }}><Typography variant='h5'>Account Agreement</Typography></Grid>
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 24 }}><Typography variant='body1'>Please read and acknowledge the following agreement</Typography></Grid>
 			<Grid item xs={12}>
-				<div style={{padding: 20, backgroundColor: '#484848', width: '70%', marginTop: 20, borderRadius: 4}}>
+				<div style={{padding: 20, backgroundColor: '#484848', width: '75%', marginTop: 20, borderRadius: 4}}>
 					<div style={{height: 600, overflow: "scroll"}}>
 						<Document
 							file="https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf"
