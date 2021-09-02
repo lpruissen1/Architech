@@ -1,10 +1,9 @@
-﻿import React, { useState } from 'react'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import MomentUtils from "@date-io/moment";
+﻿import DateFnsUtils from '@date-io/date-fns';
+import { alpha, makeStyles } from '@material-ui/core/styles';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from "moment";
-import { makeStyles, alpha } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -72,7 +71,7 @@ export default function DatePicker(props) {
 				}}
 				onChange={val => {
 					handleDateChange(val);
-					props.setHighLevelState(moment(val).format('MM-DD-YYYY'));
+					props.setHighLevelState(moment(val).format('YYYY-MM-DD'));
 				}}
 				emptyLabel="" 
 			/>
