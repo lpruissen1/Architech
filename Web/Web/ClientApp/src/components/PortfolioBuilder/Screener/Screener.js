@@ -126,6 +126,7 @@ export function Screener(props) {
 	const [collapseOpen, setCollapseOpen] = useState(false)
 	const [changeMade, setChangeMade] = useState(false)
 	const [index, setIndex] = useState(props.indexId)
+	const [name, setName] = useState("")
 
 	const loadIndex = async () => {
 		const loadedIndex = await CustomIndexClient.getCustomIndexByIndexId(AuthClient.GetIdFromStoredJwt(), index)
@@ -282,6 +283,7 @@ export function Screener(props) {
 		CustomIndexClient.CreateCustomIndex({
 			userId: AuthClient.GetIdFromStoredJwt(),
 			indexId: newIndexID,
+			name: name,
 			markets: [
 				"Sp500"
 			],
@@ -333,6 +335,8 @@ export function Screener(props) {
 				DeleteInclusion={props.handleInclusionDelete}
 				AddExclusion={handleExclusionAddition}
 				DeleteExclusion={handleExclusionDelete}
+				name={name}
+				setName={setName}
 			/>
 			<br/>
 			{index

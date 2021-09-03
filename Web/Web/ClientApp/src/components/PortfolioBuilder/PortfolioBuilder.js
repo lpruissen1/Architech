@@ -33,7 +33,7 @@ export function PortfolioBuilder(props) {
 	const [tickers, setTickers] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 	const [inclusions, setInclusions] = useState([])
-
+	
 	let { indexID } = useParams();
 
 	const [indexId, setIndexId] = useState(indexID)
@@ -58,7 +58,7 @@ export function PortfolioBuilder(props) {
 		<Grid container spacing={3}>
 				<Grid item xs={9}>
 				<RaisedCard
-					style={{ height: 640, overflow: 'scroll'}}
+					style={{ overflow: 'scroll'}}
 					children={
 						<>
 							<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }}>

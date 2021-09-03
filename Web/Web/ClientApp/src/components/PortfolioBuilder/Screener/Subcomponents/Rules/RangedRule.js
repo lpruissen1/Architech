@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
-import NumberFormatter from '../../../../../Formatter/NumberFormatter'
+import { NumberFormatter } from '../../../../../Formatter/Formatter'
 import './Rules.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -91,7 +91,7 @@ export default function RangedRule(props) {
 							min={props.option.selectorMin}
 							max={props.option.selectorMax}
 							value={value}
-							valueLabelFormat={value => <div>{NumberFormatter.NumberFormatter(value)}</div>}
+							valueLabelFormat={value => <div>{NumberFormatter(value)}</div>}
 							onChange={updateView}
 							onChangeCommitted={updateRuleRanges}/>
 					</div>

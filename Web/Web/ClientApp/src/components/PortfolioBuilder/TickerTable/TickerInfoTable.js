@@ -1,9 +1,9 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import NumberFormatter from '../../../Formatter/NumberFormatter'
+import { UnitFormatter } from '../../../Formatter/Formatter'
 import RuleTextFormatter from '../../../Formatter/RuleTextFormatter'
 
 export default function TickerInfoTable(props) {
@@ -26,7 +26,7 @@ export default function TickerInfoTable(props) {
 				</TableRow>
 				<TableRow>
 						<TableCell align='left' style={labelCellStyle}>Market Cap</TableCell>
-						<TableCell align='left' style={dataCellStyle}>{NumberFormatter.UnitFormatter(props.tickerInfo[0].marketCap, "MarketCap")}</TableCell>
+						<TableCell align='left' style={dataCellStyle}>{UnitFormatter(props.tickerInfo[0].marketCap, "MarketCap")}</TableCell>
 				</TableRow>
 				<TableRow>
 						<TableCell align='left' style={labelCellStyle}>Current Price</TableCell>
@@ -36,7 +36,7 @@ export default function TickerInfoTable(props) {
 						return (
 							<TableRow>
 								<TableCell align='left' style={labelCellStyle}>{RuleTextFormatter(rule.ruleType, rule.timePeriod)}</TableCell>
-								<TableCell align='left' style={dataCellStyle}>{NumberFormatter.UnitFormatter(rule.value, rule.ruleType)}</TableCell>
+								<TableCell align='left' style={dataCellStyle}>{UnitFormatter(rule.value, rule.ruleType)}</TableCell>
 							</TableRow>
 						)
 					})}

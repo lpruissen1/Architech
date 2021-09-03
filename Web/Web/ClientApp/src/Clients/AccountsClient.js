@@ -1,5 +1,4 @@
-﻿import UserClient from './UserClient'
-const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
+﻿const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
 
 class AccountsClient {
 	async CreateTradingAccount(data) {
