@@ -13,6 +13,32 @@ class AccountsClient {
 				return response.status
 			});
 	}
+
+	async CreateAchRelationship(userId, data) {
+		fetch(API_URL + "create-ach-relationship/" + userId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+		.then(function (response) {
+			if (response.ok) {
+				const data = response.json()
+
+				return data
+			}
+		});
+	}
+
+	async GetAchRelationship(userId) {
+		fetch(API_URL + "get-ach-relationship/" + userId, {
+			method: 'GET'
+		})
+			.then(function (response) {
+			return response.status
+		});
+	}
 }
 
 export default new AccountsClient();

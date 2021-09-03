@@ -13,6 +13,7 @@ import UserClient from '../../Clients/UserClient';
 import AccountsClient from '../../Clients/AccountsClient';
 import AuthClient from '../../Clients/AuthClient';
 import './PremiumModal.css';
+import FinishRegistrationModal from './FinishRegistrationModal';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -80,6 +81,8 @@ export default function TradingRegistration() {
 	const [idFrontFileName, setIdFrontFileName] = useState()
 	const [idBackFileName, setIdBackFileName] = useState()
 
+	const [finishModal, setFinishModal] = useState(false)
+
 	const RetrieveClientIpAddress = async () => {
 		const response = await fetch("https://geolocation-db.com/json/", {
 			method: 'GET'
@@ -119,7 +122,7 @@ export default function TradingRegistration() {
 
 	const createTradingAccount = async () => {
 		const ipAddress = await RetrieveClientIpAddress()
-		console.log(ipAddress)
+
 		const body = {
 			userId: AuthClient.GetIdFromStoredJwt(),
 			firstName: firstName,
@@ -145,6 +148,7 @@ export default function TradingRegistration() {
 		}
 
 		AccountsClient.CreateTradingAccount(body)
+		setFinishModal(true)
 	}
 
 	const getSteps = () => {
@@ -258,6 +262,11 @@ export default function TradingRegistration() {
 
 	return (
 		<div style={{ width: '100%', height: '100%', backgroundColor: 'none' }}>
+			{finishModal &&
+				<div className='finish-modal'>
+					<FinishRegistrationModal />
+				</div>
+			}
 			<Grid
 				container
 				style={{ height: '100%' }}>
