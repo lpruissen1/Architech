@@ -3,7 +3,7 @@ import jwt from 'jwt-decode';
 
 const API_URL = "https://localhost:9001/Auth/"; // this will eventually need to be config
 
-class AuthService {
+class AuthClient {
 	async Login(username, password) {
 
 		const response = await fetch(API_URL + "login", {
@@ -62,4 +62,4 @@ class AuthService {
 	}
 }
 
-export default new AuthService();
+export default new AuthClient();
