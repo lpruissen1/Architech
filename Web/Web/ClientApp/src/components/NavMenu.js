@@ -4,6 +4,7 @@ import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from '
 import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
+import PrimaryActionButton from './Generic/PrimaryActionButton';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -69,6 +70,7 @@ export class NavMenu extends Component {
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
 										</NavItem>
+										<PrimaryActionButton onClick={this.props.fundMeDaddy} text="fund me :)" className="text-light" />
 									</>
 								) : (
 									<NavItem>
