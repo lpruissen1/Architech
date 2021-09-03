@@ -12,12 +12,19 @@ import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
 import TradingRegistration from './TradingRegistration/TradingRegistration';
+import FundingModal from './Funding/FundingModal';
 import './custom.css';
 
 export function App(props) {
 
 	const [loggedIn, setLoggedIn] = useState()
 	const [userId, setUserId] = useState("")
+	const [shouldIFund, setShouldIFund] = useState(false)
+
+	const fundMeDaddy = () => {
+		debugger
+		setShouldIFund(!shouldIFund)
+	}
 
 	const updateLoggedIn = () => {
 		const userId = AuthClient.GetIdFromStoredJwt()
@@ -36,8 +43,11 @@ export function App(props) {
 
 	return (
 		<>
-			<NavMenu loggedIn={loggedIn} updateLoggedIn={updateLoggedIn} fixed="top"/>
+			<NavMenu loggedIn={loggedIn} fundMeDaddy={fundMeDaddy} updateLoggedIn={updateLoggedIn} fixed="top"/>
 			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
+				{shouldIFund &&
+					<FundingModal fundMeDaddy={fundMeDaddy} />
+				}
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
