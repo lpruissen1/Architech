@@ -57,7 +57,7 @@ export default function PersonalInfoWorkflow(props) {
 					<Grid item xs={12}>
 						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
 							<Grid item xs={4}>
-								<StatePicker setState={props.setState} value={props.state} label='State *'/>
+								<StatePicker setState={props.setState} value={props.state}/>
 							</Grid>
 							<Grid item xs={4}>
 								<OutlinedTextInput label='Postal Code' value={props.postalCode} width='100%' onChange={(event) => props.setPostalCode(event.target.value)} />

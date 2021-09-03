@@ -1,4 +1,5 @@
-﻿const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
+﻿import UserClient from './UserClient'
+const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
 
 class AccountsClient {
 	async CreateTradingAccount(data) {
@@ -14,8 +15,8 @@ class AccountsClient {
 			});
 	}
 
-	async CreateAchRelationship(userId, data) {
-		fetch(API_URL + "create-ach-relationship/" + userId, {
+	async CreateAchRelationship(data) {
+		fetch(API_URL + "create-ach-relationship/" + UserClient.GetIdFromStoredJwt(), {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -32,12 +33,37 @@ class AccountsClient {
 	}
 
 	async GetAchRelationship(userId) {
-		fetch(API_URL + "get-ach-relationship/" + userId, {
-			method: 'GET'
+		debugger
+		const response = await fetch(API_URL + "get-ach-relationship/" + userId, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		})
-			.then(function (response) {
-			return response.status
-		});
+
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
+	
+	}
+
+	async ExecuteTransfer(data, userId) {
+		const response = await fetch(API_URL + "transfer-funds/" + userId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+
+		})
+
+		debugger
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
+	
 	}
 }
 

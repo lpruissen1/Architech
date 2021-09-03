@@ -17,8 +17,7 @@ export function Profile(props) {
 			setUserInfo(info)
 		}
 		const loadFundingInfo = async () => {
-			const newInfo = await AccountsClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
-			debugger
+			const newInfo = await AccountsClient.GetAchRelationship()
 			setAchRelationship(newInfo)
 		}
 

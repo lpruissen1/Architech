@@ -22,7 +22,6 @@ export function App(props) {
 	const [shouldIFund, setShouldIFund] = useState(false)
 
 	const fundMeDaddy = () => {
-		debugger
 		setShouldIFund(!shouldIFund)
 	}
 
