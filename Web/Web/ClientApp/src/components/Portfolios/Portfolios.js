@@ -1,11 +1,10 @@
-﻿import React, { useCallback, useState, useEffect } from 'react';
-import CustomIndexClient from '../../Clients/CustomIndexClient';
-import { NewPortfolioCard } from './Subcomponents/NewPortfolioCard';
-import { PortfolioCard } from './Subcomponents/PortfolioCard';
+﻿import React, { useCallback, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
+import CustomIndexClient from '../../Clients/CustomIndexClient';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import './Portfolios.css';
+import { PortfolioCard } from './Subcomponents/PortfolioCard';
 
 export function Portfolios(props) {
 
