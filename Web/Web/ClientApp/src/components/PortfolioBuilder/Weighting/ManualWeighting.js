@@ -47,8 +47,6 @@ export default function ManualWeighting(props) {
 	const getHelperText = () => {
 		let weightSum = 0
 
-		debugger
-
 		for (let i = 0; i < props.manualWeights.length; i++) {
 			weightSum += props.manualWeights[i].weight
 		}

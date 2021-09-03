@@ -5,6 +5,7 @@ import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
 import PrimaryActionButton from './Generic/PrimaryActionButton';
+import PrimaryLinkButton from './Generic/PrimaryLinkButton';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -71,6 +72,7 @@ export class NavMenu extends Component {
 											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
 										</NavItem>
 										<PrimaryActionButton onClick={this.props.fundMeDaddy} text="fund me :)" className="text-light" />
+										<PrimaryLinkButton to="/trade" text="Trade" className="text-light" />
 									</>
 								) : (
 									<NavItem>
