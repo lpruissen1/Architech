@@ -71,7 +71,7 @@ export class NavMenu extends Component {
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
 										</NavItem>
-										<Button style={{ color: '#ffffff', fontSize=12, borderRadius: '50%' }} onClick={this.props.fundMeDaddy}> + Add Funds </Button>
+										<Button style={{ color: '#ffffff', fontSize:12, borderRadius: '50%' }} onClick={this.props.fundMeDaddy}> + Add Funds </Button>
 										<PrimaryLinkButton to="/trade" text="Trade" style={{ fontSize: 12 }} className="text-light" />
 									</>
 								) : (

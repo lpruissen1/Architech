@@ -29,10 +29,13 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 export function PortfolioBuilder(props) {
-	const [value, setValue] = React.useState(0);
+	const [step, setStep] = React.useState(0);
 	const [tickers, setTickers] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 	const [inclusions, setInclusions] = useState([])
+
+	const [weightingOption, setWeightingOption] = useState("")
+	const [manualWeights, setManualWeights] = useState([])
 	
 	let { indexID } = useParams();
 
@@ -51,7 +54,7 @@ export function PortfolioBuilder(props) {
 	}
 
 	const handleChange = (event, newValue) => {
-		setValue(newValue);
+		setStep(newValue);
 	};
 
 	return (
@@ -67,7 +70,7 @@ export function PortfolioBuilder(props) {
 										indicator: classes.indicator
 									}}
 									style={{ outline: 'none' }}
-									value={value}
+									value={step}
 									onChange={handleChange}
 									aria-label="simple tabs example">
 									<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
@@ -75,7 +78,7 @@ export function PortfolioBuilder(props) {
 									<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
 								</Tabs>
 							</AppBar>
-							<TabPanel value={value} index={0}>
+							<TabPanel value={step} index={0}>
 								<Screener
 									setLoading={setLoading}
 									setTickers={setTickers}
@@ -85,14 +88,18 @@ export function PortfolioBuilder(props) {
 									handleInclusionDelete={handleInclusionDelete}
 								/>
 							</TabPanel>
-							<TabPanel value={value} index={1}>
+							<TabPanel value={step} index={1}>
 								<Weighter
-									tickers={tickers.ticker}
+									tickers={tickers}
 									setTickers={setTickers}
 									inclusions={inclusions}
+									weightingOption={weightingOption}
+									setWeightingOption={setWeightingOption}
+									manualWeights={manualWeights}
+									setManualWeights={setManualWeights}
 								/>
 							</TabPanel>
-							<TabPanel value={value} index={2}>
+							<TabPanel value={step} index={2}>
 										Item Three
 							</TabPanel>
 						</>

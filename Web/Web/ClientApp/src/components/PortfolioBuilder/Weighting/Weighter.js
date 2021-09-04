@@ -19,48 +19,47 @@ const useStyles = makeStyles((theme) => ({
 export function Weighter(props) {
 	const classes = useStyles();
 	const [options, _] = useState(GetWeightingOptions())
-	const [selection, setSelection] = useState("")
-	const [manualWeights, setManualWeights] = useState([])
 
 	const handleCheck = (event) => {
-		setSelection(event.currentTarget.value)
+		props.setWeightingOption(event.currentTarget.value)
 	}
 
 	const handleManualWeight = (ticker, weight) => {
-
-		if (manualWeights.filter(entry => entry.ticker === ticker).length > 0) {
-			let remainder = manualWeights.filter(entry => entry.ticker !== ticker)
+		if (props.manualWeights.filter(entry => entry.ticker === ticker).length > 0) {
+			let remainder = props.manualWeights.filter(entry => entry.ticker !== ticker)
 
 			remainder.push({ ticker: ticker, weight: weight })
 
-			setManualWeights(remainder)
+			props.setManualWeights(remainder)
 
 			handleWeighting()
 
 			return
 		}
 
-		let tempWeights = manualWeights
+		let tempWeights = props.manualWeights
 		tempWeights.push({ ticker: ticker, weight: weight })
-		setManualWeights(tempWeights)
+		props.setManualWeights(tempWeights)
 
 		handleWeighting()
 	}
 
 	const deleteManualWeight = (ticker) => {
-		let tempWeights = manualWeights
+		let tempWeights = props.manualWeights
 
-		setManualWeights(tempWeights.filter(entry => entry.ticker !== ticker))
+		props.setManualWeights(tempWeights.filter(entry => entry.ticker !== ticker))
 	}
 
 	const handleWeighting = async () => {
-		if (selection !== "") {
-			var result = await WeightingClient.postWeightingRequest(selection, props.tickers.map(thing => { return thing.ticker }), manualWeights)
+		if (props.weightingOption !== "" && props.tickers) {
+			var tickers = props.tickers.map(thing => { return thing.ticker })
+
+			var result = await WeightingClient.postWeightingRequest(props.weightingOption, tickers, props.manualWeights)
 			props.setTickers(result.tickers)
 		}
 	}
 
-	useEffect(() => { handleWeighting() }, [selection])
+	useEffect(() => { handleWeighting() }, [props.weightingOption])
 
 	return (
 		<div>
@@ -73,8 +72,8 @@ export function Weighter(props) {
 							value={option.value}
 							style={{ outline: 'none' }}
 							className={classes.button}
-							variant={option.value === selection ? 'contained' : 'outlined'}
-							color={option.value === selection ? 'primary' : 'default'}
+							variant={option.value === props.weightingOption ? 'contained' : 'outlined'}
+							color={option.value === props.weightingOption ? 'primary' : 'default'}
 							disableElevation
 							disableRipple
 						>
@@ -87,7 +86,7 @@ export function Weighter(props) {
 			<ManualWeighting
 				options={props.inclusions}
 				handleManualWeight={handleManualWeight}
-				manualWeights={manualWeights}
+				manualWeights={props.manualWeights}
 				deleteManualWeight={deleteManualWeight}
 			/>
 		</div>
