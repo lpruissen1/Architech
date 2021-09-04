@@ -4,7 +4,7 @@ import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from '
 import AuthClient from '../Clients/AuthClient';
 import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
-import PrimaryActionButton from './Generic/PrimaryActionButton';
+import Button from '@material-ui/core/Button';
 import PrimaryLinkButton from './Generic/PrimaryLinkButton';
 import './NavMenu.css';
 
@@ -71,8 +71,8 @@ export class NavMenu extends Component {
 										<NavItem onClick={this.props.updateLoggedIn}>
 											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
 										</NavItem>
-										<PrimaryActionButton onClick={this.props.fundMeDaddy} text="fund me :)" className="text-light" />
-										<PrimaryLinkButton to="/trade" text="Trade" className="text-light" />
+										<Button style={{ color: '#ffffff', fontSize=12, borderRadius: '50%' }} onClick={this.props.fundMeDaddy}> + Add Funds </Button>
+										<PrimaryLinkButton to="/trade" text="Trade" style={{ fontSize: 12 }} className="text-light" />
 									</>
 								) : (
 									<NavItem>
