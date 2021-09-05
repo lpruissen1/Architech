@@ -62,6 +62,23 @@ class AccountsClient {
 		}
 	
 	}
+
+	async ExecuteBulkOrder(data, userId) {
+		const response = await fetch(API_URL + "execute-bulk-market-order/" + userId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+
+		})
+
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
+	
+	}
 }
 
 export default new AccountsClient();

@@ -5,6 +5,7 @@ import Picker from '../Generic/Picker';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import ScreenerClient from '../../Clients/ScreenerClient';
+import AccountsClient from '../../Clients/AccountsClient';
 import PurchaseOrderTable from './PurchaseOrderTable';
 import { Typography, Grid, Button } from '@material-ui/core/';
 
@@ -53,6 +54,14 @@ export default function TradeOverview() {
 
 	}
 
+	const sendBulkOrder = () => {
+		const bulkMarketOrder = {
+			Orders: potentialPurchaseOrder
+		}
+
+		AccountsClient.ExecuteBulkOrder(bulkMarketOrder, AuthClient.GetIdFromStoredJwt())
+	}
+
 	useEffect(() => { loadPortfolios() }, [])
 
 	return (
@@ -86,7 +95,7 @@ export default function TradeOverview() {
 							</Button>
 						</Grid>
 						<Grid item xs={6}>
-							<PrimaryActionButton text='Send' width='100%' />
+							<PrimaryActionButton text='Send' width='100%' onClick={() => sendBulkOrder()} />
 						</Grid>
 					</Grid>
 
