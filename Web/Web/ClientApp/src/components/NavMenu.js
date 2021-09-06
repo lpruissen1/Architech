@@ -38,10 +38,10 @@ export class NavMenu extends Component {
 						<NavbarBrand tag={Link} to="/">
 							<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 								<img style={{
-									width: 32, height: 32, marginRight: 10, marginLeft: 0, marginBottom: 2
+									width: 32, height: 32, marginRight: 10, marginLeft: 0, marginBottom: 2, marginTop: 10
 								}} src={Logo} alt="Architech Logo" />
 								<img style={{
-									 height: 32, marginLeft: 0
+									 height: 32, marginLeft: 0, marginTop: 10
 								}} src={LogoFont} alt="Architech Logo Font" />
 							</div>
 						</NavbarBrand>
@@ -51,25 +51,25 @@ export class NavMenu extends Component {
 								{this.props.loggedIn ? (
 									<>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/dashboard">Dashboard</NavLink>
+											<NavLink tag={Link} className="text-light" to="/dashboard" style={{ marginTop: 10 }}>Dashboard</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/portfolioBuilder">Portfolio Builder</NavLink>
+											<NavLink tag={Link} className="text-light" to="/portfolioBuilder" style={{ marginTop: 10 }}>Portfolio Builder</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/portfolios">Portfolios</NavLink>
+											<NavLink tag={Link} className="text-light" to="/portfolios" style={{ marginTop: 10 }}>Portfolios</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/research">Research</NavLink>
+											<NavLink tag={Link} className="text-light" to="/research" style={{ marginTop: 10 }}>Research</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/education">Education</NavLink>
+											<NavLink tag={Link} className="text-light" to="/education" style={{ marginTop: 10 }}>Education</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} className="text-light" to="/profile">Profile</NavLink>
+											<NavLink tag={Link} className="text-light" to="/profile" style={{ marginTop: 10 }}>Profile</NavLink>
 										</NavItem>
 										<NavItem onClick={this.props.updateLoggedIn}>
-											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/">Logout</NavLink>
+											<NavLink tag={Link} onClick={this.logout} className="text-light" to="/" style={{ marginTop: 10, marginRight: 180 }}>Logout</NavLink>
 										</NavItem>
 										<Button style={{ color: '#ffffff', fontSize:12, borderRadius: '50%' }} onClick={this.props.fundMeDaddy}> + Add Funds </Button>
 										<PrimaryLinkButton to="/trade" text="Trade" style={{ fontSize: 12 }} className="text-light" />

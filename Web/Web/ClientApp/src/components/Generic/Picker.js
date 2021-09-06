@@ -68,6 +68,7 @@ export default function Picker(props) {
 					}}
 					style={{ borderRadius: 4, color: '#fff', width: props.width }}
 					className={classes.root}
+					placeholder={props.placeholder}
 					label={props.label}
 					color={props.color}
 					
@@ -80,5 +81,6 @@ Picker.propTypes = {
 	value: PropTypes.string.isRequired,
 	setState: PropTypes.func.isRequired,
 	width: PropTypes.number,
-	style: PropTypes.object
+	style: PropTypes.object,
+	placeholder: PropTypes.string
 }

@@ -35,10 +35,10 @@ export const useStyles = makeStyles((theme) => ({
 export function PortfolioBuilder(props) {
 
 	const [markets, setMarkets] = useState([
-		{ value: 'Sp500', displayName: 'S&P 500', isChecked: true },
-		{ value: 'Useless1', displayName: 'Useless1', isChecked: true },
-		{ value: 'Useless2', displayName: 'Useless2', isChecked: true },
-		{ value: 'Useless3', displayName: 'Useless3', isChecked: true }])
+		{ value: 'Sp500', displayName: 'Large Cap 500', isChecked: true },
+		{ value: 'Useless1', displayName: 'Tech 100', isChecked: true },
+		{ value: 'Useless2', displayName: 'Small Cap 2000', isChecked: true },
+		{ value: 'Useless3', displayName: 'ESG 50', isChecked: true }])
 
 	const [sectors, setSectors] = useState([
 		{
@@ -341,7 +341,7 @@ export function PortfolioBuilder(props) {
 		<Grid container spacing={3}>
 				<Grid item xs={9}>
 				<RaisedCard
-					style={{ overflow: 'scroll'}}
+					style={{ overflow: 'scroll', minHeight: 640}}
 					children={
 						<>
 							<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }}>
@@ -353,9 +353,9 @@ export function PortfolioBuilder(props) {
 									value={step}
 									onChange={handleChange}
 									aria-label="simple tabs example">
-									<Tab className={classes.root} style={{ outline: 'none' }} label="Screening" />
-									<Tab className={classes.root} style={{ outline: 'none' }} label="Weighting" />
-									<Tab className={classes.root} style={{ outline: 'none' }} label="Backtesting" />
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Screen" />
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Weigh" />
+									<Tab className={classes.root} style={{ outline: 'none' }} label="Backtest" />
 								</Tabs>
 							</AppBar>
 							<TabPanel value={step} index={0}>
@@ -413,11 +413,12 @@ export function PortfolioBuilder(props) {
 						/>}
 					/>
 			</Grid>
-			<Grid item xs={1}>
+			<Grid item xs={2}>
 				<PrimaryActionButton
 					onClick={indexId ? updateIndex : saveIndex}
 					style={{ marginBottom: 20 }}
 					text='Save Index'
+					width='100%'
 				/>			
 			</Grid>
 		</Grid>
