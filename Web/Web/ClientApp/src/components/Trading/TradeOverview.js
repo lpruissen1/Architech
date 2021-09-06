@@ -65,14 +65,32 @@ export default function TradeOverview() {
 	useEffect(() => { loadPortfolios() }, [])
 
 	return (
-		<>
-			<Picker options={
-				portfolios && portfolios.map((portfolio) => {
-					return (
-						portfolio.name)
-				})} value={selectedPortfolio} setState={setSelectedPortfolio} label={"Portfolio"}
-			/>
-			<OutlinedTextInput label='Amount' value={amount} width='100%' onChange={(event) => setAmount(event.target.value)} />
+		<Grid container spacing={1}>
+			<Grid item xs={12} style={{ color: '#ffffff' }}>
+				<Typography variant='h6'>Target Portfolio</Typography>
+			</Grid>
+			<Grid item xs={12} justify='left' align='left'>
+				<Picker
+					options={
+					portfolios && portfolios.map((portfolio) => {
+						return (
+							portfolio.name)
+					})}
+					value={selectedPortfolio}
+					setState={setSelectedPortfolio}
+					width= '40%'
+				/>
+			</Grid>
+			<Grid item xs={12} style={{ color: '#ffffff' }}>
+				<Typography variant='h6'>Amount ($)</Typography>
+			</Grid>
+			<Grid item xs={12} style={{ marginBottom: 20 }}>
+				<OutlinedTextInput
+					value={amount}
+					width='40%'
+					onChange={(event) => setAmount(event.target.value)}
+				/>
+			</Grid>
 			{potentialPurchaseOrder ?
 				<>
 					<Grid container spacing={1}>
@@ -81,28 +99,26 @@ export default function TradeOverview() {
 								<Typography variant='h6'>Review Purchase Order</Typography>
 							</div>
 						</Grid>
-						<Grid item xs={12}>
+						<Grid item xs={12} style={{ marginBottom: 30 }}>
 							<PurchaseOrderTable tickers={potentialPurchaseOrder} />
 						</Grid>
-
-						<Grid item xs={6}>
+						<Grid item xs={2}>
 							<Button
 								variant='outlined'
-								style={{ borderColor: '#c0c0c0', color:'#c0c0c0', marginLeft: 20, marginBottom: 24, outline: 'none', minWidth: 100 }}
+								style={{ borderColor: '#c0c0c0', color:'#c0c0c0', marginLeft: 20, marginTop: 16, outline: 'none', width: '90%' }}
 								onClick={() => setPotentialPruchaseOrder()}
 							>
 								Clear
 							</Button>
 						</Grid>
-						<Grid item xs={6}>
-							<PrimaryActionButton text='Send' width='100%' onClick={() => sendBulkOrder()} />
+						<Grid item xs={2} justify='left'>
+							<PrimaryActionButton text='Send' width='90%' onClick={() => sendBulkOrder()} />
 						</Grid>
 					</Grid>
 
 				</>
-				:
-				<PrimaryActionButton text='Calculate' width='100%' onClick={CalculatePurchaseOrder} />
+				: <PrimaryActionButton text='Calculate' width='20%' onClick={CalculatePurchaseOrder} />
 			}
-		</>
+		</Grid>
 	)
 }
