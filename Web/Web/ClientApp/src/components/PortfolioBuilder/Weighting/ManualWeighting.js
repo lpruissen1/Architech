@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import PrimaryActionButton from '../../Generic/PrimaryActionButton';
+import Picker from '../../Generic/Picker';
+import OutlinedTextInput from '../../Generic/OutlinedTextInput';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -47,8 +49,6 @@ export default function ManualWeighting(props) {
 	const getHelperText = () => {
 		let weightSum = 0
 
-		debugger
-
 		for (let i = 0; i < props.manualWeights.length; i++) {
 			weightSum += props.manualWeights[i].weight
 		}
@@ -66,58 +66,36 @@ export default function ManualWeighting(props) {
 
 	return (
 		<>
-			<Grid container spacing={1}>
-				<Grid item xs={2} align='center' justify='bottom' style={{ padding: 20 }}>
-					<Autocomplete
-						style={{marginTop: 30, width: '18ch'}}
-						className={classes.tickerSelector}
-						disableClearable
-						closeIcon={null}
-						forcePopupIcon={false}
-						size='small'
-						value={value}
-						onChange={(event, newValue) => {
-							setValue(newValue);
-						}}
+			<Grid container spacing={1} style={{ paddingLeft: 80 }}>
+				<Grid item xs={4} align='left' justify='left' style={{ padding: 20 }}>
+					<Picker
 						options={props.options}
-						classes={{ paper: classes.paper }}
-						renderInput={(params) => (
-							<TextField {...params} id="outlined" variant="outlined"
-								placeholder="Select Ticker"
-								InputLabelProps={{
-									shrink: true,
-								}}
-								InputProps={{
-									...params.InputProps,
-									type: 'search',
-								}}
-							/>)}
-					/>
+						placeholder='Select Ticker'
+						setState={setValue}
+					/> 
 				</Grid>
-				<Grid item xs={2} align='left' style={{ padding: 20 }}>
-					<TextField
-						style={{ marginTop: 20, width: '18ch'}}
-						label="Enter Weight"
+				<Grid item xs={3} align='left' style={{ padding: 20 }}>
+					<OutlinedTextInput 
+						placeholder='Enter % Weight'
 						onChange={(event) => {
 							setWeight(Number(event.target.value));
 						}}
-						value={weight ? weight : '' }
+						value={weight ? weight : ''}
 						error={getHelperText() !== '' ? true : false}
 						helperText={getHelperText()}
 					/>
 				</Grid>
-				<Grid item xs={2} align='left' style={{ padding: 20 }}>
+				<Grid item xs={4} align='left' justify='left' style={{ padding: 20 }}>
 					<PrimaryActionButton
 						disabled={value && weight && getHelperText() === '' ? false : true}
-						style={{ fontSize: 12, marginTop: 34 }}
 						onClick={submitWeight}
 						text='Set Weight'
 						/>
 				</Grid>
-				<Grid item xs={6} align='left' style={{ padding: 20 }}>
+				<Grid item xs={6} align='left' style={{ padding: 20, paddingLeft: 30 }}>
 					<>
-						<ul className="list" style={{ marginLeft: 0, paddingLeft: 0, maxWidth: 300 }}>
-							<Typography style={{ color: '#d0d0d0' }}>Manual Weights: </Typography>
+						<ul className="list" style={{ marginLeft: 0, paddingLeft: 0 }}>
+							<Typography style={{ color: '#d0d0d0', marginBottom: 10 }} variant='body1'>Manual Weights: </Typography>
 							{props.manualWeights && props.manualWeights.map((entry) => {
 								return (
 									<Chip

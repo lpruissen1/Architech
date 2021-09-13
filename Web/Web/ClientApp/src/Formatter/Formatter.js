@@ -1,4 +1,4 @@
-﻿const UnitFormatter = (num, ruleType) => {
+﻿export function  UnitFormatter(num, ruleType) {
 
 	if (ruleType === "MarketCap") {
 		return '$' + NumberFormatter(num)
@@ -14,7 +14,7 @@
 }
 
 
-const NumberFormatter = (num) => {
+export function  NumberFormatter(num) {
 	if (num > 1000000 && num < 1000000000) {
 		return (num / 1000000).toFixed(0) + 'M';
 	} else if (num >= 1000000000 && num < 1000000000000) {
@@ -26,8 +26,4 @@ const NumberFormatter = (num) => {
 	} else if (num < 10000) {
 		return num
 	}
-}
-
-export default {
-	UnitFormatter, NumberFormatter
 }
