@@ -15,11 +15,11 @@ export default function CreateAchRelationship() {
 	
 	const sendRequest = async () => {
 		const body = {
-			BankAccountOwnerName: accountOwnerName,
-			AccountType: accountType,
-			BankAccountNumber: accountNumber,
-			BankAccountRoutingNumber: accountRoutingNumber,
-			BankAccountNickname: nickname
+			bankAccountOwnerName: accountOwnerName,
+			accountType: accountType,
+			bankAccountNumber: accountNumber,
+			bankAccountRoutingNumber: accountRoutingNumber,
+			bankAccountNickname: nickname
 		}
 
 		AccountsClient.CreateAchRelationship(UserClient.GetIdFromStoredJwt(), body)

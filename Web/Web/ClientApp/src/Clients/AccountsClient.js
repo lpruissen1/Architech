@@ -1,5 +1,4 @@
-﻿import UserClient from './UserClient'
-const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
+﻿const API_URL = "https://localhost:9001/Accounts/"; // this will eventually need to be config
 
 class AccountsClient {
 	async CreateTradingAccount(data) {
@@ -15,8 +14,8 @@ class AccountsClient {
 			});
 	}
 
-	async CreateAchRelationship(data) {
-		fetch(API_URL + "create-ach-relationship/" + UserClient.GetIdFromStoredJwt(), {
+	async CreateAchRelationship(userId, data) {
+		fetch(API_URL + "create-ach-relationship/" + userId, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -33,7 +32,6 @@ class AccountsClient {
 	}
 
 	async GetAchRelationship(userId) {
-		debugger
 		const response = await fetch(API_URL + "get-ach-relationship/" + userId, {
 			method: 'GET',
 			headers: {
@@ -58,7 +56,23 @@ class AccountsClient {
 
 		})
 
-		debugger
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
+	
+	}
+
+	async ExecuteBulkOrder(data, userId) {
+		const response = await fetch(API_URL + "execute-bulk-market-order/" + userId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+
+		})
+
 		if (response.ok) {
 			const data = await response.json()
 			return data

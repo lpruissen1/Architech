@@ -20,6 +20,7 @@ class CustomIndexClient {
 			const activePortfolios = data.map((portfolio) => {
 				return {
 					indexId: portfolio.indexId,
+					name: portfolio.name,
 					markets: portfolio.markets,
 					sectors: portfolio.sectors,
 					industries: portfolio.industries,

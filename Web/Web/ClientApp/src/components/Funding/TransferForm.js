@@ -22,7 +22,6 @@ export default function TransferForm(props) {
 	useEffect(() => {
 		const loadFundingInfo = async () => {
 			const newInfo = await AccountsClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
-			debugger
 			setAchRelationship(newInfo)
 		}
 
@@ -38,7 +37,6 @@ export default function TransferForm(props) {
 		}
 
 		var result = await AccountsClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
-		debugger
 		props.setTransferInitiated(true)
 	}
 

@@ -1,9 +1,5 @@
-﻿import React, { useState } from 'react';
-import './NewPortfolioCard.css';
-import './PortfolioCard.css';
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+﻿import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,16 +7,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import RaisedCard from '../../Generic/RaisedCard';
-import PortfolioTableRow from './PortfolioTableRow.js';
+import DeleteIcon from '@material-ui/icons/Delete';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import SectorAndIndustryTable from './SectorAndIndustryTable';
+import { UnitFormatter } from '../../../Formatter/Formatter';
+import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
+import PrimaryTextButton from '../../Generic/PrimaryTextButton';
+import RaisedCard from '../../Generic/RaisedCard';
 import BasicMetricTable from './BasicMetricTable';
 import DeleteModal from './DeleteModal';
-import TimePeriodFormatter from '../../../Formatter/TimeFormatter.js';
-import UnitFormatter from '../../../Formatter/NumberFormatter';
-import PrimaryTextButton from '../../Generic/PrimaryTextButton';
+import './NewPortfolioCard.css';
+import './PortfolioCard.css';
+import PortfolioTableRow from './PortfolioTableRow.js';
+import SectorAndIndustryTable from './SectorAndIndustryTable';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
@@ -136,7 +135,7 @@ export function PortfolioCard(props) {
 					<Table aria-label="collapsible table" size="small" style={{ backgroundColor: '#363636' }}>
 						<TableHead className={classes.tableHead}>
 							<TableRow style={{ borderBottom: 'none' }}>
-								<TableCell className={classes.headCells} style={{ borderBottom: 'none'}} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>Blueprint Name</Typography></TableCell>
+								<TableCell className={classes.headCells} style={{ borderBottom: 'none' }} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>{props.portfolio.name}</Typography></TableCell>
 								<TableCell align="right" style={{ width: '70%', borderBottom: 'none'}}>
 									<PrimaryTextButton
 										onClick={handleEditOnClick}
