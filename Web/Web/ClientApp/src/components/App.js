@@ -6,7 +6,6 @@ import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
 import { Registration } from './Login/Registration';
-import { NavMenu } from './Header';
 import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
@@ -16,6 +15,7 @@ import FundingModal from './Funding/FundingModal';
 import TradeOverview from './Trading/TradeOverview';
 import './custom.css';
 import LeftNav from './LeftNav';
+import PrimarySearchAppBar from './PrimarySearchAppBar';
 
 export function App(props) {
 
@@ -44,11 +44,12 @@ export function App(props) {
 
 	return (
 		<>
-			<LeftNav/>
 			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
 				{shouldIFund &&
 					<FundingModal fundMeDaddy={fundMeDaddy} />
 				}
+				<LeftNav />
+				<PrimarySearchAppBar />
 				<Route exact path='/' component={Home} />
 				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
