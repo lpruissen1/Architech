@@ -11,12 +11,13 @@ export default function PrimarySearchAppBar() {
 	return (
 		<div>
 			<NavLink to="/dashboard">
-				<AppBar position="static">
-					<Box style={{ backgroundColor: 'black' }} sx={{ px: 2.5, py: 3 }}>
-						<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-							<img style={{
-								width: 32, height: 32, marginRight: 10, marginLeft: 0, marginBottom: 2
-							}} src={Logo} alt="Architech Logo" />
+				<AppBar position="fixed" style={{zIndex: 10000}}>
+					<Box style={{ backgroundColor: '#121212' }} sx={{ height: 64, zIndex: 10000 }}>
+						<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%' }}>
+							<img
+								style={{width: 32, height: 32, marginRight: 10, marginLeft: 24}}
+								src={Logo}
+								alt="Architech Logo" />
 							<img style={{
 								height: 32, marginLeft: 0
 							}} src={LogoFont} alt="Architech Logo Font" />
