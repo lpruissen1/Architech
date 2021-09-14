@@ -51,7 +51,7 @@ export function App(props) {
 				}
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
-						<PrimarySearchAppBar />
+						<PrimarySearchAppBar updateLoggedIn={updateLoggedIn} />
 					</Grid>
 					<Grid item xs={12}>
 						<Grid container spacing={1}>
