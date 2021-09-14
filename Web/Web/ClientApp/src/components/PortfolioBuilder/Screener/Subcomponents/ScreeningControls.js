@@ -14,7 +14,7 @@ export default function ScreeningControls(props) {
 		<Grid container spacing={1}>
 			<Grid item xs={12}>
 				<Typography style={{ marginTop: 20, marginLeft: 10, color: '#fff', marginBottom: 20 }} variant='h6'>Portfolio Name</Typography>
-				<OutlinedTextInput onChange={(event) => props.setName(event.target.value)}/>
+				<OutlinedTextInput value={props.name} onChange={(event) => props.setName(event.target.value)}/>
 			</Grid>
 			<Grid item xs={12}>
 				<Typography style={{ marginTop: 20, marginLeft: 10, color:'#fff' }} variant='h6'>Choose Your Markets</Typography>

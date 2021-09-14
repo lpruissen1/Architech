@@ -6,7 +6,6 @@ import { Education } from './Education/Education';
 import { Home } from './Home/Home';
 import { Login } from './Login/Login';
 import { Registration } from './Login/Registration';
-import { NavMenu } from './NavMenu';
 import { PortfolioBuilder } from './PortfolioBuilder/PortfolioBuilder';
 import { Portfolios } from './Portfolios/Portfolios';
 import { Profile } from './Profile/Profile';
@@ -15,6 +14,10 @@ import TradingRegistration from './TradingRegistration/TradingRegistration';
 import FundingModal from './Funding/FundingModal';
 import TradeOverview from './Trading/TradeOverview';
 import './custom.css';
+import LeftNav from './LeftNav';
+import PrimarySearchAppBar from './PrimarySearchAppBar';
+import AppBar from './AppBar';
+import Grid from '@material-ui/core/Grid';
 
 export function App(props) {
 
@@ -43,22 +46,35 @@ export function App(props) {
 
 	return (
 		<>
-			<NavMenu loggedIn={loggedIn} fundMeDaddy={fundMeDaddy} updateLoggedIn={updateLoggedIn} fixed="top"/>
-			<div style={{marginLeft: '5%', marginRight: '5%', justifyContent: 'center' }}>
+			<div style={{justifyContent: 'center' }}>
 				{shouldIFund &&
 					<FundingModal fundMeDaddy={fundMeDaddy} />
 				}
-				<Route exact path='/' component={Home} />
-				<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
-				<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
-				<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
-				<AuthenticatedRoute exact path='/research' component={Research} />
-				<AuthenticatedRoute exact path='/education' component={Education} />
-				<AuthenticatedRoute exact path='/profile' component={Profile} />
-				<AuthenticatedRoute exact path='/trade' component={TradeOverview} />
-				<AuthenticatedRoute exact path='/tradingRegistration' component={TradingRegistration} />
-				<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
-				<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
+				<Grid container spacing={1}>
+					<Grid item xs={12}>
+						{loggedIn ? <PrimarySearchAppBar updateLoggedIn={updateLoggedIn} loggedIn={loggedIn} fundMeDaddy={fundMeDaddy} /> : <AppBar/>}
+					</Grid>
+					<Grid item xs={12}>
+						<Grid container spacing={1}>
+							<Grid item style={{ width: 200 }}>
+								{loggedIn && <LeftNav />}
+							</Grid>
+							<Grid item xs style={{ padding: 30, paddingTop: 94 }}>
+								<Route exact path='/' component={Home} />
+								<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
+								<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
+								<AuthenticatedRoute exact path='/portfolios' component={() => <Portfolios userID={userId} />} />
+								<AuthenticatedRoute exact path='/research' component={Research} />
+								<AuthenticatedRoute exact path='/education' component={Education} />
+								<AuthenticatedRoute exact path='/profile' component={Profile} />
+								<AuthenticatedRoute exact path='/trade' component={TradeOverview} />
+								<AuthenticatedRoute exact path='/tradingRegistration' component={TradingRegistration} />
+								<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
+								<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid> 
 			</div>
 		</>
 	);

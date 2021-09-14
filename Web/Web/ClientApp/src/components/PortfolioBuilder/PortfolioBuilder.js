@@ -338,10 +338,10 @@ export function PortfolioBuilder(props) {
 	useEffect(() => { handleMount() }, []);
 
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={2} justify='center'>
 				<Grid item xs={9}>
 				<RaisedCard
-					style={{ overflow: 'scroll', minHeight: 640}}
+					style={{ overflow: 'scroll', minHeight: 580, marginLeft: 20}}
 					children={
 						<>
 							<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }}>
@@ -404,7 +404,7 @@ export function PortfolioBuilder(props) {
 				</Grid>
 			<Grid container item xs={3} justify="center">
 				<RaisedCard
-					style={{ position: 'fixed', height: 640, width: '22%' }}
+					style={{ position: 'fixed', width: '18%', maxHeight: '75%', overflow: 'scroll' }}
 					children={
 						<TickerTable
 							tickers={tickers}
