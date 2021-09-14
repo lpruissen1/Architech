@@ -16,6 +16,7 @@ import TradeOverview from './Trading/TradeOverview';
 import './custom.css';
 import LeftNav from './LeftNav';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
+import AppBar from './AppBar';
 import Grid from '@material-ui/core/Grid';
 
 export function App(props) {
@@ -51,12 +52,12 @@ export function App(props) {
 				}
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
-						<PrimarySearchAppBar updateLoggedIn={updateLoggedIn} />
+						{loggedIn ? <PrimarySearchAppBar updateLoggedIn={updateLoggedIn} loggedIn={loggedIn} fundMeDaddy={fundMeDaddy} /> : <AppBar/>}
 					</Grid>
 					<Grid item xs={12}>
 						<Grid container spacing={1}>
 							<Grid item style={{ width: 200 }}>
-								<LeftNav />
+								{loggedIn && <LeftNav />}
 							</Grid>
 							<Grid item xs style={{ padding: 30, paddingTop: 94 }}>
 								<Route exact path='/' component={Home} />

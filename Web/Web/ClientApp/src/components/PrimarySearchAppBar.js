@@ -7,12 +7,14 @@ import LogoFont from './ArchitechLogoFont.svg';
 import './NavMenu.css';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AuthClient from '../Clients/AuthClient';
+import PrimaryLinkButton from './Generic/PrimaryLinkButton';
 
 const useStyles = makeStyles((theme) => ({
 	search: {
@@ -107,7 +109,7 @@ export default function PrimarySearchAppBar(props) {
 					<Box style={{ backgroundColor: '#121212' }} sx={{ height: 64, zIndex: 10000 }}>
 					<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%', width: '100%' }}>
 						<div style={{ width: '25%', display: 'flex', height: '100%', justifyContent: 'left', alignItems: 'center' }}>
-							<NavLink to="/dashboard">
+							<NavLink to="/">
 								<img
 									style={{width: 32, height: 32, marginRight: 10, marginLeft: 24}}
 									src={Logo}
@@ -133,15 +135,24 @@ export default function PrimarySearchAppBar(props) {
 							</div>
 						</div>
 						<div style={{ display: 'flex', width: '25%', alignItems: 'center', justifyContent: 'right' }}>
-							<IconButton
-								style={{marginRight: 24, outline: 'none', color: '#f0f0f0'}}
-								edge="end"
-								aria-label="account of current user"
-								aria-haspopup="true"
-								onClick={handleProfileMenuOpen}
-							>
-								<AccountCircle />
-							</IconButton>
+							{props.loggedIn ?
+								<>	
+									<Button style={{ color: '#f0f0f0', fontSize: 12, borderRadius: '50%', outline: 'none', textTransform: 'none' }} onClick={props.fundMeDaddy}> + Add Funds </Button>
+									<IconButton
+										style={{marginRight: 24, outline: 'none', color: '#f0f0f0'}}
+										edge="end"
+										aria-label="account of current user"
+										aria-haspopup="true"
+										onClick={handleProfileMenuOpen}
+									>
+										<AccountCircle />
+									</IconButton>
+								</>
+								:
+								<>
+									<PrimaryLinkButton to="/login" text="Login"/>
+								</>
+							}
 						</div>
 						</div>
 					</Box>
