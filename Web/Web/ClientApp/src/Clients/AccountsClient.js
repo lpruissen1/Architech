@@ -43,7 +43,20 @@ class AccountsClient {
 			const data = await response.json()
 			return data
 		}
-	
+	}
+
+	async GetOrders(userId) {
+		const response = await fetch(API_URL + "get-orders/" + userId, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
 	}
 
 	async ExecuteTransfer(data, userId) {
