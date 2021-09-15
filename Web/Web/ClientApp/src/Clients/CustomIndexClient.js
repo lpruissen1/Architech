@@ -17,19 +17,7 @@ class CustomIndexClient {
 		if (response.ok) {
 			const data = await response.json()
 
-			const activePortfolios = data.map((portfolio) => {
-				return {
-					indexId: portfolio.indexId,
-					name: portfolio.name,
-					markets: portfolio.markets,
-					sectors: portfolio.sectors,
-					industries: portfolio.industries,
-					rangedRules: portfolio.rangedRule,
-					timedRangeRules: portfolio.timedRangeRule
-				}
-			})
-
-			return activePortfolios
+			return data
 		}
 	}
 
