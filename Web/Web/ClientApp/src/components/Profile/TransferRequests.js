@@ -1,25 +1,25 @@
 ﻿import Grid from '@material-ui/core/Grid';
 import React, { useState } from 'react';
+import FundingClient from '../../Clients/FundingClient';
+import UserClient from '../../Clients/UserClient';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
-import AccountsClient from '../../Clients/AccountsClient';
-import UserClient from '../../Clients/UserClient';
-
 
 export default function CreateAchRelationship() {
-	const [accountOwnerName, setAccountOwnerName] = useState()
+	const [transfers, setTransfers] = useState()
 	const [nickname, setNickname] = useState()
 	const [accountType, setAccountType] = useState()
 	const [accountNumber, setAccountNumber] = useState()
 	const [accountRoutingNumber, setAccountRoutingNumber] = useState()
 
 	const loadTransfers = async () => {
-		const transfers = await CustomIndexClient.getCustomIndexByUserId(props.userID)
-		setPortfolios(activePortfolios)
+		const transfers = await FundingClient.GetTransfers(UserClient.GetIdFromStoredJwt())
+		setTransfers(activePortfolios)
 	}
 
 	useEffect(() => { loadTransfers() }, [])
 
+	// list them out 
 	return (
 		<>
 			<Grid container spacing={1}>
