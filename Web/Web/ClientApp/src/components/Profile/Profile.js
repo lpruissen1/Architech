@@ -6,6 +6,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PrimaryLinkButton from '../Generic/PrimaryLinkButton';
+import FundingClient from '../../Clients/FundingClient';
 
 export function Profile(props) {
 	const [userInfo, setUserInfo] = useState()
@@ -17,7 +18,7 @@ export function Profile(props) {
 			setUserInfo(info)
 		}
 		const loadFundingInfo = async () => {
-			const newInfo = await AccountsClient.GetAchRelationship()
+			const newInfo = await FundingClient.GetAchRelationship()
 			setAchRelationship(newInfo)
 		}
 

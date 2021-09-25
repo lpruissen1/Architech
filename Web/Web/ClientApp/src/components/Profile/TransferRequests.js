@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import AccountsClient from '../../Clients/AccountsClient';
 import UserClient from '../../Clients/UserClient';
-import FundingClient from '../../Clients/FundingClient';
 
 
 export default function CreateAchRelationship() {
@@ -12,18 +12,13 @@ export default function CreateAchRelationship() {
 	const [accountType, setAccountType] = useState()
 	const [accountNumber, setAccountNumber] = useState()
 	const [accountRoutingNumber, setAccountRoutingNumber] = useState()
-	
-	const sendRequest = async () => {
-		const body = {
-			bankAccountOwnerName: accountOwnerName,
-			accountType: accountType,
-			bankAccountNumber: accountNumber,
-			bankAccountRoutingNumber: accountRoutingNumber,
-			bankAccountNickname: nickname
-		}
 
-		FundingClient.CreateAchRelationship(UserClient.GetIdFromStoredJwt(), body)
-	} 
+	const loadTransfers = async () => {
+		const transfers = await CustomIndexClient.getCustomIndexByUserId(props.userID)
+		setPortfolios(activePortfolios)
+	}
+
+	useEffect(() => { loadTransfers() }, [])
 
 	return (
 		<>
