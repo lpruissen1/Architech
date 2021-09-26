@@ -1,45 +1,71 @@
-﻿import Grid from '@material-ui/core/Grid';
-import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import FundingClient from '../../Clients/FundingClient';
 import UserClient from '../../Clients/UserClient';
-import OutlinedTextInput from '../Generic/OutlinedTextInput';
-import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
+import PrimaryTextButton from '../Generic/PrimaryTextButton';
 
-export default function CreateAchRelationship() {
+export default function TransferRequests() {
 	const [transfers, setTransfers] = useState()
-	const [nickname, setNickname] = useState()
-	const [accountType, setAccountType] = useState()
-	const [accountNumber, setAccountNumber] = useState()
-	const [accountRoutingNumber, setAccountRoutingNumber] = useState()
+	const [value, setValue] = useState(0)
 
 	const loadTransfers = async () => {
 		const transfers = await FundingClient.GetTransfers(UserClient.GetIdFromStoredJwt())
-		setTransfers(activePortfolios)
+		setTransfers(transfers)
 	}
 
-	useEffect(() => { loadTransfers() }, [])
+	useEffect(() => { loadTransfers() }, [value, transfers])
 
-	// list them out 
+	const cancelTransfer = async (transfer) => {
+		await FundingClient.CancelTransfer(UserClient.GetIdFromStoredJwt(), transfer.transferId)
+		setValue(value + 1)
+	}
+
 	return (
 		<>
-			<Grid container spacing={1}>
-				<Grid item spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
-					<OutlinedTextInput label='Account Owner Name' width='100%' onChange={(event) => setAccountOwnerName(event.target.value)}/>
-				</Grid>
-				<Grid item spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
-					<OutlinedTextInput label='Account Nickname' width='100%' onChange={(event) => setNickname(event.target.value)} />
-				</Grid>
-				<Grid item spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
-					<OutlinedTextInput label='Account Type' width='100%' onChange={(event) => setAccountType(event.target.value)} />
-				</Grid>
-				<Grid item spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
-					<OutlinedTextInput label='Bank Account Number' width='100%' onChange={(event) => setAccountNumber(event.target.value)} />
-				</Grid>
-				<Grid item spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
-					<OutlinedTextInput label='Bank Routing Numer' width='100%' onChange={(event) => setAccountRoutingNumber(event.target.value)} />
-				</Grid>
-				<PrimaryActionButton text="Link Account" onClick={sendRequest}/>
-			</Grid>
+			<Typography variant="h6" gutterBottom component="div">
+				Orders
+			</Typography>
+			<Table size="small" aria-label="purchases">
+				<TableHead>
+					<TableRow>
+						<TableCell style={{ color: '#d0d0d0' }}>Transfer Id</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Time</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Amount</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Direction</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}>Status</TableCell>
+						<TableCell style={{ color: '#d0d0d0' }}></TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{transfers && transfers.slice(0).reverse().map((transfer) => (
+						<TableRow key={transfer.TransferId}>
+							<TableCell component="th" scope="row" style={{ color: '#d0d0d0' }}>
+								{transfer.transferId}
+							</TableCell>
+							<TableCell style={{ color: '#d0d0d0' }}>
+								{transfer.created}
+							</TableCell>
+							<TableCell style={{ color: '#d0d0d0' }}>
+								{transfer.amount}
+							</TableCell>
+							<TableCell style={{ color: '#d0d0d0' }}>
+								{transfer.direction}
+							</TableCell>
+							<TableCell style={{ color: '#d0d0d0' }}>
+								{transfer.status}
+							</TableCell>
+							<TableCell style={{ color: '#d0d0d0' }}>
+								{(transfer.status === "QUEUED" || transfer.status === "PENDING") ? <PrimaryTextButton text="Cancel Transfer" onClick={() => cancelTransfer(transfer)}/> : <></>}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
 		</>
 	)
 }

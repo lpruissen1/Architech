@@ -48,7 +48,7 @@ class FundingClient {
 	}
 
 	async CancelTransfer(userId, transferId) {
-		const response = await fetch(API_URL + "execute-bulk-market-order/" + userId + "/" + transferId, {
+		const response = await fetch(API_URL + "cancel-transfer/" + userId + "/" + transferId, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ class FundingClient {
 
 	async GetTransfers(userId) {
 		const response = await fetch(API_URL + "get-all-transfers/" + userId, {
-			method: 'POST',
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			}
