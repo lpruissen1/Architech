@@ -1,12 +1,11 @@
 ﻿import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import React, { useState, useEffect } from 'react';
-import PrimaryActionButton from '../Generic/PrimaryActionButton';
-import Picker from '../Generic/Picker';
-import './FundingModal.css';
-import OutlinedTextInput from '../Generic/OutlinedTextInput';
-import AccountsClient from '../../Clients/AccountsClient';
+import React, { useEffect, useState } from 'react';
+import FundingClient from '../../Clients/FundingClient';
 import UserClient from '../../Clients/UserClient';
+import OutlinedTextInput from '../Generic/OutlinedTextInput';
+import Picker from '../Generic/Picker';
+import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import './FundingModal.css';
 
 export default function TransferForm(props) {
 
@@ -21,7 +20,7 @@ export default function TransferForm(props) {
 
 	useEffect(() => {
 		const loadFundingInfo = async () => {
-			const newInfo = await AccountsClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
+			const newInfo = await FundingClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
 			setAchRelationship(newInfo)
 		}
 
@@ -36,7 +35,7 @@ export default function TransferForm(props) {
 			direction: transferDirection
 		}
 
-		var result = await AccountsClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
+		await FundingClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
 		props.setTransferInitiated(true)
 	}
 
