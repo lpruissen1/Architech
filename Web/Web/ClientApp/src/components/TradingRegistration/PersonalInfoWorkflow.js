@@ -7,14 +7,7 @@ import StatePicker from '../Generic/StatePicker';
 import DatePicker from '../Generic/DatePicker';
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
-	adornedEnd: {
-		backgroundColor: "#c0c0c0"
-	}
-}));
-
 export default function PersonalInfoWorkflow(props) {
-	const classes = useStyles();
 
 	return (
 		<Grid container spacing={1} style={{ paddingLeft: 20, paddingRight: 20 }}>
