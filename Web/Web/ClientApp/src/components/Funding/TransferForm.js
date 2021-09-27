@@ -5,6 +5,10 @@ import UserClient from '../../Clients/UserClient';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import Picker from '../Generic/Picker';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
 import './FundingModal.css';
 
 export default function TransferForm(props) {
@@ -14,6 +18,7 @@ export default function TransferForm(props) {
 	const [amount, setAmount] = useState()
 	const [selectedAch, setSelectedAch] = useState()
 	const [achRelationship, setAchRelationship] = useState()
+	const [anchorEl, setAnchorEl] = useState(null);
 
 	const transferOptions = ["ach"]
 	const transferDirectionOptions = ["INCOMING", "OUTGOING"]
@@ -39,6 +44,16 @@ export default function TransferForm(props) {
 		props.setTransferInitiated(true)
 	}
 
+	const handlePopoverOpen = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
+
 	return (
 		<Grid container spacing={1} style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
 			<Grid item xs={12}>
@@ -51,7 +66,47 @@ export default function TransferForm(props) {
 				<Picker options={[achRelationship && achRelationship.nickname]} setState={setSelectedAch} value={selectedAch} label='Select Account' />
 			</Grid>
 			<Grid item xs={12}>
-				<OutlinedTextInput label='Amount' value={amount} width='100%' onChange={(event) => setAmount(event.target.value)} />
+				<OutlinedTextInput
+					label='Amount'
+					type='number'
+					value={amount}
+					width='100%'
+					error={amount < 0 || amount > 50000}
+					onChange={(event) => setAmount(event.target.value)}
+					InputProps={{
+						endAdornment: (
+							<InputAdornment position="end">
+								<HelpOutlineIcon
+									style={{ color: '#e0e0e0' }}
+									aria-owns={open ? 'mouse-over-popover' : undefined}
+									aria-haspopup="true"
+									onMouseEnter={handlePopoverOpen}
+									onMouseLeave={handlePopoverClose}
+								/>
+								<Popover
+									id="mouse-over-popover"
+									sx={{
+										pointerEvents: 'none',
+									}}
+									open={open}
+									anchorEl={anchorEl}
+									anchorOrigin={{
+										vertical: 'bottom',
+										horizontal: 'left',
+									}}
+									transformOrigin={{
+										vertical: 'top',
+										horizontal: 'left',
+									}}
+									style={{zIndex: 100000}}
+									onClose={handlePopoverClose}
+									disableRestoreFocus
+								>
+									<Typography sx={{ p: 1 }}>Amount must be between $0 and $50,000.</Typography>
+								</Popover>
+							</InputAdornment>)
+					}}
+				/>
 			</Grid>
 			<Grid item xs={6}>
 				<div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ffffff' }} >
