@@ -10,7 +10,7 @@ import TransferRequests from './TransferRequests';
 
 export function Profile(props) {
 	const [userInfo, setUserInfo] = useState()
-	const [achRelationship, setAchRelationship] = useState()
+	const [achRelationship, setAchRelationship] = useState() // use this info to conditionall hide the input
 
 	useEffect(() => {
 		const loadInfo = async () => {

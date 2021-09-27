@@ -1,14 +1,14 @@
-import { Drawer, MenuItem } from '@material-ui/core';
-import React from 'react';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import { Drawer } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import './NavMenu.css';
-import NavMenuItem from './Generic/NavMenuItem';
-import BuildIcon from '@material-ui/icons/Build';
-import PieChartIcon from '@material-ui/icons/PieChart';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import SchoolIcon from '@material-ui/icons/SchoolRounded';
+import BuildIcon from '@material-ui/icons/Build';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import PersonIcon from '@material-ui/icons/Person';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import SchoolIcon from '@material-ui/icons/SchoolRounded';
+import React from 'react';
+import NavMenuItem from './Generic/NavMenuItem';
+import './NavMenu.css';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import EmptyTickerTable from './EmptyTickerTable';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,10 +6,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import TickerTableRow from './TickerTableRow';
-import { makeStyles } from '@material-ui/core/styles';
-import './TickerTable.css';
+import React from 'react';
+import EmptyTickerTable from './EmptyTickerTable';
 import TickerInfoTable from './TickerInfoTable';
+import './TickerTable.css';
+import TickerTableRow from './TickerTableRow';
 
 
 export const useStyles = makeStyles((theme) => ({

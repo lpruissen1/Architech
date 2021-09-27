@@ -87,8 +87,8 @@ export function Login(props) {
 					</form>
 					<PrimaryActionButton
 						onClick={loginUser}
-						text='Login'
-						width='42ch'
+							text='Login'
+							width='95%'
 					/>
 					<p style={{ color: '#c0c0c0', margin: 14, textAlign: 'center', marginBottom: 0 }}
 					> Don't have an account? 

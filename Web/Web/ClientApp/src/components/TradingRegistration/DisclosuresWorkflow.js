@@ -1,11 +1,11 @@
-﻿import React, { useState } from 'react';
+﻿import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ export default function DisclosuresWorkflow(props) {
 			return false
 		}
 
-		if (ssn.length != 9) {
+		if (ssn.length !== 9) {
 			return false
 		}
 
