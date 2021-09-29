@@ -32,10 +32,6 @@ export default function Alerts(props) {
 		
 	return (
 		<Stack style={{ position: 'fixed', bottom: 0, zIndex: 12001, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
-			<Alert severity="error" style={{ width: '20%' }}>
-				<AlertTitle>Error</AlertTitle>
-				This is an error alert — <strong>check it out!</strong>
-			</Alert>
 			{renderAlerts()}
 		</Stack>
 	);
