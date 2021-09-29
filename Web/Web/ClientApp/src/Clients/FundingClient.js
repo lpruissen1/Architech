@@ -40,11 +40,8 @@ class FundingClient {
 			},
 			body: JSON.stringify(data)
 		})
-
-		if (response.ok) {
-			const data = await response.json()
-			return data
-		}
+		debugger
+		return response.status
 	}
 
 	async CancelTransfer(userId, transferId) {

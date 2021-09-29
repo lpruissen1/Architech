@@ -9,6 +9,10 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import { v4 as uuidv4 } from 'uuid';
+
 import './FundingModal.css';
 
 export default function TransferForm(props) {
@@ -18,6 +22,7 @@ export default function TransferForm(props) {
 	const [amount, setAmount] = useState()
 	const [selectedAch, setSelectedAch] = useState()
 	const [achRelationship, setAchRelationship] = useState()
+	const [error, setError] = useState({})
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const transferOptions = ["ach"]
@@ -40,8 +45,18 @@ export default function TransferForm(props) {
 			direction: transferDirection
 		}
 
-		await FundingClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
-		props.setTransferInitiated(true)
+		var result = await FundingClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
+		debugger;
+		if (result === 200) {
+			props.setTransferInitiated(true)
+		}
+		else if (result === 403) {
+			props.addAlert({ active: true, message: "Insufficient Funds", id: uuidv4()})
+		}
+		else if (result === 400) {
+			setError({ active: true, message: "Unknown Error"})
+		}
+		debugger
 	}
 
 	const handlePopoverOpen = (event) => {
@@ -51,11 +66,15 @@ export default function TransferForm(props) {
 	const handlePopoverClose = () => {
 		setAnchorEl(null);
 	};
-
 	const open = Boolean(anchorEl);
 
 	return (
 		<Grid container spacing={1} style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
+			{error.active &&
+				<Alert severity="error" >
+					<AlertTitle>Error</AlertTitle>
+				{error.message}
+				</Alert >}
 			<Grid item xs={12}>
 				<Picker options={transferOptions} setState={setTransferType} value={transferType} label='Transfer Type' />
 			</Grid>
