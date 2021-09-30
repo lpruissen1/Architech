@@ -4,14 +4,13 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-
 import './NavMenu.css';
 
 export default function Alerts(props) {
 
 	const renderAlerts = () => {
 		return ( props.alerts && props.alerts.map((alert) => {
-			return <Alert severity="error" style={{ width: '20%' }} action={
+			return <Alert severity={alert.type} style={{ width: '20%' }} action={
 				<IconButton
 					aria-label="close"
 					color="inherit"
@@ -28,7 +27,6 @@ export default function Alerts(props) {
 					</Alert>
 		}))
 	}
-
 		
 	return (
 		<Stack style={{ position: 'fixed', bottom: 0, zIndex: 12001, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>

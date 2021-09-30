@@ -40,7 +40,7 @@ class FundingClient {
 			},
 			body: JSON.stringify(data)
 		})
-		debugger
+
 		return response.status
 	}
 
