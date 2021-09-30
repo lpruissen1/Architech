@@ -36,9 +36,16 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 // where did you come from and what was the state of where you came from
-export default function OutlinedTextInput(props) {
+export default function OutlinedNumberInput(props) {
 
 	const classes = useStyles();
+
+	const handleInput = (event) => {
+		const reg = /^\d+$/;
+		if (reg.test(event.target.value) || event.target.value === '') {
+			props.onChange(event)
+		}
+	}
 
 	return (
 		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='smalll' label={props.label}
@@ -47,7 +54,7 @@ export default function OutlinedTextInput(props) {
 				shrink: true
 			}}
 			classes={{ input: classes.input }}
-			onChange={props.onChange}
+			onChange={handleInput}
 			disabled={props.disabled}
 			error={props.error}
 			autoComplete='off'
@@ -55,13 +62,13 @@ export default function OutlinedTextInput(props) {
 			style={{ borderRadius: 4, fontColor: '#ffffff', width: props.width }}
 			helperText={props.helperText}
 			placeholder={props.placeholder}
-			type={props.type}
+			type='number'
 			InputProps={{ className: classes.multilineColor, ...props.InputProps }}
 		/>
 	)
 }
 
-OutlinedTextInput.propTypes = {
+OutlinedNumberInput.propTypes = {
 	label: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
