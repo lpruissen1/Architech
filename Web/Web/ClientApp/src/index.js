@@ -44,7 +44,7 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
 	<MuiThemeProvider theme={theme}>
-		<div style={{ backgroundColor: '#303030' }}>
+		<div style={{ backgroundColor: '#303030', height: '100%'}}>
 			<BrowserRouter basename={baseUrl}>
 				<App />
 			</BrowserRouter>

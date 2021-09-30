@@ -1,11 +1,12 @@
-﻿import React, { useEffect, useState } from 'react';
-import UserClient from '../../Clients/UserClient';
-import AccountsClient from '../../Clients/AccountsClient';
-import CreateAchRelationship from './CreateAchRelationship';
-import Skeleton from '@material-ui/lab/Skeleton';
+﻿import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import Skeleton from '@material-ui/lab/Skeleton';
+import React, { useEffect, useState } from 'react';
+import FundingClient from '../../Clients/FundingClient';
+import UserClient from '../../Clients/UserClient';
 import PrimaryLinkButton from '../Generic/PrimaryLinkButton';
+import CreateAchRelationship from './CreateAchRelationship';
+import TransferRequests from './TransferRequests';
 
 export function Profile(props) {
 	const [userInfo, setUserInfo] = useState()
@@ -17,7 +18,7 @@ export function Profile(props) {
 			setUserInfo(info)
 		}
 		const loadFundingInfo = async () => {
-			const newInfo = await AccountsClient.GetAchRelationship()
+			const newInfo = await FundingClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
 			setAchRelationship(newInfo)
 		}
 
@@ -78,6 +79,15 @@ export function Profile(props) {
 				</Grid>
 				<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
 					<CreateAchRelationship/>
+				</Grid>
+				<Grid item xs={12} align="flex-start">
+					<Typography variant="h6">
+						{'FundingRequests'}
+					</Typography>
+					<div style={{ height: 2, backgroundColor: '#d0d0d0' }}></div>
+				</Grid>
+				<Grid item xs={12} style={{ paddingTop: 10, paddingLeft: 20 }}>
+					<TransferRequests/>
 				</Grid>
 			</Grid>
 		</div>
