@@ -16,6 +16,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import PositionsClient from '../../Clients/PositionsClient';
+import AuthClient from '../../Clients/AuthClient';
 
 export const useStyles = makeStyles((theme) => ({
 	button: {
@@ -131,6 +133,7 @@ export function Dashboard(props) {
 						borderRadius: 4,
 						paddingTop: 20
 					}}>
+					<Button onClick={() => PositionsClient.GetAllPositions(AuthClient.GetIdFromStoredJwt())}>click</Button>
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							<Typography style={{color: '#fff', marginBottom: 20 }} variant='h5'>
