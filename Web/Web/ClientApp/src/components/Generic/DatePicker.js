@@ -54,7 +54,7 @@ export default function DatePicker(props) {
 				label={props.label}
 				value={selectedDate}
 				InputLabelProps={{
-					style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
+					style: { color: '#f0f0f0', backgroundColor: '#424242', paddingRight: 10 },
 					shrink: true
 				}}
 				className={classes.root}

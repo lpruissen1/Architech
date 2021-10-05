@@ -106,16 +106,29 @@ export default function TradingRegistration() {
 		loadInfo();
 	}, []);
 
-	useEffect(() => { validateForm() }, [ssnError, agreed])
+	useEffect(() => { validateForm() }, [ssnError, agreed, dateOfBirth, address, city, state, postalCode, ssnError, phoneNumber, taxResidency,
+		idFront, idBack, agreementTimestamp, fundingSource, isControlledPerson, isAffiliatedExchangeOrFinra, isPoliticallyExposed,
+		immediateFamilyExposed, agreed, activeStep])
 
 	const validateForm = () => {
-		const errorList = [ssnError, agreed]
-
-		if (errorList.indexOf(true) === -1) {
-			setFormValid(true)
-		}
-		else {
-			setFormValid(false)
+		switch (activeStep) {
+			case 0:
+				debugger
+				setFormValid(dateOfBirth && address && city && state && postalCode && phoneNumber && taxResidency && idFront && idBack)
+				break
+			case 1:
+				debugger
+				setFormValid(!ssnError && ssn && fundingSource && isControlledPerson && isAffiliatedExchangeOrFinra && isPoliticallyExposed && immediateFamilyExposed)
+				break
+			case 2:
+				debugger
+				setFormValid(agreed && agreementTimestamp)
+				break
+			case 3:
+				debugger
+				setFormValid(true)
+			default:
+				return 'Unknown stepIndex';
 		}
 	}
 
@@ -261,7 +274,7 @@ export default function TradingRegistration() {
 	}
 
 	return (
-		<div style={{ width: '100%', height: '100%', backgroundColor: 'none' }}>
+		<div style={{ width: '90%', height: '100%', background: '#424242', borderRadius: 4, marginLeft: '5%', marginRight: '5%' }}>
 			{finishModal &&
 				<div className='finish-modal'>
 					<FinishRegistrationModal />
@@ -297,8 +310,8 @@ export default function TradingRegistration() {
 						))}
 					</Stepper>
 					</Grid>
-				<Grid align='center' justify = 'center' item xs={12} style={{ height: '40%' }}>
-					<div style={{ width: '70%', height: '100%', background: '#363636', borderRadius: 4}}>
+				<Grid align='center' justify = 'center' item xs={12}>
+					<div style={{ width: '80%', height: '100%'}}>
 						{getStepContent(activeStep)}
 					</div>
 					</Grid>
@@ -320,6 +333,7 @@ export default function TradingRegistration() {
 								style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }}
 								variant="contained"
 								color="primary"
+								disabled={!formValid}
 								onClick={activeStep === steps.length - 1 ? createTradingAccount : handleNext}
 							>
 									{getButtonText(activeStep, steps.length)}

@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 export default function ReviewPage(props) {
 
 	return (
-		<div>
+		<div style={{ marginBottom: 40 }}>
 			<Grid container spacing={1}>
 				<Grid item alignContent='center' xs={4} style={{ color: '#f0f0f0', backgroundColor: '#484848', borderTopLeftRadius: 4, padding: 0, borderBottom: '2px solid #545454' }}>
 					<div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

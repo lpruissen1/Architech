@@ -6,6 +6,7 @@ import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import StatePicker from '../Generic/StatePicker';
 import DatePicker from '../Generic/DatePicker';
 import { makeStyles } from '@material-ui/core/styles';
+import Picker from '../Generic/Picker';
 
 export const useStyles = makeStyles((theme) => ({
 	adornedEnd: {
@@ -22,7 +23,7 @@ export default function PersonalInfoWorkflow(props) {
 			<Grid item xs={12}>
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
-						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
+						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 0 }}>
 							<Grid item xs={4}>
 								<OutlinedTextInput label='First Name' disabled={true} value={props.firstName} width='100%' onChange={(event) => props.setFirstName(event.target.value)} />
 							</Grid>
@@ -35,7 +36,7 @@ export default function PersonalInfoWorkflow(props) {
 						</Grid>
 				`	</Grid>
 					<Grid item xs={12}>
-						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
+						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 0 }}>
 							<Grid item xs={8}>
 								<OutlinedTextInput label='Email Address' disabled={true} value={props.email} width='100%' onChange={(event) => props.setEmail(event.target.value)} />
 							</Grid>
@@ -45,7 +46,7 @@ export default function PersonalInfoWorkflow(props) {
 						</Grid>
 				`	</Grid>
 					<Grid item xs={12}>
-						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
+						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 0 }}>
 							<Grid item xs={8}>
 								<OutlinedTextInput label='Street Address' value={props.address} width='100%' onChange={(event) => props.setAddress(event.target.value)} />
 							</Grid>
@@ -55,7 +56,7 @@ export default function PersonalInfoWorkflow(props) {
 						</Grid>
 				`	</Grid>
 					<Grid item xs={12}>
-						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 10 }}>
+						<Grid container spacing={4} style={{ paddingRight: 30, paddingLeft: 0 }}>
 							<Grid item xs={4}>
 								<StatePicker setState={props.setState} value={props.state}/>
 							</Grid>
@@ -63,7 +64,7 @@ export default function PersonalInfoWorkflow(props) {
 								<OutlinedTextInput label='Postal Code' value={props.postalCode} width='100%' onChange={(event) => props.setPostalCode(event.target.value)} />
 							</Grid>
 							<Grid item xs={4}>
-								<OutlinedTextInput label='Country of Tax Residency' value={props.taxResidency} width='100%' onChange={(event) => props.setTaxResidency(event.target.value)} />
+								<Picker label='Country of Tax Residency' value={props.taxResidency} options={['USA']} width='100%' setState={props.setTaxResidency} />
 							</Grid>
 						</Grid>
 				`	</Grid>
@@ -71,10 +72,10 @@ export default function PersonalInfoWorkflow(props) {
 			</Grid>
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#f0f0f0', marginTop: 24, marginBottom: 10 }}><Typography variant='h5'>Identity Verification</Typography></Grid>
 			<Grid align="left" justify="left" item xs={12} style={{ color: '#e0e0e0', marginBottom: 36 }}><Typography variant='body1'>Upload images of the front and back of your driver's license</Typography></Grid>
-			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 30  }}>
+			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 0  }}>
 				<ImageInput key='front' value={props.idFront} setImage={props.setIdFront} setFileName={props.setIdFrontFileName} label="Upload ID Front" id='front'/>
 			</Grid>
-			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 30 }}>
+			<Grid align='left' justify='left' item xs={6} style={{ paddingBottom: 80, paddingLeft: 0 }}>
 				<ImageInput key='back' value={props.idBack} setImage={props.setIdBack} setFileName={props.setIdBackFileName} label="Upload ID Back" id='back'/>
 			</Grid>
 		</Grid>

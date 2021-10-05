@@ -63,7 +63,7 @@ export default function Picker(props) {
 				<TextField {...params} id="outlined" variant="outlined"
 					InputLabelProps={{
 						shrink: true,
-						style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
+						style: { color: '#f0f0f0', backgroundColor: '#424242', paddingRight: 10 },
 
 					}}
 					style={{ borderRadius: 4, color: '#fff', width: props.width }}
