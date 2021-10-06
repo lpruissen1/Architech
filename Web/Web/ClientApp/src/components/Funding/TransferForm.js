@@ -7,6 +7,7 @@ import './FundingModal.css';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import AccountsClient from '../../Clients/AccountsClient';
 import UserClient from '../../Clients/UserClient';
+import FundingClient from '../../Clients/FundingClient';
 
 export default function TransferForm(props) {
 
@@ -21,7 +22,7 @@ export default function TransferForm(props) {
 
 	useEffect(() => {
 		const loadFundingInfo = async () => {
-			const newInfo = await AccountsClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
+			const newInfo = await FundingClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
 			setAchRelationship(newInfo)
 		}
 
@@ -36,7 +37,7 @@ export default function TransferForm(props) {
 			direction: transferDirection
 		}
 
-		var result = await AccountsClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
+		var result = await FundingClient.ExecuteTransfer(body, UserClient.GetIdFromStoredJwt())
 		props.setTransferInitiated(true)
 	}
 

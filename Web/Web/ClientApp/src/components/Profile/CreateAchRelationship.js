@@ -4,6 +4,7 @@ import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import AccountsClient from '../../Clients/AccountsClient';
 import UserClient from '../../Clients/UserClient';
+import FundingClient from '../../Clients/FundingClient';
 
 
 export default function CreateAchRelationship() {
@@ -22,7 +23,7 @@ export default function CreateAchRelationship() {
 			bankAccountNickname: nickname
 		}
 
-		AccountsClient.CreateAchRelationship(UserClient.GetIdFromStoredJwt(), body)
+		FundingClient.CreateAchRelationship(UserClient.GetIdFromStoredJwt(), body)
 	} 
 
 	return (
