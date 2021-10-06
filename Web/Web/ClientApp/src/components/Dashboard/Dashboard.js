@@ -120,7 +120,7 @@ export function Dashboard(props) {
 
 	return (
 		<Grid container spacing={4}>
-			<Grid item xs={12} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+			<Grid item xs={12} style={{ paddingLeft: '5%', paddingRight: '5%' }}>
 				<div
 					style={{
 						backgroundColor: '#404040',
@@ -172,7 +172,7 @@ export function Dashboard(props) {
 					</Grid>
 				</div>
 			</Grid>
-			<Grid item xs={12} style={{ paddingLeft: '10%', paddingRight: '10%' }}>
+			<Grid item xs={12} style={{ paddingLeft: '5%', paddingRight: '5%' }}>
 				<div
 					style={{
 						backgroundColor: '#404040',
