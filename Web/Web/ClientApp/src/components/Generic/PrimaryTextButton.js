@@ -21,6 +21,8 @@ export default function PrimaryTextButton(props) {
 
 	return (
 		<Button
+			startIcon={props.startIcon}
+			endIcon={props.endIcon}
 			className={classes.primaryTextButton}
 			onClick={props.onClick}
 			style={{ outline: 'none', ...props.style }}
