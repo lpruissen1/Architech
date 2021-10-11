@@ -2,7 +2,6 @@
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { Screener } from './Screener/Screener';
@@ -14,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AuthClient from '../../Clients/AuthClient';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import TabPanel from '../Generic/TabPanel';
 
 export const useStyles = makeStyles((theme) => ({
 	indicator: {
@@ -424,19 +424,3 @@ export function PortfolioBuilder(props) {
 		</Grid>
 	);
 }
-
-function TabPanel(props) {
-	const { children, value, index, ...other } = props;
-
-	return (
-		<div>
-			{value === index && props.children}
-		</div>
-	);
-}
-
-TabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.any.isRequired,
-	value: PropTypes.any.isRequired,
-};

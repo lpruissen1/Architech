@@ -10,13 +10,13 @@ import './NavMenu.css';
 export default function PrimarySearchAppBar() {
 	return (
 		<div>
-			<AppBar position="fixed" style={{zIndex: 10000}}>
+			<AppBar position="fixed" style={{ zIndex: 10000 }}>
 				<Box style={{ backgroundColor: '#121212' }} sx={{ height: 64, zIndex: 10000 }}>
 					<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%', width: '100%' }}>
 						<div style={{ width: '25%', display: 'flex', height: '100%', justifyContent: 'left', alignItems: 'center' }}>
 							<NavLink to="/">
 								<img
-									style={{width: 32, height: 32, marginRight: 10, marginLeft: 24}}
+									style={{ width: 32, height: 32, marginRight: 10, marginLeft: 24 }}
 									src={Logo}
 									alt="Architech Logo" />
 								<img style={{
@@ -25,7 +25,7 @@ export default function PrimarySearchAppBar() {
 							</NavLink>
 						</div>
 						<div style={{ display: 'flex', width: '75%', alignItems: 'center', justifyContent: 'right' }}>
-							<PrimaryLinkButton to="/login" text="Login"/>
+							<PrimaryLinkButton to="/login" text="Login" />
 						</div>
 					</div>
 				</Box>

@@ -12,11 +12,12 @@ import { Profile } from './Profile/Profile';
 import { Research } from './Research/Research';
 import TradingRegistration from './TradingRegistration/TradingRegistration';
 import FundingModal from './Funding/FundingModal';
-import TradeOverview from './Trading/TradeOverview';
+import TradeOverview from "./Trading/TradeOverview";
 import './custom.css';
 import LeftNav from './LeftNav';
 import PrimarySearchAppBar from './PrimarySearchAppBar';
 import AppBar from './AppBar';
+import Alerts from './Alerts';
 import Grid from '@material-ui/core/Grid';
 
 export function App(props) {
@@ -24,6 +25,16 @@ export function App(props) {
 	const [loggedIn, setLoggedIn] = useState()
 	const [userId, setUserId] = useState("")
 	const [shouldIFund, setShouldIFund] = useState(false)
+	const [alerts, setAlerts] = useState([])
+
+	const addAlert = (alert) => {
+		setAlerts([...alerts, alert])
+	}
+
+	const removeAlert = (id) => {
+		var temp = alerts.filter(alert => alert.id !== id)
+		setAlerts(temp)
+	}
 
 	const fundMeDaddy = () => {
 		setShouldIFund(!shouldIFund)
@@ -46,9 +57,9 @@ export function App(props) {
 
 	return (
 		<>
-			<div style={{justifyContent: 'center' }}>
+			<div style={{justifyContent: 'center', height:'100%'}}>
 				{shouldIFund &&
-					<FundingModal fundMeDaddy={fundMeDaddy} />
+					<FundingModal fundMeDaddy={fundMeDaddy} addAlert={addAlert} />
 				}
 				<Grid container spacing={1}>
 					<Grid item xs={12}>
@@ -74,7 +85,8 @@ export function App(props) {
 							</Grid>
 						</Grid>
 					</Grid>
-				</Grid> 
+				</Grid>
+				<Alerts alerts={alerts} removeAlert={removeAlert}/>
 			</div>
 		</>
 	);

@@ -9,6 +9,7 @@ import PieChartIcon from '@material-ui/icons/PieChart';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import SchoolIcon from '@material-ui/icons/SchoolRounded';
 import PersonIcon from '@material-ui/icons/Person';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -25,6 +26,7 @@ export default function LeftNav() {
 			<div style={{ height: 64, marginBottom: 20 }}></div>
 			<NavMenuItem to='/dashboard' label='Dashboard' icon={<DashboardIcon />} />
 			<NavMenuItem to='/portfolioBuilder' label='Portfolio Builder' icon={<BuildIcon />} />
+			<NavMenuItem to='/trade' label='Trade' icon={<TrendingUpIcon />} />
 			<NavMenuItem to='/portfolio' label='Portfolios' icon={<PieChartIcon />} />
 			<NavMenuItem to='/research' label='Research' icon={<BarChartIcon />} />
 			<NavMenuItem to='/education' label='Education' icon={<SchoolIcon />} />

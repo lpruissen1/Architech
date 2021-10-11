@@ -52,11 +52,11 @@ export default function OutlinedTextInput(props) {
 			error={props.error}
 			autoComplete='off'
 			value={props.value}
-			style={{ borderRadius: 4, fontColor: '#ffffff', width: props.width}}
+			style={{ borderRadius: 4, fontColor: '#ffffff', width: props.width }}
 			helperText={props.helperText}
 			placeholder={props.placeholder}
 			type={props.type}
-			InputProps={{ className: classes.multilineColor }}
+			InputProps={{ className: classes.multilineColor, ...props.InputProps }}
 		/>
 	)
 }
