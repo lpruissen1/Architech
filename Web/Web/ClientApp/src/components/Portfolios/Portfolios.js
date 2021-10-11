@@ -35,8 +35,8 @@ export function Portfolios(props) {
 
 	return (
 		<Grid align='center' justify='center' container xs={12}>
-			<Grid container style={{ width: '90%', height: '100%', background: '#404040', borderRadius: 4, paddingLeft: '5%', paddingRight: '5%', paddingTop: 30, paddingBottom: 30 }}>
-				<Grid container style={{ marginBottom: 36 }}>
+			<Grid container style={{ width: '90%', height: '100%', background: '#404040', borderRadius: 4, paddingLeft: '3%', paddingRight: '3%', paddingTop: 24, paddingBottom: 30 }}>
+				<Grid container style={{ marginBottom: 42 }}>
 					<Grid
 						item
 						xs={6}
@@ -46,9 +46,10 @@ export function Portfolios(props) {
 							display: 'flex',
 							alignItems: 'center',
 							justifyContent: 'flex-start',
+							borderBottom: '1px solid #727272',
 						}}
 					>
-						<Typography style={{ color: '#ffffff' }} variant='h4'>Portfolios</Typography>
+						<Typography style={{ color: '#ffffff', marginBottom: 14 }} variant='h5'>Your Portfolios</Typography>
 					</Grid>
 					<Grid
 						item
@@ -59,26 +60,31 @@ export function Portfolios(props) {
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'flex-end',
+						borderBottom: '1px solid #727272'
 					}}>
 						<PrimaryActionButton
-							style={{ margin: 0, borderRadius: 100 }}
+							style={{ margin: 0, borderRadius: 100, fontSize: 12, marginBottom: 14 }}
 							onClick={clickie}
-							width='30%'
-							text='Create New'
-							startIcon={<AddIcon />}
+							text='Create New  '
+							startIcon={<AddIcon style={{ marginLeft: 4 }} />}
 						/>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}>
-					{
-						portfolios && portfolios.map((portfolio) => {
-							return (
-								<PortfolioCard key={portfolio.indexId}
-									portfolio={portfolio}
-									deletePortfolio={deletePortfolio}
-									userId={props.userID}/>)
-						})
-					}
+				<Grid item xs={12}> 
+					<Grid container spacing={4}>
+						{
+							portfolios && portfolios.map((portfolio) => {
+								return (
+									<Grid item xs={6}>
+									<PortfolioCard
+										key={portfolio.indexId}
+										portfolio={portfolio}
+										deletePortfolio={deletePortfolio}
+										userId={props.userID} />
+									</Grid>)
+							})
+						}
+					</Grid>
 				</Grid>
 				{createNew && (
 					<>

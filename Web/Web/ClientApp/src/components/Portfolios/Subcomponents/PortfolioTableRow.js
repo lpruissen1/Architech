@@ -17,7 +17,7 @@ export default function PortfolioTableRow(props) {
 
 	return (
 		<React.Fragment>
-			<TableRow>
+			<TableRow style={{ maxWidth: '100%'}}>
 				<TableCell style={{ color: textColor, borderTop: '1px solid #606060', borderBottom: 'none', width: 20 }}>
 					<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{ outline: 'none', color: iconColor }}>
 						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -26,9 +26,25 @@ export default function PortfolioTableRow(props) {
 				<TableCell component="th" scope="row" style={{ color: textColor, borderTop: '1px solid #606060', borderBottom: 'none'}}>
 					<Typography style={{ fontWeight: 600 }}>{props.name}</Typography>
 				</TableCell>
-				<TableCell align="left" style={{ color: textColor, borderTop: '1px solid #606060', borderBottom: 'none' }}>
+				<TableCell
+					align="left"
+					style={{
+						color: textColor,
+						borderTop: '1px solid #606060',
+						borderBottom: 'none',
+					}}>
 					{props.data
-						? <Typography>{props.data}</Typography>
+						? <Typography
+							style={{
+								display: 'inline-block',
+								verticalAlign: 'middle',
+								maxWidth: '80%',
+								margin: 0,
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis'
+						}}
+						>{props.data}</Typography>
 						: <Typography style={{ fontStyle: "oblique" }}>None</Typography>
 					}
 				</TableCell>

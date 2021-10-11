@@ -136,7 +136,7 @@ export function PortfolioCard(props) {
 					<Table aria-label="collapsible table" size="small" style={{ backgroundColor: '#484848' }}>
 						<TableHead className={classes.tableHead}>
 							<TableRow style={{ borderBottom: 'none' }}>
-								<TableCell className={classes.headCells} style={{ borderBottom: 'none', backgroundColor: '#505050' }} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>{props.portfolio.name}</Typography></TableCell>
+								<TableCell className={classes.headCells} style={{ borderBottom: 'none', backgroundColor: '#505050' }} colSpan={2}><Typography variant="subtitle1" style={{ color: '#fff', minWidth: 150 }}>{props.portfolio.name}</Typography></TableCell>
 								<TableCell align="right" style={{ width: '70%', borderBottom: 'none', backgroundColor: '#505050', paddingRight: 0}}>
 									<PrimaryTextButton
 										endIcon={<DriveFileRenameOutlineIcon />}
@@ -164,14 +164,14 @@ export function PortfolioCard(props) {
 								data={props.portfolio.markets.join(", ")}
 								interiorTable={<h1> Blahhhh </h1>} />
 							<PortfolioTableRow
-								name="Sectors and Industries"
+								name="Sectors"
 								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
 								interiorTable={
 									<SectorAndIndustryTable
 										getSectorAndIndustryDisplay={getSectorAndIndustryDisplay} />
 								} />
 							<PortfolioTableRow
-								name="Basic Metrics"
+								name="Metrics"
 								data={getMetricDisplayInfo().map(metric => metric.displayName).join(", ")}
 								interiorTable={<BasicMetricTable
 									getMetricDisplayInfo={getMetricDisplayInfo} />}
