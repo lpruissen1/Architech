@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export const useStyles = makeStyles((theme) => ({
@@ -20,15 +20,36 @@ export const useStyles = makeStyles((theme) => ({
 		textTransform: 'none',
 		fontSize: 12,
 		fontWeight: 600,
-		color: theme.palette.info.light
+		color: '#ffffff',
+		backgroundColor: 'rgba(256, 256, 256, 0.1)'
 	}
 }));
 
 export default function PortfolioTableRow(props) {
 
 	const [open, setOpen] = useState(false)
+	const [absoluteReturn, setAbsoluteReturn] = useState()
+	const [percentReturn, setPercentReturn] = useState()
+	const [portfolioValue, setPortfolioValue] = useState()
 
 	const classes = useStyles()
+
+	const calculatePortfolioMetrics = () => {
+
+		let costBasis = 0
+		let currentValue = 0
+
+		props.portfolio.positions.forEach(position => {
+			costBasis += (position.averagePurchasePrice * position.quantity)
+			currentValue += (position.currentPrice * position.quantity)
+		})
+
+		setAbsoluteReturn(currentValue - costBasis)
+		setPercentReturn((currentValue - costBasis) / costBasis * 100)
+		setPortfolioValue(currentValue)
+	}
+
+	useEffect(() => { calculatePortfolioMetrics() }, [])
 
 	return (
 		<>
@@ -38,16 +59,16 @@ export default function PortfolioTableRow(props) {
 						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 					</IconButton>
 				</TableCell>
-				<TableCell style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
+				<TableCell style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none', maxWidth: 180 }}>
 					{props.portfolio.portfolioId}
 				</TableCell>
-				<TableCell style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
-					$2,395.42
+				<TableCell align='right' style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
+					$ {portfolioValue && portfolioValue.toFixed(2)}
 				</TableCell>
-				<TableCell style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
-					$415.26 (21.21%)
+				<TableCell align='right' style={{ color: absoluteReturn > 0 ? '#64ffda' : '#FF6551', borderTop: '1px solid #606060', borderBottom: 'none' }}>
+					$ {absoluteReturn && absoluteReturn.toFixed(2)} ({percentReturn && percentReturn.toFixed(3)}%)
 				</TableCell>
-				<TableCell style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none', alignItems: 'center' }}>
+				<TableCell align='center' style={{ color: '#f0f0f0', borderTop: '1px solid #606060', borderBottom: 'none', alignItems: 'center' }}>
 					<Link to='/trade' style={{ textDecoration: 'none' }}>
 						<Button className={classes.button}>Buy/Sell</Button>
 					</Link>
@@ -83,7 +104,8 @@ export default function PortfolioTableRow(props) {
 											<TableCell align='right' component="th" scope="row" style={{ color: '#c0c0c0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
 												${position.currentPrice.toFixed(2)}
 											</TableCell>
-											<TableCell align='right' component="th" scope="row" style={{ color: '#c0c0c0', borderTop: '1px solid #606060', borderBottom: 'none' }}>
+											<TableCell align='right' component="th" scope="row" style={{
+												color: position.averagePurchasePrice < position.currentPrice ? '#64ffda' : '#FF6551', borderTop: '1px solid #606060', borderBottom: 'none' }}>
 												{(((position.currentPrice - position.averagePurchasePrice) / position.averagePurchasePrice) * 100).toFixed(3)}%
 											</TableCell>
 											<TableCell align='center' style={{ color: '#c0c0c0', borderTop: '1px solid #606060', borderBottom: 'none' }}>

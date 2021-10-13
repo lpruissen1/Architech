@@ -47,12 +47,12 @@ export default function PortfolioTable(props) {
 							<TableHead>
 								<TableRow>
 									<TableCell colSpan={2} style={{ backgroundColor: '#505050', borderTopLeftRadius: 8, borderBottom: 'none' }}>
-										<Typography variant='subtitle1' style={{ color: '#ffffff' }}>Portfolio Name</Typography>
+										<Typography variant='subtitle1' style={{ color: '#ffffff' }}></Typography>
 									</TableCell>
-									<TableCell style={{ backgroundColor: '#505050', borderBottom: 'none' }}>
+									<TableCell align='right' style={{ backgroundColor: '#505050', borderBottom: 'none' }}>
 										<Typography variant='subtitle1' style={{ color: '#ffffff' }}>Value</Typography>
 									</TableCell>
-									<TableCell style={{ backgroundColor: '#505050', borderBottom: 'none' }}>
+									<TableCell align='right' style={{ backgroundColor: '#505050', borderBottom: 'none' }}>
 										<Typography variant='subtitle1' style={{ color: '#ffffff' }}>Total Return</Typography>
 									</TableCell>
 									<TableCell style={{ backgroundColor: '#505050', borderBottom: 'none', borderTopRightRadius: 8 }}>
