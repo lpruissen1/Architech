@@ -3,19 +3,18 @@
 class PositionsClient {
 
 	async GetAllPositions(userId) {
-		fetch(API_URL + 'get-all?userId=' + userId, {
+		const response  = await fetch(API_URL + 'get-all?userId=' + userId, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(function (response) {
-				if (response.ok) {
-					const data = response.json()
 
-					return data
-				}
-			});
+		if (response.ok) {
+			const data = await response.json()
+
+			return data
+		}
 	}
 }
 
