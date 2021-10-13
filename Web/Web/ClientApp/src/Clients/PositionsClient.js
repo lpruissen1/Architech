@@ -3,12 +3,11 @@
 class PositionsClient {
 
 	async GetAllPositions(userId) {
-		fetch(API_URL + 'create?userId=' + userId, {
-			method: 'POST',
+		fetch(API_URL + 'get-all?userId=' + userId, {
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(userId)
+			}
 		})
 			.then(function (response) {
 				if (response.ok) {
