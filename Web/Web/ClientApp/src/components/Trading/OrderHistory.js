@@ -20,7 +20,11 @@ export default function OrderHistory(props) {
 	}
 
 	const cancelOrder = async (order) => {
-		await OrderClient.CancelOrder(UserClient.GetIdFromStoredJwt(), order.orderId)
+		var result = await OrderClient.CancelOrder(UserClient.GetIdFromStoredJwt(), order.orderId)
+
+		if (result) {
+			await loadOrderHistory()
+		}
 	}
 
 	useEffect(() => { loadOrderHistory() }, [])
