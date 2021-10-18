@@ -30,6 +30,21 @@ class AccountsClient {
 		}
 	
 	}
+
+	async GetAccountHistory(userId) {
+		const response = await fetch(API_URL + 'accountHistory/' + userId, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		if (response.ok) {
+			const data = await response.json()
+
+			return data
+		}
+	}
 }
 
 export default new AccountsClient();
