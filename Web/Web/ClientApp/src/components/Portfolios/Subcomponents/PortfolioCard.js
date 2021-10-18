@@ -20,6 +20,7 @@ import './NewPortfolioCard.css';
 import './PortfolioCard.css';
 import PortfolioTableRow from './PortfolioTableRow.js';
 import SectorAndIndustryTable from './SectorAndIndustryTable';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export const useStyles = makeStyles((theme) => ({
 	deleteButton: {
@@ -129,22 +130,23 @@ export function PortfolioCard(props) {
 	}
 
 	return (
-		<RaisedCard style={{ borderRadius: 8 }}>
+		<div style={{ borderRadius: 8, boxShadow: '0px 3px 15px rgba(0, 0, 0, 0.15)' }}>
 			<div className="portfolioCard" style={{ marginBottom: 20 }}>
 				<TableContainer style={{ borderRadius: 8 }}>
-					<Table aria-label="collapsible table" size="small" style={{ backgroundColor: '#363636' }}>
+					<Table aria-label="collapsible table" size="small" style={{ backgroundColor: '#484848' }}>
 						<TableHead className={classes.tableHead}>
 							<TableRow style={{ borderBottom: 'none' }}>
-								<TableCell className={classes.headCells} style={{ borderBottom: 'none' }} colSpan={2}><Typography variant="h6" style={{ color: '#fff', minWidth: 150 }}>{props.portfolio.name}</Typography></TableCell>
-								<TableCell align="right" style={{ width: '70%', borderBottom: 'none'}}>
+								<TableCell className={classes.headCells} style={{ borderBottom: 'none', backgroundColor: '#505050' }} colSpan={2}><Typography variant="subtitle1" style={{ color: '#fff', minWidth: 150 }}>{props.portfolio.name}</Typography></TableCell>
+								<TableCell align="right" style={{ width: '70%', borderBottom: 'none', backgroundColor: '#505050', paddingRight: 0}}>
 									<PrimaryTextButton
+										endIcon={<DriveFileRenameOutlineIcon />}
 										onClick={handleEditOnClick}
-										text='Edit Portfolio'
+										text='Edit'
 										style={{height: 30, marginTop: 0, marginBottom: 0}}
 									/>
 
 								</TableCell>
-								<TableCell style={{ borderBottom: 'none' }} align="right" className={classes.headCells}>
+								<TableCell style={{ borderBottom: 'none', backgroundColor: '#505050', width: 20 }} align="right" className={classes.headCells}>
 									{modal &&
 										<DeleteModal
 											handleDelete={handleDelete}
@@ -162,14 +164,14 @@ export function PortfolioCard(props) {
 								data={props.portfolio.markets.join(", ")}
 								interiorTable={<h1> Blahhhh </h1>} />
 							<PortfolioTableRow
-								name="Sectors and Industries"
+								name="Sectors"
 								data={getSectorAndIndustryDisplay().map(sector => sector.name).join(', ')}
 								interiorTable={
 									<SectorAndIndustryTable
 										getSectorAndIndustryDisplay={getSectorAndIndustryDisplay} />
 								} />
 							<PortfolioTableRow
-								name="Basic Metrics"
+								name="Metrics"
 								data={getMetricDisplayInfo().map(metric => metric.displayName).join(", ")}
 								interiorTable={<BasicMetricTable
 									getMetricDisplayInfo={getMetricDisplayInfo} />}
@@ -178,6 +180,6 @@ export function PortfolioCard(props) {
 					</Table>
 				</TableContainer>
 			</div>
-		</RaisedCard>
+		</div>
 	);
 }
