@@ -27,7 +27,7 @@ export default function OrderHistory(props) {
 	return (
 		<Grid container spacing={1}>
 			{orders && orders.slice(0).reverse().map((order) => (
-				<Grid item xs={12}>
+				<Grid item xs={10} style={{ marginBottom: 12 }}>
 					<OrderCard order={order} />
 				</Grid>
 			))}
