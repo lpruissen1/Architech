@@ -13,12 +13,11 @@ export default function PrimarySearchAppBar() {
 	const [date, setDate] = useState("Hi")
 
 	useEffect(() => {
-		let eventSource = new EventSource("https://localhost:5001/Date")
+		let eventSource = new EventSource("https://localhost:42069/Data/date")
 		eventSource.onmessage = e => updateDate(e.data)
 	}, [])
 
 	const updateDate = (newDate) => {
-		debugger
 		setDate(newDate)
 	}
 

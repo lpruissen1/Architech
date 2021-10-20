@@ -46,7 +46,6 @@ export default function PlaceTrade() {
 			amount: amount
 		})
 
-		debugger
 
 		setPotentialPruchaseOrder(response.tickers)
 		// success, show
