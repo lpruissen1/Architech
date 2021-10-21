@@ -26,7 +26,7 @@ export default function PurchaseOrderTable(props) {
 	return (
 		<div className='tickerTable'>
 			<TableContainer style={{ borderRadius: 8, height: 640 }}>
-				<Table className={classes.table} style={{ backgroundColor: '#363636' }} stickyHeader aria-label="collapsible table" size="small">
+				<Table className={classes.table} style={{ backgroundColor: '#464646' }} stickyHeader aria-label="collapsible table" size="small">
 					<TableHead className={classes.tableHead}>
 						<TableRow className={classes.tableHead} style={{ height: 48 }}>
 							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: 'none' }}>
