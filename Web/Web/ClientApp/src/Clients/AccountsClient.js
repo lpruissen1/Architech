@@ -32,7 +32,7 @@ class AccountsClient {
 	}
 
 	async GetAccountHistory(userId) {
-		const response = await fetch(API_URL + 'accountHistory/' + userId, {
+		const response = await fetch(API_URL + 'accountHistory/' + userId+ "/Year", {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

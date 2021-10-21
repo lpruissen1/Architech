@@ -8,10 +8,13 @@ import AuthClient from '../../Clients/AuthClient';
 export default function GraphArea(props) {
 
 	const [accountHistory, setAccountHistory] = useState()
+	const [netContributions, setNetContributions] = useState()
 
 	const loadAccountHistory = async () => {
 		const response = await AccountsClient.GetAccountHistory(AuthClient.GetIdFromStoredJwt())
 		setAccountHistory(response.accountHistory)
+		setNetContributions(response.netContributions)
+		debugger;
 	}
 
 	useEffect(() => { loadAccountHistory() }, [])
@@ -55,8 +58,8 @@ export default function GraphArea(props) {
 		series: [
 			{
 				name: "Contributions",
-				data: accountHistory && Object.entries(accountHistory).map(([key, value]) => [parseInt(key) * 1000, 10000]),
-				type: "area",
+				data: netContributions && Object.entries(netContributions).map(([key, value]) => [parseInt(key) * 1000, value]),
+				type: "line",
 			},
 			{
 				name: "Account Value",
