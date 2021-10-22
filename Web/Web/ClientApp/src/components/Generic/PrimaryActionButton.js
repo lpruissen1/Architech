@@ -42,6 +42,8 @@ export default function PrimaryActionButton(props) {
 
 	return (
 		<Button
+			startIcon={props.startIcon}
+			endIcon={props.endIcon}
 			onClick={!props.disabled && props.onClick}
 			className={props.disabled ? classes.disabledButton : classes.root}
 			variant="contained"

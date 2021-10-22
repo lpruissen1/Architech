@@ -5,6 +5,7 @@ import OrderHistory from './OrderHistory';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Grid from '@material-ui/core/Grid';
 
 const StyledTabs = withStyles((theme) => ({
 	indicator: {
@@ -43,19 +44,28 @@ export default function TradeOverview() {
 	};
 
 	return (
-		<>
-			<div>
+		<Grid container style={{
+			width: '100%',
+			height: '100%',
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			borderRadius: 4,
+		}}>
+			<Grid item xs={12} style={{ paddingBottom: 24, backgroundColor: '#404040', borderTopLeftRadius: 4, borderTopRightRadius: 4, paddingTop: 16}}>
 				<StyledTabs value={step} onChange={handleChange} aria-label="styled tabs example">
 					<StyledTab label="Place Trade" />
 					<StyledTab label="Order History" />
 				</StyledTabs>
-			</div>
-			<TabPanel value={step} index={0}>
-				<PlaceTrade />
-			</TabPanel>
-			<TabPanel value={step} index={1}>
-				<OrderHistory />
-			</TabPanel>
-		</>
+			</Grid>
+			<Grid item xs={12} style={{ paddingBottom: 24, backgroundColor: '#404040', borderBottomLeftRadius: 4, borderBottomRightRadius: 4, paddingTop: 24, paddingLeft: 40 }}>
+				<TabPanel value={step} index={0}>
+					<PlaceTrade />
+				</TabPanel>
+				<TabPanel value={step} index={1}>
+					<OrderHistory />
+				</TabPanel>
+			</Grid>
+		</Grid>
 	)
 }

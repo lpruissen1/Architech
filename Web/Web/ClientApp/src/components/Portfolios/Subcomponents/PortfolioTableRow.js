@@ -17,24 +17,41 @@ export default function PortfolioTableRow(props) {
 
 	return (
 		<React.Fragment>
-			<TableRow>
-				<TableCell style={{ color: textColor, borderTop: 'none', borderBottomColor: borderColor }}>
+			<TableRow style={{ maxWidth: '100%'}}>
+				<TableCell style={{ color: textColor, borderTop: '1px solid #606060', borderBottom: 'none', width: 20 }}>
 					<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{ outline: 'none', color: iconColor }}>
 						{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 					</IconButton>
 				</TableCell>
-				<TableCell component="th" scope="row" style={{ borderTop: 'none', color: textColor, borderBottomColor: borderColor}}>
+				<TableCell component="th" scope="row" style={{ color: textColor, borderTop: '1px solid #606060', borderBottom: 'none'}}>
 					<Typography style={{ fontWeight: 600 }}>{props.name}</Typography>
 				</TableCell>
-				<TableCell align="left" style={{ borderTop: 'none', color: textColor, borderBottomColor: borderColor }}>
+				<TableCell
+					align="left"
+					style={{
+						color: textColor,
+						borderTop: '1px solid #606060',
+						borderBottom: 'none',
+					}}>
 					{props.data
-						? <Typography>{props.data}</Typography>
+						? <Typography
+							style={{
+								display: 'inline-block',
+								verticalAlign: 'middle',
+								maxWidth: '80%',
+								margin: 0,
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis'
+						}}
+						>{props.data}</Typography>
 						: <Typography style={{ fontStyle: "oblique" }}>None</Typography>
 					}
 				</TableCell>
+				<TableCell style={{borderTop: '1px solid #606060', borderBottom: 'none'}}></TableCell>
 			</TableRow>
 			<TableRow>
-				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderTop: 'none', borderBottomColor: borderColor, color: textColor, backgroundColor: '#424242'}} colSpan={6}>
+				<TableCell style={{ paddingBottom: 0, paddingTop: 0, borderTop: '1px solid #606060', borderBottom: 'none', color: textColor, backgroundColor: '#545454'}} colSpan={6}>
 					<Collapse in={open} timeout="auto" unmountOnExit>
 						<Box margin={1}>
 							{props.interiorTable}
