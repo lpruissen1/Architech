@@ -12,6 +12,7 @@ import RaisedCard from '../Generic/RaisedCard';
 import { v4 as uuidv4 } from 'uuid';
 import AuthClient from '../../Clients/AuthClient';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
+import PriceDataClient from '../../Clients/PriceDataClient';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import TabPanel from '../Generic/TabPanel';
 
@@ -153,12 +154,15 @@ export function PortfolioBuilder(props) {
 	const [name, setName] = useState("")
 
 	const [step, setStep] = React.useState(0);
-	const [tickers, setTickers] = React.useState([]);
+	const [stocks, setStocks] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 	const [inclusions, setInclusions] = useState([])
 
 	const [weightingOption, setWeightingOption] = useState("")
 	const [manualWeights, setManualWeights] = useState([])
+
+	const [priceData, setPriceData] = useState()
+	const [eventSource, setEventSource] = useState()
 	
 	let { indexID } = useParams();
 
@@ -337,6 +341,20 @@ export function PortfolioBuilder(props) {
 
 	useEffect(() => { handleMount() }, []);
 
+	useEffect(() => {
+		var tickers = stocks && stocks.slice(0, 9).map((stock) => { return stock.ticker })
+		debugger
+		if (tickers.length === 0)
+			return;
+
+		PriceDataClient.GetPriceData(tickers, setPriceData)
+
+		return function cleanup() {
+			debugger
+			PriceDataClient.Close();
+		};
+	}, [stocks])
+
 	return (
 		<Grid container spacing={2} justify='center'>
 				<Grid item xs={9}>
@@ -381,13 +399,13 @@ export function PortfolioBuilder(props) {
 									setLoading={setLoading}
 									getActiveMarkets={getActiveMarkets}
 									getActiveIndustries={getActiveIndustries}
-									setTickers={setTickers}
+									setTickers={setStocks}
 								/>
 							</TabPanel>
 							<TabPanel value={step} index={1}>
 								<Weighter
-									tickers={tickers}
-									setTickers={setTickers}
+									tickers={stocks}
+									setTickers={setStocks}
 									inclusions={inclusions}
 									weightingOption={weightingOption}
 									setWeightingOption={setWeightingOption}
@@ -407,9 +425,9 @@ export function PortfolioBuilder(props) {
 					style={{ position: 'fixed', width: '18%', maxHeight: '75%', overflow: 'scroll' }}
 					children={
 						<TickerTable
-							tickers={tickers}
+							tickers={stocks}
 							loading={loading}
-							tickerInfo={tickers}
+							tickerInfo={stocks}
 						/>}
 					/>
 			</Grid>
