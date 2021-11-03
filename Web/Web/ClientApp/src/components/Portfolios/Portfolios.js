@@ -2,6 +2,7 @@
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
+import AuthClient from '../../Clients/AuthClient';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import './Portfolios.css';
 import { PortfolioCard } from './Subcomponents/PortfolioCard';
@@ -10,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@mui/icons-material/Add';
 
 
-export function Portfolios(props) {
+export function Portfolios() {
 
 	const history = useHistory();
 	const handleOnClick = useCallback(() => history.push('/screener'), [history]);
@@ -19,7 +20,7 @@ export function Portfolios(props) {
 	const clickie = () => setCreateNew(!createNew)
 
 	const loadPortfolios = async () => {
-		const activePortfolios =  await CustomIndexClient.getCustomIndexByUserId(props.userID)
+		const activePortfolios = await CustomIndexClient.getCustomIndexByUserId(AuthClient.GetIdFromStoredJwt())
 		setPortfolios(activePortfolios)
 	}
 
@@ -80,7 +81,7 @@ export function Portfolios(props) {
 										key={portfolio.indexId}
 										portfolio={portfolio}
 										deletePortfolio={deletePortfolio}
-										userId={props.userID} />
+										userId={AuthClient.GetIdFromStoredJwt()} />
 									</Grid>)
 							})
 						}

@@ -237,6 +237,7 @@ export function PortfolioBuilder(props) {
 		setSectors(tempSectors)
 		setRangedRules(loadedIndex.rangedRule)
 		setTimedRangeRules(loadedIndex.timedRangeRule)
+		setName(loadedIndex.name)
 	}
 
 	const getActiveMarkets = () => {
