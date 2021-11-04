@@ -1,12 +1,23 @@
-﻿import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Chart from "react-apexcharts";
+﻿import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import PositionsClient from '../../Clients/PositionsClient';
+import React, { useState, useEffect } from 'react';
+import Chart from "react-apexcharts";
+import AccountsClient from '../../Clients/AccountsClient';
 import AuthClient from '../../Clients/AuthClient';
 
 export default function GraphArea(props) {
+
+	const [accountHistory, setAccountHistory] = useState()
+	const [netContributions, setNetContributions] = useState()
+
+	const loadAccountHistory = async () => {
+		const response = await AccountsClient.GetAccountHistory(AuthClient.GetIdFromStoredJwt())
+		setAccountHistory(response.accountHistory)
+		setNetContributions(response.netContributions)
+		debugger;
+	}
+
+	useEffect(() => { loadAccountHistory() }, [])
 
 	const options = {
 		chart: {
@@ -47,26 +58,12 @@ export default function GraphArea(props) {
 		series: [
 			{
 				name: "Contributions",
-				data: [
-					[1486684800000, 35],
-					[1486771200000, 38],
-					[1486857600000, 41],
-					[1486944000000, 44],
-					[1487030400000, 44],
-					[1487116800000, 47]
-				],
-				type: "line"
+				data: netContributions && Object.entries(netContributions).map(([key, value]) => [parseInt(key) * 1000, value]),
+				type: "line",
 			},
 			{
 				name: "Account Value",
-				data: [
-					[1486684800000, 39],
-					[1486771200000, 40],
-					[1486857600000, 36],
-					[1486944000000, 50],
-					[1487030400000, 33],
-					[1487116800000, 59]
-				],
+				data: accountHistory && Object.entries(accountHistory).map(([key, value]) => [parseInt(key) * 1000, value]),
 				type: "area",
 			},
 		],
