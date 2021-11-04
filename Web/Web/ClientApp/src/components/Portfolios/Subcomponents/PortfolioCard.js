@@ -110,7 +110,7 @@ export function PortfolioCard(props) {
 
 		const displayRules = []
 
-		props.portfolio.rangedRules.forEach(rule => {
+		props.portfolio.rangedRule.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
 					displayRules.push({ displayName: name.displayName, min: UnitFormatter(rule.lower, rule.ruleType), max: UnitFormatter(rule.upper, rule.ruleType), timePeriod: '' })
@@ -118,7 +118,7 @@ export function PortfolioCard(props) {
 			})
 		})
 
-		props.portfolio.timedRangeRules.forEach(rule => {
+		props.portfolio.timedRangeRule.forEach(rule => {
 			prettyNames.forEach(name => {
 				if (name.ruleType === rule.ruleType) {
 					displayRules.push({ displayName: name.displayName, min: UnitFormatter(rule.lower, rule.ruleType), max: UnitFormatter(rule.upper, rule.ruleType), timePeriod: TimePeriodFormatter(rule.timePeriod) })

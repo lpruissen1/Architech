@@ -15,7 +15,6 @@ class ScreenerClient {
 	}
 
 	async postPurchaseOrderRequest(data = {}) {
-		debugger
 		const response = await fetch(API_URL + "PurchaseOrder", {
 				method: 'POST',
 				headers: {
