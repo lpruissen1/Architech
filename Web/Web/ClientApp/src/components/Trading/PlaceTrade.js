@@ -92,6 +92,34 @@ export default function PlaceTrade() {
 			<Grid item xs={3}>
 				{!potentialPurchaseOrder && <PrimaryActionButton text='Generate Order' width='50%' onClick={CalculatePurchaseOrder} />}
 			</Grid>
+			<Grid item xs={3} style={{ color: '#d0d0d0', paddingLeft: 12, marginRight: 20 }}>
+				<Typography variant='body1'>Sell Target Portfolio</Typography>
+			</Grid>
+			<Grid item xs={8} style={{ color: '#d0d0d0', paddingLeft: 12 }}>
+				<Typography variant='body1'>Amount ($)</Typography>
+			</Grid>
+			<Grid item xs={3} justify='left' align='left' style={{ marginRight: 20 }}>
+				<Picker
+					options={
+						portfolios && portfolios.map((portfolio) => {
+							return (
+								portfolio.name)
+						})}
+					value={selectedPortfolio}
+					setState={setSelectedPortfolio}
+					width='100%'
+				/>
+			</Grid>
+			<Grid item xs={3} style={{ marginBottom: 20, marginRight: 20 }}>
+				<OutlinedTextInput
+					value={amount}
+					width='100%'
+					onChange={(event) => setAmount(event.target.value)}
+				/>
+			</Grid>
+			<Grid item xs={3}>
+				{!potentialPurchaseOrder && <PrimaryActionButton text='Generate Sell Order' width='50%' onClick={CalculatePurchaseOrder} />}
+			</Grid>
 			<Grid item xs={12} style={{ marginTop: 36 }}>
 				<Grid container spacing={1}>
 					<Grid item xs={10} style={{ borderBottom: '1px solid #727272' }}>
