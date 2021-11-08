@@ -10,19 +10,14 @@ import TransferRequests from './TransferRequests';
 
 export function Profile(props) {
 	const [userInfo, setUserInfo] = useState()
-	const [achRelationship, setAchRelationship] = useState()
+	//const [achRelationship, setAchRelationship] = useState()
 
 	useEffect(() => {
 		const loadInfo = async () => {
 			const info = await UserClient.GetInfo()
 			setUserInfo(info)
 		}
-		const loadFundingInfo = async () => {
-			const newInfo = await FundingClient.GetAchRelationship(UserClient.GetIdFromStoredJwt())
-			setAchRelationship(newInfo)
-		}
 
-		loadFundingInfo();
 		loadInfo();
 	}, []);
 

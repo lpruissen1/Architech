@@ -1,7 +1,6 @@
 ﻿import React, { useState } from 'react'
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Button from '@material-ui/core/Button';
 import './Registration.css';
 import AuthClient from '../../Clients/AuthClient';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,7 +37,6 @@ export function Login(props) {
 		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserId(response)
 			setCredentialError(false)
 		}
 
