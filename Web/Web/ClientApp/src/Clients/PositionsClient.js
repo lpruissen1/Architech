@@ -18,7 +18,7 @@ class PositionsClient {
 	}
 
 	async GetAllPositionsNew(userId) {
-		const response  = await fetch(API_URL + 'get-all-new?userId=' + userId, {
+		const response  = await fetch(API_URL + 'get-all-new/' + userId, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'

@@ -29,17 +29,17 @@ export default function PlaceTrade() {
 
 	const loadTradedPortfolios = async () => {
 		const activePortfolios = await PositionsClient.GetAllPositionsNew(AuthClient.GetIdFromStoredJwt())
-		setTradedPortfolios(activePortfolios)
+		setTradedPortfolios(activePortfolios.portfolios)
 	}
 
 	const CalculateSellOrder  = async () => {
 		var portfolio = tradedPortfolios.filter(x => x.name === selectedPortfolioSell)[0]
 
-		var positionCount = portfolio.Positions.length;
+		var positionCount = portfolio.positions.length;
 
-		var sellOrders = portfolio.Positions.map(position => {
-			var amount = Math.max(sellAmount / positionCount, position.CurrentPrice * position.Quantity)
-			return { Ticker: position.ticker, Amount: amount }
+		var sellOrders = portfolio.positions && portfolio.positions.map(position => {
+			var amount = Math.min(parseInt(sellAmount) / positionCount, position.currentPrice * position.quantity)
+			return { ticker: position.ticker, amount: amount }
 		})
 
 		var order = {
@@ -51,8 +51,9 @@ export default function PlaceTrade() {
 		setPotentialOrder(order)
 	}
 
-	const CalculatePurchaseOrder= async () => {
+	const CalculatePurchaseOrder = async () => {
 		var portfolio = availablePortfolio.filter(x => x.name === selectedPortfolio)[0]
+
 
 		const weightingRequest = {
 			Option: portfolio.weightingOption,
