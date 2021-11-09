@@ -79,7 +79,7 @@ export default function PlaceTrade() {
 		})
 
 		var order = {
-			portfolioId: portfolio.Id,
+			portfolioId: portfolio.indexId,
 			orders: response.tickers,
 			direction: "buy"
 		}
