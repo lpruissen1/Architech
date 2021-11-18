@@ -1,8 +1,8 @@
-﻿const GET_ALL_URL = 'https://localhost:7001/CustomIndex?userID='
-const GET_BY_ID_URL = 'https://localhost:7001/CustomIndex/GetCustomIndex?userID='
-const POST_API_URL = 'https://localhost:7001/CustomIndex'
-const DELETE_API_URL = 'https://localhost:7001/CustomIndex/DeleteIndex?userId='
-const PUT_API_URL = 'https://localhost:7001/CustomIndex/UpdateIndex?userId='
+﻿const GET_ALL_URL = 'https://localhost:9001/CustomIndex?userID='
+const GET_BY_ID_URL = 'https://localhost:9001/CustomIndex/GetCustomIndex?userID='
+const POST_API_URL = 'https://localhost:9001/CustomIndex'
+const DELETE_API_URL = 'https://localhost:9001/CustomIndex/DeleteIndex?userId='
+const PUT_API_URL = 'https://localhost:9001/CustomIndex/UpdateIndex?userId='
 
 class CustomIndexClient {
 

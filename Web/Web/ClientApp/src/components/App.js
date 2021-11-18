@@ -21,9 +21,7 @@ import Alerts from './Alerts';
 import Grid from '@material-ui/core/Grid';
 
 export function App(props) {
-
 	const [loggedIn, setLoggedIn] = useState()
-	const [userId, setUserId] = useState("")
 	const [shouldIFund, setShouldIFund] = useState(false)
 	const [alerts, setAlerts] = useState([])
 
@@ -45,7 +43,6 @@ export function App(props) {
 
 		if (userId) {
 			setLoggedIn(true)
-			setUserId(userId)
 		}
 		else {
 			setLoggedIn(false)
@@ -53,7 +50,6 @@ export function App(props) {
 	}
 
 	useEffect(() => { updateLoggedIn() }, [])
-
 
 	return (
 		<>
@@ -80,8 +76,8 @@ export function App(props) {
 								<AuthenticatedRoute exact path='/profile' component={Profile} />
 								<AuthenticatedRoute exact path='/trade' component={TradeOverview} />
 								<AuthenticatedRoute exact path='/tradingRegistration' component={TradingRegistration} />
-								<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
-								<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} setUserId={setUserId} />} />
+								<Route exact path='/login' component={() => <Login updateLoggedIn={updateLoggedIn} />} />
+								<Route exact path='/register' component={() => <Registration updateLoggedIn={updateLoggedIn} />} />
 							</Grid>
 						</Grid>
 					</Grid>

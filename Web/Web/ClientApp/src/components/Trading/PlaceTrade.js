@@ -6,30 +6,60 @@ import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
 import ScreenerClient from '../../Clients/ScreenerClient';
 import AccountsClient from '../../Clients/AccountsClient';
+import PositionsClient from '../../Clients/PositionsClient';
 import PurchaseOrderTable from './PurchaseOrderTable';
 import { Typography, Grid, Button } from '@material-ui/core/';
 
 export default function PlaceTrade() {
-	const [portfolios, setPortfolios] = useState([]);
-	const [selectedPortfolio, setSelectedPortfolio] = useState();
-	const [amount, setAmount] = useState();
+	const [availablePortfolio, setAvailablePortfolio] = useState([]);
+	const [tradedPortfolios, setTradedPortfolios] = useState([]);
 
-	const [potentialPurchaseOrder, setPotentialPruchaseOrder] = useState();
+	const [selectedPortfolio, setSelectedPortfolio] = useState();
+	const [buyAmount, setBuyAmount] = useState();
+
+	const [selectedPortfolioSell, setSelectedPortfolioSell] = useState();
+	const [sellAmount, setSellAmount] = useState();
+
+	const [potentialOrder, setPotentialOrder] = useState();
 
 	const loadPortfolios = async () => {
-		const activePortfolios = await CustomIndexClient.getCustomIndexByUserId(AuthClient.GetIdFromStoredJwt())
-		setPortfolios(activePortfolios)
+		const portfolios = await CustomIndexClient.getCustomIndexByUserId(AuthClient.GetIdFromStoredJwt())
+		setAvailablePortfolio(portfolios)
+	}
+
+	const loadTradedPortfolios = async () => {
+		const activePortfolios = await PositionsClient.GetAllPositionsNew(AuthClient.GetIdFromStoredJwt())
+		setTradedPortfolios(activePortfolios.portfolios)
+	}
+
+	const CalculateSellOrder  = async () => {
+		var portfolio = tradedPortfolios.filter(x => x.name === selectedPortfolioSell)[0]
+
+		var positionCount = portfolio.positions.length;
+
+		var sellOrders = portfolio.positions && portfolio.positions.map(position => {
+			var amount = Math.min(parseInt(sellAmount) / positionCount, position.currentPrice * position.quantity)
+			return { ticker: position.ticker, amount: amount }
+		})
+
+		var order = {
+			portfolioId: portfolio.Id,
+			direction: "sell",
+			orders: sellOrders
+		}
+
+		setPotentialOrder(order)
 	}
 
 	const CalculatePurchaseOrder = async () => {
-		var portfolio = portfolios.filter(x => x.name === selectedPortfolio)[0]
+		var portfolio = availablePortfolio.filter(x => x.name === selectedPortfolio)[0]
+
 
 		const weightingRequest = {
 			Option: portfolio.weightingOption,
 			Tickers: [],
 			manualWeights: portfolio.manualWeights
 		}
-
 
 		const screeningRequest = {
 			markets: portfolio.markets,
@@ -40,27 +70,34 @@ export default function PlaceTrade() {
 			exclusions: portfolio.exclusions
 		}
 
+
+		// alter response to contain direction
 		const response = await ScreenerClient.postPurchaseOrderRequest({
 			screeningRequest: screeningRequest,
 			weightingRequest: weightingRequest,
-			amount: amount
+			amount: buyAmount
 		})
 
-		setPotentialPruchaseOrder(response.tickers)
+		var order = {
+			portfolioId: portfolio.indexId,
+			orders: response.tickers,
+			direction: "buy"
+		}
+
+		setPotentialOrder(order)
 		// success, show
 		// fail, let them know
 
 	}
 
 	const sendBulkOrder = () => {
-		const bulkMarketOrder = {
-			Orders: potentialPurchaseOrder
-		}
-
-		AccountsClient.ExecuteBulkOrder(bulkMarketOrder, AuthClient.GetIdFromStoredJwt())
+		AccountsClient.ExecuteBulkOrder(potentialOrder, AuthClient.GetIdFromStoredJwt())
 	}
 
-	useEffect(() => { loadPortfolios() }, [])
+	useEffect(() => {
+		loadPortfolios()
+		loadTradedPortfolios()
+	}, [])
 
 	return (
 		<Grid container spacing={1}>
@@ -73,7 +110,7 @@ export default function PlaceTrade() {
 			<Grid item xs={3} justify='left' align='left' style={{ marginRight: 20 }}>
 				<Picker
 					options={
-					portfolios && portfolios.map((portfolio) => {
+					availablePortfolio && availablePortfolio.map((portfolio) => {
 						return (
 							portfolio.name)
 					})}
@@ -84,13 +121,41 @@ export default function PlaceTrade() {
 			</Grid>
 			<Grid item xs={3} style={{ marginBottom: 20, marginRight: 20 }}>
 				<OutlinedTextInput
-					value={amount}
+					value={buyAmount}
 					width='100%'
-					onChange={(event) => setAmount(event.target.value)}
+					onChange={(event) => setBuyAmount(event.target.value)}
 				/>
 			</Grid>
 			<Grid item xs={3}>
-				{!potentialPurchaseOrder && <PrimaryActionButton text='Generate Order' width='50%' onClick={CalculatePurchaseOrder} />}
+				<PrimaryActionButton text='Generate Order' width='50%' onClick={CalculatePurchaseOrder} />
+			</Grid>
+			<Grid item xs={3} style={{ color: '#d0d0d0', paddingLeft: 12, marginRight: 20 }}>
+				<Typography variant='body1'>Sell Target Portfolio</Typography>
+			</Grid>
+			<Grid item xs={8} style={{ color: '#d0d0d0', paddingLeft: 12 }}>
+				<Typography variant='body1'>Amount ($)</Typography>
+			</Grid>
+			<Grid item xs={3} justify='left' align='left' style={{ marginRight: 20 }}>
+				<Picker
+					options={
+						tradedPortfolios && tradedPortfolios.map((portfolio) => {
+							return (
+								portfolio.name)
+						})}
+					value={selectedPortfolioSell}
+					setState={setSelectedPortfolioSell}
+					width='100%'
+				/>
+			</Grid>
+			<Grid item xs={3} style={{ marginBottom: 20, marginRight: 20 }}>
+				<OutlinedTextInput
+					value={sellAmount}
+					width='100%'
+					onChange={(event) => setSellAmount(event.target.value)}
+				/>
+			</Grid>
+			<Grid item xs={3}>
+				<PrimaryActionButton text='Generate Sell Order' width='50%' onClick={CalculateSellOrder} />
 			</Grid>
 			<Grid item xs={12} style={{ marginTop: 36 }}>
 				<Grid container spacing={1}>
@@ -98,17 +163,17 @@ export default function PlaceTrade() {
 						<Typography variant='subtitle1' style={{ color: '#f0f0f0' }}>Order Summary</Typography>
 					</Grid>
 					<Grid item xs={10}>
-						{potentialPurchaseOrder ?
+						{potentialOrder ?
 							<>
 								<Grid container spacing={1}>
 									<Grid item xs={12} style={{ marginBottom: 0 }}>
-										<PurchaseOrderTable tickers={potentialPurchaseOrder} />
+										<PurchaseOrderTable tickers={potentialOrder.orders} />
 									</Grid>
 									<Grid item xs={2}>
 										<Button
 											variant='outlined'
 											style={{ borderColor: '#c0c0c0', color: '#c0c0c0', outline: 'none', marginTop: 16, width: '90%', textTransform: 'none', fontSize: 16 }}
-											onClick={() => setPotentialPruchaseOrder()}
+											onClick={() => setPotentialOrder()}
 										>
 											Clear
 										</Button>

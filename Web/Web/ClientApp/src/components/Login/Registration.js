@@ -1,17 +1,16 @@
-﻿import React, { useState, useEffect } from 'react'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import './Registration.css';
-import AuthClient from '../../Clients/AuthClient';
-import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
-import { validateEmail, validatePassword, validateUsername, validateName, validatePasswordMatch } from './RegistrationValidationHelpers'
-import TextInput from '../Generic/TextInput.js';
-import RaisedCard from '../Generic/RaisedCard.js';
-import InputAdornment from '@material-ui/core/InputAdornment';
+﻿import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { makeStyles } from '@material-ui/core/styles';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
+import AuthClient from '../../Clients/AuthClient';
+import RaisedCard from '../Generic/RaisedCard.js';
+import TextInput from '../Generic/TextInput.js';
+import './Registration.css';
+import { validateEmail, validateName, validatePassword, validatePasswordMatch, validateUsername } from './RegistrationValidationHelpers';
 
 // we should move all these to their own files
 export const useStyles = makeStyles((theme) => ({
@@ -61,7 +60,6 @@ export function Registration(props) {
 		if (response) {
 			props.updateLoggedIn()
 			history.push('/')
-			props.setUserId(response)
 		}
 	}
 
