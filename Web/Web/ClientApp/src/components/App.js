@@ -66,7 +66,16 @@ export function App(props) {
 							<Grid item style={{ width: 200 }}>
 								{loggedIn && <LeftNav />}
 							</Grid>
-							<Grid item xs style={{ padding: 30, paddingTop: 94 }}>
+							<Grid item xs style={{
+								padding: 30,
+								paddingTop: 94,
+								width: '100%',
+								height: '100%',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+							>
 								<Route exact path='/' component={Home} />
 								<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
 								<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
