@@ -11,6 +11,9 @@ export default function PurchaseOrderTableRow(props) {
 					<Typography style={{ fontWeight: 600, marginLeft: 2 }}>{props.ticker}</Typography>
 				</TableCell>
 				<TableCell style={{ color: '#d0d0d0', borderBottomColor: '#545454' }} align="left">
+					<Typography style={{ color: props.direction == 'Buy' ? '#64ffda' : '#FF644C' }}>{props.direction}</Typography>
+				</TableCell>
+				<TableCell style={{ color: '#d0d0d0', borderBottomColor: '#545454' }} align="right">
 					<Typography>${props.amount.toFixed(2)}</Typography>
 				</TableCell>
 			</TableRow>

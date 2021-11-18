@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import TabPanel from '../Generic/TabPanel';
-import PlaceTrade from './PlaceTrade';
+import BuyOrders from './BuyOrders';
+//import SellOrders from './SellOrders';
 import OrderHistory from './OrderHistory';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -62,17 +63,17 @@ export default function TradeOverview() {
 					</Tabs>
 				</AppBar>
 				<TabPanel value={step} index={0}>
-					<div style={{padding: 40, paddingLeft: 20}}>
-						<PlaceTrade />
+					<div style={{padding: 40, paddingLeft: 20, paddingRight: 10}}>
+						<BuyOrders />
 					</div>
 				</TabPanel>
 				<TabPanel value={step} index={1}>
-					<div style={{ padding: 40, paddingLeft: 20 }}>
-						<PlaceTrade />
+					<div style={{ padding: 40, paddingLeft: 20, paddingRight: 10 }}>
+						
 					</div>
 				</TabPanel>
 				<TabPanel value={step} index={2}>
-					<div style={{ padding: 40, paddingLeft: 20 }}>
+					<div style={{ padding: 40, paddingLeft: 20, paddingRight: 10 }}>
 						<OrderHistory />
 					</div>
 				</TabPanel>
