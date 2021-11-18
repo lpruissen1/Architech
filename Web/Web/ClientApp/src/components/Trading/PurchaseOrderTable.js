@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import PurchaseOrderTableRow from './PurchaseOrderTableRow';
 import { makeStyles } from '@material-ui/core/styles';
+import PrimaryActionButton from '../Generic/PrimaryActionButton';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -29,8 +30,22 @@ export default function PurchaseOrderTable(props) {
 				<Table className={classes.table} stickyHeader aria-label="collapsible table" size="small">
 					<TableHead className={classes.tableHead}>
 						<TableRow className={classes.tableHead} style={{ height: 48 }}>
-							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: 'none' }} colSpan={3}>
+							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: '1px solid #404040' }} colSpan={2}>
 								<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Order Summary</Typography>
+							</TableCell>
+							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: '1px solid #404040' }}>
+								{props.tickers
+									? <div style={{
+										width: '100%',
+										height: '100%',
+										display: 'flex',
+										alignItems: 'flex-end',
+										justifyContent: 'flex-end',
+									}}>
+										< PrimaryActionButton text='Send Order' style={{ fontSize: 10, margin: 0 }} onClick={() => props.sendBulkOrder()} />
+									</div>
+									: <></>
+								}
 							</TableCell>
 						</TableRow>
 					</TableHead>

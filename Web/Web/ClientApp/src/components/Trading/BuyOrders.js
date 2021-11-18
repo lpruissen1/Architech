@@ -135,7 +135,13 @@ export default function PlaceTrade() {
 						/>
 					</Grid>
 					<Grid item xs={12} style={{ paddingLeft: 18 }}>
-						<PrimaryActionButton text='Generate Order' width='100%' onClick={CalculatePurchaseOrder} style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }} />
+						<PrimaryActionButton
+							text='Generate Order'
+							width='100%'
+							onClick={CalculatePurchaseOrder}
+							style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }}
+							disabled={!(selectedPortfolio && buyAmount || selectedTicker && buyAmountTicker)}
+						/>
 					</Grid>
 					{potentialOrder ? 
 						<Grid item xs={12} style={{ paddingLeft: 18 }}>
@@ -161,15 +167,17 @@ export default function PlaceTrade() {
 						<>
 							<Grid container spacing={1} justify='right' align='right'>
 								<Grid item xs={12} style={{ marginBottom: 0, paddingLeft: 36 }}>
-									<PurchaseOrderTable tickers={potentialOrder.orders} direction='Buy' />
-								</Grid>
-								<Grid item xs={2} justify='left'>
-									<PrimaryActionButton text='Send' width='90%' onClick={() => sendBulkOrder()} />
+									<PurchaseOrderTable tickers={potentialOrder.orders} sendBulkOrder={sendBulkOrder} direction='Buy' />
 								</Grid>
 							</Grid>
 
 						</>
-						: <PurchaseOrderTable />
+						:<Grid container spacing={1} justify='right' align='right'>
+								<Grid item xs={12} style={{ marginBottom: 0, paddingLeft: 36 }}>
+									<PurchaseOrderTable />
+								</Grid>
+							</Grid>
+						
 				}
 				</div>
 			</Grid>
