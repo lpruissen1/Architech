@@ -176,9 +176,8 @@ export default function PlaceTrade() {
 								<Grid item xs={12} style={{ marginBottom: 0, paddingLeft: 36 }}>
 									<PurchaseOrderTable />
 								</Grid>
-							</Grid>
-						
-				}
+						</Grid>		
+					}
 				</div>
 			</Grid>
 		</Grid>
