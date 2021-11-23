@@ -34,8 +34,6 @@ export default function PlaceTrade() {
 
 	const [tradedPortfolios, setTradedPortfolios] = useState([]);
 
-	const [selectedPortfolio, setSelectedPortfolio] = useState();
-
 	const [selectedPortfolioSell, setSelectedPortfolioSell] = useState();
 	const [sellAmount, setSellAmount] = useState();
 
@@ -49,7 +47,24 @@ export default function PlaceTrade() {
 		setTradedPortfolios(activePortfolios.portfolios)
 	}
 
-	const CalculateSellOrder  = async () => {
+	const sellAllOrder = async () => {
+		var portfolio = tradedPortfolios.filter(x => x.name === selectedPortfolioSell)[0]
+
+		var sellOrders = portfolio.positions && portfolio.positions.map(position => {
+			var amount = position.currentPrice * position.quantity
+			return { ticker: position.ticker, amount: amount }
+		})
+
+		var order = {
+			portfolioId: portfolio.Id,
+			direction: "sell",
+			orders: sellOrders
+		}
+
+		setPotentialOrder(order)
+	}
+
+	const CalculateSellOrder = async () => {
 		var portfolio = tradedPortfolios.filter(x => x.name === selectedPortfolioSell)[0]
 
 		var positionCount = portfolio.positions.length;
@@ -108,7 +123,7 @@ export default function PlaceTrade() {
 					</Grid>
 					<Grid item xs={2} style={{ paddingLeft: 10, paddingRight: 0 }}>
 						<div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-							<Button className={classes.button}>
+							<Button className={classes.button} onClick={sellAllOrder} disabled={selectedPortfolioSell ? false : true}>
 								Sell All
 							</Button>
 						</div>
@@ -148,7 +163,7 @@ export default function PlaceTrade() {
 					</Grid>
 					<Grid item xs={2} style={{ paddingLeft: 10, paddingRight: 0 }}>
 						<div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-							<Button className={classes.button}>
+							<Button className={classes.button} disabled={sellTicker ? false : true}>
 								Sell All
 							</Button>
 						</div>
@@ -159,7 +174,7 @@ export default function PlaceTrade() {
 							width='100%'
 							onClick={CalculateSellOrder}
 							style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }}
-							disabled={!(selectedPortfolio && sellAmount || sellTicker && sellAmountTicker)}
+							disabled={!(selectedPortfolioSell && sellAmount || sellTicker && sellAmountTicker)}
 						/>
 					</Grid>
 					{potentialOrder ?
