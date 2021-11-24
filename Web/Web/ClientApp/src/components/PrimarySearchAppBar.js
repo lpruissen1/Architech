@@ -6,7 +6,6 @@ import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
 import './NavMenu.css';
 import { useHistory } from 'react-router-dom';
-import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import { alpha, makeStyles } from '@material-ui/core/styles';
@@ -19,6 +18,7 @@ import PrimaryLinkButton from './Generic/PrimaryLinkButton';
 import StockInformationClient from '../Clients/StockInformationClient';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		backgroundColor: '#f0f0f0'
+	},
+	clearIndicator: {
+		color: "#d0d0d0"
 	}
 }));
 
@@ -48,6 +51,7 @@ export default function PrimarySearchAppBar(props) {
 	const history = useHistory();
 
 	const handleSelection = () => {
+		debugger
 		if (value) {
 			history.push({
 				pathname: `/research/${value}`
@@ -55,8 +59,11 @@ export default function PrimarySearchAppBar(props) {
 
 			setValue(null)
 		}
+
+		setInputValue('')
 	}
 
+	const [inputValue, setInputValue] = useState('')
 	const [value, setValue] = useState()
 	const [options, setOptions] = useState()
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -137,12 +144,16 @@ export default function PrimarySearchAppBar(props) {
 								onChange={(event, newValue) => {
 									setValue(newValue)
 								}}
+								onInputChange={(event, newInputValue) => {
+									setInputValue(newInputValue);
+								}}
 								options={options}
 								clearOnBlur={true}
 								classes={{
 									paper: classes.paper,
 									inputRoot: classes.inputRoot,
-									input: classes.inputInput
+									input: classes.inputInput,
+									clearIndicator: classes.clearIndicator
 								}}
 								renderInput={(params) => (
 									<TextField {...params} id="outlined" variant="outlined"
@@ -154,10 +165,10 @@ export default function PrimarySearchAppBar(props) {
 										InputProps={{
 											...params.InputProps,
 											type: 'search',
-											startAdornment: React.cloneElement(<SearchIcon />, {
-												value: value
-											})}
-										}
+											startAdornment: React.cloneElement(<SearchIcon />),
+											value: inputValue
+										}}
+										value={inputValue}
 									/>)}
 							/>
 						</div>
