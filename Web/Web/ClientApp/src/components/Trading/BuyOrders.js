@@ -8,6 +8,7 @@ import ScreenerClient from '../../Clients/ScreenerClient';
 import AccountsClient from '../../Clients/AccountsClient';
 import PurchaseOrderTable from './PurchaseOrderTable';
 import { Typography, Grid, Button } from '@material-ui/core/';
+import StockInformationClient from '../../Clients/StockInformationClient';
 
 export default function PlaceTrade() {
 	const [availablePortfolio, setAvailablePortfolio] = useState([]);
@@ -20,6 +21,13 @@ export default function PlaceTrade() {
 	const [buyAmountTicker, setBuyAmountTicker] = useState();
 
 	const [potentialOrder, setPotentialOrder] = useState();
+
+	const [tickerOptions, setTickerOptions] = useState()
+
+	const GetOptions = async () => {
+		let response = await StockInformationClient.GetAllTickers()
+		setTickerOptions(response)
+	}
 
 	const loadPortfolios = async () => {
 		const portfolios = await CustomIndexClient.getCustomIndexByUserId(AuthClient.GetIdFromStoredJwt())
@@ -65,12 +73,26 @@ export default function PlaceTrade() {
 
 	}
 
+	const CalculateIndividualOrder = () => {
+		var order = {
+			orders: [{ ticker: selectedTicker, amount: +buyAmountTicker }],
+			direction: "buy"
+		}
+
+		setPotentialOrder(order)
+	}
+
 	const sendBulkOrder = () => {
 		AccountsClient.ExecuteBulkOrder(potentialOrder, AuthClient.GetIdFromStoredJwt())
 	}
 
+	const sendIndividualOrder = () => {
+		AccountsClient.ExecuteIndividualOrder(potentialOrder, AuthClient.GetIdFromStoredJwt())
+	}
+
 	useEffect(() => {
 		loadPortfolios()
+		GetOptions()
 	}, [])
 
 	return (
@@ -86,13 +108,15 @@ export default function PlaceTrade() {
 					<Grid item xs={6} justify='left' align='left' style={{ paddingLeft: 10, paddingRight: 10 }}>
 						<Picker
 							options={
-							availablePortfolio && availablePortfolio.map((portfolio) => {
-								return (
-									portfolio.name)
-							})}
+								availablePortfolio && availablePortfolio.map((portfolio) => {
+									return (
+										portfolio.name)
+								})}
 							value={selectedPortfolio}
 							setState={setSelectedPortfolio}
-							width= '100%'
+							width='100%'
+							error={selectedPortfolio && selectedTicker}
+							helperText={selectedPortfolio && selectedTicker ? 'Select either a portfolio or ticker.' : ''}
 						/>
 					</Grid>
 					<Grid item xs={6} style={{ paddingLeft: 10, paddingRight: 12 }}>
@@ -117,14 +141,12 @@ export default function PlaceTrade() {
 					</Grid>
 					<Grid item xs={6} justify='left' align='left' style={{ paddingLeft: 10, paddingRight: 10 }}>
 						<Picker
-							options={
-								availableTickers && availableTickers.map((ticker) => {
-									return (
-										ticker)
-								})}
+							options={tickerOptions}
 							value={selectedTicker}
 							setState={setSelectedTicker}
 							width='100%'
+							error={selectedPortfolio && selectedTicker}
+							helperText={selectedPortfolio && selectedTicker ? 'Select either a portfolio or ticker.' : ''}
 						/>
 					</Grid>
 					<Grid item xs={6} style={{ paddingLeft: 10, paddingRight: 12 }}>
@@ -138,7 +160,7 @@ export default function PlaceTrade() {
 						<PrimaryActionButton
 							text='Generate Order'
 							width='100%'
-							onClick={CalculatePurchaseOrder}
+							onClick={(selectedPortfolio && !selectedTicker) ? CalculatePurchaseOrder : CalculateIndividualOrder}
 							style={{ fontSize: 14, marginLeft: 0, marginRight: 0 }}
 							disabled={!(selectedPortfolio && buyAmount || selectedTicker && buyAmountTicker)}
 						/>

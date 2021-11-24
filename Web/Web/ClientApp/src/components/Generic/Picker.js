@@ -45,7 +45,6 @@ export default function Picker(props) {
 		<Autocomplete
 			className={props.className}
 			color={props.color}
-			disableClearable
 			disablePortal
 			closeIcon={null}
 			forcePopupIcon={false}
@@ -71,6 +70,8 @@ export default function Picker(props) {
 					placeholder={props.placeholder}
 					label={props.label}
 					color={props.color}
+					error={props.error}
+					helperText={props.helperText}
 					
 				/>)}
 		/>)
