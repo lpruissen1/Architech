@@ -175,7 +175,7 @@ export default function PrimarySearchAppBar(props) {
 						<div style={{ display: 'flex', width: '25%', alignItems: 'center', justifyContent: 'right' }}>
 							{props.loggedIn ?
 								<>	
-									<Button style={{ color: '#f0f0f0', fontSize: 12, borderRadius: '50%', outline: 'none', textTransform: 'none' }} onClick={props.fundMeDaddy}> + Add Funds </Button>
+									<Button style={{ color: '#f0f0f0', fontSize: 12, borderRadius: '50%', outline: 'none', textTransform: 'none' }} onClick={props.fundMeDaddy}> Transfer Funds </Button>
 									<IconButton
 										style={{marginRight: 24, outline: 'none', color: '#f0f0f0'}}
 										edge="end"
