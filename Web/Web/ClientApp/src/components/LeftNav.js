@@ -24,7 +24,7 @@ export default function LeftNav() {
 	const renderContent = (
 		<>
 			<div style={{ height: 64, marginBottom: 20 }}></div>
-			<NavMenuItem to='/dashboard' label='Dashboard' icon={<DashboardIcon />} />
+			<NavMenuItem to='/' label='Dashboard' icon={<DashboardIcon />} />
 			<NavMenuItem to='/portfolioBuilder' label='Portfolio Builder' icon={<BuildIcon />} />
 			<NavMenuItem to='/trade' label='Trade' icon={<TrendingUpIcon />} />
 			<NavMenuItem to='/portfolio' label='Portfolios' icon={<PieChartIcon />} />

@@ -25,7 +25,7 @@ export default function PrimarySearchAppBar() {
 							</NavLink>
 						</div>
 						<div style={{ display: 'flex', width: '75%', alignItems: 'center', justifyContent: 'right' }}>
-							<PrimaryLinkButton to="/login" text="Login" />
+							<PrimaryLinkButton style={{ fontSize: 14 }} to="/login" text="Login" />
 						</div>
 					</div>
 				</Box>

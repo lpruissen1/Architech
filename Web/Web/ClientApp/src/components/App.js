@@ -77,7 +77,7 @@ export function App(props) {
 							}}
 							>
 								<Route exact path='/' component={Home} />
-								<AuthenticatedRoute exact path='/dashboard' component={() => <Dashboard />} />
+								<AuthenticatedRoute exact path='/' component={() => <Dashboard />} />
 								<AuthenticatedRoute exact path='/portfolioBuilder/:indexID?' component={PortfolioBuilder} />
 								<AuthenticatedRoute exact path='/portfolio' component={() => <Portfolios />} />
 								<AuthenticatedRoute exact path='/research' component={Research} />

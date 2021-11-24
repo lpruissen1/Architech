@@ -44,7 +44,7 @@ export function Login(props) {
 	};
 
     return (
-        <div className="global-flex-container">
+		<div className="global-flex-container" style={{ marginLeft: -200 }}>
 			<RaisedCard
 				className="loginCard"
 				style={{display: 'block', marginTop: '5%', paddingTop: 40, paddingLeft: 20, paddingRight: 20, paddingBottom: 40 }}
