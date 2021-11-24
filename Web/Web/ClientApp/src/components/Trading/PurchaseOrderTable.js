@@ -42,7 +42,7 @@ export default function PurchaseOrderTable(props) {
 										alignItems: 'flex-end',
 										justifyContent: 'flex-end',
 									}}>
-										< PrimaryActionButton text='Send Order' style={{ fontSize: 10, margin: 0 }} onClick={() => props.sendBulkOrder()} />
+										< PrimaryActionButton text='Send Order' style={{ fontSize: 10, margin: 0 }} onClick={() => props.sendOrder()} />
 									</div>
 									: <></>
 								}

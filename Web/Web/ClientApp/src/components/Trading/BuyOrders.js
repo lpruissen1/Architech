@@ -189,7 +189,7 @@ export default function PlaceTrade() {
 						<>
 							<Grid container spacing={1} justify='right' align='right'>
 								<Grid item xs={12} style={{ marginBottom: 0, paddingLeft: 36 }}>
-									<PurchaseOrderTable tickers={potentialOrder.orders} sendBulkOrder={sendBulkOrder} direction='Buy' />
+									<PurchaseOrderTable tickers={potentialOrder.orders} sendOrder={selectedPortfolio ? sendBulkOrder : sendIndividualOrder} direction='Buy' />
 								</Grid>
 							</Grid>
 
