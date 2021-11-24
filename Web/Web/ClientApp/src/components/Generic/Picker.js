@@ -66,7 +66,7 @@ export default function Picker(props) {
 						style: { color: '#f0f0f0', backgroundColor: '#363636' },
 
 					}}
-					style={{ borderRadius: 4, color: '#fff', width: props.width }}
+					style={{ borderRadius: 4, color: '#fff', width: '100%'}}
 					className={classes.root}
 					placeholder={props.placeholder}
 					label={props.label}

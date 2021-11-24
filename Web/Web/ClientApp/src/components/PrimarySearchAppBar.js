@@ -21,43 +21,20 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
-	search: {
-		position: 'relative',
-		borderRadius: theme.shape.borderRadius,
+	inputRoot: {
+		color: '#d0d0d0',
 		backgroundColor: alpha(theme.palette.common.white, 0.15),
 		'&:hover': {
 			backgroundColor: alpha(theme.palette.common.white, 0.25),
 		},
 		marginRight: theme.spacing(2),
 		marginLeft: 0,
-		width: '50%',
+		width: '100%',
 		[theme.breakpoints.up('sm')]: {
 			marginLeft: theme.spacing(3),
 			width: 'auto',
 		},
-	},
-	searchIcon: {
-		padding: theme.spacing(0, 2),
-		color: '#bcbcbc',
-		height: '100%',
-		position: 'absolute',
-		pointerEvents: 'none',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	inputRoot: {
-		color: '#d0d0d0',
-	},
-	inputInput: {
-		padding: theme.spacing(1, 1, 1, 0),
-		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-		transition: theme.transitions.create('width'),
-		width: '50%',
-		[theme.breakpoints.up('md')]: {
-			width: '20ch',
-		},
+		paddingLeft: 6
 	},
 	paper: {
 		backgroundColor: '#f0f0f0'
@@ -80,17 +57,10 @@ export default function PrimarySearchAppBar(props) {
 		}
 	}
 
-	const [cleared, setCleared] = useState(true)
 	const [value, setValue] = useState()
 	const [options, setOptions] = useState()
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-	const clickNClear = (event) => {
-		value &&
-			props.onChange(event)
-		setValue(null)
-	}
 
 	const GetOptions = async () => {
 		let response = await StockInformationClient.GetAllTickers()
@@ -158,22 +128,8 @@ export default function PrimarySearchAppBar(props) {
 							</NavLink>
 						</div>
 						<div style={{display: 'flex', width: '50%', alignItems: 'center', justifyContent: 'center'}}>
-							<div className={classes.search} style={{ width: '50%' }}>
-								<div className={classes.searchIcon}>
-									<SearchIcon />
-								</div>
-								<InputBase
-									placeholder="Search Tickers…"
-									classes={{
-										root: classes.inputRoot,
-										input: classes.inputInput,
-									}}
-									options={options}
-									inputProps={{ 'aria-label': 'search' }}
-								/>
-							</div>
 							<Autocomplete
-								key={cleared}
+								style={{width: '60%'}}
 								closeIcon={null}
 								forcePopupIcon={false}
 								size='small'
@@ -182,12 +138,15 @@ export default function PrimarySearchAppBar(props) {
 									setValue(newValue)
 								}}
 								options={options}
-								inputValue=''
 								clearOnBlur={true}
-								classes={{ paper: classes.paper }}
+								classes={{
+									paper: classes.paper,
+									inputRoot: classes.inputRoot,
+									input: classes.inputInput
+								}}
 								renderInput={(params) => (
 									<TextField {...params} id="outlined" variant="outlined"
-										placeholder="Search Tickers"
+										placeholder="Search Tickers..."
 										InputLabelProps={{
 											shrink: true,
 										}}
@@ -195,10 +154,9 @@ export default function PrimarySearchAppBar(props) {
 										InputProps={{
 											...params.InputProps,
 											type: 'search',
-											endAdornment: React.cloneElement(<SearchIcon />, {
-												onClick: clickNClear, value: value
-											})
-										}
+											startAdornment: React.cloneElement(<SearchIcon />, {
+												value: value
+											})}
 										}
 									/>)}
 							/>
