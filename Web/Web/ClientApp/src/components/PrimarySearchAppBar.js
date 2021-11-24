@@ -1,10 +1,11 @@
 ﻿import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import Logo from './ArchitechLogo.svg';
 import LogoFont from './ArchitechLogoFont.svg';
 import './NavMenu.css';
+import { useHistory } from 'react-router-dom';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
@@ -15,6 +16,9 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AuthClient from '../Clients/AuthClient';
 import PrimaryLinkButton from './Generic/PrimaryLinkButton';
+import StockInformationClient from '../Clients/StockInformationClient';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
 	search: {
@@ -64,8 +68,34 @@ export default function PrimarySearchAppBar(props) {
 
 	const classes = useStyles()
 
+	const history = useHistory();
+
+	const handleSelection = () => {
+		if (value) {
+			history.push({
+				pathname: `/research/${value}`
+			});
+
+			setValue(null)
+		}
+	}
+
+	const [cleared, setCleared] = useState(true)
+	const [value, setValue] = useState()
+	const [options, setOptions] = useState()
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const clickNClear = (event) => {
+		value &&
+			props.onChange(event)
+		setValue(null)
+	}
+
+	const GetOptions = async () => {
+		let response = await StockInformationClient.GetAllTickers()
+		setOptions(response)
+	}
 
 	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -82,6 +112,14 @@ export default function PrimarySearchAppBar(props) {
 		props.updateLoggedIn()
 		handleMenuClose()
 	}
+
+	useEffect(() => {
+		GetOptions()
+	}, [])
+
+	useEffect(() => {
+		handleSelection()
+	}, [value])
 
 	const renderMenu = (
 		<Menu
@@ -104,7 +142,7 @@ export default function PrimarySearchAppBar(props) {
 	);
 
 	return (
-		<div>
+			<div>
 				<AppBar position="fixed" style={{zIndex: 10000}}>
 					<Box style={{ backgroundColor: '#121212' }} sx={{ height: 64, zIndex: 10000 }}>
 					<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%', width: '100%' }}>
@@ -130,9 +168,40 @@ export default function PrimarySearchAppBar(props) {
 										root: classes.inputRoot,
 										input: classes.inputInput,
 									}}
+									options={options}
 									inputProps={{ 'aria-label': 'search' }}
 								/>
 							</div>
+							<Autocomplete
+								key={cleared}
+								closeIcon={null}
+								forcePopupIcon={false}
+								size='small'
+								value={value}
+								onChange={(event, newValue) => {
+									setValue(newValue)
+								}}
+								options={options}
+								inputValue=''
+								clearOnBlur={true}
+								classes={{ paper: classes.paper }}
+								renderInput={(params) => (
+									<TextField {...params} id="outlined" variant="outlined"
+										placeholder="Search Tickers"
+										InputLabelProps={{
+											shrink: true,
+										}}
+										color={props.color}
+										InputProps={{
+											...params.InputProps,
+											type: 'search',
+											endAdornment: React.cloneElement(<SearchIcon />, {
+												onClick: clickNClear, value: value
+											})
+										}
+										}
+									/>)}
+							/>
 						</div>
 						<div style={{ display: 'flex', width: '25%', alignItems: 'center', justifyContent: 'right' }}>
 							{props.loggedIn ?

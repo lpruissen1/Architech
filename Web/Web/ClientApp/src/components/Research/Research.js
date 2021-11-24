@@ -1,8 +1,13 @@
-﻿import React from 'react'
+﻿import React, { useState } from 'react'
+import { useParams } from "react-router-dom";
 
-export function Research() {
+export function Research(props) {
+
+	let { value } = useParams();
+
+	const [tickerValue, setTickerValue] = useState(value)
 
 	return (
-		<h1> Sweet sweet data about stocks </h1>
+		<h1> {value} </h1>
 	)
 }

@@ -8,6 +8,7 @@ import PrimaryLinkButton from './Generic/PrimaryLinkButton';
 import './NavMenu.css';
 
 export default function PrimarySearchAppBar() {
+
 	return (
 		<div>
 			<AppBar position="fixed" style={{ zIndex: 10000 }}>
