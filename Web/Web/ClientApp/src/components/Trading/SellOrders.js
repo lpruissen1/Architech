@@ -1,5 +1,4 @@
 ﻿import React, { useState, useEffect } from 'react'
-import CustomIndexClient from '../../Clients/CustomIndexClient';
 import AuthClient from '../../Clients/AuthClient';
 import Picker from '../Generic/Picker';
 import OutlinedTextInput from '../Generic/OutlinedTextInput';
