@@ -66,8 +66,8 @@ export function Portfolios() {
 						<PrimaryActionButton
 							style={{ margin: 0, borderRadius: 100, fontSize: 12, marginBottom: 14 }}
 							onClick={clickie}
-							text='Create New  '
-							startIcon={<AddIcon style={{ marginLeft: 4 }} />}
+							text='Create New     '
+							startIcon={<AddIcon style={{ marginLeft: 2 }} />}
 						/>
 					</Grid>
 				</Grid>
