@@ -45,7 +45,6 @@ export default function Picker(props) {
 		<Autocomplete
 			className={props.className}
 			color={props.color}
-			disableClearable
 			disablePortal
 			closeIcon={null}
 			forcePopupIcon={false}
@@ -59,18 +58,21 @@ export default function Picker(props) {
 				paper: classes.paper,
 				inputRoot: classes.inputRoot
 			}}
+			style={{...props.style}}
 			renderInput={(params) => (
 				<TextField {...params} id="outlined" variant="outlined"
 					InputLabelProps={{
 						shrink: true,
-						style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
+						style: { color: '#f0f0f0', backgroundColor: '#363636' },
 
 					}}
-					style={{ borderRadius: 4, color: '#fff', width: props.width }}
+					style={{ borderRadius: 4, color: '#fff', width: '100%'}}
 					className={classes.root}
 					placeholder={props.placeholder}
 					label={props.label}
 					color={props.color}
+					error={props.error}
+					helperText={props.helperText}
 					
 				/>)}
 		/>)

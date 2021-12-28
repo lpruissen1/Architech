@@ -8,11 +8,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import PurchaseOrderTableRow from './PurchaseOrderTableRow';
 import { makeStyles } from '@material-ui/core/styles';
+import PrimaryActionButton from '../Generic/PrimaryActionButton';
 
 
 export const useStyles = makeStyles((theme) => ({
 	tableHead: {
-		backgroundColor: '#404040',
+		backgroundColor: '#606060',
 	},
 	table: {
 		color: '#d0d0d0'
@@ -25,21 +26,33 @@ export default function PurchaseOrderTable(props) {
 
 	return (
 		<div className='tickerTable'>
-			<TableContainer style={{ borderRadius: 8, height: 640 }}>
-				<Table className={classes.table} style={{ backgroundColor: '#464646' }} stickyHeader aria-label="collapsible table" size="small">
+			<TableContainer style={{ borderRadius: 8, height: 500, backgroundColor: '#545454' }}>
+				<Table className={classes.table} stickyHeader aria-label="collapsible table" size="small">
 					<TableHead className={classes.tableHead}>
 						<TableRow className={classes.tableHead} style={{ height: 48 }}>
-							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: 'none' }}>
-								<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Ticker</Typography>
+							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: '1px solid #404040' }} colSpan={2}>
+								<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Order Summary</Typography>
 							</TableCell>
-							<TableCell style={{ borderBottom: 'none' }} className={classes.tableHead}>
-								<Typography variant='h6' style={{ color: '#fff', fontSize: 15, fontWeight: 550 }}>Amount</Typography>
+							<TableCell className={classes.tableHead} style={{ color: '#fff', borderBottom: '1px solid #404040' }}>
+								{props.tickers
+									? <div style={{
+										width: '100%',
+										height: '100%',
+										display: 'flex',
+										alignItems: 'flex-end',
+										justifyContent: 'flex-end',
+									}}>
+										< PrimaryActionButton text='Send Order' style={{ fontSize: 10, margin: 0 }} onClick={() => props.sendOrder()} />
+									</div>
+									: <></>
+								}
 							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						{props.tickers && props.tickers.map(stockdatum =>
 							<PurchaseOrderTableRow
+								direction={props.direction}
 								key={stockdatum.ticker}
 								ticker={stockdatum.ticker}
 								amount={stockdatum.amount}

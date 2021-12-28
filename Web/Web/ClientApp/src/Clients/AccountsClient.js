@@ -31,6 +31,23 @@ class AccountsClient {
 	
 	}
 
+	async ExecuteIndividualOrder(data, userId) {
+		const response = await fetch(API_URL + "execute-individual-market-order/" + userId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+
+		})
+
+		if (response.ok) {
+			const data = await response.json()
+			return data
+		}
+
+	}
+
 	async GetAccountHistory(userId) {
 		const response = await fetch(API_URL + 'accountHistory/' + userId+ "/Month", {
 			method: 'GET',

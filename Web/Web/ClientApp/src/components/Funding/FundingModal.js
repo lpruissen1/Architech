@@ -9,7 +9,7 @@ export default function FundingModal(props) {
 
 	return (
 		<div className='funding-modal' style={{ height: '100%' }}>
-			<RaisedCard style={{ boxShadow: 'none', width: '35%', height: '75%', margin: 'auto', padding: 40 }}>
+			<RaisedCard style={{ boxShadow: 'none', width: '35%', height: '75%', margin: 'auto', padding: 40}}>
 				{!transferInitiated
 					? <TransferForm setTransferInitiated={setTransferInitiated} fundMeDaddy={props.fundMeDaddy} addAlert={props.addAlert} />
 					: <TransferComplete fundMeDaddy={props.fundMeDaddy} /> 

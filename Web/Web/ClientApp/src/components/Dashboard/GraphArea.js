@@ -102,11 +102,6 @@ export default function GraphArea(props) {
 				paddingTop: 20
 			}}>
 			<Grid container spacing={3}>
-				<Grid item xs={12}>
-					<Typography style={{ color: '#fff', marginBottom: 20 }} variant='h5'>
-						<strong>Account Overview</strong>
-					</Typography>
-				</Grid>
 				<Grid item xs={9}>
 					<Chart
 						options={options}

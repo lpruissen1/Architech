@@ -1,39 +1,30 @@
 ﻿import React from 'react'
 import TabPanel from '../Generic/TabPanel';
-import PlaceTrade from './PlaceTrade';
+import BuyOrders from './BuyOrders';
+import SellOrders from './SellOrders';
 import OrderHistory from './OrderHistory';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 
-const StyledTabs = withStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
 	indicator: {
-		outline: 'none',
-		display: 'flex',
-		justifyContent: 'center',
-		backgroundColor: 'transparent',
-		'& > span': {
-			maxWidth: 60,
-			width: '100%',
-			backgroundColor: theme.palette.info.main,
-		}
+		backgroundColor: theme.palette.info.main
 	},
-}))((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
-
-const StyledTab = withStyles((theme) => ({
 	root: {
-		outline: 'none',
 		textTransform: 'none',
-		color: '#fff',
-		fontWeight: theme.typography.fontWeightRegular,
-		fontSize: theme.typography.pxToRem(15),
-		marginRight: theme.spacing(1),
-		'&:focus': {
-			opacity: 1,
-		}
+		fontSize: 15
 	},
-}))((props) => <Tab disableRipple style={{ outline: 'none' }} {...props} />);
+	appBar: {
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+		height: 48,
+		backgroundColor: '#484848',
+		color: '#fff'
+	}
+}));
 
 export default function TradeOverview() {
 	const [step, setStep] = React.useState(0);
@@ -43,29 +34,50 @@ export default function TradeOverview() {
 		setStep(newValue);
 	};
 
+	const classes = useStyles();
+
 	return (
-		<Grid container style={{
-			width: '100%',
-			height: '100%',
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			borderRadius: 4,
-		}}>
-			<Grid item xs={12} style={{ paddingBottom: 24, backgroundColor: '#404040', borderTopLeftRadius: 4, borderTopRightRadius: 4, paddingTop: 16}}>
-				<StyledTabs value={step} onChange={handleChange} aria-label="styled tabs example">
-					<StyledTab label="Place Trade" />
-					<StyledTab label="Order History" />
-				</StyledTabs>
-			</Grid>
-			<Grid item xs={12} style={{ paddingBottom: 24, backgroundColor: '#404040', borderBottomLeftRadius: 4, borderBottomRightRadius: 4, paddingTop: 24, paddingLeft: 40 }}>
+		<>
+			<Grid container style={{
+				width: '100%',
+				height: '100%',
+				maxWidth: 1200,
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				borderRadius: 4,
+				backgroundColor: '#404040'
+			}}>
+				<AppBar className={classes.appBar} elevation={1} style={{ position: 'sticky', top: 0 }}>
+					<Tabs
+						classes={{
+							indicator: classes.indicator
+						}}
+						style={{ outline: 'none' }}
+						value={step}
+						onChange={handleChange}
+						aria-label="simple tabs example">
+						<Tab className={classes.root} style={{ outline: 'none' }} label="Buy" />
+						<Tab className={classes.root} style={{ outline: 'none' }} label="Sell" />
+						<Tab className={classes.root} style={{ outline: 'none' }} label="Orders" />
+					</Tabs>
+				</AppBar>
 				<TabPanel value={step} index={0}>
-					<PlaceTrade />
+					<div style={{padding: 40, paddingLeft: 20, paddingRight: 10}}>
+						<BuyOrders />
+					</div>
 				</TabPanel>
 				<TabPanel value={step} index={1}>
-					<OrderHistory />
+					<div style={{ padding: 40, paddingLeft: 20, paddingRight: 10 }}>
+						<SellOrders />
+					</div>
+				</TabPanel>
+				<TabPanel value={step} index={2}>
+					<div style={{ padding: 40, paddingLeft: 20, paddingRight: 10 }}>
+						<OrderHistory />
+					</div>
 				</TabPanel>
 			</Grid>
-		</Grid>
+		</>
 	)
 }
