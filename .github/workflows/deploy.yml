@@ -24,9 +24,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build Assets
-        run: cd Web/Web/ClientApp
-        run: ls
-        run: npm run build
+        run: npm run build --prefix Web/Web/ClientApp
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
