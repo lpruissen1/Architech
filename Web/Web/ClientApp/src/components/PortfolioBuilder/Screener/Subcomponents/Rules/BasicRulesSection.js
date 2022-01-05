@@ -67,7 +67,6 @@ export default class BasicRulesSection extends React.Component {
 					<RangedRule
 						option={this.state.options.find(option => option.value === rule.ruleType)}
 						rule={rule}
-						handleUpdate={this.props.handleUpdate}
 						deleteRangedRule={this.props.deleteRangedRule}/>
 					<br />
 				</div>
@@ -80,7 +79,6 @@ export default class BasicRulesSection extends React.Component {
 					<TimedRangeRule
 						option={this.state.options.find(option => option.value === rule.ruleType)}
 						rule={rule}
-						handleUpdate={this.props.handleUpdate}
 						deleteTimedRangeRule={this.props.deleteTimedRangeRule}
 						renderedTimeSpans={this.props.checkIfTimedRangeRuleExists(rule.ruleType)}/>
 					<br />

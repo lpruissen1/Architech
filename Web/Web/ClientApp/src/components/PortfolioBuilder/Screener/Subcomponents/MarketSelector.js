@@ -9,8 +9,6 @@ export default function MarketSelector(props) {
 			if (market.value === event.currentTarget.value)
 				market.isChecked = !market.isChecked
 		})
-
-		props.handleUpdate()
 	}
 
 	return (

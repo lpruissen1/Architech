@@ -9,7 +9,6 @@ export default function TransferRequests() {
 	const [value, setValue] = useState(0)
 
 	const loadTransfers = async () => {
-		debugger
 		const transfers = await FundingClient.GetTransfers(UserClient.GetIdFromStoredJwt())
 		setTransfers(transfers)
 	}

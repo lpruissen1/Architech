@@ -51,7 +51,6 @@ export default function PrimarySearchAppBar(props) {
 	const history = useHistory();
 
 	const handleSelection = () => {
-		debugger
 		if (value) {
 			history.push({
 				pathname: `/research/${value}`

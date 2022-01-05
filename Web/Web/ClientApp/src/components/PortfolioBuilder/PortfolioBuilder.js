@@ -1,19 +1,27 @@
 ﻿import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import React, { useState, useEffect } from 'react';
+import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { Screener } from './Screener/Screener';
-import TickerTable from './TickerTable/TickerTable';
-import { Weighter } from './Weighting/Weighter';
-import { makeStyles } from '@material-ui/core/styles';
-import RaisedCard from '../Generic/RaisedCard';
 import { v4 as uuidv4 } from 'uuid';
+import OutlinedTextInput from '../Generic/OutlinedTextInput';
 import AuthClient from '../../Clients/AuthClient';
 import CustomIndexClient from '../../Clients/CustomIndexClient';
+import WeightingClient from '../../Clients/WeightingClient';
+import ScreenerClient from '../../Clients/ScreenerClient';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
+import RaisedCard from '../Generic/RaisedCard';
 import TabPanel from '../Generic/TabPanel';
+import InclusionsExclusions from './Screener/Subcomponents/InclusionsExclusions';
+import MarketSelector from './Screener/Subcomponents/MarketSelector';
+import BasicRulesSection from "./Screener/Subcomponents/Rules/BasicRulesSection";
+import SectorSelector from './Screener/Subcomponents/SectorSelector';
+import TickerTable from './TickerTable/TickerTable';
+import { Weighter } from './Weighting/Weighter';
 
 export const useStyles = makeStyles((theme) => ({
 	indicator: {
@@ -32,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export function PortfolioBuilder(props) {
+export function PortfolioBuilder() {
 
 	const [markets, setMarkets] = useState([
 		{ value: 'Sp500', displayName: 'Large Cap 500', isChecked: true },
@@ -150,6 +158,9 @@ export function PortfolioBuilder(props) {
 	const [rangedRules, setRangedRules] = useState([])
 	const [timedRangeRules, setTimedRangeRules] = useState([])
 	const [exclusions, setExclusions] = useState([])
+
+	// Move input up a level as to not have to re-render everything
+
 	const [name, setName] = useState("")
 
 	const [step, setStep] = React.useState(0);
@@ -326,7 +337,6 @@ export function PortfolioBuilder(props) {
 			exclusions: exclusions,
 			weightingOption: weightingOption,
 			manualWeights: manualWeights
-
 		});
 	}
 
@@ -336,8 +346,55 @@ export function PortfolioBuilder(props) {
 		}
 	}
 
+	// 1. Screen button
+	const screen = async () => {
+		if (validate()) {
+
+			setLoading(true)
+
+			const response = await ScreenerClient.postScreeningRequest({
+				markets: getActiveMarkets(),
+				industries: getActiveIndustries(),
+				rangedRule: rangedRules,
+				timedRangeRule: timedRangeRules,
+				inclusions: inclusions,
+				exclusions: exclusions
+			})
+
+			setTickers(response.securities)
+			setLoading(false)
+			await handleWeighting()
+		}
+	}
+
+	const validate = () => {
+
+		for (let i = 0; i < timedRangeRules.length; i++) {
+			if (timedRangeRules[i].timePeriod === "") {
+				return false
+			}
+		}
+		return true
+	}
+
+
+	// move this up
+	const handleWeighting = async () => {
+		if (weightingOption !== "" && tickers) {
+			var blah = tickers.map(thing => { return thing.ticker })
+
+			var result = await WeightingClient.postWeightingRequest(weightingOption, blah, manualWeights)
+			setTickers(result.tickers)
+		}
+	}
+
+	useEffect(() => { handleWeighting() }, [weightingOption, manualWeights])
 	useEffect(() => { handleMount() }, []);
 
+	// 2. Look into tab switching
+	// 4. Memoize everything
+	// 5. Look through state of screening things
+	// 6. Move weighting up
 	return (
 		<Grid container spacing={2} justify='center'>
 				<Grid item xs={9}>
@@ -357,38 +414,57 @@ export function PortfolioBuilder(props) {
 									<Tab className={classes.root} style={{ outline: 'none' }} label="Screen" />
 									<Tab className={classes.root} style={{ outline: 'none' }} label="Weigh" />
 									<Tab className={classes.root} style={{ outline: 'none' }} label="Backtest" />
+									<PrimaryActionButton text="Screen" onClick={screen}/>
 								</Tabs>
 							</AppBar>
 							<TabPanel value={step} index={0}>
-								<Screener
-									sectors={sectors}
-									rangedRules={rangedRules}
-									timedRangeRules={timedRangeRules}
-									handleRangedRuleUpdate={handleRangedRuleUpdate}
-									handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
-									deleteRangedRule={deleteRangedRule}
-									deleteTimedRangeRule={deleteTimedRangeRule}
-									checkIfRangedRuleExists={checkIfRangedRuleExists}
-									checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
-									inclusions={inclusions}
-									exclusions={exclusions}
-									markets={markets}
-									AddInclusion={handleInclusionAddition}
-									DeleteInclusion={handleInclusionDelete}
-									AddExclusion={handleExclusionAddition}
-									DeleteExclusion={handleExclusionDelete}
-									name={name}
-									setName={setName}
-									setLoading={setLoading}
-									getActiveMarkets={getActiveMarkets}
-									getActiveIndustries={getActiveIndustries}
-									setTickers={setTickers}
-								/>
+								<Grid container spacing={1}>
+									<Grid item xs={12}>
+										<Typography style={{ marginTop: 20, marginLeft: 10, color: '#fff', marginBottom: 20 }} variant='h6'>Portfolio Name</Typography>
+										<OutlinedTextInput value={name} onChange={(event) => setName(event.target.value)} />
+									</Grid>
+									<Grid item xs={12}>
+										<Typography style={{ marginTop: 20, marginLeft: 10, color: '#fff' }} variant='h6'>Choose Your Markets</Typography>
+										<MarketSelector
+											markets={markets}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography style={{ marginLeft: 10, color: '#fff' }} variant='h6'>Choose Your Sectors</Typography>
+										<SectorSelector
+											sectors={sectors}
+											setSectors={setSectors}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography style={{ marginTop: 20, marginLeft: 10, color: '#fff' }} variant='h6'>Add Metrics</Typography>
+										<BasicRulesSection
+											rangedRules={rangedRules}
+											timedRangeRules={timedRangeRules}
+											handleRangedRuleUpdate={handleRangedRuleUpdate}
+											handleTimedRangeRuleUpdate={handleTimedRangeRuleUpdate}
+											deleteRangedRule={deleteRangedRule}
+											deleteTimedRangeRule={deleteTimedRangeRule}
+											checkIfRangedRuleExists={checkIfRangedRuleExists}
+											checkIfTimedRangeRuleExists={checkIfTimedRangeRuleExists}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<Box className="inclusion-selector-container">
+											<InclusionsExclusions
+												inclusions={inclusions}
+												exclusions={exclusions}
+												AddInclusion={handleInclusionAddition}
+												AddExclusion={handleExclusionAddition}
+												DeleteInclusion={handleInclusionDelete}
+												DeleteExclusion={handleExclusionDelete}
+											/>
+										</Box>
+									</Grid>
+								</Grid>
 							</TabPanel>
 							<TabPanel value={step} index={1}>
 								<Weighter
-									tickers={tickers}
-									setTickers={setTickers}
 									inclusions={inclusions}
 									weightingOption={weightingOption}
 									setWeightingOption={setWeightingOption}

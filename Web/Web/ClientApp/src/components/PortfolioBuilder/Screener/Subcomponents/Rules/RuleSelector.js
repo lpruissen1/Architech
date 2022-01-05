@@ -53,7 +53,6 @@ export default function RuleSelector(props) {
 						inputProps={{
 							classes: {
 								icon: classes.icon,
-								paper: classes.paper     
 							},
 						}}
 						MenuProps={{

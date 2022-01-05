@@ -79,13 +79,11 @@ export default function TimeRangedRule(props) {
 
 	const updateRuleRanges = (event, newValue) => {
 		updateView(event, newValue)
-		props.handleUpdate()
 	}
 
 	const updateTimePeriod = (time) => {
 		let rule = props.rule
 		rule.timePeriod = time;
-		props.handleUpdate()
 	}
 
 	const deleteRule = () => {

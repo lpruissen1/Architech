@@ -57,6 +57,7 @@ export default function SectorSelector(props) {
 	const classes = useStyles()
 	const [renderIndustry, setRenderIndustry] = useState(false)
 	const [selectAllChecked, setSelectAllChecked] = useState(false)
+	const [refresh, setRefresh] = useState(false)
 
 	const handleAllChecked = () => {
 		let sectors = props.sectors
@@ -70,13 +71,13 @@ export default function SectorSelector(props) {
 			sectors.forEach(sector => sector.industries.forEach(industry => industry.isChecked = true))
 			setSelectAllChecked(true)
 		}
-
-		props.handleUpdate()
+		setRefresh(!refresh)
 	}
 
 	const handleSectorOnClick = (event) => {
-		let sectors = props.sectors
-		sectors.forEach(sector => {
+		var shit = props.sectors
+		debugger
+		shit.forEach(sector => {
 			if (sector.value === event.currentTarget.value) {
 				if (sector.isChecked === "checked") {
 					sector.isChecked = "unchecked"
@@ -89,11 +90,11 @@ export default function SectorSelector(props) {
 			}
 		})
 
-		if (sectors.filter(sector => sector.isChecked === "unchecked").length > 0) {
+		if (shit.filter(sector => sector.isChecked === "unchecked").length > 0) {
 			setSelectAllChecked(false)
 		}
-
-		props.handleUpdate()
+		debugger
+		setRefresh(!refresh)
 	}
 
 	const handleIndustryClick = () => {
@@ -101,6 +102,7 @@ export default function SectorSelector(props) {
 	}
 
 	const GetSectorButtonStyle = (status) => {
+		debugger
 		if (status === "unchecked") {
 			return {
 				className: classes.buttonUnchecked,
@@ -166,7 +168,6 @@ export default function SectorSelector(props) {
 			/>
 			{renderIndustry && <IndustryCheckBox
 				sectors={props.sectors}
-				handleUpdate={props.handleUpdate}
 				setSelectAllChecked={setSelectAllChecked}
 			/>}
 		</div>

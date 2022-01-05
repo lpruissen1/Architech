@@ -48,7 +48,7 @@ export default function OutlinedNumberInput(props) {
 	}
 
 	return (
-		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='smalll' label={props.label}
+		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='small' label={props.label}
 			InputLabelProps={{
 				style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10 },
 				shrink: true

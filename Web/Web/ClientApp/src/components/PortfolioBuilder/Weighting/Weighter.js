@@ -44,16 +44,12 @@ export function Weighter(props) {
 
 			props.setManualWeights(remainder)
 
-			handleWeighting()
-
 			return
 		}
 
 		let tempWeights = props.manualWeights
 		tempWeights.push({ ticker: ticker, weight: weight })
 		props.setManualWeights(tempWeights)
-
-		handleWeighting()
 	}
 
 	const deleteManualWeight = (ticker) => {
@@ -61,17 +57,6 @@ export function Weighter(props) {
 
 		props.setManualWeights(tempWeights.filter(entry => entry.ticker !== ticker))
 	}
-
-	const handleWeighting = async () => {
-		if (props.weightingOption !== "" && props.tickers) {
-			var tickers = props.tickers.map(thing => { return thing.ticker })
-
-			var result = await WeightingClient.postWeightingRequest(props.weightingOption, tickers, props.manualWeights)
-			props.setTickers(result.tickers)
-		}
-	}
-
-	useEffect(() => { handleWeighting() }, [props.weightingOption])
 
 	return (
 		<div>

@@ -2,11 +2,13 @@
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
-import React from 'react';
+import React, { useState }from 'react';
 import IndustryCheckBoxContent from './IndustryCheckBoxContents.js';
 import './SectorSelector.css';
 
 export default function IndustryCheckBox(props) {
+	const [refresh, setRefresh] = useState()
+
 	const handleOnClick = (event) => {
 
 		let values = event.target.value.split("|")
@@ -32,8 +34,7 @@ export default function IndustryCheckBox(props) {
 		if (props.sectors.filter(sector => sector.isChecked !== "checked").length > 0) {
 			props.setSelectAllChecked(false)
 		}
-
-		props.handleUpdate()
+		setRefresh()
 	}
 
 	return (

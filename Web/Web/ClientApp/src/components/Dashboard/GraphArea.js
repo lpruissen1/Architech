@@ -14,7 +14,6 @@ export default function GraphArea(props) {
 		const response = await AccountsClient.GetAccountHistory(AuthClient.GetIdFromStoredJwt())
 		setAccountHistory(response.accountHistory)
 		setNetContributions(response.netContributions)
-		debugger;
 	}
 
 	useEffect(() => { loadAccountHistory() }, [])

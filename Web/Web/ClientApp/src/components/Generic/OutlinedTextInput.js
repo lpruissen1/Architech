@@ -41,7 +41,7 @@ export default function OutlinedTextInput(props) {
 	const classes = useStyles();
 
 	return (
-		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='smalll' label={props.label}
+		<TextField required id="outlined-required" className={classes.root} variant="outlined" size='small' label={props.label}
 			InputLabelProps={{
 				style: { color: '#f0f0f0', backgroundColor: '#363636', paddingRight: 10, ...props.style },
 				shrink: true

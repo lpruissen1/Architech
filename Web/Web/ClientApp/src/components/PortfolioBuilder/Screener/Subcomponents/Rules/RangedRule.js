@@ -67,7 +67,6 @@ export default function RangedRule(props) {
 
 	const updateRuleRanges = (event, newValue) => {
 		updateView(event, newValue)
-		props.handleUpdate()
 	}
 
 	const deleteRule = () => {
