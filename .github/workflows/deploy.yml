@@ -23,6 +23,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
+      - name: Nav
+        run: cd ./Web/Web/ClientApp && ls
+
+      # Runs a single command using the runners shell
       - name: Build Assets
         run: npm run build --prefix Web/Web/ClientApp
 
