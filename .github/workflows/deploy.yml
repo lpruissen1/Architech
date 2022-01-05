@@ -24,7 +24,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: shoot
-        run: cd Web/Web/ClientApp
+        run: cd Web/ClientApp
 
       # Runs a single command using the runners shell
       - name: where am i
