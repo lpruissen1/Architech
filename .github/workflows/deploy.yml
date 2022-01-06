@@ -26,8 +26,9 @@ jobs:
       - name: Nav
         run: cd ./Web/Web/ClientApp && ls
 
-			- name: Install dependencies
-      run: npm install --prefix Web/Web/ClientApp
+      # Runs a single command using the runners shell
+      - name: Install
+        run: npm install --prefix Web/Web/ClientApp
 
       # Runs a single command using the runners shell
       - name: Build Assets
