@@ -317,7 +317,7 @@ export default function TradingRegistration() {
 							</Grid>
 							<Grid item xs={6} style={{ display: 'flex', justifyContent:'flex-end' }}>
 							<Button
-								style={{ marginBottom: 0, marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }}
+								style={{ marginRight: 20, textTransform: 'none', outline: 'none', minWidth: 100, marginBottom: 24 }}
 								variant="contained"
 								color="primary"
 								onClick={activeStep === steps.length - 1 ? createTradingAccount : handleNext}

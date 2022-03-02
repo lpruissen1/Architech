@@ -7,6 +7,7 @@ import SectorSelector from './SectorSelector';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import OutlinedTextInput from '../../../Generic/OutlinedTextInput'
+import { Rebalancer } from './Rebalancing/Rebalancer';
 
 export default function ScreeningControls(props) {
 
@@ -54,6 +55,16 @@ export default function ScreeningControls(props) {
 						AddExclusion={props.AddExclusion}
 						DeleteInclusion={props.DeleteInclusion}
 						DeleteExclusion={props.DeleteExclusion}
+					/>
+				</Box>
+			</Grid>
+			<Grid item xs={12}>
+				<Box>
+					<Rebalancer	
+						rebalancingFrequency={props.rebalancingFrequency}
+						setRebalancingFrequency={props.setRebalancingFrequency}
+						automaticRebalancing={props.automaticRebalancing}
+						setAutomaticRebalancing={props.setAutomaticRebalancing}
 					/>
 				</Box>
 			</Grid>

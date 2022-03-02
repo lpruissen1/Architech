@@ -81,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function InclusionExclusion(props) {
-	const [renderFields, setRenderFields] = useState(false)
 	const [options, setOptions] = useState([])
 
 	const classes = useStyles()

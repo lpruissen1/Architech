@@ -58,6 +58,10 @@ export function Screener(props) {
 				DeleteExclusion={props.DeleteExclusion}
 				name={props.name}
 				setName={props.setName}
+				rebalancingFrequency={props.rebalancingFrequency}
+				setRebalancingFrequency={props.setRebalancingFrequency}
+				automaticRebalancing={props.automaticRebalancing}
+				setAutomaticRebalancing={props.setAutomaticRebalancing}
 			/>
 			<br/>
 		</div>

@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import React from 'react';
 import PrimaryActionButton from '../Generic/PrimaryActionButton';
-import RaisedCard from '../Generic/RaisedCard';
 
 export const useStyles = makeStyles((theme) => ({
 	root: {

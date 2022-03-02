@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
 import WeightingClient from '../../../Clients/WeightingClient';
-import GetWeightingOptions from './WeightingOptionsRepo'
+import GetWeightingOptions from "./WeightingOptionsRepo";
 import ManualWeighting from './ManualWeighting'
 import Typography from '@material-ui/core/Typography';
 

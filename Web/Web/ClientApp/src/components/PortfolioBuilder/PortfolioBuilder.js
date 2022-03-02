@@ -157,9 +157,12 @@ export function PortfolioBuilder(props) {
 	const [loading, setLoading] = React.useState(true);
 	const [inclusions, setInclusions] = useState([])
 
-	const [weightingOption, setWeightingOption] = useState("")
+	const [weightingOption, setWeightingOption] = useState("MarketCap")
 	const [manualWeights, setManualWeights] = useState([])
-	
+
+	const [rebalancingFrequency, setRebalancingFrequency] = useState("None")
+	const [automaticRebalancing, setAutomaticRebalancing] = useState(false)
+
 	let { indexID } = useParams();
 
 	const [indexId, setIndexId] = useState(indexID)
@@ -305,7 +308,11 @@ export function PortfolioBuilder(props) {
 			inclusions: inclusions,
 			exclusions: exclusions,
 			weightingOption: weightingOption,
-			manualWeights: manualWeights
+			manualWeights: manualWeights,
+			rebalancingRules: {
+				"Automatic": automaticRebalancing,
+				"Frequency": rebalancingFrequency 
+			}
 		});
 
 		setIndexId(newIndexID)
@@ -325,8 +332,11 @@ export function PortfolioBuilder(props) {
 			inclusions: inclusions,
 			exclusions: exclusions,
 			weightingOption: weightingOption,
-			manualWeights: manualWeights
-
+			manualWeights: manualWeights,
+			rebalancingRules: {
+				"Automatic": automaticRebalancing,
+				"Frequency": rebalancingFrequency
+			}
 		});
 	}
 
@@ -383,6 +393,10 @@ export function PortfolioBuilder(props) {
 									getActiveMarkets={getActiveMarkets}
 									getActiveIndustries={getActiveIndustries}
 									setTickers={setTickers}
+									rebalancingFrequency={rebalancingFrequency}
+									setRebalancingFrequency={setRebalancingFrequency}
+									automaticRebalancing={automaticRebalancing}
+									setAutomaticRebalancing={setAutomaticRebalancing}
 								/>
 							</TabPanel>
 							<TabPanel value={step} index={1}>
